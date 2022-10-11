@@ -1,0 +1,33 @@
+{
+  "name": "frontend-capstone-ecommerce",
+  "version": "1.0.0",
+  "description": "** FEC",
+  "main": "index.js",
+  "scripts": {
+    "test": "test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fillet-OFish/Frontend-Capstone-Ecommerce.git"
+  },
+  "keywords": [
+    "react",
+    "node",
+    "express",
+    "css"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fillet-OFish/Frontend-Capstone-Ecommerce/issues"
+  },
+  "homepage": "https://github.com/Fillet-OFish/Frontend-Capstone-Ecommerce#readme",
+  "dependencies": {
+    "axios": "^1.1.2",
+    "bootstrap": "^5.2.2",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20",
+    "npx": "^10.2.2",
+    "react": "^18.2.0"
+  }
+}
