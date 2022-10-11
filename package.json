@@ -1,33 +1,31 @@
 {
   "name": "frontend-capstone-ecommerce",
   "version": "1.0.0",
-  "description": "** FEC",
+  "description": "Frontend Capstone",
   "main": "index.js",
   "scripts": {
+    "server-dev": "npx nodemon --watch server server/index.js",
+    "client-dev": "npx webpack --watch",
     "test": "test.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Fillet-OFish/Frontend-Capstone-Ecommerce.git"
   },
-  "keywords": [
-    "react",
-    "node",
-    "express",
-    "css"
-  ],
-  "author": "",
+  "author": "Jaden Ee, Fernando Gamboa, Sophia Zhou",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Fillet-OFish/Frontend-Capstone-Ecommerce/issues"
-  },
   "homepage": "https://github.com/Fillet-OFish/Frontend-Capstone-Ecommerce#readme",
   "dependencies": {
-    "axios": "^1.1.2",
-    "bootstrap": "^5.2.2",
-    "express": "^4.18.2",
+    "@babel/plugin-transform-runtime": "^7.19.1",
     "nodemon": "^2.0.20",
-    "npx": "^10.2.2",
     "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.19.4",
+    "@babel/preset-react": "^7.18.6",
+    "babel-loader": "^8.2.5",
+    "express": "^4.18.2",
+    "react-dom": "^18.2.0",
+    "webpack-cli": "^4.10.0"
   }
 }
