@@ -7,7 +7,7 @@ export default function Styles({styles, style, setStyle}) {
  console.log('styles', display)
 
   function set( prop ) {
-    console.log('you clic ked', prop)
+    console.log('you clicked', prop)
     setStyle(prop)
   }
 
@@ -15,7 +15,9 @@ export default function Styles({styles, style, setStyle}) {
     <div>
 
       {/* price */}
-      <p>{style.sale_price ? (<><span style={{textDecoration: 'line-through'}}>{style.original_price}</span> {style.sale_price}</>) : style.original_price}</p>
+      <p>{style.sale_price ? (<><span style={{textDecoration: 'line-through'}}>${style.original_price}</span> ${style.sale_price}</>) : <>${style.original_price}</>}</p>
+
+      {/* style name */}
       <p>STYLE > {style.name}</p>
 
       {/* icons */}

@@ -43,7 +43,9 @@ function App() {
       return setProduct(result.data);
     });
   }, [update]);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_overview_index_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_overview_index_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    product: product
+  }));
 }
 
 /***/ }),
@@ -78,7 +80,12 @@ function Gallery(_ref) {
 
   // console.log('made it to gallery', style.photos)
   console.log('gallery photos', photos);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, "photos");
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, photos ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, photos.map(function (photo) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("img", {
+      key: photo.url,
+      src: photo.thumbnail_url
+    });
+  })) : null);
 }
 
 /***/ }),
@@ -113,14 +120,14 @@ function Styles(_ref) {
     setDisplay = _useState2[1];
   console.log('styles', display);
   function set(prop) {
-    console.log('you clic ked', prop);
+    console.log('you clicked', prop);
     setStyle(prop);
   }
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", null, style.sale_price ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement((react__WEBPACK_IMPORTED_MODULE_1___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", {
     style: {
       textDecoration: 'line-through'
     }
-  }, style.original_price), " ", style.sale_price) : style.original_price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", null, "STYLE > ", style.name), styles.map(function (one) {
+  }, "$", style.original_price), " $", style.sale_price) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement((react__WEBPACK_IMPORTED_MODULE_1___default().Fragment), null, "$", style.original_price)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", null, "STYLE > ", style.name), styles.map(function (one) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", {
       key: one.style_id
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("img", {
@@ -157,35 +164,35 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function Overview() {
+function Overview(_ref) {
+  var product = _ref.product;
+  console.log('overview', product);
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
     _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
-    products = _useState2[0],
-    setProducts = _useState2[1];
+    styles = _useState2[0],
+    setStyles = _useState2[1];
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
     _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState3, 2),
-    styles = _useState4[0],
-    setStyles = _useState4[1];
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+    style = _useState4[0],
+    setStyle = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
     _useState6 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState5, 2),
-    style = _useState6[0],
-    setStyle = _useState6[1];
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
-    _useState8 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState7, 2),
-    update = _useState8[0],
-    setUpdate = _useState8[1];
+    update = _useState6[0],
+    setUpdate = _useState6[1];
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    axios__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/products').then(function (result) {
-      setProducts(result.data[0]);
-    }); // id 40344
-    axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/products/".concat(40344, "/styles")).then(function (result) {
-      // let temp = [...result.data.results[0]];
-      setStyles(result.data.results);
-      setStyle(result.data.results[0]);
-    });
+    if (product) {
+      axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/products/".concat(40344, "/styles")).then(function (result) {
+        setStyles(result.data.results);
+        setStyle(result.data.results[0]);
+      });
+    } else {
+      axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/products/".concat(40344, "/styles")).then(function (result) {
+        setStyles(result.data.results);
+        setStyle(result.data.results[0]);
+      });
+    }
   }, [update]);
-  console.log('index', style);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h1", null, "Overview"), products.name, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Gallery_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", null, product.category), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h2", null, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Gallery_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
     style: style
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Styles_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
     styles: styles,

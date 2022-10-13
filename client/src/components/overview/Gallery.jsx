@@ -13,11 +13,7 @@ export default function Gallery({style}) {
 
   return(
     <div>
-      photos
-      {/* {photos ? (<div>{JSON.stringify(photos)}</div>) : null} */}
-      {/* {style.photos.map(photo => <img src={photo.thumbnail_url} />)} */}
-      {/* {style.photos.map(photo => <img src={photo.thumbnail_url} />)} */}
-
+      {photos ? (<div>{photos.map(photo => <img key={photo.url} src={photo.thumbnail_url} />)}</div>) : null}
     </div>
   )
 }

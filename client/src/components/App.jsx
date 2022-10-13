@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Overview from './overview/index.jsx';
 
 export default function App() {
   const [products, setProducts] = useState([]) // list of all products (needed for search bar)
@@ -13,9 +14,10 @@ export default function App() {
       .then(result => setProduct(result.data))
   },[update])
 
+
   return(
     <div>
-
+      <Overview product={product}/>
     </div>
   )
 }
