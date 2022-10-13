@@ -12,14 +12,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ App)
 /* harmony export */ });
+<<<<<<< HEAD
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var _relatedItemsAndComparison_RelatedItemsAndComparison_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./relatedItemsAndComparison/RelatedItemsAndComparison.jsx */ "./client/src/components/relatedItemsAndComparison/RelatedItemsAndComparison.jsx");
+=======
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+>>>>>>> master
 
 
 
 function App() {
+<<<<<<< HEAD
   function temp() {
     axios__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/products').then(function (data) {
       return console.log('frontend', data);
@@ -167,6 +175,30 @@ __webpack_require__.r(__webpack_exports__);
 function YourOutfitList() {
   return;
   /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_RelatedProduct_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+=======
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+    _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
+    products = _useState2[0],
+    setProducts = _useState2[1]; // list of all products (needed for search bar)
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+    _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState3, 2),
+    product = _useState4[0],
+    setProduct = _useState4[1]; // one product (needed for page render)
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+    _useState6 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState5, 2),
+    update = _useState6[0],
+    setUpdate = _useState6[1];
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    axios__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/products').then(function (result) {
+      setProducts(result.data);
+    });
+    axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/products/".concat(40344)) // id 40344
+    .then(function (result) {
+      return setProduct(result.data);
+    });
+  }, [update]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null);
+>>>>>>> master
 }
 
 /***/ }),
@@ -33655,6 +33687,7 @@ function _nonIterableRest() {
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./node_modules/@babel/runtime/helpers/esm/objectDestructuringEmpty.js":
 /*!*****************************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/esm/objectDestructuringEmpty.js ***!
@@ -33672,6 +33705,8 @@ function _objectDestructuringEmpty(obj) {
 
 /***/ }),
 
+=======
+>>>>>>> master
 /***/ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js":
 /*!******************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js ***!
