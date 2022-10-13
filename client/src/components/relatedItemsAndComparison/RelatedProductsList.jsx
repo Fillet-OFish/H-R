@@ -8,7 +8,7 @@ export default function RelatedProductsList ({currentItem}) {
 
   useEffect(() => {
     axios.get(`/api/products/${currentItem}/related`)
-      .then(data => setRelatedItems(data.data))
+      .then(data => {console.log('data', data.data); setRelatedItems(data.data)})
       .catch(err => console.log(err));
   }, [])
 

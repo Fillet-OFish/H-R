@@ -9,16 +9,6 @@ export default function App() {
 
   useEffect(() => {
     axios.get('/api/products')
-<<<<<<< HEAD
-      .then(data => console.log('frontend', data))
-  }
-
-  return(
-    <div>
-      hello world
-      <button onClick={() => temp()}>click</button>
-      <RelatedItemsAndComparison />
-=======
       .then(result => {setProducts(result.data)})
     axios.get(`/api/products/${40344}`) // id 40344
       .then(result => setProduct(result.data))
@@ -26,8 +16,7 @@ export default function App() {
 
   return(
     <div>
-
->>>>>>> master
+      {product.id ? <RelatedItemsAndComparison currentItem={product.id} /> : null }
     </div>
   )
 }

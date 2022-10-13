@@ -3,9 +3,7 @@ import axios from 'axios';
 import RelatedProductsList from './RelatedProductsList.jsx';
 import YourOutfitList from './YourOutfitList.jsx';
 
-export default function RelatedItemsAndComparison({/*{currentItem}*/}) {
-
-  const currentItem = 40344;
+export default function RelatedItemsAndComparison({currentItem}) {
 
   return (
     <div>
