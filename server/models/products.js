@@ -6,7 +6,7 @@ function getProducts(callback) {
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/products`,
     headers: {
       'User-Agent': 'request',
-      'Authorization': `token ${process.env.TOKENS}`
+      'Authorization': `${process.env.TOKENS}`
     }
   }
   return axios(options);
@@ -17,7 +17,7 @@ function getProduct(id, callback) {
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/products/:${id}`,
     headers: {
       'User-Agent': 'request',
-      'Authorization': `token ${process.env.TOKENS}`
+      'Authorization': `${process.env.TOKENS}`
     }
   }
   return axios(options);
@@ -28,7 +28,7 @@ function getStyles(id, callback){
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/products/:${id}/styles`,
     headers: {
       'User-Agent': 'request',
-      'Authorization': `token ${process.env.TOKENS}`
+      'Authorization': `${process.env.TOKENS}`
     }
   }
   return axios(options);
@@ -39,7 +39,7 @@ function getRelated(id, callback){
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/products/:${id}/related`,
     headers: {
       'User-Agent': 'request',
-      'Authorization': `token ${process.env.TOKENS}`
+      'Authorization': `${process.env.TOKENS}`
     }
   }
   return axios(options);

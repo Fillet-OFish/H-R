@@ -3,6 +3,6 @@ const { getProducts, getProduct, getStyles, getRelated } = require('../models/pr
 module.exports = {
   getAll: function (req, res) {
     getProducts()
-      // .then(data => console.log(data.body))
+      .then(result => res.status(200).send(result.data))
   }
 }

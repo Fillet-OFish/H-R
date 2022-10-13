@@ -5,7 +5,7 @@ export default function App() {
 
   function temp() {
     axios.get('/api/products')
-      .then(data => console.log('frontend', data))
+      .then(data => console.log('frontend', data.data))
   }
 
   return(
