@@ -1,0 +1,9 @@
+body {
+  font-family: sans-serif, arial;
+}
+
+.style-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 75px;
+}
