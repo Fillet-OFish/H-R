@@ -14,7 +14,7 @@ function getProducts(callback) {
 
 function getProduct(id, callback) {
   let options = {
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/products/:${id}`,
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/products/${id}`,
     headers: {
       'User-Agent': 'request',
       'Authorization': `${process.env.TOKENS}`
@@ -25,7 +25,7 @@ function getProduct(id, callback) {
 
 function getStyles(id, callback){
   let options = {
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/products/:${id}/styles`,
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/products/${id}/styles`,
     headers: {
       'User-Agent': 'request',
       'Authorization': `${process.env.TOKENS}`
@@ -36,7 +36,7 @@ function getStyles(id, callback){
 
 function getRelated(id, callback){
   let options = {
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/products/:${id}/related`,
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/products/${id}/related`,
     headers: {
       'User-Agent': 'request',
       'Authorization': `${process.env.TOKENS}`
