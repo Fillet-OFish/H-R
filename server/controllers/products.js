@@ -1,8 +1,16 @@
-const { getProducts, getProduct, getStyles, getRelated } = require('../models/products.js')
+const models = require('../models')
 
 module.exports = {
   getAll: function (req, res) {
-    getProducts()
+    models.products.getProducts()
+      .then(result => {console.log('controller',result.data);res.status(200).send(result.data)})
+  },
+  getOne: function (req, res) {
+    models.products.getProduct(req.params.id)
+      .then(result => res.status(200).send(result.data))
+  },
+  getStyles: function (req, res) {
+    models.products.getStyles(req.params.id)
       .then(result => res.status(200).send(result.data))
   }
 }
