@@ -13,7 +13,7 @@ export default function App() {
     <div>
       hello world
       <button onClick={() => temp()}>click</button>
-      <RelatedItemsAndComparison {/*currentItem={currentItem}*/}/>
+      <RelatedItemsAndComparison />
     </div>
   )
 }
