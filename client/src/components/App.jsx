@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import QA from './QA.jsx';
 import {useState, useEffect} from 'react';
 
 export default function App() {
-
-  const [quesData, setQuestData] = useState([]);
+  const [products, setProducts] = useState([]) // list of all products (needed for search bar)
+  const [product, setProduct] = useState([]) // one product (needed for page render)
+  const [update, setUpdate] = useState(false)
 
   function temp() {
     axios.get('/api/products')
@@ -15,6 +16,12 @@ export default function App() {
           .then((response) => console.log(response.data));
       })
   }
+  useEffect(() => {
+    axios.get('/api/products')
+      .then(result => {setProducts(result.data)})
+    axios.get(`/api/products/${40344}`) // id 40344
+      .then(result => setProduct(result.data))
+  },[update])
 
 
   return (
@@ -25,6 +32,7 @@ export default function App() {
       <div>
         <QA />
       </div>
+
     </div>
   )
 }
