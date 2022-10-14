@@ -5,7 +5,7 @@ import RelatedProduct from './RelatedProduct.jsx'
 export default function YourOutfitList({currentItem}) {
 
   const [outfit, setOutfit] = useState(() => {
-      var outfit = JSON.parse(localStorage.getItem('outfit')) || [];
+      let outfit = JSON.parse(localStorage.getItem('outfit')) || [];
       return outfit;
     }
   );
