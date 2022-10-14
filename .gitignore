@@ -1,3 +1,5 @@
 node_modules/
 config.js
 .env
+client/dist/bundle.js
+client/dist/bundle.js.map

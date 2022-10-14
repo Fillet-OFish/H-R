@@ -2,7 +2,6 @@ const axios = require('axios');
 
 module.exports = {
   getProducts: function() {
-    console.log('made it to getProducts',process.env.campus)
     let options = {
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/products`,
       headers: {
