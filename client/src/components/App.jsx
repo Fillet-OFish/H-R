@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import RelatedItemsAndComparison from './relatedItemsAndComparison/RelatedItemsAndComparison.jsx'
 
 export default function App() {
   const [products, setProducts] = useState([]) // list of all products (needed for search bar)
@@ -15,7 +16,7 @@ export default function App() {
 
   return(
     <div>
-
+      {product.id ? <RelatedItemsAndComparison currentItem={product.id} /> : null }
     </div>
   )
 }
