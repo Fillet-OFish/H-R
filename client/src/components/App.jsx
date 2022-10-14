@@ -9,8 +9,6 @@ export default function App() {
   const [product, setProduct] = useState([]) // one product (needed for page render)
   const [update, setUpdate] = useState(false)
 
-  console.log('product', product)
-
   useEffect(() => {
     axios.get('/api/products')
       .then(result => {setProducts(result.data)})

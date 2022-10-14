@@ -6,7 +6,6 @@ import YourOutfitList from './YourOutfitList.jsx';
 export default function RelatedItemsAndComparison({currentItem, setProduct}) {
 
 
-  console.log('relatedItemsAndComparison')
   return (
     <div>
       <RelatedProductsList currentItem={currentItem} setProduct={setProduct} />

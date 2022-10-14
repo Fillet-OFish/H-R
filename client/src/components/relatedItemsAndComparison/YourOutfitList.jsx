@@ -2,6 +2,10 @@ import React, { useEffect, useState, useRef, useReducer } from 'react';
 import axios from 'axios';
 import RelatedProduct from './RelatedProduct.jsx'
 
+const style = {
+  display: 'flex'
+}
+
 export default function YourOutfitList({currentItem, setProduct}) {
 
   const [outfit, setOutfit] = useState(() => {
@@ -18,12 +22,11 @@ export default function YourOutfitList({currentItem, setProduct}) {
     }
   }
 
-  console.log('outfit', outfit)
-
 
   return (
     <div>
-      <ul>Your Outfit:<br></br>
+      <h3>Your Outfit:</h3>
+      <ul style={style}>
         <button onClick={(e)=>{handleClick(e)}}>+</button>
         {outfit ? outfit.map((item) => <RelatedProduct setProduct={setProduct} key={item} item={item} />) : null}
       </ul>
