@@ -7,6 +7,7 @@ import Cart from './components/Cart.jsx'
 export default function Overview({product}) {
   const [styles, setStyles] = useState([])
   const [style, setStyle] = useState([])
+  const [update, setUpdate] = useState(false)
 
   useEffect(() => {
     if(product && product.length!==0){
@@ -21,19 +22,20 @@ export default function Overview({product}) {
   return(
     <>
         {/* Gallery */}
-        <Gallery style={style}/>
+        <Gallery update={update} style={style}/>
 
         <div className="right">
           {/* Stars */}
           <p>★★★★☆ Read all reviews</p>
+
           {/* Category */}
-          <p>{product.category}</p>
+          <p className="product-category">{product.category}</p>
 
           {/* Product name */}
           <p className="product-name">{product.name}</p>
 
           {/* Styles */}
-          <Styles styles={styles} style={style} setStyle={setStyle}/>
+          <Styles setUpdate={setUpdate} styles={styles} style={style} setStyle={setStyle}/>
 
           {/* Cart */}
           <Cart style={style}/>

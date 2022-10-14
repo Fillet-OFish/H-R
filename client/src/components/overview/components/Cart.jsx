@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { FaPlus } from 'react-icons/fa'
 
 export default function Cart({ style }) {
@@ -6,6 +7,7 @@ export default function Cart({ style }) {
   const [skus, setSkus] = useState([])
   const [size, setSize] = useState('')
   const [quantity, setQuantity] = useState(0)
+  const [selectQnt, setSelectQnt] = useState(1)
 
   useEffect(() => {
     if(style.skus){setSkus(Object.values(style.skus))}
@@ -15,8 +17,22 @@ export default function Cart({ style }) {
     let arr = []
     let num = 15
     if (quantity<15){num=quantity}
-    for (let i=1; i<=num; i++) {arr.push(<option key={i} value={i.toString()}>{i.toString()}</option>)}
+    for (let i=1; i<=num; i++) {
+      arr.push(<option key={i} value={i.toString()}>{i.toString()}</option>)
+    }
     return arr
+  }
+
+  function postCart(prop) {
+    let obj = style.skus
+    let skuId = ''
+    Object.keys(obj).forEach(key =>{
+      if(JSON.stringify(Object.values(obj[key]['size'])) === JSON.stringify(size.split(''))) {
+        skuId = key
+      }
+    })
+    axios.post('/api/cart', {sku_id: skuId, count: selectQnt})
+      .then(res => console.log('posted!', res.data))
   }
 
   return(
@@ -25,6 +41,7 @@ export default function Cart({ style }) {
       <select className="select-size" onChange={e=>{
           setSize(e.target.value);
           if(skus){
+            console.log('checker', skus)
             skus.filter(sku => sku.size === e.target.value).map(sku => setQuantity(sku.quantity))
           };
         }}>
@@ -37,12 +54,20 @@ export default function Cart({ style }) {
       </select>
 
       {/* select quantity dropdown */}
-      <select className="select-qnt">
+      <select className="select-qnt" onChange={e=>setSelectQnt(parseInt(e.target.value))}>
           {quantity&&size!=='default' ? getOptions() : <option>QUANTITY</option>}
       </select>
 
       {/* add to cart */}
-      {quantity>0 ? <p><button className="cart-btn">Add to bag<span className="plus-sign"><FaPlus/></span></button></p> : null}
+      {quantity>0 ?
+        <p>
+          <button className="cart-btn">Add to bag
+          <span className="plus-sign"><FaPlus onClick={e=>postCart()}/></span>
+          </button>
+        </p>
+        : null}
+
+        {/* <button onClick={e=>getCart()}>cart</button> */}
     </div>
   )
 }

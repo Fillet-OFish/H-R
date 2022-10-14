@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Header from './header/index.jsx'
 import Overview from './overview/index.jsx';
-import Search from './reviews/components/Search.jsx';
 import RelatedItemsAndComparison from './relatedItemsAndComparison/RelatedItemsAndComparison.jsx'
 
 export default function App() {
@@ -12,17 +12,17 @@ export default function App() {
   useEffect(() => {
     axios.get('/api/products')
       .then(result => {setProducts(result.data)})
-    axios.get(`/api/products/${40344}`) // id 40344
+    axios.get(`/api/products/${40344}`)
       .then(result => setProduct(result.data))
   },[update])
 
 
   return(<>
-    <div className="header">Logo <Search/></div>
+    <Header product={product}/>
     <div className="container">
       <Overview product={product}/>
 
-      {product.id ? <RelatedItemsAndComparison currentItem={product.id} /> : null }
+      {/* {product.id ? <RelatedItemsAndComparison currentItem={product.id} /> : null } */}
     </div>
 
     </>)
