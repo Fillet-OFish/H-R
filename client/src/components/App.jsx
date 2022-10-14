@@ -20,7 +20,7 @@ export default function App() {
   return(<>
     <div className="header">Logo <Search/></div>
     <div className="container">
-      <Overview product={product}/>
+      {/* <Overview product={product}/> */}
 
       {product.id ? <RelatedItemsAndComparison currentItem={product.id} /> : null }
     </div>
