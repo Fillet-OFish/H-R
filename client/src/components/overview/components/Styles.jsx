@@ -10,10 +10,9 @@ export default function Styles({styles, style, setStyle}) {
   }
 
   return(
-    <div>
-
+    <div className="styles">
       {/* price */}
-      <p>{style.sale_price ? (<><span style={{textDecoration: 'line-through'}}>${style.original_price}</span> ${style.sale_price}</>) : <>${style.original_price}</>}</p>
+      <p className="price">{style.sale_price ? (<><span style={{textDecoration: 'line-through'}}>${style.original_price}</span> ${style.sale_price}</>) : <>${style.original_price}</>}</p>
 
       {/* style name */}
       <p>STYLE > {style.name}</p>
@@ -22,10 +21,9 @@ export default function Styles({styles, style, setStyle}) {
       {styles.map(one =>
         <span key={one.style_id}>
           <img className="style-icon" src={one.photos[0].thumbnail_url} onClick={e => set(one)}/>
-          {style.style_id===one.style_id ? <FaCheck/> : null} &nbsp;
+          {style.style_id===one.style_id ? <FaCheck/> : null} &nbsp; &nbsp;
         </span>
       )}
-
     </div>
   )
 }

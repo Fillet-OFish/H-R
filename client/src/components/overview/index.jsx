@@ -30,7 +30,7 @@ export default function Overview({product}) {
           <p>{product.category}</p>
 
           {/* Product name */}
-          <h2>{product.name}</h2>
+          <p className="product-name">{product.name}</p>
 
           {/* Styles */}
           <Styles styles={styles} style={style} setStyle={setStyle}/>

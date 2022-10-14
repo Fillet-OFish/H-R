@@ -1,12 +1,12 @@
-body {
-  font-family: sans-serif, arial;
+body{
+  font-family:sans-serif, arial;
   margin:0px;
 }
 /* header */
-.header {
-  padding:10px;
+.header{
+  padding:20px;
   padding-left:260px;
-  margin-bottom: 10px;
+  margin-bottom:10px;
   color:black;
   font-size:20px;
   font-weight:1000px;
@@ -15,53 +15,98 @@ body {
   position:absolute;
   top:0;
   right:0;
-  margin-top: 5px;
-  margin-right: 280px;
-  background-color: transparent;
+  margin-top:20px;
+  margin-right:280px;
+  background-color:transparent;
   color:black;
 }
 .search-bar input{
-  background-color: transparent;
+  background-color:transparent;
   border:0px;
-  border-bottom: 1px black solid;
+  border-bottom:1px black solid;
 }
 .search-bar input:focus{
-  outline: none;
+  outline:none;
 }
 .search-bar button{
-  background-color: transparent;
+  background-color:transparent;
   border:0px;
   color:black;
 }
 /* overview */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+.container{
+  max-width:1200px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
 }
-.left {
-  display: flex;
-  height: 50vh;
+.left{
+  display:flex;
+  height:50vh;
+}
+.product-name{
+  font-weight:900;
+  font-size:30px;
 }
 /* gallery */
-.gallery-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.gallery-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
 }
-.gallery-main {
-  display: flex;
+.gallery-main{
+  display:flex;
 }
-.gallery-main img {
-  width: 500px;
-  height: 100%;
-  object-fit: contain;
+.gallery-main img{
+  width:500px;
+  height:100%;
+  object-fit:contain;
 }
 /* styles */
-.style-icon {
-  width: 80px;
-  height: 80px;
-  border-radius: 75px;
+.styles p{
+  font-size: 16px;
 }
-
+.price{
+  margin-top:-20px;
+}
+.style-icon{
+  width:80px;
+  height:80px;
+  border-radius:75px;
+}
+/* cart */
+.cart{
+  margin-top:15px;
+  font-size: 17px;
+}
+/* dropdown */
+.cart select{
+  border:1px black solid;
+  height:45px;
+  padding-left:15px;
+  font-size:16px;
+}
+.cart select:focus{
+  outline:none;
+}
+.select-size{
+  width:250px;
+  margin-right:10px;
+}
+.select-qnt{
+  width:130px;
+}
+.cart-btn{
+  position:relative;
+  width:300px;
+  height:40px;
+  background-color: transparent;
+  border: 1px black solid;
+  text-align: left;
+  padding-left:15px;
+}
+.cart-btn .plus-sign{
+  position:absolute;
+  right:0;
+  margin-right:10px;
+}

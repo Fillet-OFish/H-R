@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FaPlus } from 'react-icons/fa'
 
 export default function Cart({ style }) {
   const [products, setProducts] = useState([]) // list of all products (needed for search bar)
@@ -19,9 +20,9 @@ export default function Cart({ style }) {
   }
 
   return(
-    <div>
+    <div className="cart">
       {/* select size dropdown */}
-      <select onChange={e=>{
+      <select className="select-size" onChange={e=>{
           setSize(e.target.value);
           if(skus){
             skus.filter(sku => sku.size === e.target.value).map(sku => setQuantity(sku.quantity))
@@ -36,12 +37,12 @@ export default function Cart({ style }) {
       </select>
 
       {/* select quantity dropdown */}
-      <select>
+      <select className="select-qnt">
           {quantity&&size!=='default' ? getOptions() : <option>QUANTITY</option>}
       </select>
 
       {/* add to cart */}
-      {quantity>0 ? <p><button>Add to bag</button></p> : null}
+      {quantity>0 ? <p><button className="cart-btn">Add to bag<span className="plus-sign"><FaPlus/></span></button></p> : null}
     </div>
   )
 }
