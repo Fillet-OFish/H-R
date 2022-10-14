@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Overview from './overview/index.jsx';
 import Search from './reviews/components/Search.jsx';
+import RelatedItemsAndComparison from './relatedItemsAndComparison/RelatedItemsAndComparison.jsx'
 
 export default function App() {
   const [products, setProducts] = useState([]) // list of all products (needed for search bar)
@@ -20,6 +21,9 @@ export default function App() {
     <div className="header">Logo <Search/></div>
     <div className="container">
       <Overview product={product}/>
+
+      {product.id ? <RelatedItemsAndComparison currentItem={product.id} /> : null }
     </div>
+
     </>)
 }
