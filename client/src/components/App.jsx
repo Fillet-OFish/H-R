@@ -9,6 +9,8 @@ export default function App() {
   const [product, setProduct] = useState([]) // one product (needed for page render)
   const [update, setUpdate] = useState(false)
 
+  console.log('product', product)
+
   useEffect(() => {
     axios.get('/api/products')
       .then(result => {setProducts(result.data)})
@@ -22,7 +24,7 @@ export default function App() {
     <div className="container">
       {/* <Overview product={product}/> */}
 
-      {product.id ? <RelatedItemsAndComparison currentItem={product.id} /> : null }
+      {product.id ? <RelatedItemsAndComparison currentItem={product} setProduct={setProduct} /> : null }
     </div>
 
     </>)
