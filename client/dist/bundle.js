@@ -16,8 +16,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+<<<<<<< HEAD
 /* harmony import */ var _relatedItemsAndComparison_RelatedItemsAndComparison_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./relatedItemsAndComparison/RelatedItemsAndComparison.jsx */ "./client/src/components/relatedItemsAndComparison/RelatedItemsAndComparison.jsx");
 
+=======
+<<<<<<< HEAD
+=======
+/* harmony import */ var _relatedItemsAndComparison_RelatedItemsAndComparison_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./relatedItemsAndComparison/RelatedItemsAndComparison.jsx */ "./client/src/components/relatedItemsAndComparison/RelatedItemsAndComparison.jsx");
+
+>>>>>>> 6627b190bd01b780785625d1ad91e14761cca35c
+>>>>>>> master
 
 
 
@@ -43,6 +51,12 @@ function App() {
       return setProduct(result.data);
     });
   }, [update]);
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null);
+=======
+>>>>>>> master
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, product.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_relatedItemsAndComparison_RelatedItemsAndComparison_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
     currentItem: product.id
   }) : null);
@@ -156,6 +170,10 @@ function RelatedProductsList(_ref) {
       item: item
     });
   }));
+<<<<<<< HEAD
+=======
+>>>>>>> 6627b190bd01b780785625d1ad91e14761cca35c
+>>>>>>> master
 }
 
 /***/ }),
