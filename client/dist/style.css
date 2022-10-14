@@ -5,10 +5,9 @@ body {
 /* header */
 .header {
   padding:10px;
-  padding-left:20px;
-  background-color: rgb(42, 42, 42);
+  padding-left:260px;
   margin-bottom: 10px;
-  color:white;
+  color:black;
   font-size:20px;
   font-weight:1000px;
 }
@@ -17,19 +16,22 @@ body {
   top:0;
   right:0;
   margin-top: 5px;
-  margin-right: 20px;
+  margin-right: 280px;
   background-color: transparent;
-  color:white;
+  color:black;
 }
 .search-bar input{
   background-color: transparent;
   border:0px;
-  border-bottom: 1px white solid;
+  border-bottom: 1px black solid;
+}
+.search-bar input:focus{
+  outline: none;
 }
 .search-bar button{
   background-color: transparent;
   border:0px;
-  color:white;
+  color:black;
 }
 /* overview */
 .container {

@@ -7,7 +7,7 @@ export default function Search({product}) {
   return(
     <>
     <form className='search-bar'>
-      <input/>
+      <input placeholder="SEARCH"/>
       <button><FaSearch/></button>
     </form>
     </>
