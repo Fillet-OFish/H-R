@@ -1,6 +1,37 @@
 body {
   font-family: sans-serif, arial;
+  margin:0px;
 }
+/* header */
+.header {
+  padding:10px;
+  padding-left:20px;
+  background-color: rgb(42, 42, 42);
+  margin-bottom: 10px;
+  color:white;
+  font-size:20px;
+  font-weight:1000px;
+}
+.search-bar{
+  position:absolute;
+  top:0;
+  right:0;
+  margin-top: 5px;
+  margin-right: 20px;
+  background-color: transparent;
+  color:white;
+}
+.search-bar input{
+  background-color: transparent;
+  border:0px;
+  border-bottom: 1px white solid;
+}
+.search-bar button{
+  background-color: transparent;
+  border:0px;
+  color:white;
+}
+/* overview */
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -11,18 +42,21 @@ body {
   display: flex;
   height: 50vh;
 }
+/* gallery */
 .gallery-list {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 .gallery-main {
+  display: flex;
 }
 .gallery-main img {
   width: 500px;
   height: 100%;
   object-fit: contain;
 }
+/* styles */
 .style-icon {
   width: 80px;
   height: 80px;

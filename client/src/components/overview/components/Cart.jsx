@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 
 export default function Cart({ style }) {
   const [products, setProducts] = useState([]) // list of all products (needed for search bar)
@@ -9,7 +8,6 @@ export default function Cart({ style }) {
 
   useEffect(() => {
     if(style.skus){setSkus(Object.values(style.skus))}
-    console.log('cart qnt', style.quantity)
   }, [style])
 
   function getOptions() {
@@ -39,7 +37,7 @@ export default function Cart({ style }) {
 
       {/* select quantity dropdown */}
       <select>
-          {quantity ? getOptions() : <option>QUANTITY</option>}
+          {quantity&&size!=='default' ? getOptions() : <option>QUANTITY</option>}
       </select>
 
       {/* add to cart */}

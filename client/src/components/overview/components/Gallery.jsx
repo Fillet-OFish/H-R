@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 
 export default function Gallery({style}) {
   const [photos, setPhotos] = useState([])
@@ -8,6 +7,7 @@ export default function Gallery({style}) {
   useEffect(() => {
     setPhotos(style.photos)
     if(photos && !photo){setPhoto(photos[0])}
+    // else if(photos && photo){setPhoto(photos[0])}
   },[{}])
 
   function changePhoto(prop) {

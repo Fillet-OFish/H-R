@@ -1,34 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Styles from './Styles.jsx'
-import Gallery from './Gallery.jsx'
-import Cart from './Cart.jsx'
+import Styles from './components/Styles.jsx'
+import Gallery from './components/Gallery.jsx'
+import Cart from './components/Cart.jsx'
 
 export default function Overview({product}) {
-  console.log('overview', product)
   const [styles, setStyles] = useState([])
   const [style, setStyle] = useState([])
-  const [update, setUpdate] = useState(false)
 
   useEffect(() => {
-    if(product){
-      axios.get(`/api/products/${40344}/styles`)
-        .then(result => {
-          setStyles(result.data.results);
-          setStyle(result.data.results[0])
-        })
-    } else{
-      axios.get(`/api/products/${40344}/styles`)
+    if(product && product.length!==0){
+      axios.get(`/api/products/${product.id}/styles`)
         .then(result => {
           setStyles(result.data.results);
           setStyle(result.data.results[0])
         })
     }
-  },[update])
+  },[product])
 
   return(
-    <div>
-      <div className="container">
+    <>
         {/* Gallery */}
         <Gallery style={style}/>
 
@@ -47,7 +38,6 @@ export default function Overview({product}) {
           {/* Cart */}
           <Cart style={style}/>
         </div>
-      </div>
-    </div>
+    </>
   )
 }

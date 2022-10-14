@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Overview from './overview/index.jsx';
+import Search from './reviews/components/Search.jsx';
 
 export default function App() {
   const [products, setProducts] = useState([]) // list of all products (needed for search bar)
@@ -15,9 +16,10 @@ export default function App() {
   },[update])
 
 
-  return(
-    <div>
+  return(<>
+    <div className="header">Logo <Search/></div>
+    <div className="container">
       <Overview product={product}/>
     </div>
-  )
+    </>)
 }

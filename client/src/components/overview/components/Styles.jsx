@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { FaCheck } from 'react-icons/fa'
 
 export default function Styles({styles, style, setStyle}) {
  const [display, setDisplay] = useState([styles])
- console.log('styles', display)
 
   function set( prop ) {
     console.log('you clicked', prop)
