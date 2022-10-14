@@ -3,17 +3,23 @@ import axios from 'axios';
 
 export default function Gallery({style}) {
   const [photos, setPhotos] = useState([])
+  const [photo, setPhoto] = useState('')
 
   useEffect(() => {
     setPhotos(style.photos)
-  })
+    if(photos && !photo){setPhoto(photos[0])}
+  },[{}])
 
-  // console.log('made it to gallery', style.photos)
-  console.log('gallery photos', photos)
+  function changePhoto(prop) {
+    console.log('changePhoto', prop)
+    setPhoto(prop)
+  }
 
   return(
-    <div>
-      {photos ? (<div>{photos.map(photo => <img key={photo.url} src={photo.thumbnail_url} />)}</div>) : null}
+    <div className="left">
+      <div className="gallery-list">{photos ? (<div>{photos.map(photo => <img key={photo.url} src={photo.thumbnail_url} onClick={e=>{e.preventDefault();changePhoto(photo)}} />)}</div>) : null}</div>
+      <div className="gallery-main">{photo ? (<img src={photo.thumbnail_url}/>) : null}</div>
+
     </div>
   )
 }

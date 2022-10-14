@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Styles from './Styles.jsx'
 import Gallery from './Gallery.jsx'
+import Cart from './Cart.jsx'
 
 export default function Overview({product}) {
   console.log('overview', product)
@@ -27,17 +28,26 @@ export default function Overview({product}) {
 
   return(
     <div>
-      {/* category */}
-      <p>{product.category}</p>
+      <div className="container">
+        {/* Gallery */}
+        <Gallery style={style}/>
 
-      {/* product name */}
-      <h2>{product.name}</h2>
+        <div className="right">
+          {/* Stars */}
+          <p>★★★★☆ Read all reviews</p>
+          {/* Category */}
+          <p>{product.category}</p>
 
-      {/* gallery */}
-      <Gallery style={style}/>
+          {/* Product name */}
+          <h2>{product.name}</h2>
 
-      {/* Styles */}
-      <Styles styles={styles} style={style} setStyle={setStyle}/>
+          {/* Styles */}
+          <Styles styles={styles} style={style} setStyle={setStyle}/>
+
+          {/* Cart */}
+          <Cart style={style}/>
+        </div>
+      </div>
     </div>
   )
 }
