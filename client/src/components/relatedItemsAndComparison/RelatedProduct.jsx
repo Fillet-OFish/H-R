@@ -17,10 +17,18 @@ const imageStyle = {
   objectFit: 'cover'
 }
 
+const smallStyle = {
+  color: 'grey',
+  margin: '10px 0 10px 0'
+}
+
 export default function RelatedProduct({item, setProduct}) {
 
-  const [currentItem, setCurrentItem] = useState([])
-  const [defaultStyle, setDefaultStyle] = useState([])
+  const [currentItem, setCurrentItem] = useState([]);
+  const [defaultStyle, setDefaultStyle] = useState([]);
+  const [rating, setRating] = useState([]);
+
+  console.log('rating', rating)
 
   useEffect(() => {
     axios.get(`/api/products/${item}`)
@@ -39,6 +47,22 @@ export default function RelatedProduct({item, setProduct}) {
         }
       })
       .catch((err) => {console.log(err)});
+    axios.get(`/api/reviews/${item}`)
+      .then((data) => {
+        console.log(data.data)
+        let rating = {};
+        rating.count = data.data.count;
+        let average = 0
+        for (var i = 0; i < data.data.results.length; i++) {
+          average += data.data.results[i].rating
+          if (i === data.data.results.length - 1) {
+            average = average / data.data.results.length
+          }
+        }
+        rating.average = average;
+        setRating(rating);
+      })
+      .catch(err => {console.log(err)})
   }, [item])
 
   const clickHandler = function (e) {
@@ -51,13 +75,20 @@ export default function RelatedProduct({item, setProduct}) {
 
   return (
     <div>
-      {currentItem && defaultStyle.photos ?
+      {currentItem && defaultStyle.photos && rating.average ?
         <li style={style} onClick={(e) => {clickHandler(e)}} >
           <img style={imageStyle} src={defaultStyle.photos[0].thumbnail_url}></img>
-          <div>{currentItem.category}</div>
-          <div>{currentItem.name}</div>
-          <div>${currentItem.default_price}</div>
-          <div>rating</div>
+          <div style={{padding: '5px 10px 0 10px' }}>
+            <small style={smallStyle}>{currentItem.category}</small>
+            <div style={{height: '30px', padding: '3px 0 3px 0', fontSize: '13px'}}>{currentItem.name + ' - ' + currentItem.slogan}</div>
+            <div>{defaultStyle.sale_price ?
+              <div>
+                <p style={{color: 'red'}}>${defaultStyle.sale_price}</p>
+                <small style={smallStyle, {textDecoration: 'line-through'}}>${defaultSTyle.original_price}</small>
+              </div>
+              : <small style={smallStyle}>${defaultStyle.original_price}</small>}</div>
+            <div>rating</div>
+          </div>
         </li>
         : null
       }
