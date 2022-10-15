@@ -5,7 +5,6 @@ export default function Styles({styles, style, setStyle}) {
  const [display, setDisplay] = useState([styles])
 
   function set( prop ) {
-    console.log('you clicked', prop)
     setStyle(prop)
   }
 
@@ -15,13 +14,13 @@ export default function Styles({styles, style, setStyle}) {
       <p className="price">{style.sale_price ? (<><span style={{textDecoration: 'line-through'}}>${style.original_price}</span> ${style.sale_price}</>) : <>${style.original_price}</>}</p>
 
       {/* style name */}
-      <p>STYLE > {style.name}</p>
+      <p><span className="style-name">STYLE ></span><span className="selected-style"> {style.name}</span></p>
 
       {/* icons */}
       {styles.map(one =>
-        <span key={one.style_id}>
-          <img className="style-icon" src={one.photos[0].thumbnail_url} onClick={e => set(one)}/>
-          {style.style_id===one.style_id ? <FaCheck/> : null} &nbsp; &nbsp;
+        <span key={one.style_id} className="styles-icon-container">
+          <img className="style-icon" src={one.photos[0].thumbnail_url} onClick={e => {set(one)}}/>
+          {style.style_id===one.style_id ? <FaCheck className="check-icon"/> : null}
         </span>
       )}
     </div>
