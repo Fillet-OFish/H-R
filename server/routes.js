@@ -7,5 +7,6 @@ router.get('/products/:id/styles', controllers.products.getStyles)
 
 
 router.get('/qa/questions', controllers.qa.getAllQ);
+router.get('/qa/questions/:id/answers', controllers.qa.getAllA);
 
 module.exports = router;

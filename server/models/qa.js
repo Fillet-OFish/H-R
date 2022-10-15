@@ -3,7 +3,7 @@ const axios = require('axios');
 // get request
 function getQuestions(params, callback) {
   let options = {
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${params.id}&page=${params.page}&count=${params.count}`,
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${params.id}&count=${params.count}`,
     headers: {
       'Authorization': `${process.env.TOKENS}`
     }
