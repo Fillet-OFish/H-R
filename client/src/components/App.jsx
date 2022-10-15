@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Header from './header/index.jsx'
 import Overview from './overview/index.jsx';
-import Search from './reviews/components/Search.jsx';
 import RelatedItemsAndComparison from './relatedItemsAndComparison/RelatedItemsAndComparison.jsx'
 
 export default function App() {
@@ -39,11 +39,11 @@ export default function App() {
 
 
   return(<>
-    <div className="header">Logo <Search/></div>
+    <Header product={product}/>
     <div className="container">
       <Overview product={product}/>
 
-      {product.id ? <RelatedItemsAndComparison currentItem={product} setProduct={setProduct} /> : null }
+      {product.id ? <RelatedItemsAndComparison currentItem={product.id} /> : null }
     </div>
 
     </>)

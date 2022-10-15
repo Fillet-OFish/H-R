@@ -1,6 +1,1 @@
-** FEC
-<<<<<<< HEAD
-edit
-=======
-edit
-hello
+FEC
