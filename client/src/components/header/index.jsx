@@ -10,15 +10,11 @@ export default function Header({product}) {
     document.getElementsByClassName('cart-block')[0].style.display = 'block';
   }
 
-  function closeCart() {
-    document.getElementsByClassName('cart-block')[0].style.display = 'none';
-  }
-
   return(
     <>
       <div className="header">
         Logo <Search/>
-      <span className="shopping-bag" onMouseEnter={() => showCart()} onMouseLeave={() => closeCart()}>
+      <span className="shopping-bag" onMouseEnter={() => showCart()}>
         <FaShoppingBag className="shopping-bag-icon"/>
         </span>
       </div>
