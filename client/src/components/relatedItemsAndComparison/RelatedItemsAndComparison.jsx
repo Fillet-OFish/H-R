@@ -3,12 +3,13 @@ import axios from 'axios';
 import RelatedProductsList from './RelatedProductsList.jsx';
 import YourOutfitList from './YourOutfitList.jsx';
 
-export default function RelatedItemsAndComparison({currentItem}) {
+export default function RelatedItemsAndComparison({currentItem, setProduct}) {
+
 
   return (
     <div>
-      <RelatedProductsList currentItem={currentItem} />
-      <YourOutfitList currentItem={currentItem} />
+      <RelatedProductsList currentItem={currentItem} setProduct={setProduct} />
+      <YourOutfitList currentItem={currentItem} setProduct={setProduct} />
     </div>
   )
 }
