@@ -28,8 +28,6 @@ export default function RelatedProduct({item, setProduct}) {
   const [defaultStyle, setDefaultStyle] = useState([]);
   const [rating, setRating] = useState([]);
 
-  console.log('rating', rating)
-
   useEffect(() => {
     axios.get(`/api/products/${item}`)
       .then((data) => {setCurrentItem(data.data)})
@@ -49,7 +47,6 @@ export default function RelatedProduct({item, setProduct}) {
       .catch((err) => {console.log(err)});
     axios.get(`/api/reviews/${item}`)
       .then((data) => {
-        console.log(data.data)
         let rating = {};
         rating.count = data.data.count;
         let average = 0
