@@ -35,12 +35,32 @@ button {
   right:0;
   margin-top:50px;
   margin-right:50px;
-  padding:10px;
+  padding:30px;
   z-index: 100;
-  width:600px;
+  width:450px;
   overflow: auto;
   border:1px black solid;
   background-color: white;
+}
+.cart-block-buttons{
+  display:table;
+  margin:auto;
+  margin-top:20px;
+}
+.cart-block-buttons .view-btn{
+  width:200px;
+  background-color: white;
+  margin-right:10px;
+  padding:10px;
+  border: 1px solid black;
+}
+.cart-block-buttons .checkout-btn{
+  width:200px;
+  background-color: black;
+  color:white;
+  margin-right:10px;
+  padding:10px;
+  border: 1px solid black;
 }
 /* header - search bar */
 .search-bar{
@@ -98,6 +118,7 @@ button {
 }
 .gallery-main{
   position:relative;
+  margin-top:-30px;
   display:flex;
 }
 .gallery-main img{
@@ -105,11 +126,13 @@ button {
   height:100%;
   padding:30px;
   object-fit:contain;
+  cursor: zoom-in;
 }
 .expand-icon{
   cursor:pointer;
   position:absolute;
   right:0;
+  margin-top:10px;
   margin-right:50px;
 }
 /* right container */

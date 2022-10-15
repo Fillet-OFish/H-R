@@ -7,8 +7,11 @@ router.get('/products/:id', controllers.products.getOne)
 router.get('/products', controllers.products.getAll)
 router.get('/products/:id/styles', controllers.products.getStyles)
 
-// interaction
+// reviews
 router.get('/reviews/:id', controllers.reviews.getAll)
+
+// interactions
+router.post('/interactions/:element/:widget/:time')
 
 // cart
 router.get('/cart', controllers.cart.getAll)
