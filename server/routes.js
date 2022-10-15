@@ -8,7 +8,7 @@ router.get('/products', controllers.products.getAll)
 router.get('/products/:id/styles', controllers.products.getStyles)
 
 // interaction
-router.post('/interactions/:element/:widget/:time')
+router.get('/reviews/:id', controllers.reviews.getAll)
 
 // cart
 router.get('/cart', controllers.cart.getAll)
