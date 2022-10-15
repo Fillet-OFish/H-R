@@ -43,7 +43,7 @@ export default function App() {
     <div className="container">
       <Overview product={product}/>
 
-      {product.id ? <RelatedItemsAndComparison currentItem={product.id} /> : null }
+      {product.id ? <RelatedItemsAndComparison currentItem={product} setProduct={setProduct} /> : null }
     </div>
 
     </>)

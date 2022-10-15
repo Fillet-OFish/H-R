@@ -6,6 +6,7 @@ router.get('/products/:id/related', controllers.products.getRelated)
 router.get('/products/:id', controllers.products.getOne)
 router.get('/products', controllers.products.getAll)
 router.get('/products/:id/styles', controllers.products.getStyles)
+router.get('/reviews/:id', controllers.reviews.getAll)
 
 // reviews
 router.get('/reviews/:id', controllers.reviews.getAll)

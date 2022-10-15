@@ -7,7 +7,7 @@ export default function RelatedItemsAndComparison({currentItem, setProduct}) {
 
 
   return (
-    <div className="related-items">
+    <div>
       <RelatedProductsList currentItem={currentItem} setProduct={setProduct} />
       <YourOutfitList currentItem={currentItem} setProduct={setProduct} />
     </div>
