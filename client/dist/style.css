@@ -365,10 +365,12 @@ img {
 
 .QContainer {
   color: #525252;
+  width: 100%;
 }
 .QContainer2 {
   color: #525252;
   margin-right: 63%;
+  width: 1100px;
 }
 
 .AContainer {
