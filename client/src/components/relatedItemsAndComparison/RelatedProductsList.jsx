@@ -11,7 +11,9 @@ export default function RelatedProductsList ({currentItem, setProduct}) {
   const [relatedItems, setRelatedItems] = useState([])
 
   useEffect(() => {
-    axios.get(`/api/products/${currentItem.id}/related`)
+    const source = axios.CancelToken.source();
+
+    axios.get(`/api/products/${currentItem.id}/related`, {cancelToken: source.token})
       .then(data => {setRelatedItems(data.data)})
       .catch(err => console.log(err));
   }, [currentItem])

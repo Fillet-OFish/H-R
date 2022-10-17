@@ -333,3 +333,78 @@ button {
   0% { opacity: 0 }
   100% { opacity: 1 }
 }
+
+
+
+
+
+
+
+
+/* FERNANDO ADDED THESE ------------------------------------------------- */
+nav {
+  margin-top: 2%;
+  display: inline-block;
+  justify-content: center;
+}
+
+a {
+  cursor: pointer;
+  text-decoration:underline;
+}
+
+h2 {
+  font-weight: lighter;
+}
+
+img {
+  width:  100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.QContainer {
+  color: #525252;
+  width: 100%;
+}
+.QContainer2 {
+  color: #525252;
+  margin-right: 63%;
+  width: 1100px;
+}
+
+.AContainer {
+  color: #525252;
+  font-weight: lighter;
+  font-size: small;
+}
+.user_info {
+  margin-top: 0.5%;
+  /* color: #525252; */
+  color: #808080;
+  font-weight: lighter;
+  font-size: x-small;
+}
+
+/* PAGINATION STYLING ------------------------ */
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 5px 10px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+}
+
+.pagination a.active {
+  background-color: #494949;
+  color: white;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+}
+
