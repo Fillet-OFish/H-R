@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from './header/index.jsx'
 import Overview from './overview/index.jsx';
+import Description from './description/index.jsx';
 import RelatedItemsAndComparison from './relatedItemsAndComparison/RelatedItemsAndComparison.jsx'
 
 export default function App() {
@@ -10,17 +11,14 @@ export default function App() {
   const [update, setUpdate] = useState(false)
   const [productRating, setProductRating] = useState([]); //set current product's rating
 
-  console.log('productRating: ', productRating)
-
-
   useEffect(() => {
     axios.get('/api/products')
       .then(result => {setProducts(result.data)})
-      .catch(err => console.log(err));
     axios.get(`/api/products/${40344}`) // id 40344
-      .then(result => setProduct(result.data))
-      .catch(err => console.log(err));
-    axios.get(`/api/reviews/${40344}`)
+    .then(result => setProduct(result.data))
+
+    if(product.id){
+      axios.get(`/api/reviews/${product.id}`)
       .then((data) => {
         let rating = {};
         rating.count = data.data.count;
@@ -34,15 +32,24 @@ export default function App() {
         rating.average = average;
         setProductRating(rating);
       })
-      .catch(err => {console.log(err)})
+    }
   },[update])
 
 
   return(<>
+    {/* header */}
     <Header product={product}/>
-    <div className="container">
-      <Overview product={product}/>
 
+    {/* overview */}
+    <div className="container">
+      <Overview product={product} rating={productRating}/>
+    </div>
+
+    {/* description */}
+    <Description product={product}/>
+
+    {/* related products */}
+    <div className="container">
       {product.id ? <RelatedItemsAndComparison currentItem={product} setProduct={setProduct} /> : null }
     </div>
 
