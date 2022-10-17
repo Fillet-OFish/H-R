@@ -28,7 +28,7 @@ export default function YourOutfitList({currentItem, setProduct}) {
       <h3>Your Outfit:</h3>
       <ul style={style}>
         <button onClick={(e)=>{handleClick(e)}}>+</button>
-        {outfit ? outfit.map((item) => <RelatedProduct setProduct={setProduct} key={item} item={item} />) : null}
+        {outfit ? outfit.map((item) => <RelatedProduct setProduct={setProduct} key={item} item={item} list={'outfit'} />) : null}
       </ul>
     </div>
 )

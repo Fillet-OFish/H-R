@@ -1038,6 +1038,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var style = {
+  position: 'relative',
   border: '1px solid lightgrey ',
   margin: '8px',
   overflow: 'hidden',
@@ -1054,9 +1055,20 @@ var smallStyle = {
   color: 'grey',
   margin: '10px 0 10px 0'
 };
+var buttonStyle = {
+  position: 'absolute',
+  top: '3%',
+  left: '81%',
+  backgroundColor: 'rgba(255, 255, 255, .2)',
+  fontSize: '22px',
+  fontWeight: 'bold',
+  border: 'none',
+  cursor: 'pointer'
+};
 function RelatedProduct(_ref) {
   var item = _ref.item,
-    setProduct = _ref.setProduct;
+    setProduct = _ref.setProduct,
+    list = _ref.list;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
     _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
     currentItem = _useState2[0],
@@ -1102,7 +1114,11 @@ function RelatedProduct(_ref) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("img", {
     style: imageStyle,
     src: defaultStyle.photos[0].thumbnail_url
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+  }), list === 'related' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
+    style: buttonStyle
+  }, "\u2606") : null, list === 'outfit' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
+    style: buttonStyle
+  }, "\u274C") : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     style: {
       padding: '5px 10px 0 10px'
     }
@@ -1125,7 +1141,6 @@ function RelatedProduct(_ref) {
   }, "$", defaultSTyle.original_price)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("small", {
     style: smallStyle
   }, "$", defaultStyle.original_price)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_StarRatings_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    name: currentItem.name,
     item: item
   }))) : null);
 }
@@ -1178,7 +1193,8 @@ function RelatedProductsList(_ref) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_RelatedProduct_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
       setProduct: setProduct,
       key: item,
-      item: item
+      item: item,
+      list: 'related'
     });
   })));
 }
@@ -1206,13 +1222,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function StarRatings(_ref) {
-  var item = _ref.item,
-    name = _ref.name;
+  var item = _ref.item;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
     _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_useState, 2),
     rating = _useState2[0],
     setRating = _useState2[1];
-  console.log(name, rating);
   (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
     var source = axios__WEBPACK_IMPORTED_MODULE_3__["default"].CancelToken.source();
     axios__WEBPACK_IMPORTED_MODULE_3__["default"].get("/api/reviews/".concat(item), {
@@ -1321,7 +1335,8 @@ function YourOutfitList(_ref) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(_RelatedProduct_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
       setProduct: setProduct,
       key: item,
-      item: item
+      item: item,
+      list: 'outfit'
     });
   }) : null));
 }

@@ -23,7 +23,7 @@ export default function RelatedProductsList ({currentItem, setProduct}) {
     <div>
       <h3>Related Products:</h3>
       <ul style={style}>
-        {relatedItems.map((item) => (<RelatedProduct setProduct={setProduct} key={item} item={item}/>))}
+        {relatedItems.map((item) => (<RelatedProduct setProduct={setProduct} key={item} item={item} list={'related'}/>))}
       </ul>
     </div>
   )

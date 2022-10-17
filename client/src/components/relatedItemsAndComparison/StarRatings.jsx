@@ -3,11 +3,9 @@ import axios from 'axios';
 
 
 
-export default function StarRatings({item, name}) {
+export default function StarRatings({item}) {
 
   const [rating, setRating] = useState(null);
-
-  console.log(name, rating)
 
   useEffect(() => {
     const source = axios.CancelToken.source();

@@ -4,6 +4,7 @@ import StarRatings from './StarRatings.jsx'
 
 
 const style = {
+  position: 'relative',
   border: '1px solid lightgrey ',
   margin: '8px',
   overflow: 'hidden',
@@ -23,7 +24,18 @@ const smallStyle = {
   margin: '10px 0 10px 0'
 }
 
-export default function RelatedProduct({item, setProduct}) {
+const buttonStyle = {
+  position: 'absolute',
+  top: '3%',
+  left: '81%',
+  backgroundColor: 'rgba(255, 255, 255, .2)',
+  fontSize: '22px',
+  fontWeight: 'bold',
+  border: 'none',
+  cursor: 'pointer',
+}
+
+export default function RelatedProduct({item, setProduct, list}) {
 
   const [currentItem, setCurrentItem] = useState([]);
   const [defaultStyle, setDefaultStyle] = useState([]);
@@ -63,6 +75,8 @@ export default function RelatedProduct({item, setProduct}) {
       {currentItem && defaultStyle.photos ?
         <li style={style} onClick={(e) => {clickHandler(e)}} >
           <img style={imageStyle} src={defaultStyle.photos[0].thumbnail_url}></img>
+          {list === 'related' ? <button style={buttonStyle}>☆</button> : null}
+          {list === 'outfit' ? <button style={buttonStyle}>❌</button> : null }
           <div style={{padding: '5px 10px 0 10px' }}>
             <small style={smallStyle}>{currentItem.category}</small>
             <div style={{height: '30px', padding: '3px 0 3px 0', fontSize: '13px'}}>{currentItem.name + ' - ' + currentItem.slogan}</div>
@@ -72,7 +86,7 @@ export default function RelatedProduct({item, setProduct}) {
                 <small style={smallStyle, {textDecoration: 'line-through'}}>${defaultSTyle.original_price}</small>
               </div>
               : <small style={smallStyle}>${defaultStyle.original_price}</small>}</div>
-            <StarRatings name={currentItem.name} item={item} />
+            <StarRatings item={item} />
           </div>
         </li>
         : null
