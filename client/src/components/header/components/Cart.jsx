@@ -5,11 +5,13 @@ export default function Cart({product}) {
   const [cart, setCart] = useState(null)
   const [showCart, setShowCart] = useState(false)
 
+  // on load/product change, sets cart
   useEffect(() => {
     axios.get('/api/cart')
       .then(res => setCart(res.data))
   },[product])
 
+  // leave hover function - closes cart when mouse leaves cart
   function closeCart() {
     document.getElementsByClassName('cart-block')[0].style.display = 'none';
   }
@@ -18,11 +20,11 @@ export default function Cart({product}) {
     <div className="cart-block" onMouseLeave={() => closeCart()}>
       <h2>Your bag</h2>
           <hr/>
-        <p>
+        <div>
           Subtotal:
+          <p>{showCart ? JSON.stringify(cart) : null}</p>
           <span className="cart-block-buttons"><button className="view-btn" onClick={()=>setShowCart(!showCart)}>VIEW BAG</button> <button className="checkout-btn">CHECKOUT</button></span>
-        </p>
-        <p>{showCart ? JSON.stringify(cart) : null}</p>
+        </div>
     </div>
   )
 }
