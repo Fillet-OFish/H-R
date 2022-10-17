@@ -42,24 +42,6 @@ function App() {
     _useState8 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState7, 2),
     qaData = _useState8[0],
     setQaData = _useState8[1];
-
-  // User is currently on this page
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(1),
-    _useState10 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState9, 2),
-    currentPage = _useState10[0],
-    setCurrentPage = _useState10[1];
-  // No of Records to be displayed on each page
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(4),
-    _useState12 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState11, 1),
-    recordsPerPage = _useState12[0];
-
-  // you need indices of first and last records on current page
-  var indexOfLastRecord = currentPage * recordsPerPage;
-  var indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-  // Records to be displayed on the current page
-  var currentRecords = qaData.slice(indexOfFirstRecord, indexOfLastRecord);
-  // calculate the number of pages
-  var nPages = Math.ceil(qaData.length / recordsPerPage);
   function temp() {
     axios__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/products').then(function (data) {
       return console.log('frontend', data.data);
@@ -87,17 +69,12 @@ function App() {
       console.log('Error fetching data: ', err);
     });
   }, [product]);
-  console.log(qaData, 'IM QUEST DATA ---------');
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, "hello world", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
     onClick: function onClick() {
       return temp();
     }
   }, "click"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_qa_index_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    qaData: qaData,
-    currentRecords: currentRecords,
-    nPages: nPages,
-    currentPage: currentPage,
-    setCurrentPage: setCurrentPage
+    qaData: qaData
   }));
 }
 
@@ -114,23 +91,43 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/formatDistanceToNow/index.js");
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/parseISO/index.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/formatDistanceToNow/index.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/parseISO/index.js");
 
 
+
+
+var toDate = __webpack_require__(/*! date-fns/toDate */ "./node_modules/date-fns/esm/toDate/index.js");
 
 // ENTRY OF EACH ANSWER ----------
 var AWEntry = function AWEntry(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong", null, "A:"), props.ans.body), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), props.ans.photos.map(function (img, index) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+  // state to keep track if an answers has been helpful
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+    _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
+    helpful = _useState2[0],
+    setHelpful = _useState2[1];
+  console.log(props.ans.date, '------------------');
+  console.log(props.ans.helpfulness, '------------------');
+
+  // const result = toDate(new Date(2014, 1, 11, 11, 30, 30))
+  // console.log(result, '-------')
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, props.index === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("strong", null, "A:"), props.ans.body) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, props.ans.body), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null), props.ans.photos.map(function (img, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("img", {
       src: img.url,
       key: index
     });
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "user_info"
-  }, "by ", props.ans.answerer_name, ", ", (0,date_fns__WEBPACK_IMPORTED_MODULE_1__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_2__["default"])(props.ans.date)), " | Helpful? ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "Yes"), " (", props.ans.helpfulness, ") | ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "Report"), " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null));
+  }, "by ", props.ans.answerer_name, ", ", (0,date_fns__WEBPACK_IMPORTED_MODULE_2__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(props.ans.date)), " | Helpful? ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("a", {
+    onClick: function onClick() {
+      helpful ? props.ans.helpfulness-- : props.ans.helpfulness++;
+      setHelpful(!helpful);
+    }
+  }, "Yes"), " (", props.ans.helpfulness, ") | ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("a", null, "Report"), " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AWEntry);
 
@@ -205,31 +202,54 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _QAEntry_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./QAEntry.jsx */ "./client/src/components/qa/QAEntry.jsx");
-/* harmony import */ var _Pagination_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Pagination.jsx */ "./client/src/components/qa/Pagination.jsx");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _QAEntry_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./QAEntry.jsx */ "./client/src/components/qa/QAEntry.jsx");
+/* harmony import */ var _Pagination_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Pagination.jsx */ "./client/src/components/qa/Pagination.jsx");
+
+
 
 
 
 var QA = function QA(props) {
+  // PAGINATION STATES ----------------------------------------------
+  // User is currently on this page
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(1),
+    _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
+    currentPage = _useState2[0],
+    setCurrentPage = _useState2[1];
+  // No of Records to be displayed on each page
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(4),
+    _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState3, 1),
+    recordsPerPage = _useState4[0];
+
+  // you need indices of first and last records on current page
+  var indexOfLastRecord = currentPage * recordsPerPage;
+  var indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+  // Records to be displayed on the current page
+  var currentRecords = props.qaData.slice(indexOfFirstRecord, indexOfLastRecord);
+  // calculate the number of pages
+  var nPages = Math.ceil(props.qaData.length / recordsPerPage);
+  // ----------------------------------------------------------------
+
   // iterate through questions data
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "QContainer"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Questions & Answers"), props.currentRecords.map(function (ques, index) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h2", null, "Questions & Answers"), currentRecords.map(function (ques, index) {
     return (
       /*#__PURE__*/
       // set each question entry ---------
-      react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_QAEntry_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_QAEntry_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
         ques: ques,
         key: index,
         qaData: props.qaData
       })
     );
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Pagination_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    nPages: props.nPages,
-    currentPage: props.currentPage,
-    setCurrentPage: props.setCurrentPage
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Pagination_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    nPages: nPages,
+    currentPage: currentPage,
+    setCurrentPage: setCurrentPage
   }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (QA);
@@ -265,13 +285,18 @@ var QAEntry = function QAEntry(props) {
     _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
     answers = _useState2[0],
     setAnswers = _useState2[1];
-
-  // ADDED FOR PAGINATION ANSWERS -------------------------------
-  // No of Records to be displayed on each page
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(2),
+  // state to keep track if a question has been helpful
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
     _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState3, 2),
-    answersPerPage = _useState4[0],
-    setAnswersPerPage = _useState4[1];
+    helpful = _useState4[0],
+    setHelpful = _useState4[1];
+
+  // PAGINATION FOR ANSWERS -------------------------------
+  // No of Records to be displayed on each page
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(2),
+    _useState6 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState5, 2),
+    answersPerPage = _useState6[0],
+    setAnswersPerPage = _useState6[1];
   // Records to be displayed on the current page
   var currentAnswers = answers.slice(0, answersPerPage);
 
@@ -279,8 +304,9 @@ var QAEntry = function QAEntry(props) {
   var addAnsw = function addAnsw() {
     setAnswersPerPage(answersPerPage + 2);
   };
+  // -------------------------------------------------------
 
-  // make call axios get for answers with the quest id
+  // make an axios get call for answers with each individual quest id
   var getAnswers = function getAnswers(q_id) {
     axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/qa/questions/".concat(q_id, "/answers")).then(function (response) {
       console.log(response.data, 'THIS IS ANSWERS');
@@ -294,13 +320,26 @@ var QAEntry = function QAEntry(props) {
     getAnswers(props.ques.question_id);
   }, [props.qaData, props.ques]);
 
-  // render answers data
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("strong", null, "Q: ", props.ques.question_body)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+  // render answers data with an answers entry component and a button for more answers
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+    className: "QContainer2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("strong", null, "Q: ", props.ques.question_body), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("label", {
+    style: {
+      "float": 'right'
+    },
+    className: "user_info"
+  }, "Helpful? ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("a", {
+    onClick: function onClick() {
+      helpful ? props.ques.question_helpfulness-- : props.ques.question_helpfulness++;
+      setHelpful(!helpful);
+    }
+  }, "Yes"), " (", props.ques.question_helpfulness, ") | ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("a", null, "Add Answer"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "AContainer"
   }, currentAnswers.length === 0 ? 'No answers yet!' : currentAnswers.map(function (ans, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_AWEntry_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
       ans: ans,
-      key: index
+      key: index,
+      index: index
     })
     // <div><strong>A: {`A: ${ans.body}`}</strong></div>
     ;
@@ -334,11 +373,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var QuesnAnsw = function QuesnAnsw(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_QA_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    qaData: props.qaData,
-    currentRecords: props.currentRecords,
-    nPages: props.nPages,
-    currentPage: props.currentPage,
-    setCurrentPage: props.setCurrentPage
+    qaData: props.qaData
   })));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (QuesnAnsw);

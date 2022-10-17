@@ -1,22 +1,38 @@
 import React from 'react';
 import QAEntry from './QAEntry.jsx';
 import Pagination from './Pagination.jsx';
+import {useState, useEffect} from 'react';
 
 
 const QA = (props) => {
+
+  // PAGINATION STATES ----------------------------------------------
+  // User is currently on this page
+  const [currentPage, setCurrentPage] = useState(1);
+  // No of Records to be displayed on each page
+  const [recordsPerPage] = useState(4);
+
+  // you need indices of first and last records on current page
+  const indexOfLastRecord = currentPage * recordsPerPage;
+  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+  // Records to be displayed on the current page
+  const currentRecords = props.qaData.slice(indexOfFirstRecord, indexOfLastRecord);
+  // calculate the number of pages
+  const nPages = Math.ceil(props.qaData.length / recordsPerPage);
+  // ----------------------------------------------------------------
 
 
   // iterate through questions data
   return (
     <div className='QContainer'>
       <h2>Questions & Answers</h2>
-      {props.currentRecords.map((ques, index) => (
+      {currentRecords.map((ques, index) => (
         // set each question entry ---------
         <QAEntry ques={ques} key={index} qaData={props.qaData} />
       ))}
 
       {/* set pagination ----------- */}
-      <Pagination nPages={props.nPages} currentPage={props.currentPage} setCurrentPage={props.setCurrentPage} />
+      <Pagination nPages={nPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
     </div>
   )
 }

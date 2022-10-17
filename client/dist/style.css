@@ -2,6 +2,16 @@ body {
   font-family: sans-serif, arial;
 }
 
+.style-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 75px;
+}
+
+
+
+
+
 nav {
   margin-top: 2%;
   display: inline-block;
@@ -10,32 +20,41 @@ nav {
 
 a {
   cursor: pointer;
+  text-decoration:underline;
 }
 
 h2 {
   font-weight: lighter;
 }
-.style-icon {
-  width: 80px;
-  height: 80px;
-  border-radius: 75px;
+
+img {
+  width:  100px;
+  height: 100px;
+  object-fit: cover;
 }
 
 .QContainer {
   color: #525252;
 }
-.AContainer {
+.QContainer2 {
   color: #525252;
-  font-weight: lighter;
+  margin-right: 63%;
 }
-.user_info {
-  margin-top: 0.5%;
+
+.AContainer {
   color: #525252;
   font-weight: lighter;
   font-size: small;
 }
+.user_info {
+  margin-top: 0.5%;
+  /* color: #525252; */
+  color: #808080;
+  font-weight: lighter;
+  font-size: x-small;
+}
 
-/* PAGINATION STYLING -------------------------------------------------- */
+/* PAGINATION STYLING ------------------------ */
 .pagination {
   display: inline-block;
 }

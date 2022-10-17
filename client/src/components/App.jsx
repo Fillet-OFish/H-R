@@ -12,25 +12,10 @@ export default function App() {
   const [qaData, setQaData] = useState([]);
 
 
-  // User is currently on this page
-  const [currentPage, setCurrentPage] = useState(1);
-  // No of Records to be displayed on each page
-  const [recordsPerPage] = useState(4);
-
-  // you need indices of first and last records on current page
-  const indexOfLastRecord = currentPage * recordsPerPage;
-  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-  // Records to be displayed on the current page
-  const currentRecords = qaData.slice(indexOfFirstRecord, indexOfLastRecord);
-  // calculate the number of pages
-  const nPages = Math.ceil(qaData.length / recordsPerPage);
-
-
   function temp() {
     axios.get('/api/products')
       .then(data => console.log('frontend', data.data))
   }
-
 
   useEffect(() => {
     axios.get('/api/products')
@@ -50,14 +35,13 @@ export default function App() {
       })
   }, [product])
 
-  console.log(qaData, 'IM QUEST DATA ---------')
 
   return (
     <div>
       hello world
       <button onClick={() => temp()}>click</button>
 
-      <QuesnAnsw qaData={qaData} currentRecords={currentRecords} nPages={nPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      <QuesnAnsw qaData={qaData} />
     </div>
   )
 }
