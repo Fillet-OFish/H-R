@@ -68,14 +68,10 @@ export default function App() {
     <div className="container">
       {product.id ? <RelatedItemsAndComparison currentItem={product} setProduct={setProduct} /> : null }
     </div>
-<<<<<<< HEAD
-    </>)
-=======
 
     {/* Questions and Answers */}
     <div className="container">
       <QuesnAnsw qaData={qaData} />
     </div>
   </>)
->>>>>>> master
 }

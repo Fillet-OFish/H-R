@@ -8,11 +8,7 @@ const style = {
   margin: '8px',
   overflow: 'hidden',
   width: '230px',
-<<<<<<< HEAD
   height: '360px',
-=======
-  height: '340px',
->>>>>>> master
   cursor: 'pointer'
 }
 
