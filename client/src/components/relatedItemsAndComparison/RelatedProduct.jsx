@@ -4,13 +4,11 @@ import StarRatings from './StarRatings.jsx'
 
 
 const style = {
-  borderStyle: 'solid',
-  borderWidth: '1px',
-  listStyleType: 'none',
+  border: '1px solid grey ',
   margin: '8px',
   overflow: 'hidden',
   width: '230px',
-  height: '340px',
+  height: '360px',
   cursor: 'pointer'
 }
 

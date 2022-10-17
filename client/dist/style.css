@@ -239,6 +239,7 @@ button {
   width:80px;
   height:80px;
   border-radius:75px;
+  object-fit:cover;
 }
 .check-icon {
   position:absolute;
