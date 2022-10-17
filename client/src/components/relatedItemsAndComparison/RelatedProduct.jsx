@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useRef, useReducer } from 'react';
 import axios from 'axios';
+import StarRatings from './StarRatings.jsx'
+
 
 const style = {
   borderStyle: 'solid',
@@ -8,7 +10,8 @@ const style = {
   margin: '8px',
   overflow: 'hidden',
   width: '230px',
-  height: '340px'
+  height: '340px',
+  cursor: 'pointer'
 }
 
 const imageStyle = {
@@ -26,13 +29,15 @@ export default function RelatedProduct({item, setProduct}) {
 
   const [currentItem, setCurrentItem] = useState([]);
   const [defaultStyle, setDefaultStyle] = useState([]);
-  const [rating, setRating] = useState([]);
 
   useEffect(() => {
-    axios.get(`/api/products/${item}`)
+    const source = axios.CancelToken.source();
+
+    axios.get(`/api/products/${item}`, {cancelToken: source.token})
       .then((data) => {setCurrentItem(data.data)})
       .catch((err) => {console.log(err)});
-    axios.get(`/api/products/${item}/styles`)
+
+    axios.get(`/api/products/${item}/styles`, {cancelToken: source.token})
       .then((data) => {
         for (var i = 0; i < data.data.results.length; i++) {
           if (data.data.results[i]['default?']) {
@@ -45,22 +50,7 @@ export default function RelatedProduct({item, setProduct}) {
         }
       })
       .catch((err) => {console.log(err)});
-    axios.get(`/api/reviews/${item}`)
-      .then((data) => {
-        let rating = {};
-        rating.count = data.data.count;
-        let average = 0
-        for (var i = 0; i < data.data.results.length; i++) {
-          average += data.data.results[i].rating
-          if (i === data.data.results.length - 1) {
-            average = average / data.data.results.length
-          }
-        }
-        rating.average = average;
-        setRating(rating);
-      })
-      .catch(err => {console.log(err)})
-  }, [item])
+  }, [])
 
   const clickHandler = function (e) {
     e.preventDefault();
@@ -72,7 +62,7 @@ export default function RelatedProduct({item, setProduct}) {
 
   return (
     <div>
-      {currentItem && defaultStyle.photos && rating.average ?
+      {currentItem && defaultStyle.photos ?
         <li style={style} onClick={(e) => {clickHandler(e)}} >
           <img style={imageStyle} src={defaultStyle.photos[0].thumbnail_url}></img>
           <div style={{padding: '5px 10px 0 10px' }}>
@@ -84,7 +74,7 @@ export default function RelatedProduct({item, setProduct}) {
                 <small style={smallStyle, {textDecoration: 'line-through'}}>${defaultSTyle.original_price}</small>
               </div>
               : <small style={smallStyle}>${defaultStyle.original_price}</small>}</div>
-            <div>rating</div>
+            <StarRatings item={item} />
           </div>
         </li>
         : null
