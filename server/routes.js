@@ -1,5 +1,5 @@
-const controllers = require('./controllers/index.js')
-const router = require('express').Router()
+const controllers = require('./controllers/index.js');
+const router = require('express').Router();
 
 // products
 router.get('/products/:id/related', controllers.products.getRelated)
@@ -18,4 +18,7 @@ router.post('/interactions/:element/:widget/:time')
 router.get('/cart', controllers.cart.getAll)
 router.post('/cart', controllers.cart.postOne)
 
-module.exports = router
+router.get('/qa/questions', controllers.qa.getAllQ);
+router.get('/qa/questions/:id/answers', controllers.qa.getAllA);
+
+module.exports = router;
