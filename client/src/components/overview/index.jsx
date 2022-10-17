@@ -4,18 +4,21 @@ import Styles from './components/Styles.jsx'
 import Gallery from './components/Gallery.jsx'
 import Cart from './components/Cart.jsx'
 
-export default function Overview({product}) {
+export default function Overview({product, rating}) {
   const [styles, setStyles] = useState([])
   const [style, setStyle] = useState([])
   const [update, setUpdate] = useState(false)
 
+  // on load/product change, set styles/style based on default product/new product
   useEffect(() => {
     if(product && product.length!==0){
-      axios.get(`/api/products/${product.id}/styles`)
+      if(product.id!==null) {
+        axios.get(`/api/products/${product.id}/styles`)
         .then(result => {
           setStyles(result.data.results);
           setStyle(result.data.results[0])
         })
+      }
     }
   },[product])
 
@@ -26,13 +29,16 @@ export default function Overview({product}) {
 
         <div className="right">
           {/* Stars */}
-          <p>★★★★☆ Read all reviews</p>
+          <p>★★★★☆ <a href="/">Read all reviews</a></p>
 
           {/* Category */}
-          <p className="product-category">{product.category}</p>
+          <p className="product-category">UNISEX / {product.category} / {product.name}</p>
 
           {/* Product name */}
           <p className="product-name">{product.name}</p>
+
+          {/* price */}
+          <p className="price">{style.sale_price ? (<><span style={{textDecoration: 'line-through', textDecorationThickness:'2px', textDecorationColor:'black',color:'gray'}}>${style.original_price}</span> ${style.sale_price}</>) : <>${style.original_price}</>}</p>
 
           {/* Styles */}
           <Styles setUpdate={setUpdate} styles={styles} style={style} setStyle={setStyle}/>
