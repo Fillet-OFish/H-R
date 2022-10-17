@@ -10,7 +10,7 @@ const app = express();
 
 require('dotenv').config();
 
-app.use(express.json())
+app.use(express.json());
 
 app.use(express.static('./client/dist'));
 
@@ -21,7 +21,7 @@ app.use('/api', router) // here ('/api)
 // app.use('/api/qa', qaRouter)
 // app.use('/api/reviews'. reviewsRouter)
 
-const PORT = 3000
+const PORT = 3000;
 
 app.listen(PORT);
 console.log(`server listening at http://localhost:${PORT}`)
