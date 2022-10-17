@@ -21,15 +21,6 @@ module.exports = {
   getRelated: function (req, res) {
     models.products.getRelated(req.params.id)
       .then(result => res.status(200).send(result.data))
-<<<<<<< HEAD
-      .catch(e => console.log('products getRelated error', e))
-  },
-  product: function (req, res) {
-    models.products.getProduct(req.params.id)
-      .then(result => res.status(200).send(result.data))
-      .catch(e => console.log('products prouct error', e))
-=======
       .catch(e => console.log('products getRelated error', e.response.data))
->>>>>>> master
   }
 }
