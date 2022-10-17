@@ -73,9 +73,11 @@ function App() {
     onClick: function onClick() {
       return temp();
     }
-  }, "click"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_qa_index_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, "click"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_qa_index_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
     qaData: qaData
-  }));
+  })));
 }
 
 /***/ }),

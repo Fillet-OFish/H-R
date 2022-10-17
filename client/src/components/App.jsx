@@ -41,7 +41,10 @@ export default function App() {
       hello world
       <button onClick={() => temp()}>click</button>
 
-      <QuesnAnsw qaData={qaData} />
+      {/* Questions and Answers */}
+      <div className="container">
+        <QuesnAnsw qaData={qaData} />
+      </div>
     </div>
   )
 }
