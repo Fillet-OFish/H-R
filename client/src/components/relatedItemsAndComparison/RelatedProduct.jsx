@@ -4,11 +4,11 @@ import StarRatings from './StarRatings.jsx'
 
 
 const style = {
-  border: '1px solid grey ',
+  border: '1px solid lightgrey ',
   margin: '8px',
   overflow: 'hidden',
   width: '230px',
-  height: '360px',
+  height: '380px',
   cursor: 'pointer'
 }
 
@@ -72,7 +72,7 @@ export default function RelatedProduct({item, setProduct}) {
                 <small style={smallStyle, {textDecoration: 'line-through'}}>${defaultSTyle.original_price}</small>
               </div>
               : <small style={smallStyle}>${defaultStyle.original_price}</small>}</div>
-            <StarRatings item={item} />
+            <StarRatings name={currentItem.name} item={item} />
           </div>
         </li>
         : null

@@ -42,13 +42,15 @@ export default function App() {
 
   // get questions --------------------
   useEffect(() => {
-    axios.get('/api/qa/questions', {params: {p_id: product.id} })
-      .then((response) => {
-        setQaData(response.data.results);
-      })
-      .catch(err => {
-        console.log('Error fetching data: ', err);
-      })
+    if(product.id){
+      axios.get('/api/qa/questions', {params: {p_id: product.id} })
+        .then((response) => {
+          setQaData(response.data.results);
+        })
+        .catch(err => {
+          console.log('Error fetching data: ', err);
+        })
+    }
   }, [product])
 
 

@@ -79,15 +79,17 @@ function App() {
 
   // get questions --------------------
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    axios__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/qa/questions', {
-      params: {
-        p_id: product.id
-      }
-    }).then(function (response) {
-      setQaData(response.data.results);
-    })["catch"](function (err) {
-      console.log('Error fetching data: ', err);
-    });
+    if (product.id) {
+      axios__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/qa/questions', {
+        params: {
+          p_id: product.id
+        }
+      }).then(function (response) {
+        setQaData(response.data.results);
+      })["catch"](function (err) {
+        console.log('Error fetching data: ', err);
+      });
+    }
   }, [product]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement((react__WEBPACK_IMPORTED_MODULE_1___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_header_index_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
     product: product
@@ -1036,11 +1038,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var style = {
-  border: '1px solid grey ',
+  border: '1px solid lightgrey ',
   margin: '8px',
   overflow: 'hidden',
   width: '230px',
-  height: '360px',
+  height: '380px',
   cursor: 'pointer'
 };
 var imageStyle = {
@@ -1123,6 +1125,7 @@ function RelatedProduct(_ref) {
   }, "$", defaultSTyle.original_price)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("small", {
     style: smallStyle
   }, "$", defaultStyle.original_price)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_StarRatings_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    name: currentItem.name,
     item: item
   }))) : null);
 }
@@ -1195,7 +1198,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ "./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js");
 /* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
-/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-icons/fa */ "./node_modules/react-icons/fa/index.esm.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -1203,14 +1205,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 function StarRatings(_ref) {
-  var item = _ref.item;
+  var item = _ref.item,
+    name = _ref.name;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
     _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_useState, 2),
     rating = _useState2[0],
     setRating = _useState2[1];
-  console.log('rating: ', rating);
+  console.log(name, rating);
   (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
     var source = axios__WEBPACK_IMPORTED_MODULE_3__["default"].CancelToken.source();
     axios__WEBPACK_IMPORTED_MODULE_3__["default"].get("/api/reviews/".concat(item), {
@@ -1232,30 +1234,35 @@ function StarRatings(_ref) {
     });
   }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", null, rating ? (0,_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(Array(5)).map(function (star, i) {
-    var starIndex = i + 1;
     var starFill = function starFill() {
-      if (rating.average - starIndex >= 1) {
+      if (rating.average - i >= 1) {
         return 100;
       }
-      if (rating.average - starIndex >= 0.75) {
+      if (rating.average - i >= 0.75) {
         return 75;
       }
-      if (rating.average - starIndex >= 0.50) {
+      if (rating.average - i >= 0.50) {
         return 50;
       }
-      if (rating.average - starIndex >= 0.25) {
+      if (rating.average - i >= 0.25) {
         return 25;
       }
       return 0;
     };
-    console.log('starFill: ', starFill());
+    var style = {
+      display: 'inline-block',
+      background: "linear-gradient(90deg, #f80 ".concat(starFill(), "%, #ddd 0 ").concat(100 - starFill(), "%"),
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent'
+    };
     return (
       /*#__PURE__*/
-      // <FaStar key={i} color={`linear-gradient(90deg, #f80 ${starFill()}%, #ddd ${100 - starFill()}%`} />
-      react__WEBPACK_IMPORTED_MODULE_2___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_4__.FaStar, {
+      // <FaStar key={i} style={{backgroundColor: `linear-gradient(90deg, #f80 ${starFill()}%, #ddd ${100 - starFill()}%`}} />
+      // <FaStar key={i} color={starFill() ? '#f80' : '#ddd'} />
+      react__WEBPACK_IMPORTED_MODULE_2___default().createElement("small", {
         key: i,
-        color: starFill() ? '#f80' : '#ddd'
-      })
+        style: style
+      }, "\u2B50")
     );
   }) : null);
 }
@@ -2928,6 +2935,173 @@ function getRoundingMethod(method) {
 
 /***/ }),
 
+/***/ "./node_modules/date-fns/_lib/setUTCDay/index.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/date-fns/_lib/setUTCDay/index.js ***!
+  \*******************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = setUTCDay;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+var _index4 = __webpack_require__(/*! ../defaultOptions/index.js */ "./node_modules/date-fns/_lib/defaultOptions/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function setUTCDay(dirtyDate, dirtyDay, options) {
+  var _ref, _ref2, _ref3, _options$weekStartsOn, _options$locale, _options$locale$optio, _defaultOptions$local, _defaultOptions$local2;
+
+  (0, _index2.default)(2, arguments);
+  var defaultOptions = (0, _index4.getDefaultOptions)();
+  var weekStartsOn = (0, _index3.default)((_ref = (_ref2 = (_ref3 = (_options$weekStartsOn = options === null || options === void 0 ? void 0 : options.weekStartsOn) !== null && _options$weekStartsOn !== void 0 ? _options$weekStartsOn : options === null || options === void 0 ? void 0 : (_options$locale = options.locale) === null || _options$locale === void 0 ? void 0 : (_options$locale$optio = _options$locale.options) === null || _options$locale$optio === void 0 ? void 0 : _options$locale$optio.weekStartsOn) !== null && _ref3 !== void 0 ? _ref3 : defaultOptions.weekStartsOn) !== null && _ref2 !== void 0 ? _ref2 : (_defaultOptions$local = defaultOptions.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.weekStartsOn) !== null && _ref !== void 0 ? _ref : 0); // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
+
+  if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
+    throw new RangeError('weekStartsOn must be between 0 and 6 inclusively');
+  }
+
+  var date = (0, _index.default)(dirtyDate);
+  var day = (0, _index3.default)(dirtyDay);
+  var currentDay = date.getUTCDay();
+  var remainder = day % 7;
+  var dayIndex = (remainder + 7) % 7;
+  var diff = (dayIndex < weekStartsOn ? 7 : 0) + day - currentDay;
+  date.setUTCDate(date.getUTCDate() + diff);
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/_lib/setUTCISODay/index.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/date-fns/_lib/setUTCISODay/index.js ***!
+  \**********************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = setUTCISODay;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function setUTCISODay(dirtyDate, dirtyDay) {
+  (0, _index2.default)(2, arguments);
+  var day = (0, _index3.default)(dirtyDay);
+
+  if (day % 7 === 0) {
+    day = day - 7;
+  }
+
+  var weekStartsOn = 1;
+  var date = (0, _index.default)(dirtyDate);
+  var currentDay = date.getUTCDay();
+  var remainder = day % 7;
+  var dayIndex = (remainder + 7) % 7;
+  var diff = (dayIndex < weekStartsOn ? 7 : 0) + day - currentDay;
+  date.setUTCDate(date.getUTCDate() + diff);
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/_lib/setUTCISOWeek/index.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/date-fns/_lib/setUTCISOWeek/index.js ***!
+  \***********************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = setUTCISOWeek;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../getUTCISOWeek/index.js */ "./node_modules/date-fns/_lib/getUTCISOWeek/index.js"));
+
+var _index4 = _interopRequireDefault(__webpack_require__(/*! ../requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function setUTCISOWeek(dirtyDate, dirtyISOWeek) {
+  (0, _index4.default)(2, arguments);
+  var date = (0, _index2.default)(dirtyDate);
+  var isoWeek = (0, _index.default)(dirtyISOWeek);
+  var diff = (0, _index3.default)(date) - isoWeek;
+  date.setUTCDate(date.getUTCDate() - diff * 7);
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/_lib/setUTCWeek/index.js":
+/*!********************************************************!*\
+  !*** ./node_modules/date-fns/_lib/setUTCWeek/index.js ***!
+  \********************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = setUTCWeek;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../getUTCWeek/index.js */ "./node_modules/date-fns/_lib/getUTCWeek/index.js"));
+
+var _index4 = _interopRequireDefault(__webpack_require__(/*! ../requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function setUTCWeek(dirtyDate, dirtyWeek, options) {
+  (0, _index4.default)(2, arguments);
+  var date = (0, _index2.default)(dirtyDate);
+  var week = (0, _index.default)(dirtyWeek);
+  var diff = (0, _index3.default)(date, options) - week;
+  date.setUTCDate(date.getUTCDate() - diff * 7);
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
 /***/ "./node_modules/date-fns/_lib/startOfUTCISOWeek/index.js":
 /*!***************************************************************!*\
   !*** ./node_modules/date-fns/_lib/startOfUTCISOWeek/index.js ***!
@@ -3431,7 +3605,7 @@ var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/in
 
 var _index2 = _interopRequireDefault(__webpack_require__(/*! ../getISOWeekYear/index.js */ "./node_modules/date-fns/getISOWeekYear/index.js"));
 
-var _index3 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../setISOWeekYear/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../setISOWeekYear/index.js */ "./node_modules/date-fns/setISOWeekYear/index.js"));
 
 var _index4 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
 
@@ -3971,9 +4145,9 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports["default"] = clamp;
 
-var _index = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../max/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index = _interopRequireDefault(__webpack_require__(/*! ../max/index.js */ "./node_modules/date-fns/max/index.js"));
 
-var _index2 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../min/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../min/index.js */ "./node_modules/date-fns/min/index.js"));
 
 var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
 
@@ -4716,7 +4890,7 @@ exports["default"] = differenceInCalendarDays;
 
 var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/getTimezoneOffsetInMilliseconds/index.js */ "./node_modules/date-fns/_lib/getTimezoneOffsetInMilliseconds/index.js"));
 
-var _index2 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../startOfDay/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../startOfDay/index.js */ "./node_modules/date-fns/startOfDay/index.js"));
 
 var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
 
@@ -4838,7 +5012,7 @@ exports["default"] = differenceInCalendarISOWeeks;
 
 var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/getTimezoneOffsetInMilliseconds/index.js */ "./node_modules/date-fns/_lib/getTimezoneOffsetInMilliseconds/index.js"));
 
-var _index2 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../startOfISOWeek/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../startOfISOWeek/index.js */ "./node_modules/date-fns/startOfISOWeek/index.js"));
 
 var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
 
@@ -5009,7 +5183,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports["default"] = differenceInCalendarWeeks;
 
-var _index = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../startOfWeek/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index = _interopRequireDefault(__webpack_require__(/*! ../startOfWeek/index.js */ "./node_modules/date-fns/startOfWeek/index.js"));
 
 var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/getTimezoneOffsetInMilliseconds/index.js */ "./node_modules/date-fns/_lib/getTimezoneOffsetInMilliseconds/index.js"));
 
@@ -5308,7 +5482,7 @@ var _index2 = _interopRequireDefault(__webpack_require__(/*! ../differenceInCale
 
 var _index3 = _interopRequireDefault(__webpack_require__(/*! ../compareAsc/index.js */ "./node_modules/date-fns/compareAsc/index.js"));
 
-var _index4 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../subISOWeekYears/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index4 = _interopRequireDefault(__webpack_require__(/*! ../subISOWeekYears/index.js */ "./node_modules/date-fns/subISOWeekYears/index.js"));
 
 var _index5 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
 
@@ -5986,7 +6160,7 @@ var _index = _interopRequireDefault(__webpack_require__(/*! ../addMinutes/index.
 
 var _index2 = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
 
-var _index3 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../startOfMinute/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../startOfMinute/index.js */ "./node_modules/date-fns/startOfMinute/index.js"));
 
 var _index4 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
 
@@ -6146,7 +6320,7 @@ exports["default"] = eachQuarterOfInterval;
 
 var _index = _interopRequireDefault(__webpack_require__(/*! ../addQuarters/index.js */ "./node_modules/date-fns/addQuarters/index.js"));
 
-var _index2 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../startOfQuarter/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../startOfQuarter/index.js */ "./node_modules/date-fns/startOfQuarter/index.js"));
 
 var _index3 = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
 
@@ -6225,7 +6399,7 @@ exports["default"] = eachWeekOfInterval;
 
 var _index = _interopRequireDefault(__webpack_require__(/*! ../addWeeks/index.js */ "./node_modules/date-fns/addWeeks/index.js"));
 
-var _index2 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../startOfWeek/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../startOfWeek/index.js */ "./node_modules/date-fns/startOfWeek/index.js"));
 
 var _index3 = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
 
@@ -6391,7 +6565,7 @@ exports["default"] = eachWeekendOfMonth;
 
 var _index = _interopRequireDefault(__webpack_require__(/*! ../eachWeekendOfInterval/index.js */ "./node_modules/date-fns/eachWeekendOfInterval/index.js"));
 
-var _index2 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../startOfMonth/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../startOfMonth/index.js */ "./node_modules/date-fns/startOfMonth/index.js"));
 
 var _index3 = _interopRequireDefault(__webpack_require__(/*! ../endOfMonth/index.js */ "./node_modules/date-fns/endOfMonth/index.js"));
 
@@ -6459,7 +6633,7 @@ var _index = _interopRequireDefault(__webpack_require__(/*! ../eachWeekendOfInte
 
 var _index2 = _interopRequireDefault(__webpack_require__(/*! ../endOfYear/index.js */ "./node_modules/date-fns/endOfYear/index.js"));
 
-var _index3 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../startOfYear/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../startOfYear/index.js */ "./node_modules/date-fns/startOfYear/index.js"));
 
 var _index4 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
 
@@ -6797,7 +6971,7 @@ exports["default"] = endOfISOWeekYear;
 
 var _index = _interopRequireDefault(__webpack_require__(/*! ../getISOWeekYear/index.js */ "./node_modules/date-fns/getISOWeekYear/index.js"));
 
-var _index2 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../startOfISOWeek/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../startOfISOWeek/index.js */ "./node_modules/date-fns/startOfISOWeek/index.js"));
 
 var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
 
@@ -7322,7 +7496,7 @@ exports["default"] = format;
 
 var _index = _interopRequireDefault(__webpack_require__(/*! ../isValid/index.js */ "./node_modules/date-fns/isValid/index.js"));
 
-var _index2 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../subMilliseconds/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../subMilliseconds/index.js */ "./node_modules/date-fns/subMilliseconds/index.js"));
 
 var _index3 = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
 
@@ -9044,7 +9218,7 @@ var _index3 = _interopRequireDefault(__webpack_require__(/*! ../format/index.js 
 
 var _index4 = _interopRequireDefault(__webpack_require__(/*! ../_lib/defaultLocale/index.js */ "./node_modules/date-fns/_lib/defaultLocale/index.js"));
 
-var _index5 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../subMilliseconds/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index5 = _interopRequireDefault(__webpack_require__(/*! ../subMilliseconds/index.js */ "./node_modules/date-fns/subMilliseconds/index.js"));
 
 var _index6 = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
 
@@ -9315,7 +9489,7 @@ exports["default"] = getDayOfYear;
 
 var _index = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
 
-var _index2 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../startOfYear/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../startOfYear/index.js */ "./node_modules/date-fns/startOfYear/index.js"));
 
 var _index3 = _interopRequireDefault(__webpack_require__(/*! ../differenceInCalendarDays/index.js */ "./node_modules/date-fns/differenceInCalendarDays/index.js"));
 
@@ -9679,9 +9853,9 @@ exports["default"] = getISOWeek;
 
 var _index = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
 
-var _index2 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../startOfISOWeek/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../startOfISOWeek/index.js */ "./node_modules/date-fns/startOfISOWeek/index.js"));
 
-var _index3 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../startOfISOWeekYear/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../startOfISOWeekYear/index.js */ "./node_modules/date-fns/startOfISOWeekYear/index.js"));
 
 var _index4 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
 
@@ -9738,7 +9912,7 @@ exports["default"] = getISOWeekYear;
 
 var _index = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
 
-var _index2 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../startOfISOWeek/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../startOfISOWeek/index.js */ "./node_modules/date-fns/startOfISOWeek/index.js"));
 
 var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
 
@@ -9804,7 +9978,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports["default"] = getISOWeeksInYear;
 
-var _index = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../startOfISOWeekYear/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index = _interopRequireDefault(__webpack_require__(/*! ../startOfISOWeekYear/index.js */ "./node_modules/date-fns/startOfISOWeekYear/index.js"));
 
 var _index2 = _interopRequireDefault(__webpack_require__(/*! ../addWeeks/index.js */ "./node_modules/date-fns/addWeeks/index.js"));
 
@@ -10278,9 +10452,9 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports["default"] = getWeek;
 
-var _index = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../startOfWeek/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index = _interopRequireDefault(__webpack_require__(/*! ../startOfWeek/index.js */ "./node_modules/date-fns/startOfWeek/index.js"));
 
-var _index2 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../startOfWeekYear/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../startOfWeekYear/index.js */ "./node_modules/date-fns/startOfWeekYear/index.js"));
 
 var _index3 = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
 
@@ -10362,7 +10536,7 @@ var _index2 = _interopRequireDefault(__webpack_require__(/*! ../getDate/index.js
 
 var _index3 = _interopRequireDefault(__webpack_require__(/*! ../getDay/index.js */ "./node_modules/date-fns/getDay/index.js"));
 
-var _index4 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../startOfMonth/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index4 = _interopRequireDefault(__webpack_require__(/*! ../startOfMonth/index.js */ "./node_modules/date-fns/startOfMonth/index.js"));
 
 var _index5 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
 
@@ -10429,7 +10603,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports["default"] = getWeekYear;
 
-var _index = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../startOfWeek/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index = _interopRequireDefault(__webpack_require__(/*! ../startOfWeek/index.js */ "./node_modules/date-fns/startOfWeek/index.js"));
 
 var _index2 = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
 
@@ -10533,7 +10707,7 @@ var _index = _interopRequireDefault(__webpack_require__(/*! ../differenceInCalen
 
 var _index2 = _interopRequireDefault(__webpack_require__(/*! ../lastDayOfMonth/index.js */ "./node_modules/date-fns/lastDayOfMonth/index.js"));
 
-var _index3 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../startOfMonth/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../startOfMonth/index.js */ "./node_modules/date-fns/startOfMonth/index.js"));
 
 var _index4 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
 
@@ -12760,173 +12934,173 @@ var _index154 = _interopRequireDefault(__webpack_require__(/*! ./lastDayOfYear/i
 
 var _index155 = _interopRequireDefault(__webpack_require__(/*! ./lightFormat/index.js */ "./node_modules/date-fns/lightFormat/index.js"));
 
-var _index156 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './max/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index156 = _interopRequireDefault(__webpack_require__(/*! ./max/index.js */ "./node_modules/date-fns/max/index.js"));
 
-var _index157 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './milliseconds/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index157 = _interopRequireDefault(__webpack_require__(/*! ./milliseconds/index.js */ "./node_modules/date-fns/milliseconds/index.js"));
 
-var _index158 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './millisecondsToHours/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index158 = _interopRequireDefault(__webpack_require__(/*! ./millisecondsToHours/index.js */ "./node_modules/date-fns/millisecondsToHours/index.js"));
 
-var _index159 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './millisecondsToMinutes/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index159 = _interopRequireDefault(__webpack_require__(/*! ./millisecondsToMinutes/index.js */ "./node_modules/date-fns/millisecondsToMinutes/index.js"));
 
-var _index160 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './millisecondsToSeconds/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index160 = _interopRequireDefault(__webpack_require__(/*! ./millisecondsToSeconds/index.js */ "./node_modules/date-fns/millisecondsToSeconds/index.js"));
 
-var _index161 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './min/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index161 = _interopRequireDefault(__webpack_require__(/*! ./min/index.js */ "./node_modules/date-fns/min/index.js"));
 
-var _index162 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './minutesToHours/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index162 = _interopRequireDefault(__webpack_require__(/*! ./minutesToHours/index.js */ "./node_modules/date-fns/minutesToHours/index.js"));
 
-var _index163 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './minutesToMilliseconds/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index163 = _interopRequireDefault(__webpack_require__(/*! ./minutesToMilliseconds/index.js */ "./node_modules/date-fns/minutesToMilliseconds/index.js"));
 
-var _index164 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './minutesToSeconds/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index164 = _interopRequireDefault(__webpack_require__(/*! ./minutesToSeconds/index.js */ "./node_modules/date-fns/minutesToSeconds/index.js"));
 
-var _index165 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './monthsToQuarters/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index165 = _interopRequireDefault(__webpack_require__(/*! ./monthsToQuarters/index.js */ "./node_modules/date-fns/monthsToQuarters/index.js"));
 
-var _index166 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './monthsToYears/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index166 = _interopRequireDefault(__webpack_require__(/*! ./monthsToYears/index.js */ "./node_modules/date-fns/monthsToYears/index.js"));
 
-var _index167 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './nextDay/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index167 = _interopRequireDefault(__webpack_require__(/*! ./nextDay/index.js */ "./node_modules/date-fns/nextDay/index.js"));
 
-var _index168 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './nextFriday/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index168 = _interopRequireDefault(__webpack_require__(/*! ./nextFriday/index.js */ "./node_modules/date-fns/nextFriday/index.js"));
 
-var _index169 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './nextMonday/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index169 = _interopRequireDefault(__webpack_require__(/*! ./nextMonday/index.js */ "./node_modules/date-fns/nextMonday/index.js"));
 
-var _index170 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './nextSaturday/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index170 = _interopRequireDefault(__webpack_require__(/*! ./nextSaturday/index.js */ "./node_modules/date-fns/nextSaturday/index.js"));
 
-var _index171 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './nextSunday/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index171 = _interopRequireDefault(__webpack_require__(/*! ./nextSunday/index.js */ "./node_modules/date-fns/nextSunday/index.js"));
 
-var _index172 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './nextThursday/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index172 = _interopRequireDefault(__webpack_require__(/*! ./nextThursday/index.js */ "./node_modules/date-fns/nextThursday/index.js"));
 
-var _index173 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './nextTuesday/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index173 = _interopRequireDefault(__webpack_require__(/*! ./nextTuesday/index.js */ "./node_modules/date-fns/nextTuesday/index.js"));
 
-var _index174 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './nextWednesday/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index174 = _interopRequireDefault(__webpack_require__(/*! ./nextWednesday/index.js */ "./node_modules/date-fns/nextWednesday/index.js"));
 
-var _index175 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './parse/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index175 = _interopRequireDefault(__webpack_require__(/*! ./parse/index.js */ "./node_modules/date-fns/parse/index.js"));
 
-var _index176 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './parseISO/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index176 = _interopRequireDefault(__webpack_require__(/*! ./parseISO/index.js */ "./node_modules/date-fns/parseISO/index.js"));
 
-var _index177 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './parseJSON/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index177 = _interopRequireDefault(__webpack_require__(/*! ./parseJSON/index.js */ "./node_modules/date-fns/parseJSON/index.js"));
 
-var _index178 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './previousDay/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index178 = _interopRequireDefault(__webpack_require__(/*! ./previousDay/index.js */ "./node_modules/date-fns/previousDay/index.js"));
 
-var _index179 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './previousFriday/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index179 = _interopRequireDefault(__webpack_require__(/*! ./previousFriday/index.js */ "./node_modules/date-fns/previousFriday/index.js"));
 
-var _index180 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './previousMonday/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index180 = _interopRequireDefault(__webpack_require__(/*! ./previousMonday/index.js */ "./node_modules/date-fns/previousMonday/index.js"));
 
-var _index181 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './previousSaturday/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index181 = _interopRequireDefault(__webpack_require__(/*! ./previousSaturday/index.js */ "./node_modules/date-fns/previousSaturday/index.js"));
 
-var _index182 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './previousSunday/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index182 = _interopRequireDefault(__webpack_require__(/*! ./previousSunday/index.js */ "./node_modules/date-fns/previousSunday/index.js"));
 
-var _index183 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './previousThursday/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index183 = _interopRequireDefault(__webpack_require__(/*! ./previousThursday/index.js */ "./node_modules/date-fns/previousThursday/index.js"));
 
-var _index184 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './previousTuesday/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index184 = _interopRequireDefault(__webpack_require__(/*! ./previousTuesday/index.js */ "./node_modules/date-fns/previousTuesday/index.js"));
 
-var _index185 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './previousWednesday/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index185 = _interopRequireDefault(__webpack_require__(/*! ./previousWednesday/index.js */ "./node_modules/date-fns/previousWednesday/index.js"));
 
-var _index186 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './quartersToMonths/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index186 = _interopRequireDefault(__webpack_require__(/*! ./quartersToMonths/index.js */ "./node_modules/date-fns/quartersToMonths/index.js"));
 
-var _index187 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './quartersToYears/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index187 = _interopRequireDefault(__webpack_require__(/*! ./quartersToYears/index.js */ "./node_modules/date-fns/quartersToYears/index.js"));
 
-var _index188 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './roundToNearestMinutes/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index188 = _interopRequireDefault(__webpack_require__(/*! ./roundToNearestMinutes/index.js */ "./node_modules/date-fns/roundToNearestMinutes/index.js"));
 
-var _index189 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './secondsToHours/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index189 = _interopRequireDefault(__webpack_require__(/*! ./secondsToHours/index.js */ "./node_modules/date-fns/secondsToHours/index.js"));
 
-var _index190 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './secondsToMilliseconds/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index190 = _interopRequireDefault(__webpack_require__(/*! ./secondsToMilliseconds/index.js */ "./node_modules/date-fns/secondsToMilliseconds/index.js"));
 
-var _index191 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './secondsToMinutes/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index191 = _interopRequireDefault(__webpack_require__(/*! ./secondsToMinutes/index.js */ "./node_modules/date-fns/secondsToMinutes/index.js"));
 
-var _index192 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './set/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index192 = _interopRequireDefault(__webpack_require__(/*! ./set/index.js */ "./node_modules/date-fns/set/index.js"));
 
-var _index193 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './setDate/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index193 = _interopRequireDefault(__webpack_require__(/*! ./setDate/index.js */ "./node_modules/date-fns/setDate/index.js"));
 
-var _index194 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './setDay/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index194 = _interopRequireDefault(__webpack_require__(/*! ./setDay/index.js */ "./node_modules/date-fns/setDay/index.js"));
 
-var _index195 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './setDayOfYear/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index195 = _interopRequireDefault(__webpack_require__(/*! ./setDayOfYear/index.js */ "./node_modules/date-fns/setDayOfYear/index.js"));
 
-var _index196 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './setDefaultOptions/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index196 = _interopRequireDefault(__webpack_require__(/*! ./setDefaultOptions/index.js */ "./node_modules/date-fns/setDefaultOptions/index.js"));
 
-var _index197 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './setHours/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index197 = _interopRequireDefault(__webpack_require__(/*! ./setHours/index.js */ "./node_modules/date-fns/setHours/index.js"));
 
-var _index198 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './setISODay/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index198 = _interopRequireDefault(__webpack_require__(/*! ./setISODay/index.js */ "./node_modules/date-fns/setISODay/index.js"));
 
-var _index199 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './setISOWeek/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index199 = _interopRequireDefault(__webpack_require__(/*! ./setISOWeek/index.js */ "./node_modules/date-fns/setISOWeek/index.js"));
 
-var _index200 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './setISOWeekYear/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index200 = _interopRequireDefault(__webpack_require__(/*! ./setISOWeekYear/index.js */ "./node_modules/date-fns/setISOWeekYear/index.js"));
 
-var _index201 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './setMilliseconds/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index201 = _interopRequireDefault(__webpack_require__(/*! ./setMilliseconds/index.js */ "./node_modules/date-fns/setMilliseconds/index.js"));
 
-var _index202 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './setMinutes/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index202 = _interopRequireDefault(__webpack_require__(/*! ./setMinutes/index.js */ "./node_modules/date-fns/setMinutes/index.js"));
 
-var _index203 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './setMonth/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index203 = _interopRequireDefault(__webpack_require__(/*! ./setMonth/index.js */ "./node_modules/date-fns/setMonth/index.js"));
 
-var _index204 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './setQuarter/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index204 = _interopRequireDefault(__webpack_require__(/*! ./setQuarter/index.js */ "./node_modules/date-fns/setQuarter/index.js"));
 
-var _index205 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './setSeconds/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index205 = _interopRequireDefault(__webpack_require__(/*! ./setSeconds/index.js */ "./node_modules/date-fns/setSeconds/index.js"));
 
-var _index206 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './setWeek/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index206 = _interopRequireDefault(__webpack_require__(/*! ./setWeek/index.js */ "./node_modules/date-fns/setWeek/index.js"));
 
-var _index207 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './setWeekYear/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index207 = _interopRequireDefault(__webpack_require__(/*! ./setWeekYear/index.js */ "./node_modules/date-fns/setWeekYear/index.js"));
 
-var _index208 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './setYear/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index208 = _interopRequireDefault(__webpack_require__(/*! ./setYear/index.js */ "./node_modules/date-fns/setYear/index.js"));
 
-var _index209 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './startOfDay/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index209 = _interopRequireDefault(__webpack_require__(/*! ./startOfDay/index.js */ "./node_modules/date-fns/startOfDay/index.js"));
 
-var _index210 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './startOfDecade/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index210 = _interopRequireDefault(__webpack_require__(/*! ./startOfDecade/index.js */ "./node_modules/date-fns/startOfDecade/index.js"));
 
-var _index211 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './startOfHour/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index211 = _interopRequireDefault(__webpack_require__(/*! ./startOfHour/index.js */ "./node_modules/date-fns/startOfHour/index.js"));
 
-var _index212 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './startOfISOWeek/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index212 = _interopRequireDefault(__webpack_require__(/*! ./startOfISOWeek/index.js */ "./node_modules/date-fns/startOfISOWeek/index.js"));
 
-var _index213 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './startOfISOWeekYear/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index213 = _interopRequireDefault(__webpack_require__(/*! ./startOfISOWeekYear/index.js */ "./node_modules/date-fns/startOfISOWeekYear/index.js"));
 
-var _index214 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './startOfMinute/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index214 = _interopRequireDefault(__webpack_require__(/*! ./startOfMinute/index.js */ "./node_modules/date-fns/startOfMinute/index.js"));
 
-var _index215 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './startOfMonth/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index215 = _interopRequireDefault(__webpack_require__(/*! ./startOfMonth/index.js */ "./node_modules/date-fns/startOfMonth/index.js"));
 
-var _index216 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './startOfQuarter/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index216 = _interopRequireDefault(__webpack_require__(/*! ./startOfQuarter/index.js */ "./node_modules/date-fns/startOfQuarter/index.js"));
 
-var _index217 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './startOfSecond/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index217 = _interopRequireDefault(__webpack_require__(/*! ./startOfSecond/index.js */ "./node_modules/date-fns/startOfSecond/index.js"));
 
-var _index218 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './startOfToday/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index218 = _interopRequireDefault(__webpack_require__(/*! ./startOfToday/index.js */ "./node_modules/date-fns/startOfToday/index.js"));
 
-var _index219 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './startOfTomorrow/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index219 = _interopRequireDefault(__webpack_require__(/*! ./startOfTomorrow/index.js */ "./node_modules/date-fns/startOfTomorrow/index.js"));
 
-var _index220 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './startOfWeek/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index220 = _interopRequireDefault(__webpack_require__(/*! ./startOfWeek/index.js */ "./node_modules/date-fns/startOfWeek/index.js"));
 
-var _index221 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './startOfWeekYear/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index221 = _interopRequireDefault(__webpack_require__(/*! ./startOfWeekYear/index.js */ "./node_modules/date-fns/startOfWeekYear/index.js"));
 
-var _index222 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './startOfYear/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index222 = _interopRequireDefault(__webpack_require__(/*! ./startOfYear/index.js */ "./node_modules/date-fns/startOfYear/index.js"));
 
-var _index223 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './startOfYesterday/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index223 = _interopRequireDefault(__webpack_require__(/*! ./startOfYesterday/index.js */ "./node_modules/date-fns/startOfYesterday/index.js"));
 
-var _index224 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './sub/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index224 = _interopRequireDefault(__webpack_require__(/*! ./sub/index.js */ "./node_modules/date-fns/sub/index.js"));
 
-var _index225 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './subBusinessDays/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index225 = _interopRequireDefault(__webpack_require__(/*! ./subBusinessDays/index.js */ "./node_modules/date-fns/subBusinessDays/index.js"));
 
-var _index226 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './subDays/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index226 = _interopRequireDefault(__webpack_require__(/*! ./subDays/index.js */ "./node_modules/date-fns/subDays/index.js"));
 
-var _index227 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './subHours/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index227 = _interopRequireDefault(__webpack_require__(/*! ./subHours/index.js */ "./node_modules/date-fns/subHours/index.js"));
 
-var _index228 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './subISOWeekYears/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index228 = _interopRequireDefault(__webpack_require__(/*! ./subISOWeekYears/index.js */ "./node_modules/date-fns/subISOWeekYears/index.js"));
 
-var _index229 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './subMilliseconds/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index229 = _interopRequireDefault(__webpack_require__(/*! ./subMilliseconds/index.js */ "./node_modules/date-fns/subMilliseconds/index.js"));
 
-var _index230 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './subMinutes/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index230 = _interopRequireDefault(__webpack_require__(/*! ./subMinutes/index.js */ "./node_modules/date-fns/subMinutes/index.js"));
 
-var _index231 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './subMonths/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index231 = _interopRequireDefault(__webpack_require__(/*! ./subMonths/index.js */ "./node_modules/date-fns/subMonths/index.js"));
 
-var _index232 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './subQuarters/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index232 = _interopRequireDefault(__webpack_require__(/*! ./subQuarters/index.js */ "./node_modules/date-fns/subQuarters/index.js"));
 
-var _index233 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './subSeconds/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index233 = _interopRequireDefault(__webpack_require__(/*! ./subSeconds/index.js */ "./node_modules/date-fns/subSeconds/index.js"));
 
-var _index234 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './subWeeks/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index234 = _interopRequireDefault(__webpack_require__(/*! ./subWeeks/index.js */ "./node_modules/date-fns/subWeeks/index.js"));
 
-var _index235 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './subYears/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index235 = _interopRequireDefault(__webpack_require__(/*! ./subYears/index.js */ "./node_modules/date-fns/subYears/index.js"));
 
 var _index236 = _interopRequireDefault(__webpack_require__(/*! ./toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
 
-var _index237 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './weeksToDays/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index237 = _interopRequireDefault(__webpack_require__(/*! ./weeksToDays/index.js */ "./node_modules/date-fns/weeksToDays/index.js"));
 
-var _index238 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './yearsToMonths/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index238 = _interopRequireDefault(__webpack_require__(/*! ./yearsToMonths/index.js */ "./node_modules/date-fns/yearsToMonths/index.js"));
 
-var _index239 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module './yearsToQuarters/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index239 = _interopRequireDefault(__webpack_require__(/*! ./yearsToQuarters/index.js */ "./node_modules/date-fns/yearsToQuarters/index.js"));
 
 var _index240 = __webpack_require__(/*! ./constants/index.js */ "./node_modules/date-fns/constants/index.js");
 
@@ -13884,7 +14058,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports["default"] = isMatch;
 
-var _index = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../parse/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index = _interopRequireDefault(__webpack_require__(/*! ../parse/index.js */ "./node_modules/date-fns/parse/index.js"));
 
 var _index2 = _interopRequireDefault(__webpack_require__(/*! ../isValid/index.js */ "./node_modules/date-fns/isValid/index.js"));
 
@@ -14303,7 +14477,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports["default"] = isSameDay;
 
-var _index = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../startOfDay/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index = _interopRequireDefault(__webpack_require__(/*! ../startOfDay/index.js */ "./node_modules/date-fns/startOfDay/index.js"));
 
 var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
 
@@ -14362,7 +14536,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports["default"] = isSameHour;
 
-var _index = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../startOfHour/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index = _interopRequireDefault(__webpack_require__(/*! ../startOfHour/index.js */ "./node_modules/date-fns/startOfHour/index.js"));
 
 var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
 
@@ -14472,7 +14646,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports["default"] = isSameISOWeekYear;
 
-var _index = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../startOfISOWeekYear/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index = _interopRequireDefault(__webpack_require__(/*! ../startOfISOWeekYear/index.js */ "./node_modules/date-fns/startOfISOWeekYear/index.js"));
 
 var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
 
@@ -14523,7 +14697,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports["default"] = isSameMinute;
 
-var _index = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../startOfMinute/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index = _interopRequireDefault(__webpack_require__(/*! ../startOfMinute/index.js */ "./node_modules/date-fns/startOfMinute/index.js"));
 
 var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
 
@@ -14637,7 +14811,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports["default"] = isSameQuarter;
 
-var _index = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../startOfQuarter/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index = _interopRequireDefault(__webpack_require__(/*! ../startOfQuarter/index.js */ "./node_modules/date-fns/startOfQuarter/index.js"));
 
 var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
 
@@ -14691,7 +14865,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports["default"] = isSameSecond;
 
-var _index = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../startOfSecond/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index = _interopRequireDefault(__webpack_require__(/*! ../startOfSecond/index.js */ "./node_modules/date-fns/startOfSecond/index.js"));
 
 var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
 
@@ -14759,7 +14933,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports["default"] = isSameWeek;
 
-var _index = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../startOfWeek/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index = _interopRequireDefault(__webpack_require__(/*! ../startOfWeek/index.js */ "./node_modules/date-fns/startOfWeek/index.js"));
 
 var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
 
@@ -15815,7 +15989,7 @@ exports["default"] = isYesterday;
 
 var _index = _interopRequireDefault(__webpack_require__(/*! ../isSameDay/index.js */ "./node_modules/date-fns/isSameDay/index.js"));
 
-var _index2 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../subDays/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../subDays/index.js */ "./node_modules/date-fns/subDays/index.js"));
 
 var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
 
@@ -15969,7 +16143,7 @@ exports["default"] = lastDayOfISOWeekYear;
 
 var _index = _interopRequireDefault(__webpack_require__(/*! ../getISOWeekYear/index.js */ "./node_modules/date-fns/getISOWeekYear/index.js"));
 
-var _index2 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../startOfISOWeek/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../startOfISOWeek/index.js */ "./node_modules/date-fns/startOfISOWeek/index.js"));
 
 var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
 
@@ -16264,7 +16438,7 @@ var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/getTimezone
 
 var _index4 = _interopRequireDefault(__webpack_require__(/*! ../isValid/index.js */ "./node_modules/date-fns/isValid/index.js"));
 
-var _index5 = _interopRequireDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../subMilliseconds/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _index5 = _interopRequireDefault(__webpack_require__(/*! ../subMilliseconds/index.js */ "./node_modules/date-fns/subMilliseconds/index.js"));
 
 var _index6 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
 
@@ -17106,6 +17280,9447 @@ module.exports = exports.default;
 
 /***/ }),
 
+/***/ "./node_modules/date-fns/max/index.js":
+/*!********************************************!*\
+  !*** ./node_modules/date-fns/max/index.js ***!
+  \********************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = max;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+/**
+ * @name max
+ * @category Common Helpers
+ * @summary Return the latest of the given dates.
+ *
+ * @description
+ * Return the latest of the given dates.
+ *
+ * @param {Date[]|Number[]} datesArray - the dates to compare
+ * @returns {Date} the latest of the dates
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // Which of these dates is the latest?
+ * const result = max([
+ *   new Date(1989, 6, 10),
+ *   new Date(1987, 1, 11),
+ *   new Date(1995, 6, 2),
+ *   new Date(1990, 0, 1)
+ * ])
+ * //=> Sun Jul 02 1995 00:00:00
+ */
+function max(dirtyDatesArray) {
+  (0, _index2.default)(1, arguments);
+  var datesArray; // `dirtyDatesArray` is Array, Set or Map, or object with custom `forEach` method
+
+  if (dirtyDatesArray && typeof dirtyDatesArray.forEach === 'function') {
+    datesArray = dirtyDatesArray; // If `dirtyDatesArray` is Array-like Object, convert to Array.
+  } else if (_typeof(dirtyDatesArray) === 'object' && dirtyDatesArray !== null) {
+    datesArray = Array.prototype.slice.call(dirtyDatesArray);
+  } else {
+    // `dirtyDatesArray` is non-iterable, return Invalid Date
+    return new Date(NaN);
+  }
+
+  var result;
+  datesArray.forEach(function (dirtyDate) {
+    var currentDate = (0, _index.default)(dirtyDate);
+
+    if (result === undefined || result < currentDate || isNaN(Number(currentDate))) {
+      result = currentDate;
+    }
+  });
+  return result || new Date(NaN);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/milliseconds/index.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/date-fns/milliseconds/index.js ***!
+  \*****************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = milliseconds;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// Leap year occures every 4 years, except for years that are divisable by 100 and not divisable by 400.
+// 1 mean year = (365+1/4-1/100+1/400) days = 365.2425 days
+var daysInYear = 365.2425;
+/**
+ * @name milliseconds
+ * @category Millisecond Helpers
+ * @summary
+ * Returns the number of milliseconds in the specified, years, months, weeks, days, hours, minutes and seconds.
+ *
+ * @description
+ * Returns the number of milliseconds in the specified, years, months, weeks, days, hours, minutes and seconds.
+ *
+ * One years equals 365.2425 days according to the formula:
+ *
+ * > Leap year occures every 4 years, except for years that are divisable by 100 and not divisable by 400.
+ * > 1 mean year = (365+1/4-1/100+1/400) days = 365.2425 days
+ *
+ * One month is a year divided by 12.
+ *
+ * @param {Duration} duration - the object with years, months, weeks, days, hours, minutes and seconds to be added. Positive decimals will be rounded using `Math.floor`, decimals less than zero will be rounded using `Math.ceil`.
+ * @returns {number} the milliseconds
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // 1 year in milliseconds
+ * milliseconds({ years: 1 })
+ * //=> 31556952000
+ *
+ * // 3 months in milliseconds
+ * milliseconds({ months: 3 })
+ * //=> 7889238000
+ */
+
+function milliseconds(_ref) {
+  var years = _ref.years,
+      months = _ref.months,
+      weeks = _ref.weeks,
+      days = _ref.days,
+      hours = _ref.hours,
+      minutes = _ref.minutes,
+      seconds = _ref.seconds;
+  (0, _index.default)(1, arguments);
+  var totalDays = 0;
+  if (years) totalDays += years * daysInYear;
+  if (months) totalDays += months * (daysInYear / 12);
+  if (weeks) totalDays += weeks * 7;
+  if (days) totalDays += days;
+  var totalSeconds = totalDays * 24 * 60 * 60;
+  if (hours) totalSeconds += hours * 60 * 60;
+  if (minutes) totalSeconds += minutes * 60;
+  if (seconds) totalSeconds += seconds;
+  return Math.round(totalSeconds * 1000);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/millisecondsToHours/index.js":
+/*!************************************************************!*\
+  !*** ./node_modules/date-fns/millisecondsToHours/index.js ***!
+  \************************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = millisecondsToHours;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index2 = __webpack_require__(/*! ../constants/index.js */ "./node_modules/date-fns/constants/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name millisecondsToHours
+ * @category Conversion Helpers
+ * @summary Convert milliseconds to hours.
+ *
+ * @description
+ * Convert a number of milliseconds to a full number of hours.
+ *
+ * @param {number} milliseconds - number of milliseconds to be converted
+ *
+ * @returns {number} the number of milliseconds converted in hours
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // Convert 7200000 milliseconds to hours:
+ * const result = millisecondsToHours(7200000)
+ * //=> 2
+ *
+ * @example
+ * // It uses floor rounding:
+ * const result = millisecondsToHours(7199999)
+ * //=> 1
+ */
+function millisecondsToHours(milliseconds) {
+  (0, _index.default)(1, arguments);
+  var hours = milliseconds / _index2.millisecondsInHour;
+  return Math.floor(hours);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/millisecondsToMinutes/index.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/date-fns/millisecondsToMinutes/index.js ***!
+  \**************************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = millisecondsToMinutes;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index2 = __webpack_require__(/*! ../constants/index.js */ "./node_modules/date-fns/constants/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name millisecondsToMinutes
+ * @category Conversion Helpers
+ * @summary Convert milliseconds to minutes.
+ *
+ * @description
+ * Convert a number of milliseconds to a full number of minutes.
+ *
+ * @param {number} milliseconds - number of milliseconds to be converted.
+ *
+ * @returns {number} the number of milliseconds converted in minutes
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // Convert 60000 milliseconds to minutes:
+ * const result = millisecondsToMinutes(60000)
+ * //=> 1
+ *
+ * @example
+ * // It uses floor rounding:
+ * const result = millisecondsToMinutes(119999)
+ * //=> 1
+ */
+function millisecondsToMinutes(milliseconds) {
+  (0, _index.default)(1, arguments);
+  var minutes = milliseconds / _index2.millisecondsInMinute;
+  return Math.floor(minutes);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/millisecondsToSeconds/index.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/date-fns/millisecondsToSeconds/index.js ***!
+  \**************************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = millisecondsToSeconds;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index2 = __webpack_require__(/*! ../constants/index.js */ "./node_modules/date-fns/constants/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name millisecondsToSeconds
+ * @category Conversion Helpers
+ * @summary Convert milliseconds to seconds.
+ *
+ * @description
+ * Convert a number of milliseconds to a full number of seconds.
+ *
+ * @param {number} milliseconds - number of milliseconds to be converted
+ *
+ * @returns {number} the number of milliseconds converted in seconds
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // Convert 1000 miliseconds to seconds:
+ * const result = millisecondsToSeconds(1000)
+ * //=> 1
+ *
+ * @example
+ * // It uses floor rounding:
+ * const result = millisecondsToSeconds(1999)
+ * //=> 1
+ */
+function millisecondsToSeconds(milliseconds) {
+  (0, _index.default)(1, arguments);
+  var seconds = milliseconds / _index2.millisecondsInSecond;
+  return Math.floor(seconds);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/min/index.js":
+/*!********************************************!*\
+  !*** ./node_modules/date-fns/min/index.js ***!
+  \********************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = min;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+/**
+ * @name min
+ * @category Common Helpers
+ * @summary Returns the earliest of the given dates.
+ *
+ * @description
+ * Returns the earliest of the given dates.
+ *
+ * @param {Date[]|Number[]} datesArray - the dates to compare
+ * @returns {Date} - the earliest of the dates
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // Which of these dates is the earliest?
+ * const result = min([
+ *   new Date(1989, 6, 10),
+ *   new Date(1987, 1, 11),
+ *   new Date(1995, 6, 2),
+ *   new Date(1990, 0, 1)
+ * ])
+ * //=> Wed Feb 11 1987 00:00:00
+ */
+function min(dirtyDatesArray) {
+  (0, _index2.default)(1, arguments);
+  var datesArray; // `dirtyDatesArray` is Array, Set or Map, or object with custom `forEach` method
+
+  if (dirtyDatesArray && typeof dirtyDatesArray.forEach === 'function') {
+    datesArray = dirtyDatesArray; // If `dirtyDatesArray` is Array-like Object, convert to Array.
+  } else if (_typeof(dirtyDatesArray) === 'object' && dirtyDatesArray !== null) {
+    datesArray = Array.prototype.slice.call(dirtyDatesArray);
+  } else {
+    // `dirtyDatesArray` is non-iterable, return Invalid Date
+    return new Date(NaN);
+  }
+
+  var result;
+  datesArray.forEach(function (dirtyDate) {
+    var currentDate = (0, _index.default)(dirtyDate);
+
+    if (result === undefined || result > currentDate || isNaN(currentDate.getDate())) {
+      result = currentDate;
+    }
+  });
+  return result || new Date(NaN);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/minutesToHours/index.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/date-fns/minutesToHours/index.js ***!
+  \*******************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = minutesToHours;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index2 = __webpack_require__(/*! ../constants/index.js */ "./node_modules/date-fns/constants/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name minutesToHours
+ * @category Conversion Helpers
+ * @summary Convert minutes to hours.
+ *
+ * @description
+ * Convert a number of minutes to a full number of hours.
+ *
+ * @param {number} minutes - number of minutes to be converted
+ *
+ * @returns {number} the number of minutes converted in hours
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // Convert 140 minutes to hours:
+ * const result = minutesToHours(120)
+ * //=> 2
+ *
+ * @example
+ * // It uses floor rounding:
+ * const result = minutesToHours(179)
+ * //=> 2
+ */
+function minutesToHours(minutes) {
+  (0, _index.default)(1, arguments);
+  var hours = minutes / _index2.minutesInHour;
+  return Math.floor(hours);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/minutesToMilliseconds/index.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/date-fns/minutesToMilliseconds/index.js ***!
+  \**************************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = minutesToMilliseconds;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index2 = __webpack_require__(/*! ../constants/index.js */ "./node_modules/date-fns/constants/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name minutesToMilliseconds
+ * @category Conversion Helpers
+ * @summary Convert minutes to milliseconds.
+ *
+ * @description
+ * Convert a number of minutes to a full number of milliseconds.
+ *
+ * @param {number} minutes - number of minutes to be converted
+ *
+ * @returns {number} the number of minutes converted in milliseconds
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // Convert 2 minutes to milliseconds
+ * const result = minutesToMilliseconds(2)
+ * //=> 120000
+ */
+function minutesToMilliseconds(minutes) {
+  (0, _index.default)(1, arguments);
+  return Math.floor(minutes * _index2.millisecondsInMinute);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/minutesToSeconds/index.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/date-fns/minutesToSeconds/index.js ***!
+  \*********************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = minutesToSeconds;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index2 = __webpack_require__(/*! ../constants/index.js */ "./node_modules/date-fns/constants/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name minutesToSeconds
+ * @category Conversion Helpers
+ * @summary Convert minutes to seconds.
+ *
+ * @description
+ * Convert a number of minutes to a full number of seconds.
+ *
+ * @param { number } minutes - number of minutes to be converted
+ *
+ * @returns {number} the number of minutes converted in seconds
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // Convert 2 minutes to seconds
+ * const result = minutesToSeconds(2)
+ * //=> 120
+ */
+function minutesToSeconds(minutes) {
+  (0, _index.default)(1, arguments);
+  return Math.floor(minutes * _index2.secondsInMinute);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/monthsToQuarters/index.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/date-fns/monthsToQuarters/index.js ***!
+  \*********************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = monthsToQuarters;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index2 = __webpack_require__(/*! ../constants/index.js */ "./node_modules/date-fns/constants/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name monthsToQuarters
+ * @category Conversion Helpers
+ * @summary Convert number of months to quarters.
+ *
+ * @description
+ * Convert a number of months to a full number of quarters.
+ *
+ * @param {number} months - number of months to be converted.
+ *
+ * @returns {number} the number of months converted in quarters
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // Convert 6 months to quarters:
+ * const result = monthsToQuarters(6)
+ * //=> 2
+ *
+ * @example
+ * // It uses floor rounding:
+ * const result = monthsToQuarters(7)
+ * //=> 2
+ */
+function monthsToQuarters(months) {
+  (0, _index.default)(1, arguments);
+  var quarters = months / _index2.monthsInQuarter;
+  return Math.floor(quarters);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/monthsToYears/index.js":
+/*!******************************************************!*\
+  !*** ./node_modules/date-fns/monthsToYears/index.js ***!
+  \******************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = monthsToYears;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index2 = __webpack_require__(/*! ../constants/index.js */ "./node_modules/date-fns/constants/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name monthsToYears
+ * @category Conversion Helpers
+ * @summary Convert number of months to years.
+ *
+ * @description
+ * Convert a number of months to a full number of years.
+ *
+ * @param {number} months - number of months to be converted
+ *
+ * @returns {number} the number of months converted in years
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // Convert 36 months to years:
+ * const result = monthsToYears(36)
+ * //=> 3
+ *
+ * // It uses floor rounding:
+ * const result = monthsToYears(40)
+ * //=> 3
+ */
+function monthsToYears(months) {
+  (0, _index.default)(1, arguments);
+  var years = months / _index2.monthsInYear;
+  return Math.floor(years);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/nextDay/index.js":
+/*!************************************************!*\
+  !*** ./node_modules/date-fns/nextDay/index.js ***!
+  \************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = nextDay;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../addDays/index.js */ "./node_modules/date-fns/addDays/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../getDay/index.js */ "./node_modules/date-fns/getDay/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name nextDay
+ * @category Weekday Helpers
+ * @summary When is the next day of the week?
+ *
+ * @description
+ * When is the next day of the week? 0-6 the day of the week, 0 represents Sunday.
+ *
+ * @param {Date | number} date - the date to check
+ * @param {Day} day - day of the week
+ * @returns {Date} - the date is the next day of week
+ * @throws {TypeError} - 2 arguments required
+ *
+ * @example
+ * // When is the next Monday after Mar, 20, 2020?
+ * const result = nextDay(new Date(2020, 2, 20), 1)
+ * //=> Mon Mar 23 2020 00:00:00
+ *
+ * @example
+ * // When is the next Tuesday after Mar, 21, 2020?
+ * const result = nextDay(new Date(2020, 2, 21), 2)
+ * //=> Tue Mar 24 2020 00:00:00
+ */
+function nextDay(date, day) {
+  (0, _index3.default)(2, arguments);
+  var delta = day - (0, _index2.default)(date);
+  if (delta <= 0) delta += 7;
+  return (0, _index.default)(date, delta);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/nextFriday/index.js":
+/*!***************************************************!*\
+  !*** ./node_modules/date-fns/nextFriday/index.js ***!
+  \***************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = nextFriday;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../nextDay/index.js */ "./node_modules/date-fns/nextDay/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name nextFriday
+ * @category Weekday Helpers
+ * @summary When is the next Friday?
+ *
+ * @description
+ * When is the next Friday?
+ *
+ * @param {Date | number} date - the date to start counting from
+ * @returns {Date} the next Friday
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // When is the next Friday after Mar, 22, 2020?
+ * const result = nextFriday(new Date(2020, 2, 22))
+ * //=> Fri Mar 27 2020 00:00:00
+ */
+function nextFriday(date) {
+  (0, _index2.default)(1, arguments);
+  return (0, _index.default)(date, 5);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/nextMonday/index.js":
+/*!***************************************************!*\
+  !*** ./node_modules/date-fns/nextMonday/index.js ***!
+  \***************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = nextMonday;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../nextDay/index.js */ "./node_modules/date-fns/nextDay/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name nextMonday
+ * @category Weekday Helpers
+ * @summary When is the next Monday?
+ *
+ * @description
+ * When is the next Monday?
+ *
+ * @param {Date | number} date - the date to start counting from
+ * @returns {Date} the next Monday
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // When is the next Monday after Mar, 22, 2020?
+ * const result = nextMonday(new Date(2020, 2, 22))
+ * //=> Mon Mar 23 2020 00:00:00
+ */
+function nextMonday(date) {
+  (0, _index2.default)(1, arguments);
+  return (0, _index.default)(date, 1);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/nextSaturday/index.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/date-fns/nextSaturday/index.js ***!
+  \*****************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = nextSaturday;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../nextDay/index.js */ "./node_modules/date-fns/nextDay/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name nextSaturday
+ * @category Weekday Helpers
+ * @summary When is the next Saturday?
+ *
+ * @description
+ * When is the next Saturday?
+ *
+ * @param {Date | number} date - the date to start counting from
+ * @returns {Date} the next Saturday
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // When is the next Saturday after Mar, 22, 2020?
+ * const result = nextSaturday(new Date(2020, 2, 22))
+ * //=> Sat Mar 28 2020 00:00:00
+ */
+function nextSaturday(date) {
+  (0, _index2.default)(1, arguments);
+  return (0, _index.default)(date, 6);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/nextSunday/index.js":
+/*!***************************************************!*\
+  !*** ./node_modules/date-fns/nextSunday/index.js ***!
+  \***************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = nextSunday;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../nextDay/index.js */ "./node_modules/date-fns/nextDay/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name nextSunday
+ * @category Weekday Helpers
+ * @summary When is the next Sunday?
+ *
+ * @description
+ * When is the next Sunday?
+ *
+ * @param {Date | number} date - the date to start counting from
+ * @returns {Date} the next Sunday
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // When is the next Sunday after Mar, 22, 2020?
+ * const result = nextSunday(new Date(2020, 2, 22))
+ * //=> Sun Mar 29 2020 00:00:00
+ */
+function nextSunday(date) {
+  (0, _index2.default)(1, arguments);
+  return (0, _index.default)(date, 0);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/nextThursday/index.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/date-fns/nextThursday/index.js ***!
+  \*****************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = nextThursday;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../nextDay/index.js */ "./node_modules/date-fns/nextDay/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name nextThursday
+ * @category Weekday Helpers
+ * @summary When is the next Thursday?
+ *
+ * @description
+ * When is the next Thursday?
+ *
+ * @param {Date | number} date - the date to start counting from
+ * @returns {Date} the next Thursday
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // When is the next Thursday after Mar, 22, 2020?
+ * const result = nextThursday(new Date(2020, 2, 22))
+ * //=> Thur Mar 26 2020 00:00:00
+ */
+function nextThursday(date) {
+  (0, _index2.default)(1, arguments);
+  return (0, _index.default)(date, 4);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/nextTuesday/index.js":
+/*!****************************************************!*\
+  !*** ./node_modules/date-fns/nextTuesday/index.js ***!
+  \****************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = nextTuesday;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../nextDay/index.js */ "./node_modules/date-fns/nextDay/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name nextTuesday
+ * @category Weekday Helpers
+ * @summary When is the next Tuesday?
+ *
+ * @description
+ * When is the next Tuesday?
+ *
+ * @param {Date | number} date - the date to start counting from
+ * @returns {Date} the next Tuesday
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // When is the next Tuesday after Mar, 22, 2020?
+ * const result = nextTuesday(new Date(2020, 2, 22))
+ * //=> Tue Mar 24 2020 00:00:00
+ */
+function nextTuesday(date) {
+  (0, _index2.default)(1, arguments);
+  return (0, _index.default)(date, 2);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/nextWednesday/index.js":
+/*!******************************************************!*\
+  !*** ./node_modules/date-fns/nextWednesday/index.js ***!
+  \******************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = nextWednesday;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../nextDay/index.js */ "./node_modules/date-fns/nextDay/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name nextWednesday
+ * @category Weekday Helpers
+ * @summary When is the next Wednesday?
+ *
+ * @description
+ * When is the next Wednesday?
+ *
+ * @param {Date | number} date - the date to start counting from
+ * @returns {Date} the next Wednesday
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // When is the next Wednesday after Mar, 22, 2020?
+ * const result = nextWednesday(new Date(2020, 2, 22))
+ * //=> Wed Mar 25 2020 00:00:00
+ */
+function nextWednesday(date) {
+  (0, _index2.default)(1, arguments);
+  return (0, _index.default)(date, 3);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/Parser.js":
+/*!****************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/Parser.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.Parser = void 0;
+
+var _Setter = __webpack_require__(/*! ./Setter.js */ "./node_modules/date-fns/parse/_lib/Setter.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Parser = /*#__PURE__*/function () {
+  function Parser() {
+    _classCallCheck(this, Parser);
+  }
+
+  _createClass(Parser, [{
+    key: "run",
+    value: function run(dateString, token, match, options) {
+      var result = this.parse(dateString, token, match, options);
+
+      if (!result) {
+        return null;
+      }
+
+      return {
+        setter: new _Setter.ValueSetter(result.value, this.validate, this.set, this.priority, this.subPriority),
+        rest: result.rest
+      };
+    }
+  }, {
+    key: "validate",
+    value: function validate(_utcDate, _value, _options) {
+      return true;
+    }
+  }]);
+
+  return Parser;
+}();
+
+exports.Parser = Parser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/Setter.js":
+/*!****************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/Setter.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.ValueSetter = exports.Setter = exports.DateToSystemTimezoneSetter = void 0;
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var TIMEZONE_UNIT_PRIORITY = 10;
+
+var Setter = /*#__PURE__*/function () {
+  function Setter() {
+    _classCallCheck(this, Setter);
+
+    _defineProperty(this, "subPriority", 0);
+  }
+
+  _createClass(Setter, [{
+    key: "validate",
+    value: function validate(_utcDate, _options) {
+      return true;
+    }
+  }]);
+
+  return Setter;
+}();
+
+exports.Setter = Setter;
+
+var ValueSetter = /*#__PURE__*/function (_Setter) {
+  _inherits(ValueSetter, _Setter);
+
+  var _super = _createSuper(ValueSetter);
+
+  function ValueSetter(value, validateValue, setValue, priority, subPriority) {
+    var _this;
+
+    _classCallCheck(this, ValueSetter);
+
+    _this = _super.call(this);
+    _this.value = value;
+    _this.validateValue = validateValue;
+    _this.setValue = setValue;
+    _this.priority = priority;
+
+    if (subPriority) {
+      _this.subPriority = subPriority;
+    }
+
+    return _this;
+  }
+
+  _createClass(ValueSetter, [{
+    key: "validate",
+    value: function validate(utcDate, options) {
+      return this.validateValue(utcDate, this.value, options);
+    }
+  }, {
+    key: "set",
+    value: function set(utcDate, flags, options) {
+      return this.setValue(utcDate, flags, this.value, options);
+    }
+  }]);
+
+  return ValueSetter;
+}(Setter);
+
+exports.ValueSetter = ValueSetter;
+
+var DateToSystemTimezoneSetter = /*#__PURE__*/function (_Setter2) {
+  _inherits(DateToSystemTimezoneSetter, _Setter2);
+
+  var _super2 = _createSuper(DateToSystemTimezoneSetter);
+
+  function DateToSystemTimezoneSetter() {
+    var _this2;
+
+    _classCallCheck(this, DateToSystemTimezoneSetter);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this2 = _super2.call.apply(_super2, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this2), "priority", TIMEZONE_UNIT_PRIORITY);
+
+    _defineProperty(_assertThisInitialized(_this2), "subPriority", -1);
+
+    return _this2;
+  }
+
+  _createClass(DateToSystemTimezoneSetter, [{
+    key: "set",
+    value: function set(date, flags) {
+      if (flags.timestampIsSet) {
+        return date;
+      }
+
+      var convertedDate = new Date(0);
+      convertedDate.setFullYear(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
+      convertedDate.setHours(date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds(), date.getUTCMilliseconds());
+      return convertedDate;
+    }
+  }]);
+
+  return DateToSystemTimezoneSetter;
+}(Setter);
+
+exports.DateToSystemTimezoneSetter = DateToSystemTimezoneSetter;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/constants.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/constants.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.timezonePatterns = exports.numericPatterns = void 0;
+var numericPatterns = {
+  month: /^(1[0-2]|0?\d)/,
+  // 0 to 12
+  date: /^(3[0-1]|[0-2]?\d)/,
+  // 0 to 31
+  dayOfYear: /^(36[0-6]|3[0-5]\d|[0-2]?\d?\d)/,
+  // 0 to 366
+  week: /^(5[0-3]|[0-4]?\d)/,
+  // 0 to 53
+  hour23h: /^(2[0-3]|[0-1]?\d)/,
+  // 0 to 23
+  hour24h: /^(2[0-4]|[0-1]?\d)/,
+  // 0 to 24
+  hour11h: /^(1[0-1]|0?\d)/,
+  // 0 to 11
+  hour12h: /^(1[0-2]|0?\d)/,
+  // 0 to 12
+  minute: /^[0-5]?\d/,
+  // 0 to 59
+  second: /^[0-5]?\d/,
+  // 0 to 59
+  singleDigit: /^\d/,
+  // 0 to 9
+  twoDigits: /^\d{1,2}/,
+  // 0 to 99
+  threeDigits: /^\d{1,3}/,
+  // 0 to 999
+  fourDigits: /^\d{1,4}/,
+  // 0 to 9999
+  anyDigitsSigned: /^-?\d+/,
+  singleDigitSigned: /^-?\d/,
+  // 0 to 9, -0 to -9
+  twoDigitsSigned: /^-?\d{1,2}/,
+  // 0 to 99, -0 to -99
+  threeDigitsSigned: /^-?\d{1,3}/,
+  // 0 to 999, -0 to -999
+  fourDigitsSigned: /^-?\d{1,4}/ // 0 to 9999, -0 to -9999
+
+};
+exports.numericPatterns = numericPatterns;
+var timezonePatterns = {
+  basicOptionalMinutes: /^([+-])(\d{2})(\d{2})?|Z/,
+  basic: /^([+-])(\d{2})(\d{2})|Z/,
+  basicOptionalSeconds: /^([+-])(\d{2})(\d{2})((\d{2}))?|Z/,
+  extended: /^([+-])(\d{2}):(\d{2})|Z/,
+  extendedOptionalSeconds: /^([+-])(\d{2}):(\d{2})(:(\d{2}))?|Z/
+};
+exports.timezonePatterns = timezonePatterns;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/AMPMMidnightParser.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/AMPMMidnightParser.js ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.AMPMMidnightParser = void 0;
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _utils = __webpack_require__(/*! ../utils.js */ "./node_modules/date-fns/parse/_lib/utils.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var AMPMMidnightParser = /*#__PURE__*/function (_Parser) {
+  _inherits(AMPMMidnightParser, _Parser);
+
+  var _super = _createSuper(AMPMMidnightParser);
+
+  function AMPMMidnightParser() {
+    var _this;
+
+    _classCallCheck(this, AMPMMidnightParser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 80);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", ['a', 'B', 'H', 'k', 't', 'T']);
+
+    return _this;
+  }
+
+  _createClass(AMPMMidnightParser, [{
+    key: "parse",
+    value: function parse(dateString, token, match) {
+      switch (token) {
+        case 'b':
+        case 'bb':
+        case 'bbb':
+          return match.dayPeriod(dateString, {
+            width: 'abbreviated',
+            context: 'formatting'
+          }) || match.dayPeriod(dateString, {
+            width: 'narrow',
+            context: 'formatting'
+          });
+
+        case 'bbbbb':
+          return match.dayPeriod(dateString, {
+            width: 'narrow',
+            context: 'formatting'
+          });
+
+        case 'bbbb':
+        default:
+          return match.dayPeriod(dateString, {
+            width: 'wide',
+            context: 'formatting'
+          }) || match.dayPeriod(dateString, {
+            width: 'abbreviated',
+            context: 'formatting'
+          }) || match.dayPeriod(dateString, {
+            width: 'narrow',
+            context: 'formatting'
+          });
+      }
+    }
+  }, {
+    key: "set",
+    value: function set(date, _flags, value) {
+      date.setUTCHours((0, _utils.dayPeriodEnumToHours)(value), 0, 0, 0);
+      return date;
+    }
+  }]);
+
+  return AMPMMidnightParser;
+}(_Parser2.Parser);
+
+exports.AMPMMidnightParser = AMPMMidnightParser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/AMPMParser.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/AMPMParser.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.AMPMParser = void 0;
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _utils = __webpack_require__(/*! ../utils.js */ "./node_modules/date-fns/parse/_lib/utils.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var AMPMParser = /*#__PURE__*/function (_Parser) {
+  _inherits(AMPMParser, _Parser);
+
+  var _super = _createSuper(AMPMParser);
+
+  function AMPMParser() {
+    var _this;
+
+    _classCallCheck(this, AMPMParser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 80);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", ['b', 'B', 'H', 'k', 't', 'T']);
+
+    return _this;
+  }
+
+  _createClass(AMPMParser, [{
+    key: "parse",
+    value: function parse(dateString, token, match) {
+      switch (token) {
+        case 'a':
+        case 'aa':
+        case 'aaa':
+          return match.dayPeriod(dateString, {
+            width: 'abbreviated',
+            context: 'formatting'
+          }) || match.dayPeriod(dateString, {
+            width: 'narrow',
+            context: 'formatting'
+          });
+
+        case 'aaaaa':
+          return match.dayPeriod(dateString, {
+            width: 'narrow',
+            context: 'formatting'
+          });
+
+        case 'aaaa':
+        default:
+          return match.dayPeriod(dateString, {
+            width: 'wide',
+            context: 'formatting'
+          }) || match.dayPeriod(dateString, {
+            width: 'abbreviated',
+            context: 'formatting'
+          }) || match.dayPeriod(dateString, {
+            width: 'narrow',
+            context: 'formatting'
+          });
+      }
+    }
+  }, {
+    key: "set",
+    value: function set(date, _flags, value) {
+      date.setUTCHours((0, _utils.dayPeriodEnumToHours)(value), 0, 0, 0);
+      return date;
+    }
+  }]);
+
+  return AMPMParser;
+}(_Parser2.Parser);
+
+exports.AMPMParser = AMPMParser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/DateParser.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/DateParser.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.DateParser = void 0;
+
+var _utils = __webpack_require__(/*! ../utils.js */ "./node_modules/date-fns/parse/_lib/utils.js");
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _constants = __webpack_require__(/*! ../constants.js */ "./node_modules/date-fns/parse/_lib/constants.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var DAYS_IN_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+var DAYS_IN_MONTH_LEAP_YEAR = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // Day of the month
+
+var DateParser = /*#__PURE__*/function (_Parser) {
+  _inherits(DateParser, _Parser);
+
+  var _super = _createSuper(DateParser);
+
+  function DateParser() {
+    var _this;
+
+    _classCallCheck(this, DateParser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 90);
+
+    _defineProperty(_assertThisInitialized(_this), "subPriority", 1);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", ['Y', 'R', 'q', 'Q', 'w', 'I', 'D', 'i', 'e', 'c', 't', 'T']);
+
+    return _this;
+  }
+
+  _createClass(DateParser, [{
+    key: "parse",
+    value: function parse(dateString, token, match) {
+      switch (token) {
+        case 'd':
+          return (0, _utils.parseNumericPattern)(_constants.numericPatterns.date, dateString);
+
+        case 'do':
+          return match.ordinalNumber(dateString, {
+            unit: 'date'
+          });
+
+        default:
+          return (0, _utils.parseNDigits)(token.length, dateString);
+      }
+    }
+  }, {
+    key: "validate",
+    value: function validate(date, value) {
+      var year = date.getUTCFullYear();
+      var isLeapYear = (0, _utils.isLeapYearIndex)(year);
+      var month = date.getUTCMonth();
+
+      if (isLeapYear) {
+        return value >= 1 && value <= DAYS_IN_MONTH_LEAP_YEAR[month];
+      } else {
+        return value >= 1 && value <= DAYS_IN_MONTH[month];
+      }
+    }
+  }, {
+    key: "set",
+    value: function set(date, _flags, value) {
+      date.setUTCDate(value);
+      date.setUTCHours(0, 0, 0, 0);
+      return date;
+    }
+  }]);
+
+  return DateParser;
+}(_Parser2.Parser);
+
+exports.DateParser = DateParser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/DayOfYearParser.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/DayOfYearParser.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.DayOfYearParser = void 0;
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _constants = __webpack_require__(/*! ../constants.js */ "./node_modules/date-fns/parse/_lib/constants.js");
+
+var _utils = __webpack_require__(/*! ../utils.js */ "./node_modules/date-fns/parse/_lib/utils.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var DayOfYearParser = /*#__PURE__*/function (_Parser) {
+  _inherits(DayOfYearParser, _Parser);
+
+  var _super = _createSuper(DayOfYearParser);
+
+  function DayOfYearParser() {
+    var _this;
+
+    _classCallCheck(this, DayOfYearParser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 90);
+
+    _defineProperty(_assertThisInitialized(_this), "subpriority", 1);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", ['Y', 'R', 'q', 'Q', 'M', 'L', 'w', 'I', 'd', 'E', 'i', 'e', 'c', 't', 'T']);
+
+    return _this;
+  }
+
+  _createClass(DayOfYearParser, [{
+    key: "parse",
+    value: function parse(dateString, token, match) {
+      switch (token) {
+        case 'D':
+        case 'DD':
+          return (0, _utils.parseNumericPattern)(_constants.numericPatterns.dayOfYear, dateString);
+
+        case 'Do':
+          return match.ordinalNumber(dateString, {
+            unit: 'date'
+          });
+
+        default:
+          return (0, _utils.parseNDigits)(token.length, dateString);
+      }
+    }
+  }, {
+    key: "validate",
+    value: function validate(date, value) {
+      var year = date.getUTCFullYear();
+      var isLeapYear = (0, _utils.isLeapYearIndex)(year);
+
+      if (isLeapYear) {
+        return value >= 1 && value <= 366;
+      } else {
+        return value >= 1 && value <= 365;
+      }
+    }
+  }, {
+    key: "set",
+    value: function set(date, _flags, value) {
+      date.setUTCMonth(0, value);
+      date.setUTCHours(0, 0, 0, 0);
+      return date;
+    }
+  }]);
+
+  return DayOfYearParser;
+}(_Parser2.Parser);
+
+exports.DayOfYearParser = DayOfYearParser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/DayParser.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/DayParser.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.DayParser = void 0;
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../../../_lib/setUTCDay/index.js */ "./node_modules/date-fns/_lib/setUTCDay/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+// Day of week
+var DayParser = /*#__PURE__*/function (_Parser) {
+  _inherits(DayParser, _Parser);
+
+  var _super = _createSuper(DayParser);
+
+  function DayParser() {
+    var _this;
+
+    _classCallCheck(this, DayParser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 90);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", ['D', 'i', 'e', 'c', 't', 'T']);
+
+    return _this;
+  }
+
+  _createClass(DayParser, [{
+    key: "parse",
+    value: function parse(dateString, token, match) {
+      switch (token) {
+        // Tue
+        case 'E':
+        case 'EE':
+        case 'EEE':
+          return match.day(dateString, {
+            width: 'abbreviated',
+            context: 'formatting'
+          }) || match.day(dateString, {
+            width: 'short',
+            context: 'formatting'
+          }) || match.day(dateString, {
+            width: 'narrow',
+            context: 'formatting'
+          });
+        // T
+
+        case 'EEEEE':
+          return match.day(dateString, {
+            width: 'narrow',
+            context: 'formatting'
+          });
+        // Tu
+
+        case 'EEEEEE':
+          return match.day(dateString, {
+            width: 'short',
+            context: 'formatting'
+          }) || match.day(dateString, {
+            width: 'narrow',
+            context: 'formatting'
+          });
+        // Tuesday
+
+        case 'EEEE':
+        default:
+          return match.day(dateString, {
+            width: 'wide',
+            context: 'formatting'
+          }) || match.day(dateString, {
+            width: 'abbreviated',
+            context: 'formatting'
+          }) || match.day(dateString, {
+            width: 'short',
+            context: 'formatting'
+          }) || match.day(dateString, {
+            width: 'narrow',
+            context: 'formatting'
+          });
+      }
+    }
+  }, {
+    key: "validate",
+    value: function validate(_date, value) {
+      return value >= 0 && value <= 6;
+    }
+  }, {
+    key: "set",
+    value: function set(date, _flags, value, options) {
+      date = (0, _index.default)(date, value, options);
+      date.setUTCHours(0, 0, 0, 0);
+      return date;
+    }
+  }]);
+
+  return DayParser;
+}(_Parser2.Parser);
+
+exports.DayParser = DayParser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/DayPeriodParser.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/DayPeriodParser.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.DayPeriodParser = void 0;
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _utils = __webpack_require__(/*! ../utils.js */ "./node_modules/date-fns/parse/_lib/utils.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+// in the morning, in the afternoon, in the evening, at night
+var DayPeriodParser = /*#__PURE__*/function (_Parser) {
+  _inherits(DayPeriodParser, _Parser);
+
+  var _super = _createSuper(DayPeriodParser);
+
+  function DayPeriodParser() {
+    var _this;
+
+    _classCallCheck(this, DayPeriodParser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 80);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", ['a', 'b', 't', 'T']);
+
+    return _this;
+  }
+
+  _createClass(DayPeriodParser, [{
+    key: "parse",
+    value: function parse(dateString, token, match) {
+      switch (token) {
+        case 'B':
+        case 'BB':
+        case 'BBB':
+          return match.dayPeriod(dateString, {
+            width: 'abbreviated',
+            context: 'formatting'
+          }) || match.dayPeriod(dateString, {
+            width: 'narrow',
+            context: 'formatting'
+          });
+
+        case 'BBBBB':
+          return match.dayPeriod(dateString, {
+            width: 'narrow',
+            context: 'formatting'
+          });
+
+        case 'BBBB':
+        default:
+          return match.dayPeriod(dateString, {
+            width: 'wide',
+            context: 'formatting'
+          }) || match.dayPeriod(dateString, {
+            width: 'abbreviated',
+            context: 'formatting'
+          }) || match.dayPeriod(dateString, {
+            width: 'narrow',
+            context: 'formatting'
+          });
+      }
+    }
+  }, {
+    key: "set",
+    value: function set(date, _flags, value) {
+      date.setUTCHours((0, _utils.dayPeriodEnumToHours)(value), 0, 0, 0);
+      return date;
+    }
+  }]);
+
+  return DayPeriodParser;
+}(_Parser2.Parser);
+
+exports.DayPeriodParser = DayPeriodParser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/EraParser.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/EraParser.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.EraParser = void 0;
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var EraParser = /*#__PURE__*/function (_Parser) {
+  _inherits(EraParser, _Parser);
+
+  var _super = _createSuper(EraParser);
+
+  function EraParser() {
+    var _this;
+
+    _classCallCheck(this, EraParser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 140);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", ['R', 'u', 't', 'T']);
+
+    return _this;
+  }
+
+  _createClass(EraParser, [{
+    key: "parse",
+    value: function parse(dateString, token, match) {
+      switch (token) {
+        // AD, BC
+        case 'G':
+        case 'GG':
+        case 'GGG':
+          return match.era(dateString, {
+            width: 'abbreviated'
+          }) || match.era(dateString, {
+            width: 'narrow'
+          });
+        // A, B
+
+        case 'GGGGG':
+          return match.era(dateString, {
+            width: 'narrow'
+          });
+        // Anno Domini, Before Christ
+
+        case 'GGGG':
+        default:
+          return match.era(dateString, {
+            width: 'wide'
+          }) || match.era(dateString, {
+            width: 'abbreviated'
+          }) || match.era(dateString, {
+            width: 'narrow'
+          });
+      }
+    }
+  }, {
+    key: "set",
+    value: function set(date, flags, value) {
+      flags.era = value;
+      date.setUTCFullYear(value, 0, 1);
+      date.setUTCHours(0, 0, 0, 0);
+      return date;
+    }
+  }]);
+
+  return EraParser;
+}(_Parser2.Parser);
+
+exports.EraParser = EraParser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/ExtendedYearParser.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/ExtendedYearParser.js ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.ExtendedYearParser = void 0;
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _utils = __webpack_require__(/*! ../utils.js */ "./node_modules/date-fns/parse/_lib/utils.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var ExtendedYearParser = /*#__PURE__*/function (_Parser) {
+  _inherits(ExtendedYearParser, _Parser);
+
+  var _super = _createSuper(ExtendedYearParser);
+
+  function ExtendedYearParser() {
+    var _this;
+
+    _classCallCheck(this, ExtendedYearParser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 130);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", ['G', 'y', 'Y', 'R', 'w', 'I', 'i', 'e', 'c', 't', 'T']);
+
+    return _this;
+  }
+
+  _createClass(ExtendedYearParser, [{
+    key: "parse",
+    value: function parse(dateString, token) {
+      if (token === 'u') {
+        return (0, _utils.parseNDigitsSigned)(4, dateString);
+      }
+
+      return (0, _utils.parseNDigitsSigned)(token.length, dateString);
+    }
+  }, {
+    key: "set",
+    value: function set(date, _flags, value) {
+      date.setUTCFullYear(value, 0, 1);
+      date.setUTCHours(0, 0, 0, 0);
+      return date;
+    }
+  }]);
+
+  return ExtendedYearParser;
+}(_Parser2.Parser);
+
+exports.ExtendedYearParser = ExtendedYearParser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/FractionOfSecondParser.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/FractionOfSecondParser.js ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.FractionOfSecondParser = void 0;
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _utils = __webpack_require__(/*! ../utils.js */ "./node_modules/date-fns/parse/_lib/utils.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var FractionOfSecondParser = /*#__PURE__*/function (_Parser) {
+  _inherits(FractionOfSecondParser, _Parser);
+
+  var _super = _createSuper(FractionOfSecondParser);
+
+  function FractionOfSecondParser() {
+    var _this;
+
+    _classCallCheck(this, FractionOfSecondParser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 30);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", ['t', 'T']);
+
+    return _this;
+  }
+
+  _createClass(FractionOfSecondParser, [{
+    key: "parse",
+    value: function parse(dateString, token) {
+      var valueCallback = function valueCallback(value) {
+        return Math.floor(value * Math.pow(10, -token.length + 3));
+      };
+
+      return (0, _utils.mapValue)((0, _utils.parseNDigits)(token.length, dateString), valueCallback);
+    }
+  }, {
+    key: "set",
+    value: function set(date, _flags, value) {
+      date.setUTCMilliseconds(value);
+      return date;
+    }
+  }]);
+
+  return FractionOfSecondParser;
+}(_Parser2.Parser);
+
+exports.FractionOfSecondParser = FractionOfSecondParser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/Hour0To11Parser.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/Hour0To11Parser.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.Hour0To11Parser = void 0;
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _constants = __webpack_require__(/*! ../constants.js */ "./node_modules/date-fns/parse/_lib/constants.js");
+
+var _utils = __webpack_require__(/*! ../utils.js */ "./node_modules/date-fns/parse/_lib/utils.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var Hour0To11Parser = /*#__PURE__*/function (_Parser) {
+  _inherits(Hour0To11Parser, _Parser);
+
+  var _super = _createSuper(Hour0To11Parser);
+
+  function Hour0To11Parser() {
+    var _this;
+
+    _classCallCheck(this, Hour0To11Parser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 70);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", ['h', 'H', 'k', 't', 'T']);
+
+    return _this;
+  }
+
+  _createClass(Hour0To11Parser, [{
+    key: "parse",
+    value: function parse(dateString, token, match) {
+      switch (token) {
+        case 'K':
+          return (0, _utils.parseNumericPattern)(_constants.numericPatterns.hour11h, dateString);
+
+        case 'Ko':
+          return match.ordinalNumber(dateString, {
+            unit: 'hour'
+          });
+
+        default:
+          return (0, _utils.parseNDigits)(token.length, dateString);
+      }
+    }
+  }, {
+    key: "validate",
+    value: function validate(_date, value) {
+      return value >= 0 && value <= 11;
+    }
+  }, {
+    key: "set",
+    value: function set(date, _flags, value) {
+      var isPM = date.getUTCHours() >= 12;
+
+      if (isPM && value < 12) {
+        date.setUTCHours(value + 12, 0, 0, 0);
+      } else {
+        date.setUTCHours(value, 0, 0, 0);
+      }
+
+      return date;
+    }
+  }]);
+
+  return Hour0To11Parser;
+}(_Parser2.Parser);
+
+exports.Hour0To11Parser = Hour0To11Parser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/Hour0to23Parser.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/Hour0to23Parser.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.Hour0to23Parser = void 0;
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _constants = __webpack_require__(/*! ../constants.js */ "./node_modules/date-fns/parse/_lib/constants.js");
+
+var _utils = __webpack_require__(/*! ../utils.js */ "./node_modules/date-fns/parse/_lib/utils.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var Hour0to23Parser = /*#__PURE__*/function (_Parser) {
+  _inherits(Hour0to23Parser, _Parser);
+
+  var _super = _createSuper(Hour0to23Parser);
+
+  function Hour0to23Parser() {
+    var _this;
+
+    _classCallCheck(this, Hour0to23Parser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 70);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", ['a', 'b', 'h', 'K', 'k', 't', 'T']);
+
+    return _this;
+  }
+
+  _createClass(Hour0to23Parser, [{
+    key: "parse",
+    value: function parse(dateString, token, match) {
+      switch (token) {
+        case 'H':
+          return (0, _utils.parseNumericPattern)(_constants.numericPatterns.hour23h, dateString);
+
+        case 'Ho':
+          return match.ordinalNumber(dateString, {
+            unit: 'hour'
+          });
+
+        default:
+          return (0, _utils.parseNDigits)(token.length, dateString);
+      }
+    }
+  }, {
+    key: "validate",
+    value: function validate(_date, value) {
+      return value >= 0 && value <= 23;
+    }
+  }, {
+    key: "set",
+    value: function set(date, _flags, value) {
+      date.setUTCHours(value, 0, 0, 0);
+      return date;
+    }
+  }]);
+
+  return Hour0to23Parser;
+}(_Parser2.Parser);
+
+exports.Hour0to23Parser = Hour0to23Parser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/Hour1To24Parser.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/Hour1To24Parser.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.Hour1To24Parser = void 0;
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _constants = __webpack_require__(/*! ../constants.js */ "./node_modules/date-fns/parse/_lib/constants.js");
+
+var _utils = __webpack_require__(/*! ../utils.js */ "./node_modules/date-fns/parse/_lib/utils.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var Hour1To24Parser = /*#__PURE__*/function (_Parser) {
+  _inherits(Hour1To24Parser, _Parser);
+
+  var _super = _createSuper(Hour1To24Parser);
+
+  function Hour1To24Parser() {
+    var _this;
+
+    _classCallCheck(this, Hour1To24Parser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 70);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", ['a', 'b', 'h', 'H', 'K', 't', 'T']);
+
+    return _this;
+  }
+
+  _createClass(Hour1To24Parser, [{
+    key: "parse",
+    value: function parse(dateString, token, match) {
+      switch (token) {
+        case 'k':
+          return (0, _utils.parseNumericPattern)(_constants.numericPatterns.hour24h, dateString);
+
+        case 'ko':
+          return match.ordinalNumber(dateString, {
+            unit: 'hour'
+          });
+
+        default:
+          return (0, _utils.parseNDigits)(token.length, dateString);
+      }
+    }
+  }, {
+    key: "validate",
+    value: function validate(_date, value) {
+      return value >= 1 && value <= 24;
+    }
+  }, {
+    key: "set",
+    value: function set(date, _flags, value) {
+      var hours = value <= 24 ? value % 24 : value;
+      date.setUTCHours(hours, 0, 0, 0);
+      return date;
+    }
+  }]);
+
+  return Hour1To24Parser;
+}(_Parser2.Parser);
+
+exports.Hour1To24Parser = Hour1To24Parser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/Hour1to12Parser.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/Hour1to12Parser.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.Hour1to12Parser = void 0;
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _constants = __webpack_require__(/*! ../constants.js */ "./node_modules/date-fns/parse/_lib/constants.js");
+
+var _utils = __webpack_require__(/*! ../utils.js */ "./node_modules/date-fns/parse/_lib/utils.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var Hour1to12Parser = /*#__PURE__*/function (_Parser) {
+  _inherits(Hour1to12Parser, _Parser);
+
+  var _super = _createSuper(Hour1to12Parser);
+
+  function Hour1to12Parser() {
+    var _this;
+
+    _classCallCheck(this, Hour1to12Parser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 70);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", ['H', 'K', 'k', 't', 'T']);
+
+    return _this;
+  }
+
+  _createClass(Hour1to12Parser, [{
+    key: "parse",
+    value: function parse(dateString, token, match) {
+      switch (token) {
+        case 'h':
+          return (0, _utils.parseNumericPattern)(_constants.numericPatterns.hour12h, dateString);
+
+        case 'ho':
+          return match.ordinalNumber(dateString, {
+            unit: 'hour'
+          });
+
+        default:
+          return (0, _utils.parseNDigits)(token.length, dateString);
+      }
+    }
+  }, {
+    key: "validate",
+    value: function validate(_date, value) {
+      return value >= 1 && value <= 12;
+    }
+  }, {
+    key: "set",
+    value: function set(date, _flags, value) {
+      var isPM = date.getUTCHours() >= 12;
+
+      if (isPM && value < 12) {
+        date.setUTCHours(value + 12, 0, 0, 0);
+      } else if (!isPM && value === 12) {
+        date.setUTCHours(0, 0, 0, 0);
+      } else {
+        date.setUTCHours(value, 0, 0, 0);
+      }
+
+      return date;
+    }
+  }]);
+
+  return Hour1to12Parser;
+}(_Parser2.Parser);
+
+exports.Hour1to12Parser = Hour1to12Parser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/ISODayParser.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/ISODayParser.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.ISODayParser = void 0;
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _utils = __webpack_require__(/*! ../utils.js */ "./node_modules/date-fns/parse/_lib/utils.js");
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../../../_lib/setUTCISODay/index.js */ "./node_modules/date-fns/_lib/setUTCISODay/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+// ISO day of week
+var ISODayParser = /*#__PURE__*/function (_Parser) {
+  _inherits(ISODayParser, _Parser);
+
+  var _super = _createSuper(ISODayParser);
+
+  function ISODayParser() {
+    var _this;
+
+    _classCallCheck(this, ISODayParser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 90);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", ['y', 'Y', 'u', 'q', 'Q', 'M', 'L', 'w', 'd', 'D', 'E', 'e', 'c', 't', 'T']);
+
+    return _this;
+  }
+
+  _createClass(ISODayParser, [{
+    key: "parse",
+    value: function parse(dateString, token, match) {
+      var valueCallback = function valueCallback(value) {
+        if (value === 0) {
+          return 7;
+        }
+
+        return value;
+      };
+
+      switch (token) {
+        // 2
+        case 'i':
+        case 'ii':
+          // 02
+          return (0, _utils.parseNDigits)(token.length, dateString);
+        // 2nd
+
+        case 'io':
+          return match.ordinalNumber(dateString, {
+            unit: 'day'
+          });
+        // Tue
+
+        case 'iii':
+          return (0, _utils.mapValue)(match.day(dateString, {
+            width: 'abbreviated',
+            context: 'formatting'
+          }) || match.day(dateString, {
+            width: 'short',
+            context: 'formatting'
+          }) || match.day(dateString, {
+            width: 'narrow',
+            context: 'formatting'
+          }), valueCallback);
+        // T
+
+        case 'iiiii':
+          return (0, _utils.mapValue)(match.day(dateString, {
+            width: 'narrow',
+            context: 'formatting'
+          }), valueCallback);
+        // Tu
+
+        case 'iiiiii':
+          return (0, _utils.mapValue)(match.day(dateString, {
+            width: 'short',
+            context: 'formatting'
+          }) || match.day(dateString, {
+            width: 'narrow',
+            context: 'formatting'
+          }), valueCallback);
+        // Tuesday
+
+        case 'iiii':
+        default:
+          return (0, _utils.mapValue)(match.day(dateString, {
+            width: 'wide',
+            context: 'formatting'
+          }) || match.day(dateString, {
+            width: 'abbreviated',
+            context: 'formatting'
+          }) || match.day(dateString, {
+            width: 'short',
+            context: 'formatting'
+          }) || match.day(dateString, {
+            width: 'narrow',
+            context: 'formatting'
+          }), valueCallback);
+      }
+    }
+  }, {
+    key: "validate",
+    value: function validate(_date, value) {
+      return value >= 1 && value <= 7;
+    }
+  }, {
+    key: "set",
+    value: function set(date, _flags, value) {
+      date = (0, _index.default)(date, value);
+      date.setUTCHours(0, 0, 0, 0);
+      return date;
+    }
+  }]);
+
+  return ISODayParser;
+}(_Parser2.Parser);
+
+exports.ISODayParser = ISODayParser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/ISOTimezoneParser.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/ISOTimezoneParser.js ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.ISOTimezoneParser = void 0;
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _constants = __webpack_require__(/*! ../constants.js */ "./node_modules/date-fns/parse/_lib/constants.js");
+
+var _utils = __webpack_require__(/*! ../utils.js */ "./node_modules/date-fns/parse/_lib/utils.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+// Timezone (ISO-8601)
+var ISOTimezoneParser = /*#__PURE__*/function (_Parser) {
+  _inherits(ISOTimezoneParser, _Parser);
+
+  var _super = _createSuper(ISOTimezoneParser);
+
+  function ISOTimezoneParser() {
+    var _this;
+
+    _classCallCheck(this, ISOTimezoneParser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 10);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", ['t', 'T', 'X']);
+
+    return _this;
+  }
+
+  _createClass(ISOTimezoneParser, [{
+    key: "parse",
+    value: function parse(dateString, token) {
+      switch (token) {
+        case 'x':
+          return (0, _utils.parseTimezonePattern)(_constants.timezonePatterns.basicOptionalMinutes, dateString);
+
+        case 'xx':
+          return (0, _utils.parseTimezonePattern)(_constants.timezonePatterns.basic, dateString);
+
+        case 'xxxx':
+          return (0, _utils.parseTimezonePattern)(_constants.timezonePatterns.basicOptionalSeconds, dateString);
+
+        case 'xxxxx':
+          return (0, _utils.parseTimezonePattern)(_constants.timezonePatterns.extendedOptionalSeconds, dateString);
+
+        case 'xxx':
+        default:
+          return (0, _utils.parseTimezonePattern)(_constants.timezonePatterns.extended, dateString);
+      }
+    }
+  }, {
+    key: "set",
+    value: function set(date, flags, value) {
+      if (flags.timestampIsSet) {
+        return date;
+      }
+
+      return new Date(date.getTime() - value);
+    }
+  }]);
+
+  return ISOTimezoneParser;
+}(_Parser2.Parser);
+
+exports.ISOTimezoneParser = ISOTimezoneParser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/ISOTimezoneWithZParser.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/ISOTimezoneWithZParser.js ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.ISOTimezoneWithZParser = void 0;
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _constants = __webpack_require__(/*! ../constants.js */ "./node_modules/date-fns/parse/_lib/constants.js");
+
+var _utils = __webpack_require__(/*! ../utils.js */ "./node_modules/date-fns/parse/_lib/utils.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+// Timezone (ISO-8601. +00:00 is `'Z'`)
+var ISOTimezoneWithZParser = /*#__PURE__*/function (_Parser) {
+  _inherits(ISOTimezoneWithZParser, _Parser);
+
+  var _super = _createSuper(ISOTimezoneWithZParser);
+
+  function ISOTimezoneWithZParser() {
+    var _this;
+
+    _classCallCheck(this, ISOTimezoneWithZParser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 10);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", ['t', 'T', 'x']);
+
+    return _this;
+  }
+
+  _createClass(ISOTimezoneWithZParser, [{
+    key: "parse",
+    value: function parse(dateString, token) {
+      switch (token) {
+        case 'X':
+          return (0, _utils.parseTimezonePattern)(_constants.timezonePatterns.basicOptionalMinutes, dateString);
+
+        case 'XX':
+          return (0, _utils.parseTimezonePattern)(_constants.timezonePatterns.basic, dateString);
+
+        case 'XXXX':
+          return (0, _utils.parseTimezonePattern)(_constants.timezonePatterns.basicOptionalSeconds, dateString);
+
+        case 'XXXXX':
+          return (0, _utils.parseTimezonePattern)(_constants.timezonePatterns.extendedOptionalSeconds, dateString);
+
+        case 'XXX':
+        default:
+          return (0, _utils.parseTimezonePattern)(_constants.timezonePatterns.extended, dateString);
+      }
+    }
+  }, {
+    key: "set",
+    value: function set(date, flags, value) {
+      if (flags.timestampIsSet) {
+        return date;
+      }
+
+      return new Date(date.getTime() - value);
+    }
+  }]);
+
+  return ISOTimezoneWithZParser;
+}(_Parser2.Parser);
+
+exports.ISOTimezoneWithZParser = ISOTimezoneWithZParser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/ISOWeekParser.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/ISOWeekParser.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.ISOWeekParser = void 0;
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _constants = __webpack_require__(/*! ../constants.js */ "./node_modules/date-fns/parse/_lib/constants.js");
+
+var _utils = __webpack_require__(/*! ../utils.js */ "./node_modules/date-fns/parse/_lib/utils.js");
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../../../_lib/setUTCISOWeek/index.js */ "./node_modules/date-fns/_lib/setUTCISOWeek/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../../../_lib/startOfUTCISOWeek/index.js */ "./node_modules/date-fns/_lib/startOfUTCISOWeek/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+// ISO week of year
+var ISOWeekParser = /*#__PURE__*/function (_Parser) {
+  _inherits(ISOWeekParser, _Parser);
+
+  var _super = _createSuper(ISOWeekParser);
+
+  function ISOWeekParser() {
+    var _this;
+
+    _classCallCheck(this, ISOWeekParser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 100);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", ['y', 'Y', 'u', 'q', 'Q', 'M', 'L', 'w', 'd', 'D', 'e', 'c', 't', 'T']);
+
+    return _this;
+  }
+
+  _createClass(ISOWeekParser, [{
+    key: "parse",
+    value: function parse(dateString, token, match) {
+      switch (token) {
+        case 'I':
+          return (0, _utils.parseNumericPattern)(_constants.numericPatterns.week, dateString);
+
+        case 'Io':
+          return match.ordinalNumber(dateString, {
+            unit: 'week'
+          });
+
+        default:
+          return (0, _utils.parseNDigits)(token.length, dateString);
+      }
+    }
+  }, {
+    key: "validate",
+    value: function validate(_date, value) {
+      return value >= 1 && value <= 53;
+    }
+  }, {
+    key: "set",
+    value: function set(date, _flags, value) {
+      return (0, _index2.default)((0, _index.default)(date, value));
+    }
+  }]);
+
+  return ISOWeekParser;
+}(_Parser2.Parser);
+
+exports.ISOWeekParser = ISOWeekParser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/ISOWeekYearParser.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/ISOWeekYearParser.js ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.ISOWeekYearParser = void 0;
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _utils = __webpack_require__(/*! ../utils.js */ "./node_modules/date-fns/parse/_lib/utils.js");
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../../../_lib/startOfUTCISOWeek/index.js */ "./node_modules/date-fns/_lib/startOfUTCISOWeek/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+// ISO week-numbering year
+var ISOWeekYearParser = /*#__PURE__*/function (_Parser) {
+  _inherits(ISOWeekYearParser, _Parser);
+
+  var _super = _createSuper(ISOWeekYearParser);
+
+  function ISOWeekYearParser() {
+    var _this;
+
+    _classCallCheck(this, ISOWeekYearParser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 130);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", ['G', 'y', 'Y', 'u', 'Q', 'q', 'M', 'L', 'w', 'd', 'D', 'e', 'c', 't', 'T']);
+
+    return _this;
+  }
+
+  _createClass(ISOWeekYearParser, [{
+    key: "parse",
+    value: function parse(dateString, token) {
+      if (token === 'R') {
+        return (0, _utils.parseNDigitsSigned)(4, dateString);
+      }
+
+      return (0, _utils.parseNDigitsSigned)(token.length, dateString);
+    }
+  }, {
+    key: "set",
+    value: function set(_date, _flags, value) {
+      var firstWeekOfYear = new Date(0);
+      firstWeekOfYear.setUTCFullYear(value, 0, 4);
+      firstWeekOfYear.setUTCHours(0, 0, 0, 0);
+      return (0, _index.default)(firstWeekOfYear);
+    }
+  }]);
+
+  return ISOWeekYearParser;
+}(_Parser2.Parser);
+
+exports.ISOWeekYearParser = ISOWeekYearParser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/LocalDayParser.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/LocalDayParser.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.LocalDayParser = void 0;
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _utils = __webpack_require__(/*! ../utils.js */ "./node_modules/date-fns/parse/_lib/utils.js");
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../../../_lib/setUTCDay/index.js */ "./node_modules/date-fns/_lib/setUTCDay/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+// Local day of week
+var LocalDayParser = /*#__PURE__*/function (_Parser) {
+  _inherits(LocalDayParser, _Parser);
+
+  var _super = _createSuper(LocalDayParser);
+
+  function LocalDayParser() {
+    var _this;
+
+    _classCallCheck(this, LocalDayParser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 90);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", ['y', 'R', 'u', 'q', 'Q', 'M', 'L', 'I', 'd', 'D', 'E', 'i', 'c', 't', 'T']);
+
+    return _this;
+  }
+
+  _createClass(LocalDayParser, [{
+    key: "parse",
+    value: function parse(dateString, token, match, options) {
+      var valueCallback = function valueCallback(value) {
+        var wholeWeekDays = Math.floor((value - 1) / 7) * 7;
+        return (value + options.weekStartsOn + 6) % 7 + wholeWeekDays;
+      };
+
+      switch (token) {
+        // 3
+        case 'e':
+        case 'ee':
+          // 03
+          return (0, _utils.mapValue)((0, _utils.parseNDigits)(token.length, dateString), valueCallback);
+        // 3rd
+
+        case 'eo':
+          return (0, _utils.mapValue)(match.ordinalNumber(dateString, {
+            unit: 'day'
+          }), valueCallback);
+        // Tue
+
+        case 'eee':
+          return match.day(dateString, {
+            width: 'abbreviated',
+            context: 'formatting'
+          }) || match.day(dateString, {
+            width: 'short',
+            context: 'formatting'
+          }) || match.day(dateString, {
+            width: 'narrow',
+            context: 'formatting'
+          });
+        // T
+
+        case 'eeeee':
+          return match.day(dateString, {
+            width: 'narrow',
+            context: 'formatting'
+          });
+        // Tu
+
+        case 'eeeeee':
+          return match.day(dateString, {
+            width: 'short',
+            context: 'formatting'
+          }) || match.day(dateString, {
+            width: 'narrow',
+            context: 'formatting'
+          });
+        // Tuesday
+
+        case 'eeee':
+        default:
+          return match.day(dateString, {
+            width: 'wide',
+            context: 'formatting'
+          }) || match.day(dateString, {
+            width: 'abbreviated',
+            context: 'formatting'
+          }) || match.day(dateString, {
+            width: 'short',
+            context: 'formatting'
+          }) || match.day(dateString, {
+            width: 'narrow',
+            context: 'formatting'
+          });
+      }
+    }
+  }, {
+    key: "validate",
+    value: function validate(_date, value) {
+      return value >= 0 && value <= 6;
+    }
+  }, {
+    key: "set",
+    value: function set(date, _flags, value, options) {
+      date = (0, _index.default)(date, value, options);
+      date.setUTCHours(0, 0, 0, 0);
+      return date;
+    }
+  }]);
+
+  return LocalDayParser;
+}(_Parser2.Parser);
+
+exports.LocalDayParser = LocalDayParser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/LocalWeekParser.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/LocalWeekParser.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.LocalWeekParser = void 0;
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _constants = __webpack_require__(/*! ../constants.js */ "./node_modules/date-fns/parse/_lib/constants.js");
+
+var _utils = __webpack_require__(/*! ../utils.js */ "./node_modules/date-fns/parse/_lib/utils.js");
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../../../_lib/setUTCWeek/index.js */ "./node_modules/date-fns/_lib/setUTCWeek/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../../../_lib/startOfUTCWeek/index.js */ "./node_modules/date-fns/_lib/startOfUTCWeek/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+// Local week of year
+var LocalWeekParser = /*#__PURE__*/function (_Parser) {
+  _inherits(LocalWeekParser, _Parser);
+
+  var _super = _createSuper(LocalWeekParser);
+
+  function LocalWeekParser() {
+    var _this;
+
+    _classCallCheck(this, LocalWeekParser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 100);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", ['y', 'R', 'u', 'q', 'Q', 'M', 'L', 'I', 'd', 'D', 'i', 't', 'T']);
+
+    return _this;
+  }
+
+  _createClass(LocalWeekParser, [{
+    key: "parse",
+    value: function parse(dateString, token, match) {
+      switch (token) {
+        case 'w':
+          return (0, _utils.parseNumericPattern)(_constants.numericPatterns.week, dateString);
+
+        case 'wo':
+          return match.ordinalNumber(dateString, {
+            unit: 'week'
+          });
+
+        default:
+          return (0, _utils.parseNDigits)(token.length, dateString);
+      }
+    }
+  }, {
+    key: "validate",
+    value: function validate(_date, value) {
+      return value >= 1 && value <= 53;
+    }
+  }, {
+    key: "set",
+    value: function set(date, _flags, value, options) {
+      return (0, _index2.default)((0, _index.default)(date, value, options), options);
+    }
+  }]);
+
+  return LocalWeekParser;
+}(_Parser2.Parser);
+
+exports.LocalWeekParser = LocalWeekParser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/LocalWeekYearParser.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/LocalWeekYearParser.js ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.LocalWeekYearParser = void 0;
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _utils = __webpack_require__(/*! ../utils.js */ "./node_modules/date-fns/parse/_lib/utils.js");
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../../../_lib/getUTCWeekYear/index.js */ "./node_modules/date-fns/_lib/getUTCWeekYear/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../../../_lib/startOfUTCWeek/index.js */ "./node_modules/date-fns/_lib/startOfUTCWeek/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+// Local week-numbering year
+var LocalWeekYearParser = /*#__PURE__*/function (_Parser) {
+  _inherits(LocalWeekYearParser, _Parser);
+
+  var _super = _createSuper(LocalWeekYearParser);
+
+  function LocalWeekYearParser() {
+    var _this;
+
+    _classCallCheck(this, LocalWeekYearParser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 130);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", ['y', 'R', 'u', 'Q', 'q', 'M', 'L', 'I', 'd', 'D', 'i', 't', 'T']);
+
+    return _this;
+  }
+
+  _createClass(LocalWeekYearParser, [{
+    key: "parse",
+    value: function parse(dateString, token, match) {
+      var valueCallback = function valueCallback(year) {
+        return {
+          year: year,
+          isTwoDigitYear: token === 'YY'
+        };
+      };
+
+      switch (token) {
+        case 'Y':
+          return (0, _utils.mapValue)((0, _utils.parseNDigits)(4, dateString), valueCallback);
+
+        case 'Yo':
+          return (0, _utils.mapValue)(match.ordinalNumber(dateString, {
+            unit: 'year'
+          }), valueCallback);
+
+        default:
+          return (0, _utils.mapValue)((0, _utils.parseNDigits)(token.length, dateString), valueCallback);
+      }
+    }
+  }, {
+    key: "validate",
+    value: function validate(_date, value) {
+      return value.isTwoDigitYear || value.year > 0;
+    }
+  }, {
+    key: "set",
+    value: function set(date, flags, value, options) {
+      var currentYear = (0, _index.default)(date, options);
+
+      if (value.isTwoDigitYear) {
+        var normalizedTwoDigitYear = (0, _utils.normalizeTwoDigitYear)(value.year, currentYear);
+        date.setUTCFullYear(normalizedTwoDigitYear, 0, options.firstWeekContainsDate);
+        date.setUTCHours(0, 0, 0, 0);
+        return (0, _index2.default)(date, options);
+      }
+
+      var year = !('era' in flags) || flags.era === 1 ? value.year : 1 - value.year;
+      date.setUTCFullYear(year, 0, options.firstWeekContainsDate);
+      date.setUTCHours(0, 0, 0, 0);
+      return (0, _index2.default)(date, options);
+    }
+  }]);
+
+  return LocalWeekYearParser;
+}(_Parser2.Parser);
+
+exports.LocalWeekYearParser = LocalWeekYearParser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/MinuteParser.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/MinuteParser.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.MinuteParser = void 0;
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _constants = __webpack_require__(/*! ../constants.js */ "./node_modules/date-fns/parse/_lib/constants.js");
+
+var _utils = __webpack_require__(/*! ../utils.js */ "./node_modules/date-fns/parse/_lib/utils.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var MinuteParser = /*#__PURE__*/function (_Parser) {
+  _inherits(MinuteParser, _Parser);
+
+  var _super = _createSuper(MinuteParser);
+
+  function MinuteParser() {
+    var _this;
+
+    _classCallCheck(this, MinuteParser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 60);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", ['t', 'T']);
+
+    return _this;
+  }
+
+  _createClass(MinuteParser, [{
+    key: "parse",
+    value: function parse(dateString, token, match) {
+      switch (token) {
+        case 'm':
+          return (0, _utils.parseNumericPattern)(_constants.numericPatterns.minute, dateString);
+
+        case 'mo':
+          return match.ordinalNumber(dateString, {
+            unit: 'minute'
+          });
+
+        default:
+          return (0, _utils.parseNDigits)(token.length, dateString);
+      }
+    }
+  }, {
+    key: "validate",
+    value: function validate(_date, value) {
+      return value >= 0 && value <= 59;
+    }
+  }, {
+    key: "set",
+    value: function set(date, _flags, value) {
+      date.setUTCMinutes(value, 0, 0);
+      return date;
+    }
+  }]);
+
+  return MinuteParser;
+}(_Parser2.Parser);
+
+exports.MinuteParser = MinuteParser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/MonthParser.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/MonthParser.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.MonthParser = void 0;
+
+var _utils = __webpack_require__(/*! ../utils.js */ "./node_modules/date-fns/parse/_lib/utils.js");
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _constants = __webpack_require__(/*! ../constants.js */ "./node_modules/date-fns/parse/_lib/constants.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var MonthParser = /*#__PURE__*/function (_Parser) {
+  _inherits(MonthParser, _Parser);
+
+  var _super = _createSuper(MonthParser);
+
+  function MonthParser() {
+    var _this;
+
+    _classCallCheck(this, MonthParser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", ['Y', 'R', 'q', 'Q', 'L', 'w', 'I', 'D', 'i', 'e', 'c', 't', 'T']);
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 110);
+
+    return _this;
+  }
+
+  _createClass(MonthParser, [{
+    key: "parse",
+    value: function parse(dateString, token, match) {
+      var valueCallback = function valueCallback(value) {
+        return value - 1;
+      };
+
+      switch (token) {
+        // 1, 2, ..., 12
+        case 'M':
+          return (0, _utils.mapValue)((0, _utils.parseNumericPattern)(_constants.numericPatterns.month, dateString), valueCallback);
+        // 01, 02, ..., 12
+
+        case 'MM':
+          return (0, _utils.mapValue)((0, _utils.parseNDigits)(2, dateString), valueCallback);
+        // 1st, 2nd, ..., 12th
+
+        case 'Mo':
+          return (0, _utils.mapValue)(match.ordinalNumber(dateString, {
+            unit: 'month'
+          }), valueCallback);
+        // Jan, Feb, ..., Dec
+
+        case 'MMM':
+          return match.month(dateString, {
+            width: 'abbreviated',
+            context: 'formatting'
+          }) || match.month(dateString, {
+            width: 'narrow',
+            context: 'formatting'
+          });
+        // J, F, ..., D
+
+        case 'MMMMM':
+          return match.month(dateString, {
+            width: 'narrow',
+            context: 'formatting'
+          });
+        // January, February, ..., December
+
+        case 'MMMM':
+        default:
+          return match.month(dateString, {
+            width: 'wide',
+            context: 'formatting'
+          }) || match.month(dateString, {
+            width: 'abbreviated',
+            context: 'formatting'
+          }) || match.month(dateString, {
+            width: 'narrow',
+            context: 'formatting'
+          });
+      }
+    }
+  }, {
+    key: "validate",
+    value: function validate(_date, value) {
+      return value >= 0 && value <= 11;
+    }
+  }, {
+    key: "set",
+    value: function set(date, _flags, value) {
+      date.setUTCMonth(value, 1);
+      date.setUTCHours(0, 0, 0, 0);
+      return date;
+    }
+  }]);
+
+  return MonthParser;
+}(_Parser2.Parser);
+
+exports.MonthParser = MonthParser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/QuarterParser.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/QuarterParser.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.QuarterParser = void 0;
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _utils = __webpack_require__(/*! ../utils.js */ "./node_modules/date-fns/parse/_lib/utils.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var QuarterParser = /*#__PURE__*/function (_Parser) {
+  _inherits(QuarterParser, _Parser);
+
+  var _super = _createSuper(QuarterParser);
+
+  function QuarterParser() {
+    var _this;
+
+    _classCallCheck(this, QuarterParser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 120);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", ['Y', 'R', 'q', 'M', 'L', 'w', 'I', 'd', 'D', 'i', 'e', 'c', 't', 'T']);
+
+    return _this;
+  }
+
+  _createClass(QuarterParser, [{
+    key: "parse",
+    value: function parse(dateString, token, match) {
+      switch (token) {
+        // 1, 2, 3, 4
+        case 'Q':
+        case 'QQ':
+          // 01, 02, 03, 04
+          return (0, _utils.parseNDigits)(token.length, dateString);
+        // 1st, 2nd, 3rd, 4th
+
+        case 'Qo':
+          return match.ordinalNumber(dateString, {
+            unit: 'quarter'
+          });
+        // Q1, Q2, Q3, Q4
+
+        case 'QQQ':
+          return match.quarter(dateString, {
+            width: 'abbreviated',
+            context: 'formatting'
+          }) || match.quarter(dateString, {
+            width: 'narrow',
+            context: 'formatting'
+          });
+        // 1, 2, 3, 4 (narrow quarter; could be not numerical)
+
+        case 'QQQQQ':
+          return match.quarter(dateString, {
+            width: 'narrow',
+            context: 'formatting'
+          });
+        // 1st quarter, 2nd quarter, ...
+
+        case 'QQQQ':
+        default:
+          return match.quarter(dateString, {
+            width: 'wide',
+            context: 'formatting'
+          }) || match.quarter(dateString, {
+            width: 'abbreviated',
+            context: 'formatting'
+          }) || match.quarter(dateString, {
+            width: 'narrow',
+            context: 'formatting'
+          });
+      }
+    }
+  }, {
+    key: "validate",
+    value: function validate(_date, value) {
+      return value >= 1 && value <= 4;
+    }
+  }, {
+    key: "set",
+    value: function set(date, _flags, value) {
+      date.setUTCMonth((value - 1) * 3, 1);
+      date.setUTCHours(0, 0, 0, 0);
+      return date;
+    }
+  }]);
+
+  return QuarterParser;
+}(_Parser2.Parser);
+
+exports.QuarterParser = QuarterParser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/SecondParser.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/SecondParser.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.SecondParser = void 0;
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _constants = __webpack_require__(/*! ../constants.js */ "./node_modules/date-fns/parse/_lib/constants.js");
+
+var _utils = __webpack_require__(/*! ../utils.js */ "./node_modules/date-fns/parse/_lib/utils.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var SecondParser = /*#__PURE__*/function (_Parser) {
+  _inherits(SecondParser, _Parser);
+
+  var _super = _createSuper(SecondParser);
+
+  function SecondParser() {
+    var _this;
+
+    _classCallCheck(this, SecondParser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 50);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", ['t', 'T']);
+
+    return _this;
+  }
+
+  _createClass(SecondParser, [{
+    key: "parse",
+    value: function parse(dateString, token, match) {
+      switch (token) {
+        case 's':
+          return (0, _utils.parseNumericPattern)(_constants.numericPatterns.second, dateString);
+
+        case 'so':
+          return match.ordinalNumber(dateString, {
+            unit: 'second'
+          });
+
+        default:
+          return (0, _utils.parseNDigits)(token.length, dateString);
+      }
+    }
+  }, {
+    key: "validate",
+    value: function validate(_date, value) {
+      return value >= 0 && value <= 59;
+    }
+  }, {
+    key: "set",
+    value: function set(date, _flags, value) {
+      date.setUTCSeconds(value, 0);
+      return date;
+    }
+  }]);
+
+  return SecondParser;
+}(_Parser2.Parser);
+
+exports.SecondParser = SecondParser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/StandAloneLocalDayParser.js":
+/*!******************************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/StandAloneLocalDayParser.js ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.StandAloneLocalDayParser = void 0;
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _utils = __webpack_require__(/*! ../utils.js */ "./node_modules/date-fns/parse/_lib/utils.js");
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../../../_lib/setUTCDay/index.js */ "./node_modules/date-fns/_lib/setUTCDay/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+// Stand-alone local day of week
+var StandAloneLocalDayParser = /*#__PURE__*/function (_Parser) {
+  _inherits(StandAloneLocalDayParser, _Parser);
+
+  var _super = _createSuper(StandAloneLocalDayParser);
+
+  function StandAloneLocalDayParser() {
+    var _this;
+
+    _classCallCheck(this, StandAloneLocalDayParser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 90);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", ['y', 'R', 'u', 'q', 'Q', 'M', 'L', 'I', 'd', 'D', 'E', 'i', 'e', 't', 'T']);
+
+    return _this;
+  }
+
+  _createClass(StandAloneLocalDayParser, [{
+    key: "parse",
+    value: function parse(dateString, token, match, options) {
+      var valueCallback = function valueCallback(value) {
+        var wholeWeekDays = Math.floor((value - 1) / 7) * 7;
+        return (value + options.weekStartsOn + 6) % 7 + wholeWeekDays;
+      };
+
+      switch (token) {
+        // 3
+        case 'c':
+        case 'cc':
+          // 03
+          return (0, _utils.mapValue)((0, _utils.parseNDigits)(token.length, dateString), valueCallback);
+        // 3rd
+
+        case 'co':
+          return (0, _utils.mapValue)(match.ordinalNumber(dateString, {
+            unit: 'day'
+          }), valueCallback);
+        // Tue
+
+        case 'ccc':
+          return match.day(dateString, {
+            width: 'abbreviated',
+            context: 'standalone'
+          }) || match.day(dateString, {
+            width: 'short',
+            context: 'standalone'
+          }) || match.day(dateString, {
+            width: 'narrow',
+            context: 'standalone'
+          });
+        // T
+
+        case 'ccccc':
+          return match.day(dateString, {
+            width: 'narrow',
+            context: 'standalone'
+          });
+        // Tu
+
+        case 'cccccc':
+          return match.day(dateString, {
+            width: 'short',
+            context: 'standalone'
+          }) || match.day(dateString, {
+            width: 'narrow',
+            context: 'standalone'
+          });
+        // Tuesday
+
+        case 'cccc':
+        default:
+          return match.day(dateString, {
+            width: 'wide',
+            context: 'standalone'
+          }) || match.day(dateString, {
+            width: 'abbreviated',
+            context: 'standalone'
+          }) || match.day(dateString, {
+            width: 'short',
+            context: 'standalone'
+          }) || match.day(dateString, {
+            width: 'narrow',
+            context: 'standalone'
+          });
+      }
+    }
+  }, {
+    key: "validate",
+    value: function validate(_date, value) {
+      return value >= 0 && value <= 6;
+    }
+  }, {
+    key: "set",
+    value: function set(date, _flags, value, options) {
+      date = (0, _index.default)(date, value, options);
+      date.setUTCHours(0, 0, 0, 0);
+      return date;
+    }
+  }]);
+
+  return StandAloneLocalDayParser;
+}(_Parser2.Parser);
+
+exports.StandAloneLocalDayParser = StandAloneLocalDayParser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/StandAloneMonthParser.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/StandAloneMonthParser.js ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.StandAloneMonthParser = void 0;
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _constants = __webpack_require__(/*! ../constants.js */ "./node_modules/date-fns/parse/_lib/constants.js");
+
+var _utils = __webpack_require__(/*! ../utils.js */ "./node_modules/date-fns/parse/_lib/utils.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var StandAloneMonthParser = /*#__PURE__*/function (_Parser) {
+  _inherits(StandAloneMonthParser, _Parser);
+
+  var _super = _createSuper(StandAloneMonthParser);
+
+  function StandAloneMonthParser() {
+    var _this;
+
+    _classCallCheck(this, StandAloneMonthParser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 110);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", ['Y', 'R', 'q', 'Q', 'M', 'w', 'I', 'D', 'i', 'e', 'c', 't', 'T']);
+
+    return _this;
+  }
+
+  _createClass(StandAloneMonthParser, [{
+    key: "parse",
+    value: function parse(dateString, token, match) {
+      var valueCallback = function valueCallback(value) {
+        return value - 1;
+      };
+
+      switch (token) {
+        // 1, 2, ..., 12
+        case 'L':
+          return (0, _utils.mapValue)((0, _utils.parseNumericPattern)(_constants.numericPatterns.month, dateString), valueCallback);
+        // 01, 02, ..., 12
+
+        case 'LL':
+          return (0, _utils.mapValue)((0, _utils.parseNDigits)(2, dateString), valueCallback);
+        // 1st, 2nd, ..., 12th
+
+        case 'Lo':
+          return (0, _utils.mapValue)(match.ordinalNumber(dateString, {
+            unit: 'month'
+          }), valueCallback);
+        // Jan, Feb, ..., Dec
+
+        case 'LLL':
+          return match.month(dateString, {
+            width: 'abbreviated',
+            context: 'standalone'
+          }) || match.month(dateString, {
+            width: 'narrow',
+            context: 'standalone'
+          });
+        // J, F, ..., D
+
+        case 'LLLLL':
+          return match.month(dateString, {
+            width: 'narrow',
+            context: 'standalone'
+          });
+        // January, February, ..., December
+
+        case 'LLLL':
+        default:
+          return match.month(dateString, {
+            width: 'wide',
+            context: 'standalone'
+          }) || match.month(dateString, {
+            width: 'abbreviated',
+            context: 'standalone'
+          }) || match.month(dateString, {
+            width: 'narrow',
+            context: 'standalone'
+          });
+      }
+    }
+  }, {
+    key: "validate",
+    value: function validate(_date, value) {
+      return value >= 0 && value <= 11;
+    }
+  }, {
+    key: "set",
+    value: function set(date, _flags, value) {
+      date.setUTCMonth(value, 1);
+      date.setUTCHours(0, 0, 0, 0);
+      return date;
+    }
+  }]);
+
+  return StandAloneMonthParser;
+}(_Parser2.Parser);
+
+exports.StandAloneMonthParser = StandAloneMonthParser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/StandAloneQuarterParser.js":
+/*!*****************************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/StandAloneQuarterParser.js ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.StandAloneQuarterParser = void 0;
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _utils = __webpack_require__(/*! ../utils.js */ "./node_modules/date-fns/parse/_lib/utils.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var StandAloneQuarterParser = /*#__PURE__*/function (_Parser) {
+  _inherits(StandAloneQuarterParser, _Parser);
+
+  var _super = _createSuper(StandAloneQuarterParser);
+
+  function StandAloneQuarterParser() {
+    var _this;
+
+    _classCallCheck(this, StandAloneQuarterParser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 120);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", ['Y', 'R', 'Q', 'M', 'L', 'w', 'I', 'd', 'D', 'i', 'e', 'c', 't', 'T']);
+
+    return _this;
+  }
+
+  _createClass(StandAloneQuarterParser, [{
+    key: "parse",
+    value: function parse(dateString, token, match) {
+      switch (token) {
+        // 1, 2, 3, 4
+        case 'q':
+        case 'qq':
+          // 01, 02, 03, 04
+          return (0, _utils.parseNDigits)(token.length, dateString);
+        // 1st, 2nd, 3rd, 4th
+
+        case 'qo':
+          return match.ordinalNumber(dateString, {
+            unit: 'quarter'
+          });
+        // Q1, Q2, Q3, Q4
+
+        case 'qqq':
+          return match.quarter(dateString, {
+            width: 'abbreviated',
+            context: 'standalone'
+          }) || match.quarter(dateString, {
+            width: 'narrow',
+            context: 'standalone'
+          });
+        // 1, 2, 3, 4 (narrow quarter; could be not numerical)
+
+        case 'qqqqq':
+          return match.quarter(dateString, {
+            width: 'narrow',
+            context: 'standalone'
+          });
+        // 1st quarter, 2nd quarter, ...
+
+        case 'qqqq':
+        default:
+          return match.quarter(dateString, {
+            width: 'wide',
+            context: 'standalone'
+          }) || match.quarter(dateString, {
+            width: 'abbreviated',
+            context: 'standalone'
+          }) || match.quarter(dateString, {
+            width: 'narrow',
+            context: 'standalone'
+          });
+      }
+    }
+  }, {
+    key: "validate",
+    value: function validate(_date, value) {
+      return value >= 1 && value <= 4;
+    }
+  }, {
+    key: "set",
+    value: function set(date, _flags, value) {
+      date.setUTCMonth((value - 1) * 3, 1);
+      date.setUTCHours(0, 0, 0, 0);
+      return date;
+    }
+  }]);
+
+  return StandAloneQuarterParser;
+}(_Parser2.Parser);
+
+exports.StandAloneQuarterParser = StandAloneQuarterParser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/TimestampMillisecondsParser.js":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/TimestampMillisecondsParser.js ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.TimestampMillisecondsParser = void 0;
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _utils = __webpack_require__(/*! ../utils.js */ "./node_modules/date-fns/parse/_lib/utils.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var TimestampMillisecondsParser = /*#__PURE__*/function (_Parser) {
+  _inherits(TimestampMillisecondsParser, _Parser);
+
+  var _super = _createSuper(TimestampMillisecondsParser);
+
+  function TimestampMillisecondsParser() {
+    var _this;
+
+    _classCallCheck(this, TimestampMillisecondsParser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 20);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", '*');
+
+    return _this;
+  }
+
+  _createClass(TimestampMillisecondsParser, [{
+    key: "parse",
+    value: function parse(dateString) {
+      return (0, _utils.parseAnyDigitsSigned)(dateString);
+    }
+  }, {
+    key: "set",
+    value: function set(_date, _flags, value) {
+      return [new Date(value), {
+        timestampIsSet: true
+      }];
+    }
+  }]);
+
+  return TimestampMillisecondsParser;
+}(_Parser2.Parser);
+
+exports.TimestampMillisecondsParser = TimestampMillisecondsParser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/TimestampSecondsParser.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/TimestampSecondsParser.js ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.TimestampSecondsParser = void 0;
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _utils = __webpack_require__(/*! ../utils.js */ "./node_modules/date-fns/parse/_lib/utils.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var TimestampSecondsParser = /*#__PURE__*/function (_Parser) {
+  _inherits(TimestampSecondsParser, _Parser);
+
+  var _super = _createSuper(TimestampSecondsParser);
+
+  function TimestampSecondsParser() {
+    var _this;
+
+    _classCallCheck(this, TimestampSecondsParser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 40);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", '*');
+
+    return _this;
+  }
+
+  _createClass(TimestampSecondsParser, [{
+    key: "parse",
+    value: function parse(dateString) {
+      return (0, _utils.parseAnyDigitsSigned)(dateString);
+    }
+  }, {
+    key: "set",
+    value: function set(_date, _flags, value) {
+      return [new Date(value * 1000), {
+        timestampIsSet: true
+      }];
+    }
+  }]);
+
+  return TimestampSecondsParser;
+}(_Parser2.Parser);
+
+exports.TimestampSecondsParser = TimestampSecondsParser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/YearParser.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/YearParser.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.YearParser = void 0;
+
+var _Parser2 = __webpack_require__(/*! ../Parser.js */ "./node_modules/date-fns/parse/_lib/Parser.js");
+
+var _utils = __webpack_require__(/*! ../utils.js */ "./node_modules/date-fns/parse/_lib/utils.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+// From http://www.unicode.org/reports/tr35/tr35-31/tr35-dates.html#Date_Format_Patterns
+// | Year     |     y | yy |   yyy |  yyyy | yyyyy |
+// |----------|-------|----|-------|-------|-------|
+// | AD 1     |     1 | 01 |   001 |  0001 | 00001 |
+// | AD 12    |    12 | 12 |   012 |  0012 | 00012 |
+// | AD 123   |   123 | 23 |   123 |  0123 | 00123 |
+// | AD 1234  |  1234 | 34 |  1234 |  1234 | 01234 |
+// | AD 12345 | 12345 | 45 | 12345 | 12345 | 12345 |
+var YearParser = /*#__PURE__*/function (_Parser) {
+  _inherits(YearParser, _Parser);
+
+  var _super = _createSuper(YearParser);
+
+  function YearParser() {
+    var _this;
+
+    _classCallCheck(this, YearParser);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "priority", 130);
+
+    _defineProperty(_assertThisInitialized(_this), "incompatibleTokens", ['Y', 'R', 'u', 'w', 'I', 'i', 'e', 'c', 't', 'T']);
+
+    return _this;
+  }
+
+  _createClass(YearParser, [{
+    key: "parse",
+    value: function parse(dateString, token, match) {
+      var valueCallback = function valueCallback(year) {
+        return {
+          year: year,
+          isTwoDigitYear: token === 'yy'
+        };
+      };
+
+      switch (token) {
+        case 'y':
+          return (0, _utils.mapValue)((0, _utils.parseNDigits)(4, dateString), valueCallback);
+
+        case 'yo':
+          return (0, _utils.mapValue)(match.ordinalNumber(dateString, {
+            unit: 'year'
+          }), valueCallback);
+
+        default:
+          return (0, _utils.mapValue)((0, _utils.parseNDigits)(token.length, dateString), valueCallback);
+      }
+    }
+  }, {
+    key: "validate",
+    value: function validate(_date, value) {
+      return value.isTwoDigitYear || value.year > 0;
+    }
+  }, {
+    key: "set",
+    value: function set(date, flags, value) {
+      var currentYear = date.getUTCFullYear();
+
+      if (value.isTwoDigitYear) {
+        var normalizedTwoDigitYear = (0, _utils.normalizeTwoDigitYear)(value.year, currentYear);
+        date.setUTCFullYear(normalizedTwoDigitYear, 0, 1);
+        date.setUTCHours(0, 0, 0, 0);
+        return date;
+      }
+
+      var year = !('era' in flags) || flags.era === 1 ? value.year : 1 - value.year;
+      date.setUTCFullYear(year, 0, 1);
+      date.setUTCHours(0, 0, 0, 0);
+      return date;
+    }
+  }]);
+
+  return YearParser;
+}(_Parser2.Parser);
+
+exports.YearParser = YearParser;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/parsers/index.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/parsers/index.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.parsers = void 0;
+
+var _EraParser = __webpack_require__(/*! ./EraParser.js */ "./node_modules/date-fns/parse/_lib/parsers/EraParser.js");
+
+var _YearParser = __webpack_require__(/*! ./YearParser.js */ "./node_modules/date-fns/parse/_lib/parsers/YearParser.js");
+
+var _LocalWeekYearParser = __webpack_require__(/*! ./LocalWeekYearParser.js */ "./node_modules/date-fns/parse/_lib/parsers/LocalWeekYearParser.js");
+
+var _ISOWeekYearParser = __webpack_require__(/*! ./ISOWeekYearParser.js */ "./node_modules/date-fns/parse/_lib/parsers/ISOWeekYearParser.js");
+
+var _ExtendedYearParser = __webpack_require__(/*! ./ExtendedYearParser.js */ "./node_modules/date-fns/parse/_lib/parsers/ExtendedYearParser.js");
+
+var _QuarterParser = __webpack_require__(/*! ./QuarterParser.js */ "./node_modules/date-fns/parse/_lib/parsers/QuarterParser.js");
+
+var _StandAloneQuarterParser = __webpack_require__(/*! ./StandAloneQuarterParser.js */ "./node_modules/date-fns/parse/_lib/parsers/StandAloneQuarterParser.js");
+
+var _MonthParser = __webpack_require__(/*! ./MonthParser.js */ "./node_modules/date-fns/parse/_lib/parsers/MonthParser.js");
+
+var _StandAloneMonthParser = __webpack_require__(/*! ./StandAloneMonthParser.js */ "./node_modules/date-fns/parse/_lib/parsers/StandAloneMonthParser.js");
+
+var _LocalWeekParser = __webpack_require__(/*! ./LocalWeekParser.js */ "./node_modules/date-fns/parse/_lib/parsers/LocalWeekParser.js");
+
+var _ISOWeekParser = __webpack_require__(/*! ./ISOWeekParser.js */ "./node_modules/date-fns/parse/_lib/parsers/ISOWeekParser.js");
+
+var _DateParser = __webpack_require__(/*! ./DateParser.js */ "./node_modules/date-fns/parse/_lib/parsers/DateParser.js");
+
+var _DayOfYearParser = __webpack_require__(/*! ./DayOfYearParser.js */ "./node_modules/date-fns/parse/_lib/parsers/DayOfYearParser.js");
+
+var _DayParser = __webpack_require__(/*! ./DayParser.js */ "./node_modules/date-fns/parse/_lib/parsers/DayParser.js");
+
+var _LocalDayParser = __webpack_require__(/*! ./LocalDayParser.js */ "./node_modules/date-fns/parse/_lib/parsers/LocalDayParser.js");
+
+var _StandAloneLocalDayParser = __webpack_require__(/*! ./StandAloneLocalDayParser.js */ "./node_modules/date-fns/parse/_lib/parsers/StandAloneLocalDayParser.js");
+
+var _ISODayParser = __webpack_require__(/*! ./ISODayParser.js */ "./node_modules/date-fns/parse/_lib/parsers/ISODayParser.js");
+
+var _AMPMParser = __webpack_require__(/*! ./AMPMParser.js */ "./node_modules/date-fns/parse/_lib/parsers/AMPMParser.js");
+
+var _AMPMMidnightParser = __webpack_require__(/*! ./AMPMMidnightParser.js */ "./node_modules/date-fns/parse/_lib/parsers/AMPMMidnightParser.js");
+
+var _DayPeriodParser = __webpack_require__(/*! ./DayPeriodParser.js */ "./node_modules/date-fns/parse/_lib/parsers/DayPeriodParser.js");
+
+var _Hour1to12Parser = __webpack_require__(/*! ./Hour1to12Parser.js */ "./node_modules/date-fns/parse/_lib/parsers/Hour1to12Parser.js");
+
+var _Hour0to23Parser = __webpack_require__(/*! ./Hour0to23Parser.js */ "./node_modules/date-fns/parse/_lib/parsers/Hour0to23Parser.js");
+
+var _Hour0To11Parser = __webpack_require__(/*! ./Hour0To11Parser.js */ "./node_modules/date-fns/parse/_lib/parsers/Hour0To11Parser.js");
+
+var _Hour1To24Parser = __webpack_require__(/*! ./Hour1To24Parser.js */ "./node_modules/date-fns/parse/_lib/parsers/Hour1To24Parser.js");
+
+var _MinuteParser = __webpack_require__(/*! ./MinuteParser.js */ "./node_modules/date-fns/parse/_lib/parsers/MinuteParser.js");
+
+var _SecondParser = __webpack_require__(/*! ./SecondParser.js */ "./node_modules/date-fns/parse/_lib/parsers/SecondParser.js");
+
+var _FractionOfSecondParser = __webpack_require__(/*! ./FractionOfSecondParser.js */ "./node_modules/date-fns/parse/_lib/parsers/FractionOfSecondParser.js");
+
+var _ISOTimezoneWithZParser = __webpack_require__(/*! ./ISOTimezoneWithZParser.js */ "./node_modules/date-fns/parse/_lib/parsers/ISOTimezoneWithZParser.js");
+
+var _ISOTimezoneParser = __webpack_require__(/*! ./ISOTimezoneParser.js */ "./node_modules/date-fns/parse/_lib/parsers/ISOTimezoneParser.js");
+
+var _TimestampSecondsParser = __webpack_require__(/*! ./TimestampSecondsParser.js */ "./node_modules/date-fns/parse/_lib/parsers/TimestampSecondsParser.js");
+
+var _TimestampMillisecondsParser = __webpack_require__(/*! ./TimestampMillisecondsParser.js */ "./node_modules/date-fns/parse/_lib/parsers/TimestampMillisecondsParser.js");
+
+/*
+ * |     | Unit                           |     | Unit                           |
+ * |-----|--------------------------------|-----|--------------------------------|
+ * |  a  | AM, PM                         |  A* | Milliseconds in day            |
+ * |  b  | AM, PM, noon, midnight         |  B  | Flexible day period            |
+ * |  c  | Stand-alone local day of week  |  C* | Localized hour w/ day period   |
+ * |  d  | Day of month                   |  D  | Day of year                    |
+ * |  e  | Local day of week              |  E  | Day of week                    |
+ * |  f  |                                |  F* | Day of week in month           |
+ * |  g* | Modified Julian day            |  G  | Era                            |
+ * |  h  | Hour [1-12]                    |  H  | Hour [0-23]                    |
+ * |  i! | ISO day of week                |  I! | ISO week of year               |
+ * |  j* | Localized hour w/ day period   |  J* | Localized hour w/o day period  |
+ * |  k  | Hour [1-24]                    |  K  | Hour [0-11]                    |
+ * |  l* | (deprecated)                   |  L  | Stand-alone month              |
+ * |  m  | Minute                         |  M  | Month                          |
+ * |  n  |                                |  N  |                                |
+ * |  o! | Ordinal number modifier        |  O* | Timezone (GMT)                 |
+ * |  p  |                                |  P  |                                |
+ * |  q  | Stand-alone quarter            |  Q  | Quarter                        |
+ * |  r* | Related Gregorian year         |  R! | ISO week-numbering year        |
+ * |  s  | Second                         |  S  | Fraction of second             |
+ * |  t! | Seconds timestamp              |  T! | Milliseconds timestamp         |
+ * |  u  | Extended year                  |  U* | Cyclic year                    |
+ * |  v* | Timezone (generic non-locat.)  |  V* | Timezone (location)            |
+ * |  w  | Local week of year             |  W* | Week of month                  |
+ * |  x  | Timezone (ISO-8601 w/o Z)      |  X  | Timezone (ISO-8601)            |
+ * |  y  | Year (abs)                     |  Y  | Local week-numbering year      |
+ * |  z* | Timezone (specific non-locat.) |  Z* | Timezone (aliases)             |
+ *
+ * Letters marked by * are not implemented but reserved by Unicode standard.
+ *
+ * Letters marked by ! are non-standard, but implemented by date-fns:
+ * - `o` modifies the previous token to turn it into an ordinal (see `parse` docs)
+ * - `i` is ISO day of week. For `i` and `ii` is returns numeric ISO week days,
+ *   i.e. 7 for Sunday, 1 for Monday, etc.
+ * - `I` is ISO week of year, as opposed to `w` which is local week of year.
+ * - `R` is ISO week-numbering year, as opposed to `Y` which is local week-numbering year.
+ *   `R` is supposed to be used in conjunction with `I` and `i`
+ *   for universal ISO week-numbering date, whereas
+ *   `Y` is supposed to be used in conjunction with `w` and `e`
+ *   for week-numbering date specific to the locale.
+ */
+var parsers = {
+  G: new _EraParser.EraParser(),
+  y: new _YearParser.YearParser(),
+  Y: new _LocalWeekYearParser.LocalWeekYearParser(),
+  R: new _ISOWeekYearParser.ISOWeekYearParser(),
+  u: new _ExtendedYearParser.ExtendedYearParser(),
+  Q: new _QuarterParser.QuarterParser(),
+  q: new _StandAloneQuarterParser.StandAloneQuarterParser(),
+  M: new _MonthParser.MonthParser(),
+  L: new _StandAloneMonthParser.StandAloneMonthParser(),
+  w: new _LocalWeekParser.LocalWeekParser(),
+  I: new _ISOWeekParser.ISOWeekParser(),
+  d: new _DateParser.DateParser(),
+  D: new _DayOfYearParser.DayOfYearParser(),
+  E: new _DayParser.DayParser(),
+  e: new _LocalDayParser.LocalDayParser(),
+  c: new _StandAloneLocalDayParser.StandAloneLocalDayParser(),
+  i: new _ISODayParser.ISODayParser(),
+  a: new _AMPMParser.AMPMParser(),
+  b: new _AMPMMidnightParser.AMPMMidnightParser(),
+  B: new _DayPeriodParser.DayPeriodParser(),
+  h: new _Hour1to12Parser.Hour1to12Parser(),
+  H: new _Hour0to23Parser.Hour0to23Parser(),
+  K: new _Hour0To11Parser.Hour0To11Parser(),
+  k: new _Hour1To24Parser.Hour1To24Parser(),
+  m: new _MinuteParser.MinuteParser(),
+  s: new _SecondParser.SecondParser(),
+  S: new _FractionOfSecondParser.FractionOfSecondParser(),
+  X: new _ISOTimezoneWithZParser.ISOTimezoneWithZParser(),
+  x: new _ISOTimezoneParser.ISOTimezoneParser(),
+  t: new _TimestampSecondsParser.TimestampSecondsParser(),
+  T: new _TimestampMillisecondsParser.TimestampMillisecondsParser()
+};
+exports.parsers = parsers;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/_lib/utils.js":
+/*!***************************************************!*\
+  !*** ./node_modules/date-fns/parse/_lib/utils.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.dayPeriodEnumToHours = dayPeriodEnumToHours;
+exports.isLeapYearIndex = isLeapYearIndex;
+exports.mapValue = mapValue;
+exports.normalizeTwoDigitYear = normalizeTwoDigitYear;
+exports.parseAnyDigitsSigned = parseAnyDigitsSigned;
+exports.parseNDigits = parseNDigits;
+exports.parseNDigitsSigned = parseNDigitsSigned;
+exports.parseNumericPattern = parseNumericPattern;
+exports.parseTimezonePattern = parseTimezonePattern;
+
+var _index = __webpack_require__(/*! ../../constants/index.js */ "./node_modules/date-fns/constants/index.js");
+
+var _constants = __webpack_require__(/*! ./constants.js */ "./node_modules/date-fns/parse/_lib/constants.js");
+
+function mapValue(parseFnResult, mapFn) {
+  if (!parseFnResult) {
+    return parseFnResult;
+  }
+
+  return {
+    value: mapFn(parseFnResult.value),
+    rest: parseFnResult.rest
+  };
+}
+
+function parseNumericPattern(pattern, dateString) {
+  var matchResult = dateString.match(pattern);
+
+  if (!matchResult) {
+    return null;
+  }
+
+  return {
+    value: parseInt(matchResult[0], 10),
+    rest: dateString.slice(matchResult[0].length)
+  };
+}
+
+function parseTimezonePattern(pattern, dateString) {
+  var matchResult = dateString.match(pattern);
+
+  if (!matchResult) {
+    return null;
+  } // Input is 'Z'
+
+
+  if (matchResult[0] === 'Z') {
+    return {
+      value: 0,
+      rest: dateString.slice(1)
+    };
+  }
+
+  var sign = matchResult[1] === '+' ? 1 : -1;
+  var hours = matchResult[2] ? parseInt(matchResult[2], 10) : 0;
+  var minutes = matchResult[3] ? parseInt(matchResult[3], 10) : 0;
+  var seconds = matchResult[5] ? parseInt(matchResult[5], 10) : 0;
+  return {
+    value: sign * (hours * _index.millisecondsInHour + minutes * _index.millisecondsInMinute + seconds * _index.millisecondsInSecond),
+    rest: dateString.slice(matchResult[0].length)
+  };
+}
+
+function parseAnyDigitsSigned(dateString) {
+  return parseNumericPattern(_constants.numericPatterns.anyDigitsSigned, dateString);
+}
+
+function parseNDigits(n, dateString) {
+  switch (n) {
+    case 1:
+      return parseNumericPattern(_constants.numericPatterns.singleDigit, dateString);
+
+    case 2:
+      return parseNumericPattern(_constants.numericPatterns.twoDigits, dateString);
+
+    case 3:
+      return parseNumericPattern(_constants.numericPatterns.threeDigits, dateString);
+
+    case 4:
+      return parseNumericPattern(_constants.numericPatterns.fourDigits, dateString);
+
+    default:
+      return parseNumericPattern(new RegExp('^\\d{1,' + n + '}'), dateString);
+  }
+}
+
+function parseNDigitsSigned(n, dateString) {
+  switch (n) {
+    case 1:
+      return parseNumericPattern(_constants.numericPatterns.singleDigitSigned, dateString);
+
+    case 2:
+      return parseNumericPattern(_constants.numericPatterns.twoDigitsSigned, dateString);
+
+    case 3:
+      return parseNumericPattern(_constants.numericPatterns.threeDigitsSigned, dateString);
+
+    case 4:
+      return parseNumericPattern(_constants.numericPatterns.fourDigitsSigned, dateString);
+
+    default:
+      return parseNumericPattern(new RegExp('^-?\\d{1,' + n + '}'), dateString);
+  }
+}
+
+function dayPeriodEnumToHours(dayPeriod) {
+  switch (dayPeriod) {
+    case 'morning':
+      return 4;
+
+    case 'evening':
+      return 17;
+
+    case 'pm':
+    case 'noon':
+    case 'afternoon':
+      return 12;
+
+    case 'am':
+    case 'midnight':
+    case 'night':
+    default:
+      return 0;
+  }
+}
+
+function normalizeTwoDigitYear(twoDigitYear, currentYear) {
+  var isCommonEra = currentYear > 0; // Absolute number of the current year:
+  // 1 -> 1 AC
+  // 0 -> 1 BC
+  // -1 -> 2 BC
+
+  var absCurrentYear = isCommonEra ? currentYear : 1 - currentYear;
+  var result;
+
+  if (absCurrentYear <= 50) {
+    result = twoDigitYear || 100;
+  } else {
+    var rangeEnd = absCurrentYear + 50;
+    var rangeEndCentury = Math.floor(rangeEnd / 100) * 100;
+    var isPreviousCentury = twoDigitYear >= rangeEnd % 100;
+    result = twoDigitYear + rangeEndCentury - (isPreviousCentury ? 100 : 0);
+  }
+
+  return isCommonEra ? result : 1 - result;
+}
+
+function isLeapYearIndex(year) {
+  return year % 400 === 0 || year % 4 === 0 && year % 100 !== 0;
+}
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parse/index.js":
+/*!**********************************************!*\
+  !*** ./node_modules/date-fns/parse/index.js ***!
+  \**********************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = parse;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/defaultLocale/index.js */ "./node_modules/date-fns/_lib/defaultLocale/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../subMilliseconds/index.js */ "./node_modules/date-fns/subMilliseconds/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index4 = _interopRequireDefault(__webpack_require__(/*! ../_lib/assign/index.js */ "./node_modules/date-fns/_lib/assign/index.js"));
+
+var _index5 = _interopRequireDefault(__webpack_require__(/*! ../_lib/format/longFormatters/index.js */ "./node_modules/date-fns/_lib/format/longFormatters/index.js"));
+
+var _index6 = _interopRequireDefault(__webpack_require__(/*! ../_lib/getTimezoneOffsetInMilliseconds/index.js */ "./node_modules/date-fns/_lib/getTimezoneOffsetInMilliseconds/index.js"));
+
+var _index7 = __webpack_require__(/*! ../_lib/protectedTokens/index.js */ "./node_modules/date-fns/_lib/protectedTokens/index.js");
+
+var _index8 = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+var _index9 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _Setter = __webpack_require__(/*! ./_lib/Setter.js */ "./node_modules/date-fns/parse/_lib/Setter.js");
+
+var _index10 = __webpack_require__(/*! ./_lib/parsers/index.js */ "./node_modules/date-fns/parse/_lib/parsers/index.js");
+
+var _index11 = __webpack_require__(/*! ../_lib/defaultOptions/index.js */ "./node_modules/date-fns/_lib/defaultOptions/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+// This RegExp consists of three parts separated by `|`:
+// - [yYQqMLwIdDecihHKkms]o matches any available ordinal number token
+//   (one of the certain letters followed by `o`)
+// - (\w)\1* matches any sequences of the same letter
+// - '' matches two quote characters in a row
+// - '(''|[^'])+('|$) matches anything surrounded by two quote characters ('),
+//   except a single quote symbol, which ends the sequence.
+//   Two quote characters do not end the sequence.
+//   If there is no matching single quote
+//   then the sequence will continue until the end of the string.
+// - . matches any single character unmatched by previous parts of the RegExps
+var formattingTokensRegExp = /[yYQqMLwIdDecihHKkms]o|(\w)\1*|''|'(''|[^'])+('|$)|./g; // This RegExp catches symbols escaped by quotes, and also
+// sequences of symbols P, p, and the combinations like `PPPPPPPppppp`
+
+var longFormattingTokensRegExp = /P+p+|P+|p+|''|'(''|[^'])+('|$)|./g;
+var escapedStringRegExp = /^'([^]*?)'?$/;
+var doubleQuoteRegExp = /''/g;
+var notWhitespaceRegExp = /\S/;
+var unescapedLatinCharacterRegExp = /[a-zA-Z]/;
+/**
+ * @name parse
+ * @category Common Helpers
+ * @summary Parse the date.
+ *
+ * @description
+ * Return the date parsed from string using the given format string.
+ *
+ * > ⚠️ Please note that the `format` tokens differ from Moment.js and other libraries.
+ * > See: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md
+ *
+ * The characters in the format string wrapped between two single quotes characters (') are escaped.
+ * Two single quotes in a row, whether inside or outside a quoted sequence, represent a 'real' single quote.
+ *
+ * Format of the format string is based on Unicode Technical Standard #35:
+ * https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table
+ * with a few additions (see note 5 below the table).
+ *
+ * Not all tokens are compatible. Combinations that don't make sense or could lead to bugs are prohibited
+ * and will throw `RangeError`. For example usage of 24-hour format token with AM/PM token will throw an exception:
+ *
+ * ```javascript
+ * parse('23 AM', 'HH a', new Date())
+ * //=> RangeError: The format string mustn't contain `HH` and `a` at the same time
+ * ```
+ *
+ * See the compatibility table: https://docs.google.com/spreadsheets/d/e/2PACX-1vQOPU3xUhplll6dyoMmVUXHKl_8CRDs6_ueLmex3SoqwhuolkuN3O05l4rqx5h1dKX8eb46Ul-CCSrq/pubhtml?gid=0&single=true
+ *
+ * Accepted format string patterns:
+ * | Unit                            |Prior| Pattern | Result examples                   | Notes |
+ * |---------------------------------|-----|---------|-----------------------------------|-------|
+ * | Era                             | 140 | G..GGG  | AD, BC                            |       |
+ * |                                 |     | GGGG    | Anno Domini, Before Christ        | 2     |
+ * |                                 |     | GGGGG   | A, B                              |       |
+ * | Calendar year                   | 130 | y       | 44, 1, 1900, 2017, 9999           | 4     |
+ * |                                 |     | yo      | 44th, 1st, 1900th, 9999999th      | 4,5   |
+ * |                                 |     | yy      | 44, 01, 00, 17                    | 4     |
+ * |                                 |     | yyy     | 044, 001, 123, 999                | 4     |
+ * |                                 |     | yyyy    | 0044, 0001, 1900, 2017            | 4     |
+ * |                                 |     | yyyyy   | ...                               | 2,4   |
+ * | Local week-numbering year       | 130 | Y       | 44, 1, 1900, 2017, 9000           | 4     |
+ * |                                 |     | Yo      | 44th, 1st, 1900th, 9999999th      | 4,5   |
+ * |                                 |     | YY      | 44, 01, 00, 17                    | 4,6   |
+ * |                                 |     | YYY     | 044, 001, 123, 999                | 4     |
+ * |                                 |     | YYYY    | 0044, 0001, 1900, 2017            | 4,6   |
+ * |                                 |     | YYYYY   | ...                               | 2,4   |
+ * | ISO week-numbering year         | 130 | R       | -43, 1, 1900, 2017, 9999, -9999   | 4,5   |
+ * |                                 |     | RR      | -43, 01, 00, 17                   | 4,5   |
+ * |                                 |     | RRR     | -043, 001, 123, 999, -999         | 4,5   |
+ * |                                 |     | RRRR    | -0043, 0001, 2017, 9999, -9999    | 4,5   |
+ * |                                 |     | RRRRR   | ...                               | 2,4,5 |
+ * | Extended year                   | 130 | u       | -43, 1, 1900, 2017, 9999, -999    | 4     |
+ * |                                 |     | uu      | -43, 01, 99, -99                  | 4     |
+ * |                                 |     | uuu     | -043, 001, 123, 999, -999         | 4     |
+ * |                                 |     | uuuu    | -0043, 0001, 2017, 9999, -9999    | 4     |
+ * |                                 |     | uuuuu   | ...                               | 2,4   |
+ * | Quarter (formatting)            | 120 | Q       | 1, 2, 3, 4                        |       |
+ * |                                 |     | Qo      | 1st, 2nd, 3rd, 4th                | 5     |
+ * |                                 |     | QQ      | 01, 02, 03, 04                    |       |
+ * |                                 |     | QQQ     | Q1, Q2, Q3, Q4                    |       |
+ * |                                 |     | QQQQ    | 1st quarter, 2nd quarter, ...     | 2     |
+ * |                                 |     | QQQQQ   | 1, 2, 3, 4                        | 4     |
+ * | Quarter (stand-alone)           | 120 | q       | 1, 2, 3, 4                        |       |
+ * |                                 |     | qo      | 1st, 2nd, 3rd, 4th                | 5     |
+ * |                                 |     | qq      | 01, 02, 03, 04                    |       |
+ * |                                 |     | qqq     | Q1, Q2, Q3, Q4                    |       |
+ * |                                 |     | qqqq    | 1st quarter, 2nd quarter, ...     | 2     |
+ * |                                 |     | qqqqq   | 1, 2, 3, 4                        | 3     |
+ * | Month (formatting)              | 110 | M       | 1, 2, ..., 12                     |       |
+ * |                                 |     | Mo      | 1st, 2nd, ..., 12th               | 5     |
+ * |                                 |     | MM      | 01, 02, ..., 12                   |       |
+ * |                                 |     | MMM     | Jan, Feb, ..., Dec                |       |
+ * |                                 |     | MMMM    | January, February, ..., December  | 2     |
+ * |                                 |     | MMMMM   | J, F, ..., D                      |       |
+ * | Month (stand-alone)             | 110 | L       | 1, 2, ..., 12                     |       |
+ * |                                 |     | Lo      | 1st, 2nd, ..., 12th               | 5     |
+ * |                                 |     | LL      | 01, 02, ..., 12                   |       |
+ * |                                 |     | LLL     | Jan, Feb, ..., Dec                |       |
+ * |                                 |     | LLLL    | January, February, ..., December  | 2     |
+ * |                                 |     | LLLLL   | J, F, ..., D                      |       |
+ * | Local week of year              | 100 | w       | 1, 2, ..., 53                     |       |
+ * |                                 |     | wo      | 1st, 2nd, ..., 53th               | 5     |
+ * |                                 |     | ww      | 01, 02, ..., 53                   |       |
+ * | ISO week of year                | 100 | I       | 1, 2, ..., 53                     | 5     |
+ * |                                 |     | Io      | 1st, 2nd, ..., 53th               | 5     |
+ * |                                 |     | II      | 01, 02, ..., 53                   | 5     |
+ * | Day of month                    |  90 | d       | 1, 2, ..., 31                     |       |
+ * |                                 |     | do      | 1st, 2nd, ..., 31st               | 5     |
+ * |                                 |     | dd      | 01, 02, ..., 31                   |       |
+ * | Day of year                     |  90 | D       | 1, 2, ..., 365, 366               | 7     |
+ * |                                 |     | Do      | 1st, 2nd, ..., 365th, 366th       | 5     |
+ * |                                 |     | DD      | 01, 02, ..., 365, 366             | 7     |
+ * |                                 |     | DDD     | 001, 002, ..., 365, 366           |       |
+ * |                                 |     | DDDD    | ...                               | 2     |
+ * | Day of week (formatting)        |  90 | E..EEE  | Mon, Tue, Wed, ..., Sun           |       |
+ * |                                 |     | EEEE    | Monday, Tuesday, ..., Sunday      | 2     |
+ * |                                 |     | EEEEE   | M, T, W, T, F, S, S               |       |
+ * |                                 |     | EEEEEE  | Mo, Tu, We, Th, Fr, Sa, Su        |       |
+ * | ISO day of week (formatting)    |  90 | i       | 1, 2, 3, ..., 7                   | 5     |
+ * |                                 |     | io      | 1st, 2nd, ..., 7th                | 5     |
+ * |                                 |     | ii      | 01, 02, ..., 07                   | 5     |
+ * |                                 |     | iii     | Mon, Tue, Wed, ..., Sun           | 5     |
+ * |                                 |     | iiii    | Monday, Tuesday, ..., Sunday      | 2,5   |
+ * |                                 |     | iiiii   | M, T, W, T, F, S, S               | 5     |
+ * |                                 |     | iiiiii  | Mo, Tu, We, Th, Fr, Sa, Su        | 5     |
+ * | Local day of week (formatting)  |  90 | e       | 2, 3, 4, ..., 1                   |       |
+ * |                                 |     | eo      | 2nd, 3rd, ..., 1st                | 5     |
+ * |                                 |     | ee      | 02, 03, ..., 01                   |       |
+ * |                                 |     | eee     | Mon, Tue, Wed, ..., Sun           |       |
+ * |                                 |     | eeee    | Monday, Tuesday, ..., Sunday      | 2     |
+ * |                                 |     | eeeee   | M, T, W, T, F, S, S               |       |
+ * |                                 |     | eeeeee  | Mo, Tu, We, Th, Fr, Sa, Su        |       |
+ * | Local day of week (stand-alone) |  90 | c       | 2, 3, 4, ..., 1                   |       |
+ * |                                 |     | co      | 2nd, 3rd, ..., 1st                | 5     |
+ * |                                 |     | cc      | 02, 03, ..., 01                   |       |
+ * |                                 |     | ccc     | Mon, Tue, Wed, ..., Sun           |       |
+ * |                                 |     | cccc    | Monday, Tuesday, ..., Sunday      | 2     |
+ * |                                 |     | ccccc   | M, T, W, T, F, S, S               |       |
+ * |                                 |     | cccccc  | Mo, Tu, We, Th, Fr, Sa, Su        |       |
+ * | AM, PM                          |  80 | a..aaa  | AM, PM                            |       |
+ * |                                 |     | aaaa    | a.m., p.m.                        | 2     |
+ * |                                 |     | aaaaa   | a, p                              |       |
+ * | AM, PM, noon, midnight          |  80 | b..bbb  | AM, PM, noon, midnight            |       |
+ * |                                 |     | bbbb    | a.m., p.m., noon, midnight        | 2     |
+ * |                                 |     | bbbbb   | a, p, n, mi                       |       |
+ * | Flexible day period             |  80 | B..BBB  | at night, in the morning, ...     |       |
+ * |                                 |     | BBBB    | at night, in the morning, ...     | 2     |
+ * |                                 |     | BBBBB   | at night, in the morning, ...     |       |
+ * | Hour [1-12]                     |  70 | h       | 1, 2, ..., 11, 12                 |       |
+ * |                                 |     | ho      | 1st, 2nd, ..., 11th, 12th         | 5     |
+ * |                                 |     | hh      | 01, 02, ..., 11, 12               |       |
+ * | Hour [0-23]                     |  70 | H       | 0, 1, 2, ..., 23                  |       |
+ * |                                 |     | Ho      | 0th, 1st, 2nd, ..., 23rd          | 5     |
+ * |                                 |     | HH      | 00, 01, 02, ..., 23               |       |
+ * | Hour [0-11]                     |  70 | K       | 1, 2, ..., 11, 0                  |       |
+ * |                                 |     | Ko      | 1st, 2nd, ..., 11th, 0th          | 5     |
+ * |                                 |     | KK      | 01, 02, ..., 11, 00               |       |
+ * | Hour [1-24]                     |  70 | k       | 24, 1, 2, ..., 23                 |       |
+ * |                                 |     | ko      | 24th, 1st, 2nd, ..., 23rd         | 5     |
+ * |                                 |     | kk      | 24, 01, 02, ..., 23               |       |
+ * | Minute                          |  60 | m       | 0, 1, ..., 59                     |       |
+ * |                                 |     | mo      | 0th, 1st, ..., 59th               | 5     |
+ * |                                 |     | mm      | 00, 01, ..., 59                   |       |
+ * | Second                          |  50 | s       | 0, 1, ..., 59                     |       |
+ * |                                 |     | so      | 0th, 1st, ..., 59th               | 5     |
+ * |                                 |     | ss      | 00, 01, ..., 59                   |       |
+ * | Seconds timestamp               |  40 | t       | 512969520                         |       |
+ * |                                 |     | tt      | ...                               | 2     |
+ * | Fraction of second              |  30 | S       | 0, 1, ..., 9                      |       |
+ * |                                 |     | SS      | 00, 01, ..., 99                   |       |
+ * |                                 |     | SSS     | 000, 001, ..., 999                |       |
+ * |                                 |     | SSSS    | ...                               | 2     |
+ * | Milliseconds timestamp          |  20 | T       | 512969520900                      |       |
+ * |                                 |     | TT      | ...                               | 2     |
+ * | Timezone (ISO-8601 w/ Z)        |  10 | X       | -08, +0530, Z                     |       |
+ * |                                 |     | XX      | -0800, +0530, Z                   |       |
+ * |                                 |     | XXX     | -08:00, +05:30, Z                 |       |
+ * |                                 |     | XXXX    | -0800, +0530, Z, +123456          | 2     |
+ * |                                 |     | XXXXX   | -08:00, +05:30, Z, +12:34:56      |       |
+ * | Timezone (ISO-8601 w/o Z)       |  10 | x       | -08, +0530, +00                   |       |
+ * |                                 |     | xx      | -0800, +0530, +0000               |       |
+ * |                                 |     | xxx     | -08:00, +05:30, +00:00            | 2     |
+ * |                                 |     | xxxx    | -0800, +0530, +0000, +123456      |       |
+ * |                                 |     | xxxxx   | -08:00, +05:30, +00:00, +12:34:56 |       |
+ * | Long localized date             |  NA | P       | 05/29/1453                        | 5,8   |
+ * |                                 |     | PP      | May 29, 1453                      |       |
+ * |                                 |     | PPP     | May 29th, 1453                    |       |
+ * |                                 |     | PPPP    | Sunday, May 29th, 1453            | 2,5,8 |
+ * | Long localized time             |  NA | p       | 12:00 AM                          | 5,8   |
+ * |                                 |     | pp      | 12:00:00 AM                       |       |
+ * | Combination of date and time    |  NA | Pp      | 05/29/1453, 12:00 AM              |       |
+ * |                                 |     | PPpp    | May 29, 1453, 12:00:00 AM         |       |
+ * |                                 |     | PPPpp   | May 29th, 1453 at ...             |       |
+ * |                                 |     | PPPPpp  | Sunday, May 29th, 1453 at ...     | 2,5,8 |
+ * Notes:
+ * 1. "Formatting" units (e.g. formatting quarter) in the default en-US locale
+ *    are the same as "stand-alone" units, but are different in some languages.
+ *    "Formatting" units are declined according to the rules of the language
+ *    in the context of a date. "Stand-alone" units are always nominative singular.
+ *    In `format` function, they will produce different result:
+ *
+ *    `format(new Date(2017, 10, 6), 'do LLLL', {locale: cs}) //=> '6. listopad'`
+ *
+ *    `format(new Date(2017, 10, 6), 'do MMMM', {locale: cs}) //=> '6. listopadu'`
+ *
+ *    `parse` will try to match both formatting and stand-alone units interchangably.
+ *
+ * 2. Any sequence of the identical letters is a pattern, unless it is escaped by
+ *    the single quote characters (see below).
+ *    If the sequence is longer than listed in table:
+ *    - for numerical units (`yyyyyyyy`) `parse` will try to match a number
+ *      as wide as the sequence
+ *    - for text units (`MMMMMMMM`) `parse` will try to match the widest variation of the unit.
+ *      These variations are marked with "2" in the last column of the table.
+ *
+ * 3. `QQQQQ` and `qqqqq` could be not strictly numerical in some locales.
+ *    These tokens represent the shortest form of the quarter.
+ *
+ * 4. The main difference between `y` and `u` patterns are B.C. years:
+ *
+ *    | Year | `y` | `u` |
+ *    |------|-----|-----|
+ *    | AC 1 |   1 |   1 |
+ *    | BC 1 |   1 |   0 |
+ *    | BC 2 |   2 |  -1 |
+ *
+ *    Also `yy` will try to guess the century of two digit year by proximity with `referenceDate`:
+ *
+ *    `parse('50', 'yy', new Date(2018, 0, 1)) //=> Sat Jan 01 2050 00:00:00`
+ *
+ *    `parse('75', 'yy', new Date(2018, 0, 1)) //=> Wed Jan 01 1975 00:00:00`
+ *
+ *    while `uu` will just assign the year as is:
+ *
+ *    `parse('50', 'uu', new Date(2018, 0, 1)) //=> Sat Jan 01 0050 00:00:00`
+ *
+ *    `parse('75', 'uu', new Date(2018, 0, 1)) //=> Tue Jan 01 0075 00:00:00`
+ *
+ *    The same difference is true for local and ISO week-numbering years (`Y` and `R`),
+ *    except local week-numbering years are dependent on `options.weekStartsOn`
+ *    and `options.firstWeekContainsDate` (compare [setISOWeekYear]{@link https://date-fns.org/docs/setISOWeekYear}
+ *    and [setWeekYear]{@link https://date-fns.org/docs/setWeekYear}).
+ *
+ * 5. These patterns are not in the Unicode Technical Standard #35:
+ *    - `i`: ISO day of week
+ *    - `I`: ISO week of year
+ *    - `R`: ISO week-numbering year
+ *    - `o`: ordinal number modifier
+ *    - `P`: long localized date
+ *    - `p`: long localized time
+ *
+ * 6. `YY` and `YYYY` tokens represent week-numbering years but they are often confused with years.
+ *    You should enable `options.useAdditionalWeekYearTokens` to use them. See: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md
+ *
+ * 7. `D` and `DD` tokens represent days of the year but they are ofthen confused with days of the month.
+ *    You should enable `options.useAdditionalDayOfYearTokens` to use them. See: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md
+ *
+ * 8. `P+` tokens do not have a defined priority since they are merely aliases to other tokens based
+ *    on the given locale.
+ *
+ *    using `en-US` locale: `P` => `MM/dd/yyyy`
+ *    using `en-US` locale: `p` => `hh:mm a`
+ *    using `pt-BR` locale: `P` => `dd/MM/yyyy`
+ *    using `pt-BR` locale: `p` => `HH:mm`
+ *
+ * Values will be assigned to the date in the descending order of its unit's priority.
+ * Units of an equal priority overwrite each other in the order of appearance.
+ *
+ * If no values of higher priority are parsed (e.g. when parsing string 'January 1st' without a year),
+ * the values will be taken from 3rd argument `referenceDate` which works as a context of parsing.
+ *
+ * `referenceDate` must be passed for correct work of the function.
+ * If you're not sure which `referenceDate` to supply, create a new instance of Date:
+ * `parse('02/11/2014', 'MM/dd/yyyy', new Date())`
+ * In this case parsing will be done in the context of the current date.
+ * If `referenceDate` is `Invalid Date` or a value not convertible to valid `Date`,
+ * then `Invalid Date` will be returned.
+ *
+ * The result may vary by locale.
+ *
+ * If `formatString` matches with `dateString` but does not provides tokens, `referenceDate` will be returned.
+ *
+ * If parsing failed, `Invalid Date` will be returned.
+ * Invalid Date is a Date, whose time value is NaN.
+ * Time value of Date: http://es5.github.io/#x15.9.1.1
+ *
+ * @param {String} dateString - the string to parse
+ * @param {String} formatString - the string of tokens
+ * @param {Date|Number} referenceDate - defines values missing from the parsed dateString
+ * @param {Object} [options] - an object with options.
+ * @param {Locale} [options.locale=defaultLocale] - the locale object. See [Locale]{@link https://date-fns.org/docs/Locale}
+ * @param {0|1|2|3|4|5|6} [options.weekStartsOn=0] - the index of the first day of the week (0 - Sunday)
+ * @param {1|2|3|4|5|6|7} [options.firstWeekContainsDate=1] - the day of January, which is always in the first week of the year
+ * @param {Boolean} [options.useAdditionalWeekYearTokens=false] - if true, allows usage of the week-numbering year tokens `YY` and `YYYY`;
+ *   see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md
+ * @param {Boolean} [options.useAdditionalDayOfYearTokens=false] - if true, allows usage of the day of year tokens `D` and `DD`;
+ *   see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md
+ * @returns {Date} the parsed date
+ * @throws {TypeError} 3 arguments required
+ * @throws {RangeError} `options.weekStartsOn` must be between 0 and 6
+ * @throws {RangeError} `options.firstWeekContainsDate` must be between 1 and 7
+ * @throws {RangeError} `options.locale` must contain `match` property
+ * @throws {RangeError} use `yyyy` instead of `YYYY` for formatting years using [format provided] to the input [input provided]; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md
+ * @throws {RangeError} use `yy` instead of `YY` for formatting years using [format provided] to the input [input provided]; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md
+ * @throws {RangeError} use `d` instead of `D` for formatting days of the month using [format provided] to the input [input provided]; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md
+ * @throws {RangeError} use `dd` instead of `DD` for formatting days of the month using [format provided] to the input [input provided]; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md
+ * @throws {RangeError} format string contains an unescaped latin alphabet character
+ *
+ * @example
+ * // Parse 11 February 2014 from middle-endian format:
+ * var result = parse('02/11/2014', 'MM/dd/yyyy', new Date())
+ * //=> Tue Feb 11 2014 00:00:00
+ *
+ * @example
+ * // Parse 28th of February in Esperanto locale in the context of 2010 year:
+ * import eo from 'date-fns/locale/eo'
+ * var result = parse('28-a de februaro', "do 'de' MMMM", new Date(2010, 0, 1), {
+ *   locale: eo
+ * })
+ * //=> Sun Feb 28 2010 00:00:00
+ */
+
+function parse(dirtyDateString, dirtyFormatString, dirtyReferenceDate, options) {
+  var _ref, _options$locale, _ref2, _ref3, _ref4, _options$firstWeekCon, _options$locale2, _options$locale2$opti, _defaultOptions$local, _defaultOptions$local2, _ref5, _ref6, _ref7, _options$weekStartsOn, _options$locale3, _options$locale3$opti, _defaultOptions$local3, _defaultOptions$local4;
+
+  (0, _index9.default)(3, arguments);
+  var dateString = String(dirtyDateString);
+  var formatString = String(dirtyFormatString);
+  var defaultOptions = (0, _index11.getDefaultOptions)();
+  var locale = (_ref = (_options$locale = options === null || options === void 0 ? void 0 : options.locale) !== null && _options$locale !== void 0 ? _options$locale : defaultOptions.locale) !== null && _ref !== void 0 ? _ref : _index.default;
+
+  if (!locale.match) {
+    throw new RangeError('locale must contain match property');
+  }
+
+  var firstWeekContainsDate = (0, _index8.default)((_ref2 = (_ref3 = (_ref4 = (_options$firstWeekCon = options === null || options === void 0 ? void 0 : options.firstWeekContainsDate) !== null && _options$firstWeekCon !== void 0 ? _options$firstWeekCon : options === null || options === void 0 ? void 0 : (_options$locale2 = options.locale) === null || _options$locale2 === void 0 ? void 0 : (_options$locale2$opti = _options$locale2.options) === null || _options$locale2$opti === void 0 ? void 0 : _options$locale2$opti.firstWeekContainsDate) !== null && _ref4 !== void 0 ? _ref4 : defaultOptions.firstWeekContainsDate) !== null && _ref3 !== void 0 ? _ref3 : (_defaultOptions$local = defaultOptions.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.firstWeekContainsDate) !== null && _ref2 !== void 0 ? _ref2 : 1); // Test if weekStartsOn is between 1 and 7 _and_ is not NaN
+
+  if (!(firstWeekContainsDate >= 1 && firstWeekContainsDate <= 7)) {
+    throw new RangeError('firstWeekContainsDate must be between 1 and 7 inclusively');
+  }
+
+  var weekStartsOn = (0, _index8.default)((_ref5 = (_ref6 = (_ref7 = (_options$weekStartsOn = options === null || options === void 0 ? void 0 : options.weekStartsOn) !== null && _options$weekStartsOn !== void 0 ? _options$weekStartsOn : options === null || options === void 0 ? void 0 : (_options$locale3 = options.locale) === null || _options$locale3 === void 0 ? void 0 : (_options$locale3$opti = _options$locale3.options) === null || _options$locale3$opti === void 0 ? void 0 : _options$locale3$opti.weekStartsOn) !== null && _ref7 !== void 0 ? _ref7 : defaultOptions.weekStartsOn) !== null && _ref6 !== void 0 ? _ref6 : (_defaultOptions$local3 = defaultOptions.locale) === null || _defaultOptions$local3 === void 0 ? void 0 : (_defaultOptions$local4 = _defaultOptions$local3.options) === null || _defaultOptions$local4 === void 0 ? void 0 : _defaultOptions$local4.weekStartsOn) !== null && _ref5 !== void 0 ? _ref5 : 0); // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
+
+  if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
+    throw new RangeError('weekStartsOn must be between 0 and 6 inclusively');
+  }
+
+  if (formatString === '') {
+    if (dateString === '') {
+      return (0, _index3.default)(dirtyReferenceDate);
+    } else {
+      return new Date(NaN);
+    }
+  }
+
+  var subFnOptions = {
+    firstWeekContainsDate: firstWeekContainsDate,
+    weekStartsOn: weekStartsOn,
+    locale: locale
+  }; // If timezone isn't specified, it will be set to the system timezone
+
+  var setters = [new _Setter.DateToSystemTimezoneSetter()];
+  var tokens = formatString.match(longFormattingTokensRegExp).map(function (substring) {
+    var firstCharacter = substring[0];
+
+    if (firstCharacter in _index5.default) {
+      var longFormatter = _index5.default[firstCharacter];
+      return longFormatter(substring, locale.formatLong);
+    }
+
+    return substring;
+  }).join('').match(formattingTokensRegExp);
+  var usedTokens = [];
+
+  var _iterator = _createForOfIteratorHelper(tokens),
+      _step;
+
+  try {
+    var _loop = function _loop() {
+      var token = _step.value;
+
+      if (!(options !== null && options !== void 0 && options.useAdditionalWeekYearTokens) && (0, _index7.isProtectedWeekYearToken)(token)) {
+        (0, _index7.throwProtectedError)(token, formatString, dirtyDateString);
+      }
+
+      if (!(options !== null && options !== void 0 && options.useAdditionalDayOfYearTokens) && (0, _index7.isProtectedDayOfYearToken)(token)) {
+        (0, _index7.throwProtectedError)(token, formatString, dirtyDateString);
+      }
+
+      var firstCharacter = token[0];
+      var parser = _index10.parsers[firstCharacter];
+
+      if (parser) {
+        var incompatibleTokens = parser.incompatibleTokens;
+
+        if (Array.isArray(incompatibleTokens)) {
+          var incompatibleToken = usedTokens.find(function (usedToken) {
+            return incompatibleTokens.includes(usedToken.token) || usedToken.token === firstCharacter;
+          });
+
+          if (incompatibleToken) {
+            throw new RangeError("The format string mustn't contain `".concat(incompatibleToken.fullToken, "` and `").concat(token, "` at the same time"));
+          }
+        } else if (parser.incompatibleTokens === '*' && usedTokens.length > 0) {
+          throw new RangeError("The format string mustn't contain `".concat(token, "` and any other token at the same time"));
+        }
+
+        usedTokens.push({
+          token: firstCharacter,
+          fullToken: token
+        });
+        var parseResult = parser.run(dateString, token, locale.match, subFnOptions);
+
+        if (!parseResult) {
+          return {
+            v: new Date(NaN)
+          };
+        }
+
+        setters.push(parseResult.setter);
+        dateString = parseResult.rest;
+      } else {
+        if (firstCharacter.match(unescapedLatinCharacterRegExp)) {
+          throw new RangeError('Format string contains an unescaped latin alphabet character `' + firstCharacter + '`');
+        } // Replace two single quote characters with one single quote character
+
+
+        if (token === "''") {
+          token = "'";
+        } else if (firstCharacter === "'") {
+          token = cleanEscapedString(token);
+        } // Cut token from string, or, if string doesn't match the token, return Invalid Date
+
+
+        if (dateString.indexOf(token) === 0) {
+          dateString = dateString.slice(token.length);
+        } else {
+          return {
+            v: new Date(NaN)
+          };
+        }
+      }
+    };
+
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      var _ret = _loop();
+
+      if (_typeof(_ret) === "object") return _ret.v;
+    } // Check if the remaining input contains something other than whitespace
+
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
+  }
+
+  if (dateString.length > 0 && notWhitespaceRegExp.test(dateString)) {
+    return new Date(NaN);
+  }
+
+  var uniquePrioritySetters = setters.map(function (setter) {
+    return setter.priority;
+  }).sort(function (a, b) {
+    return b - a;
+  }).filter(function (priority, index, array) {
+    return array.indexOf(priority) === index;
+  }).map(function (priority) {
+    return setters.filter(function (setter) {
+      return setter.priority === priority;
+    }).sort(function (a, b) {
+      return b.subPriority - a.subPriority;
+    });
+  }).map(function (setterArray) {
+    return setterArray[0];
+  });
+  var date = (0, _index3.default)(dirtyReferenceDate);
+
+  if (isNaN(date.getTime())) {
+    return new Date(NaN);
+  } // Convert the date in system timezone to the same date in UTC+00:00 timezone.
+
+
+  var utcDate = (0, _index2.default)(date, (0, _index6.default)(date));
+  var flags = {};
+
+  var _iterator2 = _createForOfIteratorHelper(uniquePrioritySetters),
+      _step2;
+
+  try {
+    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+      var setter = _step2.value;
+
+      if (!setter.validate(utcDate, subFnOptions)) {
+        return new Date(NaN);
+      }
+
+      var result = setter.set(utcDate, flags, subFnOptions); // Result is tuple (date, flags)
+
+      if (Array.isArray(result)) {
+        utcDate = result[0];
+        (0, _index4.default)(flags, result[1]); // Result is date
+      } else {
+        utcDate = result;
+      }
+    }
+  } catch (err) {
+    _iterator2.e(err);
+  } finally {
+    _iterator2.f();
+  }
+
+  return utcDate;
+}
+
+function cleanEscapedString(input) {
+  return input.match(escapedStringRegExp)[1].replace(doubleQuoteRegExp, "'");
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parseISO/index.js":
+/*!*************************************************!*\
+  !*** ./node_modules/date-fns/parseISO/index.js ***!
+  \*************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = parseISO;
+
+var _index = __webpack_require__(/*! ../constants/index.js */ "./node_modules/date-fns/constants/index.js");
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name parseISO
+ * @category Common Helpers
+ * @summary Parse ISO string
+ *
+ * @description
+ * Parse the given string in ISO 8601 format and return an instance of Date.
+ *
+ * Function accepts complete ISO 8601 formats as well as partial implementations.
+ * ISO 8601: http://en.wikipedia.org/wiki/ISO_8601
+ *
+ * If the argument isn't a string, the function cannot parse the string or
+ * the values are invalid, it returns Invalid Date.
+ *
+ * @param {String} argument - the value to convert
+ * @param {Object} [options] - an object with options.
+ * @param {0|1|2} [options.additionalDigits=2] - the additional number of digits in the extended year format
+ * @returns {Date} the parsed date in the local time zone
+ * @throws {TypeError} 1 argument required
+ * @throws {RangeError} `options.additionalDigits` must be 0, 1 or 2
+ *
+ * @example
+ * // Convert string '2014-02-11T11:30:30' to date:
+ * const result = parseISO('2014-02-11T11:30:30')
+ * //=> Tue Feb 11 2014 11:30:30
+ *
+ * @example
+ * // Convert string '+02014101' to date,
+ * // if the additional number of digits in the extended year format is 1:
+ * const result = parseISO('+02014101', { additionalDigits: 1 })
+ * //=> Fri Apr 11 2014 00:00:00
+ */
+function parseISO(argument, options) {
+  var _options$additionalDi;
+
+  (0, _index2.default)(1, arguments);
+  var additionalDigits = (0, _index3.default)((_options$additionalDi = options === null || options === void 0 ? void 0 : options.additionalDigits) !== null && _options$additionalDi !== void 0 ? _options$additionalDi : 2);
+
+  if (additionalDigits !== 2 && additionalDigits !== 1 && additionalDigits !== 0) {
+    throw new RangeError('additionalDigits must be 0, 1 or 2');
+  }
+
+  if (!(typeof argument === 'string' || Object.prototype.toString.call(argument) === '[object String]')) {
+    return new Date(NaN);
+  }
+
+  var dateStrings = splitDateString(argument);
+  var date;
+
+  if (dateStrings.date) {
+    var parseYearResult = parseYear(dateStrings.date, additionalDigits);
+    date = parseDate(parseYearResult.restDateString, parseYearResult.year);
+  }
+
+  if (!date || isNaN(date.getTime())) {
+    return new Date(NaN);
+  }
+
+  var timestamp = date.getTime();
+  var time = 0;
+  var offset;
+
+  if (dateStrings.time) {
+    time = parseTime(dateStrings.time);
+
+    if (isNaN(time)) {
+      return new Date(NaN);
+    }
+  }
+
+  if (dateStrings.timezone) {
+    offset = parseTimezone(dateStrings.timezone);
+
+    if (isNaN(offset)) {
+      return new Date(NaN);
+    }
+  } else {
+    var dirtyDate = new Date(timestamp + time); // js parsed string assuming it's in UTC timezone
+    // but we need it to be parsed in our timezone
+    // so we use utc values to build date in our timezone.
+    // Year values from 0 to 99 map to the years 1900 to 1999
+    // so set year explicitly with setFullYear.
+
+    var result = new Date(0);
+    result.setFullYear(dirtyDate.getUTCFullYear(), dirtyDate.getUTCMonth(), dirtyDate.getUTCDate());
+    result.setHours(dirtyDate.getUTCHours(), dirtyDate.getUTCMinutes(), dirtyDate.getUTCSeconds(), dirtyDate.getUTCMilliseconds());
+    return result;
+  }
+
+  return new Date(timestamp + time + offset);
+}
+
+var patterns = {
+  dateTimeDelimiter: /[T ]/,
+  timeZoneDelimiter: /[Z ]/i,
+  timezone: /([Z+-].*)$/
+};
+var dateRegex = /^-?(?:(\d{3})|(\d{2})(?:-?(\d{2}))?|W(\d{2})(?:-?(\d{1}))?|)$/;
+var timeRegex = /^(\d{2}(?:[.,]\d*)?)(?::?(\d{2}(?:[.,]\d*)?))?(?::?(\d{2}(?:[.,]\d*)?))?$/;
+var timezoneRegex = /^([+-])(\d{2})(?::?(\d{2}))?$/;
+
+function splitDateString(dateString) {
+  var dateStrings = {};
+  var array = dateString.split(patterns.dateTimeDelimiter);
+  var timeString; // The regex match should only return at maximum two array elements.
+  // [date], [time], or [date, time].
+
+  if (array.length > 2) {
+    return dateStrings;
+  }
+
+  if (/:/.test(array[0])) {
+    timeString = array[0];
+  } else {
+    dateStrings.date = array[0];
+    timeString = array[1];
+
+    if (patterns.timeZoneDelimiter.test(dateStrings.date)) {
+      dateStrings.date = dateString.split(patterns.timeZoneDelimiter)[0];
+      timeString = dateString.substr(dateStrings.date.length, dateString.length);
+    }
+  }
+
+  if (timeString) {
+    var token = patterns.timezone.exec(timeString);
+
+    if (token) {
+      dateStrings.time = timeString.replace(token[1], '');
+      dateStrings.timezone = token[1];
+    } else {
+      dateStrings.time = timeString;
+    }
+  }
+
+  return dateStrings;
+}
+
+function parseYear(dateString, additionalDigits) {
+  var regex = new RegExp('^(?:(\\d{4}|[+-]\\d{' + (4 + additionalDigits) + '})|(\\d{2}|[+-]\\d{' + (2 + additionalDigits) + '})$)');
+  var captures = dateString.match(regex); // Invalid ISO-formatted year
+
+  if (!captures) return {
+    year: NaN,
+    restDateString: ''
+  };
+  var year = captures[1] ? parseInt(captures[1]) : null;
+  var century = captures[2] ? parseInt(captures[2]) : null; // either year or century is null, not both
+
+  return {
+    year: century === null ? year : century * 100,
+    restDateString: dateString.slice((captures[1] || captures[2]).length)
+  };
+}
+
+function parseDate(dateString, year) {
+  // Invalid ISO-formatted year
+  if (year === null) return new Date(NaN);
+  var captures = dateString.match(dateRegex); // Invalid ISO-formatted string
+
+  if (!captures) return new Date(NaN);
+  var isWeekDate = !!captures[4];
+  var dayOfYear = parseDateUnit(captures[1]);
+  var month = parseDateUnit(captures[2]) - 1;
+  var day = parseDateUnit(captures[3]);
+  var week = parseDateUnit(captures[4]);
+  var dayOfWeek = parseDateUnit(captures[5]) - 1;
+
+  if (isWeekDate) {
+    if (!validateWeekDate(year, week, dayOfWeek)) {
+      return new Date(NaN);
+    }
+
+    return dayOfISOWeekYear(year, week, dayOfWeek);
+  } else {
+    var date = new Date(0);
+
+    if (!validateDate(year, month, day) || !validateDayOfYearDate(year, dayOfYear)) {
+      return new Date(NaN);
+    }
+
+    date.setUTCFullYear(year, month, Math.max(dayOfYear, day));
+    return date;
+  }
+}
+
+function parseDateUnit(value) {
+  return value ? parseInt(value) : 1;
+}
+
+function parseTime(timeString) {
+  var captures = timeString.match(timeRegex);
+  if (!captures) return NaN; // Invalid ISO-formatted time
+
+  var hours = parseTimeUnit(captures[1]);
+  var minutes = parseTimeUnit(captures[2]);
+  var seconds = parseTimeUnit(captures[3]);
+
+  if (!validateTime(hours, minutes, seconds)) {
+    return NaN;
+  }
+
+  return hours * _index.millisecondsInHour + minutes * _index.millisecondsInMinute + seconds * 1000;
+}
+
+function parseTimeUnit(value) {
+  return value && parseFloat(value.replace(',', '.')) || 0;
+}
+
+function parseTimezone(timezoneString) {
+  if (timezoneString === 'Z') return 0;
+  var captures = timezoneString.match(timezoneRegex);
+  if (!captures) return 0;
+  var sign = captures[1] === '+' ? -1 : 1;
+  var hours = parseInt(captures[2]);
+  var minutes = captures[3] && parseInt(captures[3]) || 0;
+
+  if (!validateTimezone(hours, minutes)) {
+    return NaN;
+  }
+
+  return sign * (hours * _index.millisecondsInHour + minutes * _index.millisecondsInMinute);
+}
+
+function dayOfISOWeekYear(isoWeekYear, week, day) {
+  var date = new Date(0);
+  date.setUTCFullYear(isoWeekYear, 0, 4);
+  var fourthOfJanuaryDay = date.getUTCDay() || 7;
+  var diff = (week - 1) * 7 + day + 1 - fourthOfJanuaryDay;
+  date.setUTCDate(date.getUTCDate() + diff);
+  return date;
+} // Validation functions
+// February is null to handle the leap year (using ||)
+
+
+var daysInMonths = [31, null, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+function isLeapYearIndex(year) {
+  return year % 400 === 0 || year % 4 === 0 && year % 100 !== 0;
+}
+
+function validateDate(year, month, date) {
+  return month >= 0 && month <= 11 && date >= 1 && date <= (daysInMonths[month] || (isLeapYearIndex(year) ? 29 : 28));
+}
+
+function validateDayOfYearDate(year, dayOfYear) {
+  return dayOfYear >= 1 && dayOfYear <= (isLeapYearIndex(year) ? 366 : 365);
+}
+
+function validateWeekDate(_year, week, day) {
+  return week >= 1 && week <= 53 && day >= 0 && day <= 6;
+}
+
+function validateTime(hours, minutes, seconds) {
+  if (hours === 24) {
+    return minutes === 0 && seconds === 0;
+  }
+
+  return seconds >= 0 && seconds < 60 && minutes >= 0 && minutes < 60 && hours >= 0 && hours < 25;
+}
+
+function validateTimezone(_hours, minutes) {
+  return minutes >= 0 && minutes <= 59;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/parseJSON/index.js":
+/*!**************************************************!*\
+  !*** ./node_modules/date-fns/parseJSON/index.js ***!
+  \**************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = parseJSON;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name parseJSON
+ * @category Common Helpers
+ * @summary Parse a JSON date string
+ *
+ * @description
+ * Converts a complete ISO date string in UTC time, the typical format for transmitting
+ * a date in JSON, to a JavaScript `Date` instance.
+ *
+ * This is a minimal implementation for converting dates retrieved from a JSON API to
+ * a `Date` instance which can be used with other functions in the `date-fns` library.
+ * The following formats are supported:
+ *
+ * - `2000-03-15T05:20:10.123Z`: The output of `.toISOString()` and `JSON.stringify(new Date())`
+ * - `2000-03-15T05:20:10Z`: Without milliseconds
+ * - `2000-03-15T05:20:10+00:00`: With a zero offset, the default JSON encoded format in some other languages
+ * - `2000-03-15T05:20:10+05:45`: With a positive or negative offset, the default JSON encoded format in some other languages
+ * - `2000-03-15T05:20:10+0000`: With a zero offset without a colon
+ * - `2000-03-15T05:20:10`: Without a trailing 'Z' symbol
+ * - `2000-03-15T05:20:10.1234567`: Up to 7 digits in milliseconds field. Only first 3 are taken into account since JS does not allow fractional milliseconds
+ * - `2000-03-15 05:20:10`: With a space instead of a 'T' separator for APIs returning a SQL date without reformatting
+ *
+ * For convenience and ease of use these other input types are also supported
+ * via [toDate]{@link https://date-fns.org/docs/toDate}:
+ *
+ * - A `Date` instance will be cloned
+ * - A `number` will be treated as a timestamp
+ *
+ * Any other input type or invalid date strings will return an `Invalid Date`.
+ *
+ * @param {String|Number|Date} argument A fully formed ISO8601 date string to convert
+ * @returns {Date} the parsed date in the local time zone
+ * @throws {TypeError} 1 argument required
+ */
+function parseJSON(argument) {
+  (0, _index2.default)(1, arguments);
+
+  if (typeof argument === 'string') {
+    var parts = argument.match(/(\d{4})-(\d{2})-(\d{2})[T ](\d{2}):(\d{2}):(\d{2})(?:\.(\d{0,7}))?(?:Z|(.)(\d{2}):?(\d{2})?)?/);
+
+    if (parts) {
+      // Group 8 matches the sign
+      return new Date(Date.UTC(+parts[1], +parts[2] - 1, +parts[3], +parts[4] - (+parts[9] || 0) * (parts[8] == '-' ? -1 : 1), +parts[5] - (+parts[10] || 0) * (parts[8] == '-' ? -1 : 1), +parts[6], +((parts[7] || '0') + '00').substring(0, 3)));
+    }
+
+    return new Date(NaN);
+  }
+
+  return (0, _index.default)(argument);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/previousDay/index.js":
+/*!****************************************************!*\
+  !*** ./node_modules/date-fns/previousDay/index.js ***!
+  \****************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = previousDay;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../getDay/index.js */ "./node_modules/date-fns/getDay/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../subDays/index.js */ "./node_modules/date-fns/subDays/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name previousDay
+ * @category Weekday Helpers
+ * @summary When is the previous day of the week?
+ *
+ * @description
+ * When is the previous day of the week? 0-6 the day of the week, 0 represents Sunday.
+ *
+ * @param {Date | number} date - the date to check
+ * @param {number} day - day of the week
+ * @returns {Date} - the date is the previous day of week
+ * @throws {TypeError} - 2 arguments required
+ *
+ * @example
+ * // When is the previous Monday before Mar, 20, 2020?
+ * const result = previousDay(new Date(2020, 2, 20), 1)
+ * //=> Mon Mar 16 2020 00:00:00
+ *
+ * @example
+ * // When is the previous Tuesday before Mar, 21, 2020?
+ * const result = previousDay(new Date(2020, 2, 21), 2)
+ * //=> Tue Mar 17 2020 00:00:00
+ */
+function previousDay(date, day) {
+  (0, _index.default)(2, arguments);
+  var delta = (0, _index2.default)(date) - day;
+  if (delta <= 0) delta += 7;
+  return (0, _index3.default)(date, delta);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/previousFriday/index.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/date-fns/previousFriday/index.js ***!
+  \*******************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = previousFriday;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../previousDay/index.js */ "./node_modules/date-fns/previousDay/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name previousFriday
+ * @category Weekday Helpers
+ * @summary When is the previous Friday?
+ *
+ * @description
+ * When is the previous Friday?
+ *
+ * @param {Date | number} date - the date to start counting from
+ * @returns {Date} the previous Friday
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // When is the previous Friday before Jun, 19, 2021?
+ * const result = previousFriday(new Date(2021, 5, 19))
+ * //=> Fri June 18 2021 00:00:00
+ */
+function previousFriday(date) {
+  (0, _index.default)(1, arguments);
+  return (0, _index2.default)(date, 5);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/previousMonday/index.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/date-fns/previousMonday/index.js ***!
+  \*******************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = previousMonday;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../previousDay/index.js */ "./node_modules/date-fns/previousDay/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name previousMonday
+ * @category Weekday Helpers
+ * @summary When is the previous Monday?
+ *
+ * @description
+ * When is the previous Monday?
+ *
+ * @param {Date | number} date - the date to start counting from
+ * @returns {Date} the previous Monday
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // When is the previous Monday before Jun, 18, 2021?
+ * const result = previousMonday(new Date(2021, 5, 18))
+ * //=> Mon June 14 2021 00:00:00
+ */
+function previousMonday(date) {
+  (0, _index.default)(1, arguments);
+  return (0, _index2.default)(date, 1);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/previousSaturday/index.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/date-fns/previousSaturday/index.js ***!
+  \*********************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = previousSaturday;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../previousDay/index.js */ "./node_modules/date-fns/previousDay/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name previousSaturday
+ * @category Weekday Helpers
+ * @summary When is the previous Saturday?
+ *
+ * @description
+ * When is the previous Saturday?
+ *
+ * @param {Date | number} date - the date to start counting from
+ * @returns {Date} the previous Saturday
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // When is the previous Saturday before Jun, 20, 2021?
+ * const result = previousSaturday(new Date(2021, 5, 20))
+ * //=> Sat June 19 2021 00:00:00
+ */
+function previousSaturday(date) {
+  (0, _index.default)(1, arguments);
+  return (0, _index2.default)(date, 6);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/previousSunday/index.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/date-fns/previousSunday/index.js ***!
+  \*******************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = previousSunday;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../previousDay/index.js */ "./node_modules/date-fns/previousDay/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name previousSunday
+ * @category Weekday Helpers
+ * @summary When is the previous Sunday?
+ *
+ * @description
+ * When is the previous Sunday?
+ *
+ * @param {Date | number} date - the date to start counting from
+ * @returns {Date} the previous Sunday
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // When is the previous Sunday before Jun, 21, 2021?
+ * const result = previousSunday(new Date(2021, 5, 21))
+ * //=> Sun June 20 2021 00:00:00
+ */
+function previousSunday(date) {
+  (0, _index.default)(1, arguments);
+  return (0, _index2.default)(date, 0);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/previousThursday/index.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/date-fns/previousThursday/index.js ***!
+  \*********************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = previousThursday;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../previousDay/index.js */ "./node_modules/date-fns/previousDay/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name previousThursday
+ * @category Weekday Helpers
+ * @summary When is the previous Thursday?
+ *
+ * @description
+ * When is the previous Thursday?
+ *
+ * @param {Date | number} date - the date to start counting from
+ * @returns {Date} the previous Thursday
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // When is the previous Thursday before Jun, 18, 2021?
+ * const result = previousThursday(new Date(2021, 5, 18))
+ * //=> Thu June 17 2021 00:00:00
+ */
+function previousThursday(date) {
+  (0, _index.default)(1, arguments);
+  return (0, _index2.default)(date, 4);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/previousTuesday/index.js":
+/*!********************************************************!*\
+  !*** ./node_modules/date-fns/previousTuesday/index.js ***!
+  \********************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = previousTuesday;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../previousDay/index.js */ "./node_modules/date-fns/previousDay/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name previousTuesday
+ * @category Weekday Helpers
+ * @summary When is the previous Tuesday?
+ *
+ * @description
+ * When is the previous Tuesday?
+ *
+ * @param {Date | number} date - the date to start counting from
+ * @returns {Date} the previous Tuesday
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // When is the previous Tuesday before Jun, 18, 2021?
+ * const result = previousTuesday(new Date(2021, 5, 18))
+ * //=> Tue June 15 2021 00:00:00
+ */
+function previousTuesday(date) {
+  (0, _index.default)(1, arguments);
+  return (0, _index2.default)(date, 2);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/previousWednesday/index.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/date-fns/previousWednesday/index.js ***!
+  \**********************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = previousWednesday;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../previousDay/index.js */ "./node_modules/date-fns/previousDay/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name previousWednesday
+ * @category Weekday Helpers
+ * @summary When is the previous Wednesday?
+ *
+ * @description
+ * When is the previous Wednesday?
+ *
+ * @param {Date | number} date - the date to start counting from
+ * @returns {Date} the previous Wednesday
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // When is the previous Wednesday before Jun, 18, 2021?
+ * const result = previousWednesday(new Date(2021, 5, 18))
+ * //=> Wed June 16 2021 00:00:00
+ */
+function previousWednesday(date) {
+  (0, _index.default)(1, arguments);
+  return (0, _index2.default)(date, 3);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/quartersToMonths/index.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/date-fns/quartersToMonths/index.js ***!
+  \*********************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = quartersToMonths;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index2 = __webpack_require__(/*! ../constants/index.js */ "./node_modules/date-fns/constants/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name quartersToMonths
+ * @category Conversion Helpers
+ * @summary Convert number of quarters to months.
+ *
+ * @description
+ * Convert a number of quarters to a full number of months.
+ *
+ * @param {number} quarters - number of quarters to be converted
+ *
+ * @returns {number} the number of quarters converted in months
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // Convert 2 quarters to months
+ * const result = quartersToMonths(2)
+ * //=> 6
+ */
+function quartersToMonths(quarters) {
+  (0, _index.default)(1, arguments);
+  return Math.floor(quarters * _index2.monthsInQuarter);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/quartersToYears/index.js":
+/*!********************************************************!*\
+  !*** ./node_modules/date-fns/quartersToYears/index.js ***!
+  \********************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = quartersToYears;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index2 = __webpack_require__(/*! ../constants/index.js */ "./node_modules/date-fns/constants/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name quartersToYears
+ * @category Conversion Helpers
+ * @summary Convert number of quarters to years.
+ *
+ * @description
+ * Convert a number of quarters to a full number of years.
+ *
+ * @param {number} quarters - number of quarters to be converted
+ *
+ * @returns {number} the number of quarters converted in years
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // Convert 8 quarters to years
+ * const result = quartersToYears(8)
+ * //=> 2
+ *
+ * @example
+ * // It uses floor rounding:
+ * const result = quartersToYears(11)
+ * //=> 2
+ */
+function quartersToYears(quarters) {
+  (0, _index.default)(1, arguments);
+  var years = quarters / _index2.quartersInYear;
+  return Math.floor(years);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/roundToNearestMinutes/index.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/date-fns/roundToNearestMinutes/index.js ***!
+  \**************************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = roundToNearestMinutes;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index2 = __webpack_require__(/*! ../_lib/roundingMethods/index.js */ "./node_modules/date-fns/_lib/roundingMethods/index.js");
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name roundToNearestMinutes
+ * @category Minute Helpers
+ * @summary Rounds the given date to the nearest minute
+ *
+ * @description
+ * Rounds the given date to the nearest minute (or number of minutes).
+ * Rounds up when the given date is exactly between the nearest round minutes.
+ *
+ * @param {Date|Number} date - the date to round
+ * @param {Object} [options] - an object with options.
+ * @param {Number} [options.nearestTo=1] - nearest number of minutes to round to. E.g. `15` to round to quarter hours.
+ * @param {String} [options.roundingMethod='trunc'] - a rounding method (`ceil`, `floor`, `round` or `trunc`)
+ * @returns {Date} the new date rounded to the closest minute
+ * @throws {TypeError} 1 argument required
+ * @throws {RangeError} `options.nearestTo` must be between 1 and 30
+ *
+ * @example
+ * // Round 10 July 2014 12:12:34 to nearest minute:
+ * const result = roundToNearestMinutes(new Date(2014, 6, 10, 12, 12, 34))
+ * //=> Thu Jul 10 2014 12:13:00
+ *
+ * @example
+ * // Round 10 July 2014 12:07:30 to nearest quarter hour:
+ * const result = roundToNearestMinutes(new Date(2014, 6, 10, 12, 12, 34), { nearestTo: 15 })
+ * // rounds up because given date is exactly between 12:00:00 and 12:15:00
+ * //=> Thu Jul 10 2014 12:15:00
+ */
+function roundToNearestMinutes(dirtyDate, options) {
+  var _options$nearestTo;
+
+  if (arguments.length < 1) {
+    throw new TypeError('1 argument required, but only none provided present');
+  }
+
+  var nearestTo = (0, _index3.default)((_options$nearestTo = options === null || options === void 0 ? void 0 : options.nearestTo) !== null && _options$nearestTo !== void 0 ? _options$nearestTo : 1);
+
+  if (nearestTo < 1 || nearestTo > 30) {
+    throw new RangeError('`options.nearestTo` must be between 1 and 30');
+  }
+
+  var date = (0, _index.default)(dirtyDate);
+  var seconds = date.getSeconds(); // relevant if nearestTo is 1, which is the default case
+
+  var minutes = date.getMinutes() + seconds / 60;
+  var roundingMethod = (0, _index2.getRoundingMethod)(options === null || options === void 0 ? void 0 : options.roundingMethod);
+  var roundedMinutes = roundingMethod(minutes / nearestTo) * nearestTo;
+  var remainderMinutes = minutes % nearestTo;
+  var addedMinutes = Math.round(remainderMinutes / nearestTo) * nearestTo;
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), roundedMinutes + addedMinutes);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/secondsToHours/index.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/date-fns/secondsToHours/index.js ***!
+  \*******************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = secondsToHours;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index2 = __webpack_require__(/*! ../constants/index.js */ "./node_modules/date-fns/constants/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name secondsToHours
+ * @category Conversion Helpers
+ * @summary Convert seconds to hours.
+ *
+ * @description
+ * Convert a number of seconds to a full number of hours.
+ *
+ * @param {number} seconds - number of seconds to be converted
+ *
+ * @returns {number} the number of seconds converted in hours
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // Convert 7200 seconds into hours
+ * const result = secondsToHours(7200)
+ * //=> 2
+ *
+ * @example
+ * // It uses floor rounding:
+ * const result = secondsToHours(7199)
+ * //=> 1
+ */
+function secondsToHours(seconds) {
+  (0, _index.default)(1, arguments);
+  var hours = seconds / _index2.secondsInHour;
+  return Math.floor(hours);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/secondsToMilliseconds/index.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/date-fns/secondsToMilliseconds/index.js ***!
+  \**************************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = secondsToMilliseconds;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index2 = __webpack_require__(/*! ../constants/index.js */ "./node_modules/date-fns/constants/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name secondsToMilliseconds
+ * @category Conversion Helpers
+ * @summary Convert seconds to milliseconds.
+ *
+ * @description
+ * Convert a number of seconds to a full number of milliseconds.
+ *
+ * @param {number} seconds - number of seconds to be converted
+ *
+ * @returns {number} the number of seconds converted in milliseconds
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // Convert 2 seconds into milliseconds
+ * const result = secondsToMilliseconds(2)
+ * //=> 2000
+ */
+function secondsToMilliseconds(seconds) {
+  (0, _index.default)(1, arguments);
+  return seconds * _index2.millisecondsInSecond;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/secondsToMinutes/index.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/date-fns/secondsToMinutes/index.js ***!
+  \*********************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = secondsToMinutes;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index2 = __webpack_require__(/*! ../constants/index.js */ "./node_modules/date-fns/constants/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name secondsToMinutes
+ * @category Conversion Helpers
+ * @summary Convert seconds to minutes.
+ *
+ * @description
+ * Convert a number of seconds to a full number of minutes.
+ *
+ * @param {number} seconds - number of seconds to be converted
+ *
+ * @returns {number} the number of seconds converted in minutes
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // Convert 120 seconds into minutes
+ * const result = secondsToMinutes(120)
+ * //=> 2
+ *
+ * @example
+ * // It uses floor rounding:
+ * const result = secondsToMinutes(119)
+ * //=> 1
+ */
+function secondsToMinutes(seconds) {
+  (0, _index.default)(1, arguments);
+  var minutes = seconds / _index2.secondsInMinute;
+  return Math.floor(minutes);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/set/index.js":
+/*!********************************************!*\
+  !*** ./node_modules/date-fns/set/index.js ***!
+  \********************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = set;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../setMonth/index.js */ "./node_modules/date-fns/setMonth/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+var _index4 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+/**
+ * @name set
+ * @category Common Helpers
+ * @summary Set date values to a given date.
+ *
+ * @description
+ * Set date values to a given date.
+ *
+ * Sets time values to date from object `values`.
+ * A value is not set if it is undefined or null or doesn't exist in `values`.
+ *
+ * Note about bundle size: `set` does not internally use `setX` functions from date-fns but instead opts
+ * to use native `Date#setX` methods. If you use this function, you may not want to include the
+ * other `setX` functions that date-fns provides if you are concerned about the bundle size.
+ *
+ * @param {Date|Number} date - the date to be changed
+ * @param {Object} values - an object with options
+ * @param {Number} [values.year] - the number of years to be set
+ * @param {Number} [values.month] - the number of months to be set
+ * @param {Number} [values.date] - the number of days to be set
+ * @param {Number} [values.hours] - the number of hours to be set
+ * @param {Number} [values.minutes] - the number of minutes to be set
+ * @param {Number} [values.seconds] - the number of seconds to be set
+ * @param {Number} [values.milliseconds] - the number of milliseconds to be set
+ * @returns {Date} the new date with options set
+ * @throws {TypeError} 2 arguments required
+ * @throws {RangeError} `values` must be an object
+ *
+ * @example
+ * // Transform 1 September 2014 into 20 October 2015 in a single line:
+ * const result = set(new Date(2014, 8, 20), { year: 2015, month: 9, date: 20 })
+ * //=> Tue Oct 20 2015 00:00:00
+ *
+ * @example
+ * // Set 12 PM to 1 September 2014 01:23:45 to 1 September 2014 12:00:00:
+ * const result = set(new Date(2014, 8, 1, 1, 23, 45), { hours: 12 })
+ * //=> Mon Sep 01 2014 12:23:45
+ */
+function set(dirtyDate, values) {
+  (0, _index4.default)(2, arguments);
+
+  if (_typeof(values) !== 'object' || values === null) {
+    throw new RangeError('values parameter must be an object');
+  }
+
+  var date = (0, _index.default)(dirtyDate); // Check if date is Invalid Date because Date.prototype.setFullYear ignores the value of Invalid Date
+
+  if (isNaN(date.getTime())) {
+    return new Date(NaN);
+  }
+
+  if (values.year != null) {
+    date.setFullYear(values.year);
+  }
+
+  if (values.month != null) {
+    date = (0, _index2.default)(date, values.month);
+  }
+
+  if (values.date != null) {
+    date.setDate((0, _index3.default)(values.date));
+  }
+
+  if (values.hours != null) {
+    date.setHours((0, _index3.default)(values.hours));
+  }
+
+  if (values.minutes != null) {
+    date.setMinutes((0, _index3.default)(values.minutes));
+  }
+
+  if (values.seconds != null) {
+    date.setSeconds((0, _index3.default)(values.seconds));
+  }
+
+  if (values.milliseconds != null) {
+    date.setMilliseconds((0, _index3.default)(values.milliseconds));
+  }
+
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/setDate/index.js":
+/*!************************************************!*\
+  !*** ./node_modules/date-fns/setDate/index.js ***!
+  \************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = setDate;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name setDate
+ * @category Day Helpers
+ * @summary Set the day of the month to the given date.
+ *
+ * @description
+ * Set the day of the month to the given date.
+ *
+ * @param {Date|Number} date - the date to be changed
+ * @param {Number} dayOfMonth - the day of the month of the new date
+ * @returns {Date} the new date with the day of the month set
+ * @throws {TypeError} 2 arguments required
+ *
+ * @example
+ * // Set the 30th day of the month to 1 September 2014:
+ * const result = setDate(new Date(2014, 8, 1), 30)
+ * //=> Tue Sep 30 2014 00:00:00
+ */
+function setDate(dirtyDate, dirtyDayOfMonth) {
+  (0, _index3.default)(2, arguments);
+  var date = (0, _index2.default)(dirtyDate);
+  var dayOfMonth = (0, _index.default)(dirtyDayOfMonth);
+  date.setDate(dayOfMonth);
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/setDay/index.js":
+/*!***********************************************!*\
+  !*** ./node_modules/date-fns/setDay/index.js ***!
+  \***********************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = setDay;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../addDays/index.js */ "./node_modules/date-fns/addDays/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+var _index4 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index5 = __webpack_require__(/*! ../_lib/defaultOptions/index.js */ "./node_modules/date-fns/_lib/defaultOptions/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name setDay
+ * @category Weekday Helpers
+ * @summary Set the day of the week to the given date.
+ *
+ * @description
+ * Set the day of the week to the given date.
+ *
+ * @param {Date|Number} date - the date to be changed
+ * @param {Number} day - the day of the week of the new date
+ * @param {Object} [options] - an object with options.
+ * @param {Locale} [options.locale=defaultLocale] - the locale object. See [Locale]{@link https://date-fns.org/docs/Locale}
+ * @param {0|1|2|3|4|5|6} [options.weekStartsOn=0] - the index of the first day of the week (0 - Sunday)
+ * @returns {Date} the new date with the day of the week set
+ * @throws {TypeError} 2 arguments required
+ * @throws {RangeError} `options.weekStartsOn` must be between 0 and 6
+ *
+ * @example
+ * // Set week day to Sunday, with the default weekStartsOn of Sunday:
+ * const result = setDay(new Date(2014, 8, 1), 0)
+ * //=> Sun Aug 31 2014 00:00:00
+ *
+ * @example
+ * // Set week day to Sunday, with a weekStartsOn of Monday:
+ * const result = setDay(new Date(2014, 8, 1), 0, { weekStartsOn: 1 })
+ * //=> Sun Sep 07 2014 00:00:00
+ */
+function setDay(dirtyDate, dirtyDay, options) {
+  var _ref, _ref2, _ref3, _options$weekStartsOn, _options$locale, _options$locale$optio, _defaultOptions$local, _defaultOptions$local2;
+
+  (0, _index4.default)(2, arguments);
+  var defaultOptions = (0, _index5.getDefaultOptions)();
+  var weekStartsOn = (0, _index3.default)((_ref = (_ref2 = (_ref3 = (_options$weekStartsOn = options === null || options === void 0 ? void 0 : options.weekStartsOn) !== null && _options$weekStartsOn !== void 0 ? _options$weekStartsOn : options === null || options === void 0 ? void 0 : (_options$locale = options.locale) === null || _options$locale === void 0 ? void 0 : (_options$locale$optio = _options$locale.options) === null || _options$locale$optio === void 0 ? void 0 : _options$locale$optio.weekStartsOn) !== null && _ref3 !== void 0 ? _ref3 : defaultOptions.weekStartsOn) !== null && _ref2 !== void 0 ? _ref2 : (_defaultOptions$local = defaultOptions.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.weekStartsOn) !== null && _ref !== void 0 ? _ref : 0); // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
+
+  if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
+    throw new RangeError('weekStartsOn must be between 0 and 6 inclusively');
+  }
+
+  var date = (0, _index2.default)(dirtyDate);
+  var day = (0, _index3.default)(dirtyDay);
+  var currentDay = date.getDay();
+  var remainder = day % 7;
+  var dayIndex = (remainder + 7) % 7;
+  var delta = 7 - weekStartsOn;
+  var diff = day < 0 || day > 6 ? day - (currentDay + delta) % 7 : (dayIndex + delta) % 7 - (currentDay + delta) % 7;
+  return (0, _index.default)(date, diff);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/setDayOfYear/index.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/date-fns/setDayOfYear/index.js ***!
+  \*****************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = setDayOfYear;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name setDayOfYear
+ * @category Day Helpers
+ * @summary Set the day of the year to the given date.
+ *
+ * @description
+ * Set the day of the year to the given date.
+ *
+ * @param {Date|Number} date - the date to be changed
+ * @param {Number} dayOfYear - the day of the year of the new date
+ * @returns {Date} the new date with the day of the year set
+ * @throws {TypeError} 2 arguments required
+ *
+ * @example
+ * // Set the 2nd day of the year to 2 July 2014:
+ * const result = setDayOfYear(new Date(2014, 6, 2), 2)
+ * //=> Thu Jan 02 2014 00:00:00
+ */
+function setDayOfYear(dirtyDate, dirtyDayOfYear) {
+  (0, _index3.default)(2, arguments);
+  var date = (0, _index2.default)(dirtyDate);
+  var dayOfYear = (0, _index.default)(dirtyDayOfYear);
+  date.setMonth(0);
+  date.setDate(dayOfYear);
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/setDefaultOptions/index.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/date-fns/setDefaultOptions/index.js ***!
+  \**********************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = setDefaultOptions;
+
+var _index = __webpack_require__(/*! ../_lib/defaultOptions/index.js */ "./node_modules/date-fns/_lib/defaultOptions/index.js");
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name setDefaultOptions
+ * @category Common Helpers
+ * @summary Set default options including locale.
+ * @pure false
+ *
+ * @description
+ * Sets the defaults for
+ * `options.locale`, `options.weekStartsOn` and `options.firstWeekContainsDate`
+ * arguments for all functions.
+ *
+ * @param {Object} newOptions - an object with options.
+ * @param {Locale} [newOptions.locale] - the locale object. See [Locale]{@link https://date-fns.org/docs/Locale}
+ * @param {0|1|2|3|4|5|6} [newOptions.weekStartsOn] - the index of the first day of the week (0 - Sunday)
+ * @param {1|2|3|4|5|6|7} [newOptions.firstWeekContainsDate] - the day of January, which is always in the first week of the year
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // Set global locale:
+ * import { es } from 'date-fns/locale'
+ * setDefaultOptions({ locale: es })
+ * const result = format(new Date(2014, 8, 2), 'PPPP')
+ * //=> 'martes, 2 de septiembre de 2014'
+ *
+ * @example
+ * // Start of the week for 2 September 2014:
+ * const result = startOfWeek(new Date(2014, 8, 2))
+ * //=> Sun Aug 31 2014 00:00:00
+ *
+ * @example
+ * // Start of the week for 2 September 2014,
+ * // when we set that week starts on Monday by default:
+ * setDefaultOptions({ weekStartsOn: 1 })
+ * const result = startOfWeek(new Date(2014, 8, 2))
+ * //=> Mon Sep 01 2014 00:00:00
+ *
+ * @example
+ * // Manually set options take priority over default options:
+ * setDefaultOptions({ weekStartsOn: 1 })
+ * const result = startOfWeek(new Date(2014, 8, 2), { weekStartsOn: 0 })
+ * //=> Sun Aug 31 2014 00:00:00
+ *
+ * @example
+ * // Remove the option by setting it to `undefined`:
+ * setDefaultOptions({ weekStartsOn: 1 })
+ * setDefaultOptions({ weekStartsOn: undefined })
+ * const result = startOfWeek(new Date(2014, 8, 2))
+ * //=> Sun Aug 31 2014 00:00:00
+ */
+function setDefaultOptions(newOptions) {
+  (0, _index2.default)(1, arguments);
+  var result = {};
+  var defaultOptions = (0, _index.getDefaultOptions)();
+
+  for (var property in defaultOptions) {
+    if (Object.prototype.hasOwnProperty.call(defaultOptions, property)) {
+      ;
+      result[property] = defaultOptions[property];
+    }
+  }
+
+  for (var _property in newOptions) {
+    if (Object.prototype.hasOwnProperty.call(newOptions, _property)) {
+      if (newOptions[_property] === undefined) {
+        delete result[_property];
+      } else {
+        ;
+        result[_property] = newOptions[_property];
+      }
+    }
+  }
+
+  (0, _index.setDefaultOptions)(result);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/setHours/index.js":
+/*!*************************************************!*\
+  !*** ./node_modules/date-fns/setHours/index.js ***!
+  \*************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = setHours;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name setHours
+ * @category Hour Helpers
+ * @summary Set the hours to the given date.
+ *
+ * @description
+ * Set the hours to the given date.
+ *
+ * @param {Date|Number} date - the date to be changed
+ * @param {Number} hours - the hours of the new date
+ * @returns {Date} the new date with the hours set
+ * @throws {TypeError} 2 arguments required
+ *
+ * @example
+ * // Set 4 hours to 1 September 2014 11:30:00:
+ * const result = setHours(new Date(2014, 8, 1, 11, 30), 4)
+ * //=> Mon Sep 01 2014 04:30:00
+ */
+function setHours(dirtyDate, dirtyHours) {
+  (0, _index3.default)(2, arguments);
+  var date = (0, _index2.default)(dirtyDate);
+  var hours = (0, _index.default)(dirtyHours);
+  date.setHours(hours);
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/setISODay/index.js":
+/*!**************************************************!*\
+  !*** ./node_modules/date-fns/setISODay/index.js ***!
+  \**************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = setISODay;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../addDays/index.js */ "./node_modules/date-fns/addDays/index.js"));
+
+var _index4 = _interopRequireDefault(__webpack_require__(/*! ../getISODay/index.js */ "./node_modules/date-fns/getISODay/index.js"));
+
+var _index5 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name setISODay
+ * @category Weekday Helpers
+ * @summary Set the day of the ISO week to the given date.
+ *
+ * @description
+ * Set the day of the ISO week to the given date.
+ * ISO week starts with Monday.
+ * 7 is the index of Sunday, 1 is the index of Monday etc.
+ *
+ * @param {Date|Number} date - the date to be changed
+ * @param {Number} day - the day of the ISO week of the new date
+ * @returns {Date} the new date with the day of the ISO week set
+ * @throws {TypeError} 2 arguments required
+ *
+ * @example
+ * // Set Sunday to 1 September 2014:
+ * const result = setISODay(new Date(2014, 8, 1), 7)
+ * //=> Sun Sep 07 2014 00:00:00
+ */
+function setISODay(dirtyDate, dirtyDay) {
+  (0, _index5.default)(2, arguments);
+  var date = (0, _index2.default)(dirtyDate);
+  var day = (0, _index.default)(dirtyDay);
+  var currentDay = (0, _index4.default)(date);
+  var diff = day - currentDay;
+  return (0, _index3.default)(date, diff);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/setISOWeek/index.js":
+/*!***************************************************!*\
+  !*** ./node_modules/date-fns/setISOWeek/index.js ***!
+  \***************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = setISOWeek;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../getISOWeek/index.js */ "./node_modules/date-fns/getISOWeek/index.js"));
+
+var _index4 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name setISOWeek
+ * @category ISO Week Helpers
+ * @summary Set the ISO week to the given date.
+ *
+ * @description
+ * Set the ISO week to the given date, saving the weekday number.
+ *
+ * ISO week-numbering year: http://en.wikipedia.org/wiki/ISO_week_date
+ *
+ * @param {Date|Number} date - the date to be changed
+ * @param {Number} isoWeek - the ISO week of the new date
+ * @returns {Date} the new date with the ISO week set
+ * @throws {TypeError} 2 arguments required
+ *
+ * @example
+ * // Set the 53rd ISO week to 7 August 2004:
+ * const result = setISOWeek(new Date(2004, 7, 7), 53)
+ * //=> Sat Jan 01 2005 00:00:00
+ */
+function setISOWeek(dirtyDate, dirtyISOWeek) {
+  (0, _index4.default)(2, arguments);
+  var date = (0, _index2.default)(dirtyDate);
+  var isoWeek = (0, _index.default)(dirtyISOWeek);
+  var diff = (0, _index3.default)(date) - isoWeek;
+  date.setDate(date.getDate() - diff * 7);
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/setISOWeekYear/index.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/date-fns/setISOWeekYear/index.js ***!
+  \*******************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = setISOWeekYear;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../startOfISOWeekYear/index.js */ "./node_modules/date-fns/startOfISOWeekYear/index.js"));
+
+var _index4 = _interopRequireDefault(__webpack_require__(/*! ../differenceInCalendarDays/index.js */ "./node_modules/date-fns/differenceInCalendarDays/index.js"));
+
+var _index5 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name setISOWeekYear
+ * @category ISO Week-Numbering Year Helpers
+ * @summary Set the ISO week-numbering year to the given date.
+ *
+ * @description
+ * Set the ISO week-numbering year to the given date,
+ * saving the week number and the weekday number.
+ *
+ * ISO week-numbering year: http://en.wikipedia.org/wiki/ISO_week_date
+ *
+ * @param {Date|Number} date - the date to be changed
+ * @param {Number} isoWeekYear - the ISO week-numbering year of the new date
+ * @returns {Date} the new date with the ISO week-numbering year set
+ * @throws {TypeError} 2 arguments required
+ *
+ * @example
+ * // Set ISO week-numbering year 2007 to 29 December 2008:
+ * const result = setISOWeekYear(new Date(2008, 11, 29), 2007)
+ * //=> Mon Jan 01 2007 00:00:00
+ */
+function setISOWeekYear(dirtyDate, dirtyISOWeekYear) {
+  (0, _index5.default)(2, arguments);
+  var date = (0, _index2.default)(dirtyDate);
+  var isoWeekYear = (0, _index.default)(dirtyISOWeekYear);
+  var diff = (0, _index4.default)(date, (0, _index3.default)(date));
+  var fourthOfJanuary = new Date(0);
+  fourthOfJanuary.setFullYear(isoWeekYear, 0, 4);
+  fourthOfJanuary.setHours(0, 0, 0, 0);
+  date = (0, _index3.default)(fourthOfJanuary);
+  date.setDate(date.getDate() + diff);
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/setMilliseconds/index.js":
+/*!********************************************************!*\
+  !*** ./node_modules/date-fns/setMilliseconds/index.js ***!
+  \********************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = setMilliseconds;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name setMilliseconds
+ * @category Millisecond Helpers
+ * @summary Set the milliseconds to the given date.
+ *
+ * @description
+ * Set the milliseconds to the given date.
+ *
+ * @param {Date|Number} date - the date to be changed
+ * @param {Number} milliseconds - the milliseconds of the new date
+ * @returns {Date} the new date with the milliseconds set
+ * @throws {TypeError} 2 arguments required
+ *
+ * @example
+ * // Set 300 milliseconds to 1 September 2014 11:30:40.500:
+ * const result = setMilliseconds(new Date(2014, 8, 1, 11, 30, 40, 500), 300)
+ * //=> Mon Sep 01 2014 11:30:40.300
+ */
+function setMilliseconds(dirtyDate, dirtyMilliseconds) {
+  (0, _index3.default)(2, arguments);
+  var date = (0, _index2.default)(dirtyDate);
+  var milliseconds = (0, _index.default)(dirtyMilliseconds);
+  date.setMilliseconds(milliseconds);
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/setMinutes/index.js":
+/*!***************************************************!*\
+  !*** ./node_modules/date-fns/setMinutes/index.js ***!
+  \***************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = setMinutes;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name setMinutes
+ * @category Minute Helpers
+ * @summary Set the minutes to the given date.
+ *
+ * @description
+ * Set the minutes to the given date.
+ *
+ * @param {Date|Number} date - the date to be changed
+ * @param {Number} minutes - the minutes of the new date
+ * @returns {Date} the new date with the minutes set
+ * @throws {TypeError} 2 arguments required
+ *
+ * @example
+ * // Set 45 minutes to 1 September 2014 11:30:40:
+ * const result = setMinutes(new Date(2014, 8, 1, 11, 30, 40), 45)
+ * //=> Mon Sep 01 2014 11:45:40
+ */
+function setMinutes(dirtyDate, dirtyMinutes) {
+  (0, _index3.default)(2, arguments);
+  var date = (0, _index2.default)(dirtyDate);
+  var minutes = (0, _index.default)(dirtyMinutes);
+  date.setMinutes(minutes);
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/setMonth/index.js":
+/*!*************************************************!*\
+  !*** ./node_modules/date-fns/setMonth/index.js ***!
+  \*************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = setMonth;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../getDaysInMonth/index.js */ "./node_modules/date-fns/getDaysInMonth/index.js"));
+
+var _index4 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name setMonth
+ * @category Month Helpers
+ * @summary Set the month to the given date.
+ *
+ * @description
+ * Set the month to the given date.
+ *
+ * @param {Date|Number} date - the date to be changed
+ * @param {Number} month - the month of the new date
+ * @returns {Date} the new date with the month set
+ * @throws {TypeError} 2 arguments required
+ *
+ * @example
+ * // Set February to 1 September 2014:
+ * const result = setMonth(new Date(2014, 8, 1), 1)
+ * //=> Sat Feb 01 2014 00:00:00
+ */
+function setMonth(dirtyDate, dirtyMonth) {
+  (0, _index4.default)(2, arguments);
+  var date = (0, _index2.default)(dirtyDate);
+  var month = (0, _index.default)(dirtyMonth);
+  var year = date.getFullYear();
+  var day = date.getDate();
+  var dateWithDesiredMonth = new Date(0);
+  dateWithDesiredMonth.setFullYear(year, month, 15);
+  dateWithDesiredMonth.setHours(0, 0, 0, 0);
+  var daysInMonth = (0, _index3.default)(dateWithDesiredMonth); // Set the last day of the new month
+  // if the original date was the last day of the longer month
+
+  date.setMonth(month, Math.min(day, daysInMonth));
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/setQuarter/index.js":
+/*!***************************************************!*\
+  !*** ./node_modules/date-fns/setQuarter/index.js ***!
+  \***************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = setQuarter;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../setMonth/index.js */ "./node_modules/date-fns/setMonth/index.js"));
+
+var _index4 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name setQuarter
+ * @category Quarter Helpers
+ * @summary Set the year quarter to the given date.
+ *
+ * @description
+ * Set the year quarter to the given date.
+ *
+ * @param {Date|Number} date - the date to be changed
+ * @param {Number} quarter - the quarter of the new date
+ * @returns {Date} the new date with the quarter set
+ * @throws {TypeError} 2 arguments required
+ *
+ * @example
+ * // Set the 2nd quarter to 2 July 2014:
+ * const result = setQuarter(new Date(2014, 6, 2), 2)
+ * //=> Wed Apr 02 2014 00:00:00
+ */
+function setQuarter(dirtyDate, dirtyQuarter) {
+  (0, _index4.default)(2, arguments);
+  var date = (0, _index2.default)(dirtyDate);
+  var quarter = (0, _index.default)(dirtyQuarter);
+  var oldQuarter = Math.floor(date.getMonth() / 3) + 1;
+  var diff = quarter - oldQuarter;
+  return (0, _index3.default)(date, date.getMonth() + diff * 3);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/setSeconds/index.js":
+/*!***************************************************!*\
+  !*** ./node_modules/date-fns/setSeconds/index.js ***!
+  \***************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = setSeconds;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name setSeconds
+ * @category Second Helpers
+ * @summary Set the seconds to the given date.
+ *
+ * @description
+ * Set the seconds to the given date.
+ *
+ * @param {Date|Number} date - the date to be changed
+ * @param {Number} seconds - the seconds of the new date
+ * @returns {Date} the new date with the seconds set
+ * @throws {TypeError} 2 arguments required
+ *
+ * @example
+ * // Set 45 seconds to 1 September 2014 11:30:40:
+ * const result = setSeconds(new Date(2014, 8, 1, 11, 30, 40), 45)
+ * //=> Mon Sep 01 2014 11:30:45
+ */
+function setSeconds(dirtyDate, dirtySeconds) {
+  (0, _index3.default)(2, arguments);
+  var date = (0, _index2.default)(dirtyDate);
+  var seconds = (0, _index.default)(dirtySeconds);
+  date.setSeconds(seconds);
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/setWeek/index.js":
+/*!************************************************!*\
+  !*** ./node_modules/date-fns/setWeek/index.js ***!
+  \************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = setWeek;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../getWeek/index.js */ "./node_modules/date-fns/getWeek/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index4 = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name setWeek
+ * @category Week Helpers
+ * @summary Set the local week to the given date.
+ *
+ * @description
+ * Set the local week to the given date, saving the weekday number.
+ * The exact calculation depends on the values of
+ * `options.weekStartsOn` (which is the index of the first day of the week)
+ * and `options.firstWeekContainsDate` (which is the day of January, which is always in
+ * the first week of the week-numbering year)
+ *
+ * Week numbering: https://en.wikipedia.org/wiki/Week#Week_numbering
+ *
+ * @param {Date|Number} date - the date to be changed
+ * @param {Number} week - the week of the new date
+ * @param {Object} [options] - an object with options.
+ * @param {Locale} [options.locale=defaultLocale] - the locale object. See [Locale]{@link https://date-fns.org/docs/Locale}
+ * @param {0|1|2|3|4|5|6} [options.weekStartsOn=0] - the index of the first day of the week (0 - Sunday)
+ * @param {1|2|3|4|5|6|7} [options.firstWeekContainsDate=1] - the day of January, which is always in the first week of the year
+ * @returns {Date} the new date with the local week set
+ * @throws {TypeError} 2 arguments required
+ * @throws {RangeError} `options.weekStartsOn` must be between 0 and 6
+ * @throws {RangeError} `options.firstWeekContainsDate` must be between 1 and 7
+ *
+ * @example
+ * // Set the 1st week to 2 January 2005 with default options:
+ * const result = setWeek(new Date(2005, 0, 2), 1)
+ * //=> Sun Dec 26 2004 00:00:00
+ *
+ * @example
+ * // Set the 1st week to 2 January 2005,
+ * // if Monday is the first day of the week,
+ * // and the first week of the year always contains 4 January:
+ * const result = setWeek(new Date(2005, 0, 2), 1, {
+ *   weekStartsOn: 1,
+ *   firstWeekContainsDate: 4
+ * })
+ * //=> Sun Jan 4 2004 00:00:00
+ */
+function setWeek(dirtyDate, dirtyWeek, options) {
+  (0, _index3.default)(2, arguments);
+  var date = (0, _index2.default)(dirtyDate);
+  var week = (0, _index4.default)(dirtyWeek);
+  var diff = (0, _index.default)(date, options) - week;
+  date.setDate(date.getDate() - diff * 7);
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/setWeekYear/index.js":
+/*!****************************************************!*\
+  !*** ./node_modules/date-fns/setWeekYear/index.js ***!
+  \****************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = setWeekYear;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../differenceInCalendarDays/index.js */ "./node_modules/date-fns/differenceInCalendarDays/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../startOfWeekYear/index.js */ "./node_modules/date-fns/startOfWeekYear/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index4 = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+var _index5 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index6 = __webpack_require__(/*! ../_lib/defaultOptions/index.js */ "./node_modules/date-fns/_lib/defaultOptions/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name setWeekYear
+ * @category Week-Numbering Year Helpers
+ * @summary Set the local week-numbering year to the given date.
+ *
+ * @description
+ * Set the local week-numbering year to the given date,
+ * saving the week number and the weekday number.
+ * The exact calculation depends on the values of
+ * `options.weekStartsOn` (which is the index of the first day of the week)
+ * and `options.firstWeekContainsDate` (which is the day of January, which is always in
+ * the first week of the week-numbering year)
+ *
+ * Week numbering: https://en.wikipedia.org/wiki/Week#Week_numbering
+ *
+ * @param {Date|Number} date - the date to be changed
+ * @param {Number} weekYear - the local week-numbering year of the new date
+ * @param {Object} [options] - an object with options.
+ * @param {Locale} [options.locale=defaultLocale] - the locale object. See [Locale]{@link https://date-fns.org/docs/Locale}
+ * @param {0|1|2|3|4|5|6} [options.weekStartsOn=0] - the index of the first day of the week (0 - Sunday)
+ * @param {1|2|3|4|5|6|7} [options.firstWeekContainsDate=1] - the day of January, which is always in the first week of the year
+ * @returns {Date} the new date with the local week-numbering year set
+ * @throws {TypeError} 2 arguments required
+ * @throws {RangeError} `options.weekStartsOn` must be between 0 and 6
+ * @throws {RangeError} `options.firstWeekContainsDate` must be between 1 and 7
+ *
+ * @example
+ * // Set the local week-numbering year 2004 to 2 January 2010 with default options:
+ * const result = setWeekYear(new Date(2010, 0, 2), 2004)
+ * //=> Sat Jan 03 2004 00:00:00
+ *
+ * @example
+ * // Set the local week-numbering year 2004 to 2 January 2010,
+ * // if Monday is the first day of week
+ * // and 4 January is always in the first week of the year:
+ * const result = setWeekYear(new Date(2010, 0, 2), 2004, {
+ *   weekStartsOn: 1,
+ *   firstWeekContainsDate: 4
+ * })
+ * //=> Sat Jan 01 2005 00:00:00
+ */
+function setWeekYear(dirtyDate, dirtyWeekYear, options) {
+  var _ref, _ref2, _ref3, _options$firstWeekCon, _options$locale, _options$locale$optio, _defaultOptions$local, _defaultOptions$local2;
+
+  (0, _index5.default)(2, arguments);
+  var defaultOptions = (0, _index6.getDefaultOptions)();
+  var firstWeekContainsDate = (0, _index4.default)((_ref = (_ref2 = (_ref3 = (_options$firstWeekCon = options === null || options === void 0 ? void 0 : options.firstWeekContainsDate) !== null && _options$firstWeekCon !== void 0 ? _options$firstWeekCon : options === null || options === void 0 ? void 0 : (_options$locale = options.locale) === null || _options$locale === void 0 ? void 0 : (_options$locale$optio = _options$locale.options) === null || _options$locale$optio === void 0 ? void 0 : _options$locale$optio.firstWeekContainsDate) !== null && _ref3 !== void 0 ? _ref3 : defaultOptions.firstWeekContainsDate) !== null && _ref2 !== void 0 ? _ref2 : (_defaultOptions$local = defaultOptions.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.firstWeekContainsDate) !== null && _ref !== void 0 ? _ref : 1);
+  var date = (0, _index3.default)(dirtyDate);
+  var weekYear = (0, _index4.default)(dirtyWeekYear);
+  var diff = (0, _index.default)(date, (0, _index2.default)(date, options));
+  var firstWeek = new Date(0);
+  firstWeek.setFullYear(weekYear, 0, firstWeekContainsDate);
+  firstWeek.setHours(0, 0, 0, 0);
+  date = (0, _index2.default)(firstWeek, options);
+  date.setDate(date.getDate() + diff);
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/setYear/index.js":
+/*!************************************************!*\
+  !*** ./node_modules/date-fns/setYear/index.js ***!
+  \************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = setYear;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name setYear
+ * @category Year Helpers
+ * @summary Set the year to the given date.
+ *
+ * @description
+ * Set the year to the given date.
+ *
+ * @param {Date|Number} date - the date to be changed
+ * @param {Number} year - the year of the new date
+ * @returns {Date} the new date with the year set
+ * @throws {TypeError} 2 arguments required
+ *
+ * @example
+ * // Set year 2013 to 1 September 2014:
+ * const result = setYear(new Date(2014, 8, 1), 2013)
+ * //=> Sun Sep 01 2013 00:00:00
+ */
+function setYear(dirtyDate, dirtyYear) {
+  (0, _index3.default)(2, arguments);
+  var date = (0, _index2.default)(dirtyDate);
+  var year = (0, _index.default)(dirtyYear); // Check if date is Invalid Date because Date.prototype.setFullYear ignores the value of Invalid Date
+
+  if (isNaN(date.getTime())) {
+    return new Date(NaN);
+  }
+
+  date.setFullYear(year);
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/startOfDay/index.js":
+/*!***************************************************!*\
+  !*** ./node_modules/date-fns/startOfDay/index.js ***!
+  \***************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = startOfDay;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name startOfDay
+ * @category Day Helpers
+ * @summary Return the start of a day for the given date.
+ *
+ * @description
+ * Return the start of a day for the given date.
+ * The result will be in the local timezone.
+ *
+ * @param {Date|Number} date - the original date
+ * @returns {Date} the start of a day
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // The start of a day for 2 September 2014 11:55:00:
+ * const result = startOfDay(new Date(2014, 8, 2, 11, 55, 0))
+ * //=> Tue Sep 02 2014 00:00:00
+ */
+function startOfDay(dirtyDate) {
+  (0, _index2.default)(1, arguments);
+  var date = (0, _index.default)(dirtyDate);
+  date.setHours(0, 0, 0, 0);
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/startOfDecade/index.js":
+/*!******************************************************!*\
+  !*** ./node_modules/date-fns/startOfDecade/index.js ***!
+  \******************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = startOfDecade;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name startOfDecade
+ * @category Decade Helpers
+ * @summary Return the start of a decade for the given date.
+ *
+ * @description
+ * Return the start of a decade for the given date.
+ *
+ * @param {Date|Number} date - the original date
+ * @returns {Date} the start of a decade
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // The start of a decade for 21 October 2015 00:00:00:
+ * const result = startOfDecade(new Date(2015, 9, 21, 00, 00, 00))
+ * //=> Jan 01 2010 00:00:00
+ */
+function startOfDecade(dirtyDate) {
+  (0, _index2.default)(1, arguments);
+  var date = (0, _index.default)(dirtyDate);
+  var year = date.getFullYear();
+  var decade = Math.floor(year / 10) * 10;
+  date.setFullYear(decade, 0, 1);
+  date.setHours(0, 0, 0, 0);
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/startOfHour/index.js":
+/*!****************************************************!*\
+  !*** ./node_modules/date-fns/startOfHour/index.js ***!
+  \****************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = startOfHour;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name startOfHour
+ * @category Hour Helpers
+ * @summary Return the start of an hour for the given date.
+ *
+ * @description
+ * Return the start of an hour for the given date.
+ * The result will be in the local timezone.
+ *
+ * @param {Date|Number} date - the original date
+ * @returns {Date} the start of an hour
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // The start of an hour for 2 September 2014 11:55:00:
+ * const result = startOfHour(new Date(2014, 8, 2, 11, 55))
+ * //=> Tue Sep 02 2014 11:00:00
+ */
+function startOfHour(dirtyDate) {
+  (0, _index2.default)(1, arguments);
+  var date = (0, _index.default)(dirtyDate);
+  date.setMinutes(0, 0, 0);
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/startOfISOWeek/index.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/date-fns/startOfISOWeek/index.js ***!
+  \*******************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = startOfISOWeek;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../startOfWeek/index.js */ "./node_modules/date-fns/startOfWeek/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name startOfISOWeek
+ * @category ISO Week Helpers
+ * @summary Return the start of an ISO week for the given date.
+ *
+ * @description
+ * Return the start of an ISO week for the given date.
+ * The result will be in the local timezone.
+ *
+ * ISO week-numbering year: http://en.wikipedia.org/wiki/ISO_week_date
+ *
+ * @param {Date|Number} date - the original date
+ * @returns {Date} the start of an ISO week
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // The start of an ISO week for 2 September 2014 11:55:00:
+ * const result = startOfISOWeek(new Date(2014, 8, 2, 11, 55, 0))
+ * //=> Mon Sep 01 2014 00:00:00
+ */
+function startOfISOWeek(dirtyDate) {
+  (0, _index2.default)(1, arguments);
+  return (0, _index.default)(dirtyDate, {
+    weekStartsOn: 1
+  });
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/startOfISOWeekYear/index.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/date-fns/startOfISOWeekYear/index.js ***!
+  \***********************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = startOfISOWeekYear;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../getISOWeekYear/index.js */ "./node_modules/date-fns/getISOWeekYear/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../startOfISOWeek/index.js */ "./node_modules/date-fns/startOfISOWeek/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name startOfISOWeekYear
+ * @category ISO Week-Numbering Year Helpers
+ * @summary Return the start of an ISO week-numbering year for the given date.
+ *
+ * @description
+ * Return the start of an ISO week-numbering year,
+ * which always starts 3 days before the year's first Thursday.
+ * The result will be in the local timezone.
+ *
+ * ISO week-numbering year: http://en.wikipedia.org/wiki/ISO_week_date
+ *
+ * @param {Date|Number} date - the original date
+ * @returns {Date} the start of an ISO week-numbering year
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // The start of an ISO week-numbering year for 2 July 2005:
+ * const result = startOfISOWeekYear(new Date(2005, 6, 2))
+ * //=> Mon Jan 03 2005 00:00:00
+ */
+function startOfISOWeekYear(dirtyDate) {
+  (0, _index3.default)(1, arguments);
+  var year = (0, _index.default)(dirtyDate);
+  var fourthOfJanuary = new Date(0);
+  fourthOfJanuary.setFullYear(year, 0, 4);
+  fourthOfJanuary.setHours(0, 0, 0, 0);
+  var date = (0, _index2.default)(fourthOfJanuary);
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/startOfMinute/index.js":
+/*!******************************************************!*\
+  !*** ./node_modules/date-fns/startOfMinute/index.js ***!
+  \******************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = startOfMinute;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name startOfMinute
+ * @category Minute Helpers
+ * @summary Return the start of a minute for the given date.
+ *
+ * @description
+ * Return the start of a minute for the given date.
+ * The result will be in the local timezone.
+ *
+ * @param {Date|Number} date - the original date
+ * @returns {Date} the start of a minute
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // The start of a minute for 1 December 2014 22:15:45.400:
+ * const result = startOfMinute(new Date(2014, 11, 1, 22, 15, 45, 400))
+ * //=> Mon Dec 01 2014 22:15:00
+ */
+function startOfMinute(dirtyDate) {
+  (0, _index2.default)(1, arguments);
+  var date = (0, _index.default)(dirtyDate);
+  date.setSeconds(0, 0);
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/startOfMonth/index.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/date-fns/startOfMonth/index.js ***!
+  \*****************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = startOfMonth;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name startOfMonth
+ * @category Month Helpers
+ * @summary Return the start of a month for the given date.
+ *
+ * @description
+ * Return the start of a month for the given date.
+ * The result will be in the local timezone.
+ *
+ * @param {Date|Number} date - the original date
+ * @returns {Date} the start of a month
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // The start of a month for 2 September 2014 11:55:00:
+ * const result = startOfMonth(new Date(2014, 8, 2, 11, 55, 0))
+ * //=> Mon Sep 01 2014 00:00:00
+ */
+function startOfMonth(dirtyDate) {
+  (0, _index2.default)(1, arguments);
+  var date = (0, _index.default)(dirtyDate);
+  date.setDate(1);
+  date.setHours(0, 0, 0, 0);
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/startOfQuarter/index.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/date-fns/startOfQuarter/index.js ***!
+  \*******************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = startOfQuarter;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name startOfQuarter
+ * @category Quarter Helpers
+ * @summary Return the start of a year quarter for the given date.
+ *
+ * @description
+ * Return the start of a year quarter for the given date.
+ * The result will be in the local timezone.
+ *
+ * @param {Date|Number} date - the original date
+ * @returns {Date} the start of a quarter
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // The start of a quarter for 2 September 2014 11:55:00:
+ * const result = startOfQuarter(new Date(2014, 8, 2, 11, 55, 0))
+ * //=> Tue Jul 01 2014 00:00:00
+ */
+function startOfQuarter(dirtyDate) {
+  (0, _index2.default)(1, arguments);
+  var date = (0, _index.default)(dirtyDate);
+  var currentMonth = date.getMonth();
+  var month = currentMonth - currentMonth % 3;
+  date.setMonth(month, 1);
+  date.setHours(0, 0, 0, 0);
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/startOfSecond/index.js":
+/*!******************************************************!*\
+  !*** ./node_modules/date-fns/startOfSecond/index.js ***!
+  \******************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = startOfSecond;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name startOfSecond
+ * @category Second Helpers
+ * @summary Return the start of a second for the given date.
+ *
+ * @description
+ * Return the start of a second for the given date.
+ * The result will be in the local timezone.
+ *
+ * @param {Date|Number} date - the original date
+ * @returns {Date} the start of a second
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // The start of a second for 1 December 2014 22:15:45.400:
+ * const result = startOfSecond(new Date(2014, 11, 1, 22, 15, 45, 400))
+ * //=> Mon Dec 01 2014 22:15:45.000
+ */
+function startOfSecond(dirtyDate) {
+  (0, _index2.default)(1, arguments);
+  var date = (0, _index.default)(dirtyDate);
+  date.setMilliseconds(0);
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/startOfToday/index.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/date-fns/startOfToday/index.js ***!
+  \*****************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = startOfToday;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../startOfDay/index.js */ "./node_modules/date-fns/startOfDay/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name startOfToday
+ * @category Day Helpers
+ * @summary Return the start of today.
+ * @pure false
+ *
+ * @description
+ * Return the start of today.
+ *
+ * > ⚠️ Please note that this function is not present in the FP submodule as
+ * > it uses `Date.now()` internally hence impure and can't be safely curried.
+ *
+ * @returns {Date} the start of today
+ *
+ * @example
+ * // If today is 6 October 2014:
+ * const result = startOfToday()
+ * //=> Mon Oct 6 2014 00:00:00
+ */
+function startOfToday() {
+  return (0, _index.default)(Date.now());
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/startOfTomorrow/index.js":
+/*!********************************************************!*\
+  !*** ./node_modules/date-fns/startOfTomorrow/index.js ***!
+  \********************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = startOfTomorrow;
+
+/**
+ * @name startOfTomorrow
+ * @category Day Helpers
+ * @summary Return the start of tomorrow.
+ * @pure false
+ *
+ * @description
+ * Return the start of tomorrow.
+ *
+ * > ⚠️ Please note that this function is not present in the FP submodule as
+ * > it uses `new Date()` internally hence impure and can't be safely curried.
+ *
+ * @returns {Date} the start of tomorrow
+ *
+ * @example
+ * // If today is 6 October 2014:
+ * const result = startOfTomorrow()
+ * //=> Tue Oct 7 2014 00:00:00
+ */
+function startOfTomorrow() {
+  var now = new Date();
+  var year = now.getFullYear();
+  var month = now.getMonth();
+  var day = now.getDate();
+  var date = new Date(0);
+  date.setFullYear(year, month, day + 1);
+  date.setHours(0, 0, 0, 0);
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/startOfWeek/index.js":
+/*!****************************************************!*\
+  !*** ./node_modules/date-fns/startOfWeek/index.js ***!
+  \****************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = startOfWeek;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index4 = __webpack_require__(/*! ../_lib/defaultOptions/index.js */ "./node_modules/date-fns/_lib/defaultOptions/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name startOfWeek
+ * @category Week Helpers
+ * @summary Return the start of a week for the given date.
+ *
+ * @description
+ * Return the start of a week for the given date.
+ * The result will be in the local timezone.
+ *
+ * @param {Date|Number} date - the original date
+ * @param {Object} [options] - an object with options.
+ * @param {Locale} [options.locale=defaultLocale] - the locale object. See [Locale]{@link https://date-fns.org/docs/Locale}
+ * @param {0|1|2|3|4|5|6} [options.weekStartsOn=0] - the index of the first day of the week (0 - Sunday)
+ * @returns {Date} the start of a week
+ * @throws {TypeError} 1 argument required
+ * @throws {RangeError} `options.weekStartsOn` must be between 0 and 6
+ *
+ * @example
+ * // The start of a week for 2 September 2014 11:55:00:
+ * const result = startOfWeek(new Date(2014, 8, 2, 11, 55, 0))
+ * //=> Sun Aug 31 2014 00:00:00
+ *
+ * @example
+ * // If the week starts on Monday, the start of the week for 2 September 2014 11:55:00:
+ * const result = startOfWeek(new Date(2014, 8, 2, 11, 55, 0), { weekStartsOn: 1 })
+ * //=> Mon Sep 01 2014 00:00:00
+ */
+function startOfWeek(dirtyDate, options) {
+  var _ref, _ref2, _ref3, _options$weekStartsOn, _options$locale, _options$locale$optio, _defaultOptions$local, _defaultOptions$local2;
+
+  (0, _index3.default)(1, arguments);
+  var defaultOptions = (0, _index4.getDefaultOptions)();
+  var weekStartsOn = (0, _index2.default)((_ref = (_ref2 = (_ref3 = (_options$weekStartsOn = options === null || options === void 0 ? void 0 : options.weekStartsOn) !== null && _options$weekStartsOn !== void 0 ? _options$weekStartsOn : options === null || options === void 0 ? void 0 : (_options$locale = options.locale) === null || _options$locale === void 0 ? void 0 : (_options$locale$optio = _options$locale.options) === null || _options$locale$optio === void 0 ? void 0 : _options$locale$optio.weekStartsOn) !== null && _ref3 !== void 0 ? _ref3 : defaultOptions.weekStartsOn) !== null && _ref2 !== void 0 ? _ref2 : (_defaultOptions$local = defaultOptions.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.weekStartsOn) !== null && _ref !== void 0 ? _ref : 0); // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
+
+  if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
+    throw new RangeError('weekStartsOn must be between 0 and 6 inclusively');
+  }
+
+  var date = (0, _index.default)(dirtyDate);
+  var day = date.getDay();
+  var diff = (day < weekStartsOn ? 7 : 0) + day - weekStartsOn;
+  date.setDate(date.getDate() - diff);
+  date.setHours(0, 0, 0, 0);
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/startOfWeekYear/index.js":
+/*!********************************************************!*\
+  !*** ./node_modules/date-fns/startOfWeekYear/index.js ***!
+  \********************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = startOfWeekYear;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../getWeekYear/index.js */ "./node_modules/date-fns/getWeekYear/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../startOfWeek/index.js */ "./node_modules/date-fns/startOfWeek/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+var _index4 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index5 = __webpack_require__(/*! ../_lib/defaultOptions/index.js */ "./node_modules/date-fns/_lib/defaultOptions/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name startOfWeekYear
+ * @category Week-Numbering Year Helpers
+ * @summary Return the start of a local week-numbering year for the given date.
+ *
+ * @description
+ * Return the start of a local week-numbering year.
+ * The exact calculation depends on the values of
+ * `options.weekStartsOn` (which is the index of the first day of the week)
+ * and `options.firstWeekContainsDate` (which is the day of January, which is always in
+ * the first week of the week-numbering year)
+ *
+ * Week numbering: https://en.wikipedia.org/wiki/Week#Week_numbering
+ *
+ * @param {Date|Number} date - the original date
+ * @param {Object} [options] - an object with options.
+ * @param {Locale} [options.locale=defaultLocale] - the locale object. See [Locale]{@link https://date-fns.org/docs/Locale}
+ * @param {0|1|2|3|4|5|6} [options.weekStartsOn=0] - the index of the first day of the week (0 - Sunday)
+ * @param {1|2|3|4|5|6|7} [options.firstWeekContainsDate=1] - the day of January, which is always in the first week of the year
+ * @returns {Date} the start of a week-numbering year
+ * @throws {TypeError} 1 argument required
+ * @throws {RangeError} `options.weekStartsOn` must be between 0 and 6
+ * @throws {RangeError} `options.firstWeekContainsDate` must be between 1 and 7
+ *
+ * @example
+ * // The start of an a week-numbering year for 2 July 2005 with default settings:
+ * const result = startOfWeekYear(new Date(2005, 6, 2))
+ * //=> Sun Dec 26 2004 00:00:00
+ *
+ * @example
+ * // The start of a week-numbering year for 2 July 2005
+ * // if Monday is the first day of week
+ * // and 4 January is always in the first week of the year:
+ * const result = startOfWeekYear(new Date(2005, 6, 2), {
+ *   weekStartsOn: 1,
+ *   firstWeekContainsDate: 4
+ * })
+ * //=> Mon Jan 03 2005 00:00:00
+ */
+function startOfWeekYear(dirtyDate, options) {
+  var _ref, _ref2, _ref3, _options$firstWeekCon, _options$locale, _options$locale$optio, _defaultOptions$local, _defaultOptions$local2;
+
+  (0, _index4.default)(1, arguments);
+  var defaultOptions = (0, _index5.getDefaultOptions)();
+  var firstWeekContainsDate = (0, _index3.default)((_ref = (_ref2 = (_ref3 = (_options$firstWeekCon = options === null || options === void 0 ? void 0 : options.firstWeekContainsDate) !== null && _options$firstWeekCon !== void 0 ? _options$firstWeekCon : options === null || options === void 0 ? void 0 : (_options$locale = options.locale) === null || _options$locale === void 0 ? void 0 : (_options$locale$optio = _options$locale.options) === null || _options$locale$optio === void 0 ? void 0 : _options$locale$optio.firstWeekContainsDate) !== null && _ref3 !== void 0 ? _ref3 : defaultOptions.firstWeekContainsDate) !== null && _ref2 !== void 0 ? _ref2 : (_defaultOptions$local = defaultOptions.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.firstWeekContainsDate) !== null && _ref !== void 0 ? _ref : 1);
+  var year = (0, _index.default)(dirtyDate, options);
+  var firstWeek = new Date(0);
+  firstWeek.setFullYear(year, 0, firstWeekContainsDate);
+  firstWeek.setHours(0, 0, 0, 0);
+  var date = (0, _index2.default)(firstWeek, options);
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/startOfYear/index.js":
+/*!****************************************************!*\
+  !*** ./node_modules/date-fns/startOfYear/index.js ***!
+  \****************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = startOfYear;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/toDate/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name startOfYear
+ * @category Year Helpers
+ * @summary Return the start of a year for the given date.
+ *
+ * @description
+ * Return the start of a year for the given date.
+ * The result will be in the local timezone.
+ *
+ * @param {Date|Number} date - the original date
+ * @returns {Date} the start of a year
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // The start of a year for 2 September 2014 11:55:00:
+ * const result = startOfYear(new Date(2014, 8, 2, 11, 55, 00))
+ * //=> Wed Jan 01 2014 00:00:00
+ */
+function startOfYear(dirtyDate) {
+  (0, _index2.default)(1, arguments);
+  var cleanDate = (0, _index.default)(dirtyDate);
+  var date = new Date(0);
+  date.setFullYear(cleanDate.getFullYear(), 0, 1);
+  date.setHours(0, 0, 0, 0);
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/startOfYesterday/index.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/date-fns/startOfYesterday/index.js ***!
+  \*********************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = startOfYesterday;
+
+/**
+ * @name startOfYesterday
+ * @category Day Helpers
+ * @summary Return the start of yesterday.
+ * @pure false
+ *
+ * @description
+ * Return the start of yesterday.
+ *
+ * > ⚠️ Please note that this function is not present in the FP submodule as
+ * > it uses `new Date()` internally hence impure and can't be safely curried.
+ *
+ * @returns {Date} the start of yesterday
+ *
+ * @example
+ * // If today is 6 October 2014:
+ * const result = startOfYesterday()
+ * //=> Sun Oct 5 2014 00:00:00
+ */
+function startOfYesterday() {
+  var now = new Date();
+  var year = now.getFullYear();
+  var month = now.getMonth();
+  var day = now.getDate();
+  var date = new Date(0);
+  date.setFullYear(year, month, day - 1);
+  date.setHours(0, 0, 0, 0);
+  return date;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/sub/index.js":
+/*!********************************************!*\
+  !*** ./node_modules/date-fns/sub/index.js ***!
+  \********************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = sub;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../subDays/index.js */ "./node_modules/date-fns/subDays/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../subMonths/index.js */ "./node_modules/date-fns/subMonths/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index4 = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+/**
+ * @name sub
+ * @category Common Helpers
+ * @summary Subtract the specified years, months, weeks, days, hours, minutes and seconds from the given date.
+ *
+ * @description
+ * Subtract the specified years, months, weeks, days, hours, minutes and seconds from the given date.
+ *
+ * @param {Date|Number} date - the date to be changed
+ * @param {Duration} duration - the object with years, months, weeks, days, hours, minutes and seconds to be subtracted
+ *
+ * | Key     | Description                        |
+ * |---------|------------------------------------|
+ * | years   | Amount of years to be subtracted   |
+ * | months  | Amount of months to be subtracted  |
+ * | weeks   | Amount of weeks to be subtracted   |
+ * | days    | Amount of days to be subtracted    |
+ * | hours   | Amount of hours to be subtracted   |
+ * | minutes | Amount of minutes to be subtracted |
+ * | seconds | Amount of seconds to be subtracted |
+ *
+ * All values default to 0
+ *
+ * @returns {Date} the new date with the seconds subtracted
+ * @throws {TypeError} 2 arguments required
+ *
+ * @example
+ * // Subtract the following duration from 15 June 2017 15:29:20
+ * const result = sub(new Date(2017, 5, 15, 15, 29, 20), {
+ *   years: 2,
+ *   months: 9,
+ *   weeks: 1,
+ *   days: 7,
+ *   hours: 5,
+ *   minutes: 9,
+ *   seconds: 30
+ * })
+ * //=> Mon Sep 1 2014 10:19:50
+ */
+function sub(date, duration) {
+  (0, _index3.default)(2, arguments);
+  if (!duration || _typeof(duration) !== 'object') return new Date(NaN);
+  var years = duration.years ? (0, _index4.default)(duration.years) : 0;
+  var months = duration.months ? (0, _index4.default)(duration.months) : 0;
+  var weeks = duration.weeks ? (0, _index4.default)(duration.weeks) : 0;
+  var days = duration.days ? (0, _index4.default)(duration.days) : 0;
+  var hours = duration.hours ? (0, _index4.default)(duration.hours) : 0;
+  var minutes = duration.minutes ? (0, _index4.default)(duration.minutes) : 0;
+  var seconds = duration.seconds ? (0, _index4.default)(duration.seconds) : 0; // Subtract years and months
+
+  var dateWithoutMonths = (0, _index2.default)(date, months + years * 12); // Subtract weeks and days
+
+  var dateWithoutDays = (0, _index.default)(dateWithoutMonths, days + weeks * 7); // Subtract hours, minutes and seconds
+
+  var minutestoSub = minutes + hours * 60;
+  var secondstoSub = seconds + minutestoSub * 60;
+  var mstoSub = secondstoSub * 1000;
+  var finalDate = new Date(dateWithoutDays.getTime() - mstoSub);
+  return finalDate;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/subBusinessDays/index.js":
+/*!********************************************************!*\
+  !*** ./node_modules/date-fns/subBusinessDays/index.js ***!
+  \********************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = subBusinessDays;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../addBusinessDays/index.js */ "./node_modules/date-fns/addBusinessDays/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name subBusinessDays
+ * @category Day Helpers
+ * @summary Substract the specified number of business days (mon - fri) to the given date.
+ *
+ * @description
+ * Substract the specified number of business days (mon - fri) to the given date, ignoring weekends.
+ *
+ * @param {Date|Number} date - the date to be changed
+ * @param {Number} amount - the amount of business days to be subtracted. Positive decimals will be rounded using `Math.floor`, decimals less than zero will be rounded using `Math.ceil`.
+ * @returns {Date} the new date with the business days subtracted
+ * @throws {TypeError} 2 arguments required
+ *
+ * @example
+ * // Substract 10 business days from 1 September 2014:
+ * const result = subBusinessDays(new Date(2014, 8, 1), 10)
+ * //=> Mon Aug 18 2014 00:00:00 (skipped weekend days)
+ */
+function subBusinessDays(dirtyDate, dirtyAmount) {
+  (0, _index2.default)(2, arguments);
+  var amount = (0, _index3.default)(dirtyAmount);
+  return (0, _index.default)(dirtyDate, -amount);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/subDays/index.js":
+/*!************************************************!*\
+  !*** ./node_modules/date-fns/subDays/index.js ***!
+  \************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = subDays;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../addDays/index.js */ "./node_modules/date-fns/addDays/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name subDays
+ * @category Day Helpers
+ * @summary Subtract the specified number of days from the given date.
+ *
+ * @description
+ * Subtract the specified number of days from the given date.
+ *
+ * @param {Date|Number} date - the date to be changed
+ * @param {Number} amount - the amount of days to be subtracted. Positive decimals will be rounded using `Math.floor`, decimals less than zero will be rounded using `Math.ceil`.
+ * @returns {Date} the new date with the days subtracted
+ * @throws {TypeError} 2 arguments required
+ *
+ * @example
+ * // Subtract 10 days from 1 September 2014:
+ * const result = subDays(new Date(2014, 8, 1), 10)
+ * //=> Fri Aug 22 2014 00:00:00
+ */
+function subDays(dirtyDate, dirtyAmount) {
+  (0, _index2.default)(2, arguments);
+  var amount = (0, _index3.default)(dirtyAmount);
+  return (0, _index.default)(dirtyDate, -amount);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/subHours/index.js":
+/*!*************************************************!*\
+  !*** ./node_modules/date-fns/subHours/index.js ***!
+  \*************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = subHours;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../addHours/index.js */ "./node_modules/date-fns/addHours/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name subHours
+ * @category Hour Helpers
+ * @summary Subtract the specified number of hours from the given date.
+ *
+ * @description
+ * Subtract the specified number of hours from the given date.
+ *
+ * @param {Date|Number} date - the date to be changed
+ * @param {Number} amount - the amount of hours to be subtracted. Positive decimals will be rounded using `Math.floor`, decimals less than zero will be rounded using `Math.ceil`.
+ * @returns {Date} the new date with the hours subtracted
+ * @throws {TypeError} 2 arguments required
+ *
+ * @example
+ * // Subtract 2 hours from 11 July 2014 01:00:00:
+ * const result = subHours(new Date(2014, 6, 11, 1, 0), 2)
+ * //=> Thu Jul 10 2014 23:00:00
+ */
+function subHours(dirtyDate, dirtyAmount) {
+  (0, _index2.default)(2, arguments);
+  var amount = (0, _index3.default)(dirtyAmount);
+  return (0, _index.default)(dirtyDate, -amount);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/subISOWeekYears/index.js":
+/*!********************************************************!*\
+  !*** ./node_modules/date-fns/subISOWeekYears/index.js ***!
+  \********************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = subISOWeekYears;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../addISOWeekYears/index.js */ "./node_modules/date-fns/addISOWeekYears/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name subISOWeekYears
+ * @category ISO Week-Numbering Year Helpers
+ * @summary Subtract the specified number of ISO week-numbering years from the given date.
+ *
+ * @description
+ * Subtract the specified number of ISO week-numbering years from the given date.
+ *
+ * ISO week-numbering year: http://en.wikipedia.org/wiki/ISO_week_date
+ *
+ * @param {Date|Number} date - the date to be changed
+ * @param {Number} amount - the amount of ISO week-numbering years to be subtracted. Positive decimals will be rounded using `Math.floor`, decimals less than zero will be rounded using `Math.ceil`.
+ * @returns {Date} the new date with the ISO week-numbering years subtracted
+ * @throws {TypeError} 2 arguments required
+ *
+ * @example
+ * // Subtract 5 ISO week-numbering years from 1 September 2014:
+ * const result = subISOWeekYears(new Date(2014, 8, 1), 5)
+ * //=> Mon Aug 31 2009 00:00:00
+ */
+function subISOWeekYears(dirtyDate, dirtyAmount) {
+  (0, _index2.default)(2, arguments);
+  var amount = (0, _index3.default)(dirtyAmount);
+  return (0, _index.default)(dirtyDate, -amount);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/subMilliseconds/index.js":
+/*!********************************************************!*\
+  !*** ./node_modules/date-fns/subMilliseconds/index.js ***!
+  \********************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = subMilliseconds;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../addMilliseconds/index.js */ "./node_modules/date-fns/addMilliseconds/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name subMilliseconds
+ * @category Millisecond Helpers
+ * @summary Subtract the specified number of milliseconds from the given date.
+ *
+ * @description
+ * Subtract the specified number of milliseconds from the given date.
+ *
+ * @param {Date|Number} date - the date to be changed
+ * @param {Number} amount - the amount of milliseconds to be subtracted. Positive decimals will be rounded using `Math.floor`, decimals less than zero will be rounded using `Math.ceil`.
+ * @returns {Date} the new date with the milliseconds subtracted
+ * @throws {TypeError} 2 arguments required
+ *
+ * @example
+ * // Subtract 750 milliseconds from 10 July 2014 12:45:30.000:
+ * const result = subMilliseconds(new Date(2014, 6, 10, 12, 45, 30, 0), 750)
+ * //=> Thu Jul 10 2014 12:45:29.250
+ */
+function subMilliseconds(dirtyDate, dirtyAmount) {
+  (0, _index2.default)(2, arguments);
+  var amount = (0, _index3.default)(dirtyAmount);
+  return (0, _index.default)(dirtyDate, -amount);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/subMinutes/index.js":
+/*!***************************************************!*\
+  !*** ./node_modules/date-fns/subMinutes/index.js ***!
+  \***************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = subMinutes;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../addMinutes/index.js */ "./node_modules/date-fns/addMinutes/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name subMinutes
+ * @category Minute Helpers
+ * @summary Subtract the specified number of minutes from the given date.
+ *
+ * @description
+ * Subtract the specified number of minutes from the given date.
+ *
+ * @param {Date|Number} date - the date to be changed
+ * @param {Number} amount - the amount of minutes to be subtracted. Positive decimals will be rounded using `Math.floor`, decimals less than zero will be rounded using `Math.ceil`.
+ * @returns {Date} the new date with the minutes subtracted
+ * @throws {TypeError} 2 arguments required
+ *
+ * @example
+ * // Subtract 30 minutes from 10 July 2014 12:00:00:
+ * const result = subMinutes(new Date(2014, 6, 10, 12, 0), 30)
+ * //=> Thu Jul 10 2014 11:30:00
+ */
+function subMinutes(dirtyDate, dirtyAmount) {
+  (0, _index2.default)(2, arguments);
+  var amount = (0, _index3.default)(dirtyAmount);
+  return (0, _index.default)(dirtyDate, -amount);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/subMonths/index.js":
+/*!**************************************************!*\
+  !*** ./node_modules/date-fns/subMonths/index.js ***!
+  \**************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = subMonths;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../addMonths/index.js */ "./node_modules/date-fns/addMonths/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name subMonths
+ * @category Month Helpers
+ * @summary Subtract the specified number of months from the given date.
+ *
+ * @description
+ * Subtract the specified number of months from the given date.
+ *
+ * @param {Date|Number} date - the date to be changed
+ * @param {Number} amount - the amount of months to be subtracted. Positive decimals will be rounded using `Math.floor`, decimals less than zero will be rounded using `Math.ceil`.
+ * @returns {Date} the new date with the months subtracted
+ * @throws {TypeError} 2 arguments required
+ *
+ * @example
+ * // Subtract 5 months from 1 February 2015:
+ * const result = subMonths(new Date(2015, 1, 1), 5)
+ * //=> Mon Sep 01 2014 00:00:00
+ */
+function subMonths(dirtyDate, dirtyAmount) {
+  (0, _index3.default)(2, arguments);
+  var amount = (0, _index.default)(dirtyAmount);
+  return (0, _index2.default)(dirtyDate, -amount);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/subQuarters/index.js":
+/*!****************************************************!*\
+  !*** ./node_modules/date-fns/subQuarters/index.js ***!
+  \****************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = subQuarters;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../addQuarters/index.js */ "./node_modules/date-fns/addQuarters/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name subQuarters
+ * @category Quarter Helpers
+ * @summary Subtract the specified number of year quarters from the given date.
+ *
+ * @description
+ * Subtract the specified number of year quarters from the given date.
+ *
+ * @param {Date|Number} date - the date to be changed
+ * @param {Number} amount - the amount of quarters to be subtracted. Positive decimals will be rounded using `Math.floor`, decimals less than zero will be rounded using `Math.ceil`.
+ * @returns {Date} the new date with the quarters subtracted
+ * @throws {TypeError} 2 arguments required
+ *
+ * @example
+ * // Subtract 3 quarters from 1 September 2014:
+ * const result = subQuarters(new Date(2014, 8, 1), 3)
+ * //=> Sun Dec 01 2013 00:00:00
+ */
+function subQuarters(dirtyDate, dirtyAmount) {
+  (0, _index3.default)(2, arguments);
+  var amount = (0, _index.default)(dirtyAmount);
+  return (0, _index2.default)(dirtyDate, -amount);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/subSeconds/index.js":
+/*!***************************************************!*\
+  !*** ./node_modules/date-fns/subSeconds/index.js ***!
+  \***************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = subSeconds;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../addSeconds/index.js */ "./node_modules/date-fns/addSeconds/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name subSeconds
+ * @category Second Helpers
+ * @summary Subtract the specified number of seconds from the given date.
+ *
+ * @description
+ * Subtract the specified number of seconds from the given date.
+ *
+ * @param {Date|Number} date - the date to be changed
+ * @param {Number} amount - the amount of seconds to be subtracted. Positive decimals will be rounded using `Math.floor`, decimals less than zero will be rounded using `Math.ceil`.
+ * @returns {Date} the new date with the seconds subtracted
+ * @throws {TypeError} 2 arguments required
+ *
+ * @example
+ * // Subtract 30 seconds from 10 July 2014 12:45:00:
+ * const result = subSeconds(new Date(2014, 6, 10, 12, 45, 0), 30)
+ * //=> Thu Jul 10 2014 12:44:30
+ */
+function subSeconds(dirtyDate, dirtyAmount) {
+  (0, _index3.default)(2, arguments);
+  var amount = (0, _index.default)(dirtyAmount);
+  return (0, _index2.default)(dirtyDate, -amount);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/subWeeks/index.js":
+/*!*************************************************!*\
+  !*** ./node_modules/date-fns/subWeeks/index.js ***!
+  \*************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = subWeeks;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../addWeeks/index.js */ "./node_modules/date-fns/addWeeks/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name subWeeks
+ * @category Week Helpers
+ * @summary Subtract the specified number of weeks from the given date.
+ *
+ * @description
+ * Subtract the specified number of weeks from the given date.
+ *
+ * @param {Date|Number} date - the date to be changed
+ * @param {Number} amount - the amount of weeks to be subtracted. Positive decimals will be rounded using `Math.floor`, decimals less than zero will be rounded using `Math.ceil`.
+ * @returns {Date} the new date with the weeks subtracted
+ * @throws {TypeError} 2 arguments required
+ *
+ * @example
+ * // Subtract 4 weeks from 1 September 2014:
+ * const result = subWeeks(new Date(2014, 8, 1), 4)
+ * //=> Mon Aug 04 2014 00:00:00
+ */
+function subWeeks(dirtyDate, dirtyAmount) {
+  (0, _index3.default)(2, arguments);
+  var amount = (0, _index.default)(dirtyAmount);
+  return (0, _index2.default)(dirtyDate, -amount);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/subYears/index.js":
+/*!*************************************************!*\
+  !*** ./node_modules/date-fns/subYears/index.js ***!
+  \*************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = subYears;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/_lib/toInteger/index.js"));
+
+var _index2 = _interopRequireDefault(__webpack_require__(/*! ../addYears/index.js */ "./node_modules/date-fns/addYears/index.js"));
+
+var _index3 = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name subYears
+ * @category Year Helpers
+ * @summary Subtract the specified number of years from the given date.
+ *
+ * @description
+ * Subtract the specified number of years from the given date.
+ *
+ * @param {Date|Number} date - the date to be changed
+ * @param {Number} amount - the amount of years to be subtracted. Positive decimals will be rounded using `Math.floor`, decimals less than zero will be rounded using `Math.ceil`.
+ * @returns {Date} the new date with the years subtracted
+ * @throws {TypeError} 2 arguments required
+ *
+ * @example
+ * // Subtract 5 years from 1 September 2014:
+ * const result = subYears(new Date(2014, 8, 1), 5)
+ * //=> Tue Sep 01 2009 00:00:00
+ */
+function subYears(dirtyDate, dirtyAmount) {
+  (0, _index3.default)(2, arguments);
+  var amount = (0, _index.default)(dirtyAmount);
+  return (0, _index2.default)(dirtyDate, -amount);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
 /***/ "./node_modules/date-fns/toDate/index.js":
 /*!***********************************************!*\
   !*** ./node_modules/date-fns/toDate/index.js ***!
@@ -17175,6 +26790,147 @@ function toDate(argument) {
 
     return new Date(NaN);
   }
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/weeksToDays/index.js":
+/*!****************************************************!*\
+  !*** ./node_modules/date-fns/weeksToDays/index.js ***!
+  \****************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = weeksToDays;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index2 = __webpack_require__(/*! ../constants/index.js */ "./node_modules/date-fns/constants/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name weeksToDays
+ * @category Conversion Helpers
+ * @summary Convert weeks to days.
+ *
+ * @description
+ * Convert a number of weeks to a full number of days.
+ *
+ * @param {number} weeks - number of weeks to be converted
+ *
+ * @returns {number} the number of weeks converted in days
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // Convert 2 weeks into days
+ * const result = weeksToDays(2)
+ * //=> 14
+ */
+function weeksToDays(weeks) {
+  (0, _index.default)(1, arguments);
+  return Math.floor(weeks * _index2.daysInWeek);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/yearsToMonths/index.js":
+/*!******************************************************!*\
+  !*** ./node_modules/date-fns/yearsToMonths/index.js ***!
+  \******************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = yearsToMonths;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index2 = __webpack_require__(/*! ../constants/index.js */ "./node_modules/date-fns/constants/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name yearsToMonths
+ * @category Conversion Helpers
+ * @summary Convert years to months.
+ *
+ * @description
+ * Convert a number of years to a full number of months.
+ *
+ * @param {number} years - number of years to be converted
+ *
+ * @returns {number} the number of years converted in months
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // Convert 2 years into months
+ * const result = yearsToMonths(2)
+ * //=> 24
+ */
+function yearsToMonths(years) {
+  (0, _index.default)(1, arguments);
+  return Math.floor(years * _index2.monthsInYear);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/yearsToQuarters/index.js":
+/*!********************************************************!*\
+  !*** ./node_modules/date-fns/yearsToQuarters/index.js ***!
+  \********************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = yearsToQuarters;
+
+var _index = _interopRequireDefault(__webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/_lib/requiredArgs/index.js"));
+
+var _index2 = __webpack_require__(/*! ../constants/index.js */ "./node_modules/date-fns/constants/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @name yearsToQuarters
+ * @category Conversion Helpers
+ * @summary Convert years to quarters.
+ *
+ * @description
+ * Convert a number of years to a full number of quarters.
+ *
+ * @param {number} years - number of years to be converted
+ *
+ * @returns {number} the number of years converted in quarters
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // Convert 2 years to quarters
+ * const result = yearsToQuarters(2)
+ * //=> 8
+ */
+function yearsToQuarters(years) {
+  (0, _index.default)(1, arguments);
+  return Math.floor(years * _index2.quartersInYear);
 }
 
 module.exports = exports.default;
