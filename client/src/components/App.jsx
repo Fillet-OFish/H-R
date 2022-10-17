@@ -8,7 +8,23 @@ export default function App() {
   const [product, setProduct] = useState([]) // one product (needed for page render)
   const [update, setUpdate] = useState(false)
 
-  const [qaData, setQaData] = useState([]); // used to store question data
+  // used to store questions data ---------------------------
+  const [qaData, setQaData] = useState([]);
+
+
+  // User is currently on this page
+  const [currentPage, setCurrentPage] = useState(1);
+  // No of Records to be displayed on each page
+  const [recordsPerPage] = useState(4);
+
+  // you need indices of first and last records on current page
+  const indexOfLastRecord = currentPage * recordsPerPage;
+  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+  // Records to be displayed on the current page
+  const currentRecords = qaData.slice(indexOfFirstRecord, indexOfLastRecord);
+  // calculate the number of pages
+  const nPages = Math.ceil(qaData.length / recordsPerPage);
+
 
   function temp() {
     axios.get('/api/products')
@@ -29,6 +45,9 @@ export default function App() {
       .then((response) => {
         setQaData(response.data.results);
       })
+      .catch(err => {
+        console.log('Error fetching data: ', err);
+      })
   }, [product])
 
   console.log(qaData, 'IM QUEST DATA ---------')
@@ -38,7 +57,7 @@ export default function App() {
       hello world
       <button onClick={() => temp()}>click</button>
 
-      <QuesnAnsw qaData={qaData} />
+      <QuesnAnsw qaData={qaData} currentRecords={currentRecords} nPages={nPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
     </div>
   )
 }

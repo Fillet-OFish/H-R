@@ -8,7 +8,7 @@ const QuesnAnsw = (props) => {
   return (
     <div>
       <div>
-        <QA qaData={props.qaData} awData={props.awData} />
+        <QA qaData={props.qaData} currentRecords={props.currentRecords} nPages={props.nPages} currentPage={props.currentPage} setCurrentPage={props.setCurrentPage} />
       </div>
     </div>
   )

@@ -2,8 +2,55 @@ body {
   font-family: sans-serif, arial;
 }
 
+nav {
+  margin-top: 2%;
+  display: inline-block;
+  justify-content: center;
+}
+
+a {
+  cursor: pointer;
+}
+
+h2 {
+  font-weight: lighter;
+}
 .style-icon {
   width: 80px;
   height: 80px;
   border-radius: 75px;
 }
+
+.QContainer {
+  color: #525252;
+}
+.AContainer {
+  color: #525252;
+  font-weight: lighter;
+}
+.user_info {
+  margin-top: 0.5%;
+  color: #525252;
+  font-weight: lighter;
+  font-size: small;
+}
+
+/* PAGINATION STYLING -------------------------------------------------- */
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 5px 10px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+}
+
+.pagination a.active {
+  background-color: #494949;
+  color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
