@@ -1,27 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import QuesnAnsw from './qa/index.jsx';
-import QA from './qa/QA.jsx';
+import Header from './header/index.jsx'
+import Overview from './overview/index.jsx';
+import Description from './description/index.jsx';
+import RelatedItemsAndComparison from './relatedItemsAndComparison/RelatedItemsAndComparison.jsx'
 
 export default function App() {
-  const [products, setProducts] = useState([]) // list of all products (needed for search bar)
-  const [product, setProduct] = useState([]) // one product (needed for page render)
-  const [update, setUpdate] = useState(false)
+  const [products, setProducts] = useState([]); // list of all products (needed for search bar)
+  const [product, setProduct] = useState([]); // one product (needed for page render)
+  const [update, setUpdate] = useState(false);
+  const [productRating, setProductRating] = useState([]); //set current product's rating
 
   // used to store questions data ---------------------------
   const [qaData, setQaData] = useState([]);
 
 
-  function temp() {
-    axios.get('/api/products')
-      .then(data => console.log('frontend', data.data))
-  }
-
   useEffect(() => {
     axios.get('/api/products')
       .then(result => {setProducts(result.data)})
     axios.get(`/api/products/${40344}`) // id 40344
-      .then(result => setProduct(result.data))
+    .then(result => setProduct(result.data))
+
+    if(product.id){
+      axios.get(`/api/reviews/${product.id}`)
+      .then((data) => {
+        let rating = {};
+        rating.count = data.data.count;
+        let average = 0
+        for (var i = 0; i < data.data.results.length; i++) {
+          average += data.data.results[i].rating
+          if (i === data.data.results.length - 1) {
+            average = average / data.data.results.length
+          }
+        }
+        rating.average = average;
+        setProductRating(rating);
+      })
+    }
   },[update])
 
   // get questions --------------------
@@ -36,15 +52,26 @@ export default function App() {
   }, [product])
 
 
-  return (
-    <div>
-      hello world
-      <button onClick={() => temp()}>click</button>
+  return(<>
+    {/* header */}
+    <Header product={product}/>
 
-      {/* Questions and Answers */}
-      <div className="container">
-        <QuesnAnsw qaData={qaData} />
-      </div>
+    {/* overview */}
+    <div className="container">
+      <Overview product={product} rating={productRating}/>
     </div>
-  )
+
+    {/* description */}
+    <Description product={product}/>
+
+    {/* related products */}
+    <div className="container">
+      {product.id ? <RelatedItemsAndComparison currentItem={product} setProduct={setProduct} /> : null }
+    </div>
+
+    {/* Questions and Answers */}
+    <div className="container">
+      <QuesnAnsw qaData={qaData} />
+    </div>
+  </>)
 }
