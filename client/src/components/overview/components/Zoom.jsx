@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-export default function Zoom({ src, magnifierHeight = 100, magnifieWidth = 100, zoomLevel = 1.5 }){
+export default function Zoom({ src, magnifierHeight = 100, magnifieWidth = 100, zoomLevel = 1.5, setExpand, expandPhoto }){
   const [[x, y], setXY] = useState([0, 0]);
   const [[imgWidth, imgHeight], setSize] = useState([0, 0]);
   const [showMagnifier, setShowMagnifier] = useState(false);
@@ -33,12 +33,12 @@ export default function Zoom({ src, magnifierHeight = 100, magnifieWidth = 100, 
         onMouseLeave={() => {
           setShowMagnifier(false);
         }}
-        alt={"img"}
         style={{
           objectFit:"contain",
           cursor:"none",
           width:"600px"
         }}
+        onClick={e=>{setExpand(prev=>!prev);expandPhoto()}}
       />
 
       <div

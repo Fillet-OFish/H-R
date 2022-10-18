@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaExpand, FaCompress } from 'react-icons/fa';
 import Zoom from './Zoom.jsx'
+import Carousel from './Carousel.jsx'
 
 function usePrevious(value) { //credit: Ohans Emmanuel
   const ref = useRef();
@@ -13,6 +14,7 @@ function usePrevious(value) { //credit: Ohans Emmanuel
 export default function Gallery({ style, noDefault }) {
   const [photos, setPhotos] = useState([])
   const [photo, setPhoto] = useState('')
+  const [click, setClick] = useState(0)
   const [expand, setExpand] = useState(true)
   const prevStyle = usePrevious(style)
   const newPhotos = useRef(style.photos)
@@ -22,17 +24,23 @@ export default function Gallery({ style, noDefault }) {
     // handle no default image
     noDefault ? setPhotos([{thumbnail_url: "https://i.postimg.cc/gjFHrzW3/image-4.png"}])
       : setPhotos(style.photos)
+
+    // if(click){setPhoto(photos[click])}
+
     if(photos && !photo){setPhoto(photos[0])}
     else{
       if(photos!==newPhotos && style!==prevStyle) {
         setPhoto(newPhotos[0])
       }
     }
+
   },[{}])
 
   // onClick function - input: img, output: change of gallery main photo
-  function changePhoto(prop) {
-    setPhoto(prop)
+  function changePhoto(props) {
+    let [index, curPhoto] = [props.i, props.photo]
+    setPhoto(curPhoto)
+    setClick(index)
   }
 
   // onClick function to collapse/uncollapse gallery img
@@ -50,15 +58,21 @@ export default function Gallery({ style, noDefault }) {
 
   return(
     <div className="left">
-      <div className="gallery-list">{photos ? (<div>{photos.map(photo => <p key={photo.url}><img src={photo.thumbnail_url} onClick={e=>{e.preventDefault();changePhoto(photo)}} /></p>)}</div>) : null}</div>
-      <div className="gallery-main" onClick={e=>{setExpand(!expand);expandPhoto()}}>
+      <div className="gallery-list">{photos ? (<div>{photos.map((photo, i) => <p key={i}><img src={photo.thumbnail_url} onClick={e=>{e.preventDefault();changePhoto({photo, i})}} /></p>)}</div>) : null}</div>
+      <div className="gallery-main">
         {photo ?
           expand ?
-            <><img className="img-main" src={photo.thumbnail_url}/><FaExpand  className="expand-icon" /></>
-            : <><Zoom src={photo.thumbnail_url}/><FaCompress className="expand-icon" /></>
+            <>
+              <Carousel photos={photos} click={click} setPhoto={setPhoto} setExpand={setExpand} expandPhoto={expandPhoto}/>
+              <FaExpand  className="expand-icon" onClick={e=>{setExpand(prev=>!prev);expandPhoto()}}/>
+            </>
+            :
+            <>
+              <Zoom src={photo.thumbnail_url} setExpand={setExpand} expandPhoto={expandPhoto}/>
+              <FaCompress className="expand-icon" onClick={e=>{setExpand(prev=>!prev);expandPhoto()}}/>
+            </>
         : null}
       </div>
-
     </div>
   )
 }

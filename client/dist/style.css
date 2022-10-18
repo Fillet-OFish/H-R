@@ -132,7 +132,7 @@ button {
   height:200px;
   border:1px black solid;
   background-color:white;
-  animation: fade-in 0.25s ease-in;
+  animation: fade-in 0.3s ease-in;
 }
 .cart-block-buttons{
   display:table;
@@ -210,21 +210,56 @@ button {
 }
 .gallery-main{
   position:relative;
-  margin-top:-30px;
+  margin-top:0px;
   display:flex;
+  user-select: none;
 }
 .gallery-main img{
-  /* background-color:blue; */
   width:500px;
   height:100%;
   padding:25px 40px;
   object-fit:contain;
-  cursor:zoom-in;
+  user-select: none;
+}
+.carousel-container {
+  position: relative;
+  height: 500px;
+  display: flex;
+}
+.carousel-container img{
+}
+.carousel-container img:hover{
+  cursor: zoom-in;
+}
+.carousel-container .slide {
+}
+.carousel-container .slide.active {
+}
+.carousel-container .right-arrow {
+  position: absolute;
+  top: 50%;
+  right: 32px;
+  padding: 10px;
+  font-size: 25px;
+  font-weight: 100;
+  cursor: pointer;
+  z-index: 10;
+}
+.carousel-container .left-arrow {
+  position: absolute;
+  top: 50%;
+  left: 32px;
+  padding: 10px;
+  font-size: 25px;
+  font-weight: 100;
+  cursor: pointer;
+  z-index: 10;
 }
 .expand-icon{
   cursor:pointer;
   position:absolute;
   right:0;
+  font-size:20px;
   margin-top:10px;
   margin-right:50px;
 }
@@ -304,6 +339,10 @@ button {
   font-size:16px;
   text-align:left;
   padding-left:15px;
+  transition: 1s;
+}
+.cart-btn:focus{
+  outline: 1px gray solid;
 }
 .cart-btn .plus-sign{
   position:absolute;
