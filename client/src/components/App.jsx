@@ -12,8 +12,6 @@ export default function App() {
   const [update, setUpdate] = useState(false);
   const [productRating, setProductRating] = useState([]); //set current product's rating
 
-  // used to store questions data ---------------------------
-  const [qaData, setQaData] = useState([]);
 
 
   useEffect(() => {
@@ -22,7 +20,7 @@ export default function App() {
     axios.get(`/api/products/${40344}`) // id 40344
     .then(result => setProduct(result.data))
 
-    if(product.id){
+    if(product.id) {
       axios.get(`/api/reviews/${product.id}`)
       .then((data) => {
         let rating = {};
@@ -40,18 +38,6 @@ export default function App() {
     }
   },[update])
 
-  // get questions --------------------
-  useEffect(() => {
-    if(product.id){
-      axios.get('/api/qa/questions', {params: {p_id: product.id} })
-      .then((response) => {
-        setQaData(response.data.results);
-      })
-      .catch(err => {
-        console.log('Error fetching data: ', err);
-      })
-    }
-  }, [product])
 
   return(<>
     {/* header */}
@@ -76,7 +62,7 @@ export default function App() {
 
     {/* Questions and Answers */}
     <div className="container">
-      <QuesnAnsw qaData={qaData} />
+      <QuesnAnsw product={product} />
     </div>
   </>)
 }
