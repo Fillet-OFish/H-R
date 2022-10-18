@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaExpand, FaCompress } from 'react-icons/fa';
+import Zoom from './Zoom.jsx'
 
 function usePrevious(value) { //credit: Ohans Emmanuel
   const ref = useRef();
@@ -9,7 +10,7 @@ function usePrevious(value) { //credit: Ohans Emmanuel
   return ref.current;
 }
 
-export default function Gallery({style}) {
+export default function Gallery({ style, noDefault }) {
   const [photos, setPhotos] = useState([])
   const [photo, setPhoto] = useState('')
   const [expand, setExpand] = useState(true)
@@ -18,7 +19,9 @@ export default function Gallery({style}) {
 
   // on load/style change, set side photos and main photo to default
   useEffect(() => {
-    setPhotos(style.photos)
+    // handle no default image
+    noDefault ? setPhotos([{thumbnail_url: "https://i.postimg.cc/gjFHrzW3/image-4.png"}])
+      : setPhotos(style.photos)
     if(photos && !photo){setPhoto(photos[0])}
     else{
       if(photos!==newPhotos && style!==prevStyle) {
@@ -34,7 +37,7 @@ export default function Gallery({style}) {
 
   // onClick function to collapse/uncollapse gallery img
   function expandPhoto(prop){
-    if(expand=== true) {
+    if(expand === true) {
       document.getElementsByClassName('img-main')[0].style.width = '1000px'
       document.getElementsByClassName('img-main')[0].style.cursor = 'zoom-out'
       document.getElementsByClassName('right')[0].style.visibility = 'hidden'
@@ -45,19 +48,14 @@ export default function Gallery({style}) {
     }
   }
 
-  // magnify
-
   return(
     <div className="left">
       <div className="gallery-list">{photos ? (<div>{photos.map(photo => <p key={photo.url}><img src={photo.thumbnail_url} onClick={e=>{e.preventDefault();changePhoto(photo)}} /></p>)}</div>) : null}</div>
       <div className="gallery-main" onClick={e=>{setExpand(!expand);expandPhoto()}}>
         {photo ?
-          (<>
-            <img className="img-main" src={photo.thumbnail_url}/>
-            {expand ?
-              <FaExpand  className="expand-icon" />
-              : <FaCompress className="expand-icon" />}
-          </>)
+          expand ?
+            <><img className="img-main" src={photo.thumbnail_url}/><FaExpand  className="expand-icon" /></>
+            : <><Zoom src={photo.thumbnail_url}/><FaCompress className="expand-icon" /></>
         : null}
       </div>
 

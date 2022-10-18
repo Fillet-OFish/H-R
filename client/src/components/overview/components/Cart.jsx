@@ -64,8 +64,8 @@ export default function Cart({ style }) {
       {/* add to cart */}
       {quantity!==0 && size!=='default'?
         <p>
-          <button className="cart-btn">Add to bag
-          <span className="plus-sign"><FaPlus onClick={e=>postCart()}/></span>
+          <button className="cart-btn" onClick={e=>postCart()}>Add to bag
+          <span className="plus-sign"><FaPlus/></span>
           </button>
         </p>
         : null}

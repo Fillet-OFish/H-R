@@ -19,7 +19,7 @@ export default function Header({ product }) {
 
       <div className='header'>
         {/* logo */}
-        <span className='logo'>Hack & Reactor</span> <Search/>
+        <span className='logo'><a href='/'>Hack & Reactor</a></span> <Search/>
 
         {/* sign in/register */}
         <span className='header-links'>
