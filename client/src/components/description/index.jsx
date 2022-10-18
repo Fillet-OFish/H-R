@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 
+<<<<<<< HEAD
 export default function Description({product}) {
 
+=======
+export default function Description({ product }) {
+>>>>>>> master
   return(
     <div className="description">
       <div className="d-left">

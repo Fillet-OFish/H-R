@@ -44,15 +44,23 @@ export default function App() {
   useEffect(() => {
     if(product.id){
       axios.get('/api/qa/questions', {params: {p_id: product.id} })
+<<<<<<< HEAD
         .then((response) => {
           setQaData(response.data.results);
         })
         .catch(err => {
           console.log('Error fetching data: ', err);
         })
+=======
+      .then((response) => {
+        setQaData(response.data.results);
+      })
+      .catch(err => {
+        console.log('Error fetching data: ', err);
+      })
+>>>>>>> master
     }
   }, [product])
-
 
   return(<>
     {/* header */}

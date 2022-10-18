@@ -6,10 +6,8 @@ import QA from './QA.jsx';
 const QuesnAnsw = (props) => {
 
   return (
-    <div>
-      <div>
+    <div className="questions-and-answers">
         <QA qaData={props.qaData} />
-      </div>
     </div>
   )
 }
