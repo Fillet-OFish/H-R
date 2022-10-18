@@ -109,7 +109,7 @@ export default function YourOutfitList({currentItem, setProduct}) {
   return (
     <div style={{position: 'relative'}}>
       <h3>Your Outfit:</h3>
-      {outfit.length > 4 ? <button style={buttonLStyle} onClick={(e) => {buttonL(e)}}>{'<'}</button> : null}
+      {outfit.length > 3 ? <button style={buttonLStyle} onClick={(e) => {buttonL(e)}}>{'<'}</button> : null}
 
       <ul className='scrollOutfit' style={style}>
         <div style={{position: 'relative'}}>
@@ -119,7 +119,7 @@ export default function YourOutfitList({currentItem, setProduct}) {
         </div>
         {outfit ? outfit.map((item) => <RelatedProduct setProduct={setProduct} key={item} item={item} list={'outfit'} outfit={outfit} setOutfit={setOutfit} />) : null}
       </ul>
-      {outfit.length > 4 ? <button style={buttonRStyle} onClick={(e) => {buttonR(e)}}>{'>'}</button> : null}
+      {outfit.length > 3 ? <button style={buttonRStyle} onClick={(e) => {buttonR(e)}}>{'>'}</button> : null}
 
     </div>
 )

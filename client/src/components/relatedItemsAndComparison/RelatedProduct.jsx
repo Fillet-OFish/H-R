@@ -1,13 +1,15 @@
 import React, { useEffect, useState, useRef, useReducer } from 'react';
 import axios from 'axios';
 import StarRatings from './StarRatings.jsx'
+import PopupComparison from './PopupComparison.jsx'
 
 
 const style = {
+  listStyleType: 'none',
   position: 'relative',
   border: '1px solid lightgrey ',
   margin: '8px',
-  overflow: 'hidden',
+  // overflow: 'hidden',
   width: '257px',
   height: '380px',
   cursor: 'pointer',
@@ -30,7 +32,8 @@ export default function RelatedProduct({item, setProduct, list, outfit, setOutfi
 
   const [currentItem, setCurrentItem] = useState([]);
   const [defaultStyle, setDefaultStyle] = useState([]);
-  const [hover, setHover] = useState(false)
+  const [hover, setHover] = useState(false);
+  const [popup, setPopup] = useState(false);
 
   useEffect(() => {
     const source = axios.CancelToken.source();
@@ -72,7 +75,9 @@ export default function RelatedProduct({item, setProduct, list, outfit, setOutfi
 
   const clickHandler = function (e) {
     e.preventDefault();
-    setProduct(currentItem);
+    if(!hover) {
+      setProduct(currentItem);
+    }
   }
 
   const handleOutfitClick = (e) => {
@@ -83,13 +88,31 @@ export default function RelatedProduct({item, setProduct, list, outfit, setOutfi
     setOutfit(newOutfit);
   }
 
+
+  const handleComparisonClick = (e) => {
+    e.preventDefault();
+    setPopup(!popup);
+  }
+
   return (
     <div>
+      <PopupComparison popup={popup} setPopup={setPopup}/>
       {currentItem && defaultStyle.photos ?
         <li style={style} onClick={(e) => {clickHandler(e)}} >
           <img style={imageStyle} src={defaultStyle.photos[0].thumbnail_url || 'https://i.postimg.cc/gjFHrzW3/image-4.png'}></img>
-          {list === 'related' ? <button onMouseEnter={()=>{setHover(true)}} onMouseLeave={()=>{setHover(false)}} style={buttonStyle}>☆</button> : null}
-          {list === 'outfit' ? <button onMouseEnter={()=>{setHover(true)}} onMouseLeave={()=>{setHover(false)}} style={buttonStyle} onClick={e=>{handleOutfitClick(e)}}>x</button> : null }
+
+          {list === 'related' ?
+            <button onMouseEnter={()=>{setHover(true)}} onMouseLeave={()=>{setHover(false)}} style={buttonStyle} onClick={e=>{handleComparisonClick(e)}}>
+              ☆
+            </button> : null
+          }
+
+          {list === 'outfit' ?
+            <button onMouseEnter={()=>{setHover(true)}} onMouseLeave={()=>{setHover(false)}} style={buttonStyle} onClick={e=>{handleOutfitClick(e)}}>
+              x
+            </button> : null
+          }
+
           <div style={{padding: '5px 10px 0 10px' }}>
             <small style={smallStyle}>{currentItem.category}</small>
             <div style={{height: '30px', padding: '3px 0 3px 0', fontSize: '13px'}}>{currentItem.name + ' - ' + currentItem.slogan}</div>

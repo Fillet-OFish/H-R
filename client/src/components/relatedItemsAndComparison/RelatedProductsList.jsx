@@ -3,10 +3,9 @@ import axios from 'axios';
 import RelatedProduct from './RelatedProduct.jsx';
 
 const style = {
-  display: 'grid',
+  display: 'flex',
   margin: '0',
   padding: '0',
-  gridAutoFlow: 'column',
   maxWidth: '1100px',
   width: '100%',
   overflowX: 'auto',
