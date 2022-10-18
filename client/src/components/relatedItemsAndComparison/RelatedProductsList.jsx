@@ -34,7 +34,7 @@ export default function RelatedProductsList ({currentItem, setProduct}) {
     top: '50%',
     left: '-2%',
 
-    fontSize: '22px',
+    fontSize: '28px',
     border: 'none',
     backgroundColor: 'transparent',
     color: hideButton.buttonL,
@@ -46,12 +46,13 @@ export default function RelatedProductsList ({currentItem, setProduct}) {
     top: '50%',
     left: '100%',
 
-    fontSize: '22px',
+    fontSize: '28px',
     border: 'none',
     backgroundColor: 'transparent',
     color: hideButton.buttonR,
     cursor: hideButton.cursorR
   }
+
 
   const buttonL = (e) => {
     e.preventDefault();
@@ -60,7 +61,7 @@ export default function RelatedProductsList ({currentItem, setProduct}) {
       setHideButton({...hideButton, buttonR: 'grey', cursorR: 'pointer'})
     }
     if (e.target.nextSibling.scrollLeft - 275 === 0) {
-      setHideButton({...hideButton, buttonL: 'transparent', cursorL: 'default'})
+      setHideButton({buttonR: 'grey', cursorR: 'pointer', buttonL: 'transparent', cursorL: 'default'})
     }
 
     document.querySelector('.scroll').scrollBy(-275, 0)
@@ -71,8 +72,9 @@ export default function RelatedProductsList ({currentItem, setProduct}) {
 
     setHideButton({...hideButton, buttonL: 'grey', cursorL: 'pointer'})
     if (e.target.previousSibling.scrollWidth - (e.target.previousSibling.scrollLeft + 275) === 1100) {
-      setHideButton({...hideButton, buttonR: 'transparent', cursorR: 'default'})
+      setHideButton({buttonL: 'grey', cursorL: 'pointer', buttonR: 'transparent', cursorR: 'default'})
     }
+
 
     document.querySelector('.scroll').scrollBy(275, 0)
   }

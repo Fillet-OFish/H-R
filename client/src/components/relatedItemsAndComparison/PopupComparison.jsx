@@ -49,7 +49,7 @@ export default function PopupComparison ({popup, setPopup}) {
 
       <div style={content} onClick={()=>{setPopup(!popup)}}>
 
-        <p>some texts... <br/> click anywhere to exit </p>
+        <p>some texts... <br/> click anywhere in the box to exit </p>
 
       </div>
 

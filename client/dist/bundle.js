@@ -1052,7 +1052,7 @@ function PopupComparison(_ref) {
     onClick: function onClick() {
       setPopup(!popup);
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", null, "some texts... ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null), " click anywhere to exit ")));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", null, "some texts... ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null), " click anywhere in the box to exit ")));
 }
 
 /***/ }),
@@ -1337,7 +1337,7 @@ function RelatedProductsList(_ref) {
     position: 'absolute',
     top: '50%',
     left: '-2%',
-    fontSize: '22px',
+    fontSize: '28px',
     border: 'none',
     backgroundColor: 'transparent',
     color: hideButton.buttonL,
@@ -1347,7 +1347,7 @@ function RelatedProductsList(_ref) {
     position: 'absolute',
     top: '50%',
     left: '100%',
-    fontSize: '22px',
+    fontSize: '28px',
     border: 'none',
     backgroundColor: 'transparent',
     color: hideButton.buttonR,
@@ -1362,10 +1362,12 @@ function RelatedProductsList(_ref) {
       }));
     }
     if (e.target.nextSibling.scrollLeft - 275 === 0) {
-      setHideButton(_objectSpread(_objectSpread({}, hideButton), {}, {
+      setHideButton({
+        buttonR: 'grey',
+        cursorR: 'pointer',
         buttonL: 'transparent',
         cursorL: 'default'
-      }));
+      });
     }
     document.querySelector('.scroll').scrollBy(-275, 0);
   };
@@ -1376,10 +1378,12 @@ function RelatedProductsList(_ref) {
       cursorL: 'pointer'
     }));
     if (e.target.previousSibling.scrollWidth - (e.target.previousSibling.scrollLeft + 275) === 1100) {
-      setHideButton(_objectSpread(_objectSpread({}, hideButton), {}, {
+      setHideButton({
+        buttonL: 'grey',
+        cursorL: 'pointer',
         buttonR: 'transparent',
         cursorR: 'default'
-      }));
+      });
     }
     document.querySelector('.scroll').scrollBy(275, 0);
   };
@@ -1578,7 +1582,7 @@ function YourOutfitList(_ref) {
     position: 'absolute',
     top: '50%',
     left: '-2%',
-    fontSize: '22px',
+    fontSize: '28px',
     border: 'none',
     backgroundColor: 'transparent',
     color: hideButton.buttonL,
@@ -1588,7 +1592,7 @@ function YourOutfitList(_ref) {
     position: 'absolute',
     top: '50%',
     left: '100%',
-    fontSize: '22px',
+    fontSize: '28px',
     border: 'none',
     backgroundColor: 'transparent',
     color: hideButton.buttonR,
@@ -1610,10 +1614,12 @@ function YourOutfitList(_ref) {
       }));
     }
     if (e.target.nextSibling.scrollLeft - 275 === 0) {
-      setHideButton(_objectSpread(_objectSpread({}, hideButton), {}, {
+      setHideButton({
+        buttonR: 'grey',
+        cursorR: 'pointer',
         buttonL: 'transparent',
         cursorL: 'default'
-      }));
+      });
     }
     document.querySelector('.scrollOutfit').scrollBy(-275, 0);
   };
@@ -1624,10 +1630,12 @@ function YourOutfitList(_ref) {
       cursorL: 'pointer'
     }));
     if (e.target.previousSibling.scrollWidth - (e.target.previousSibling.scrollLeft + 275) === 1100) {
-      setHideButton(_objectSpread(_objectSpread({}, hideButton), {}, {
+      setHideButton({
+        buttonL: 'grey',
+        cursorL: 'pointer',
         buttonR: 'transparent',
         cursorR: 'default'
-      }));
+      });
     }
     document.querySelector('.scrollOutfit').scrollBy(275, 0);
   };
