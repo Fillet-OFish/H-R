@@ -24,5 +24,16 @@ const getAllA = (req, res) => {
     })
 }
 
+const postAnsw = (req, res) => {
+  addAnswer(req.params.id, req.body)
+    .then(response => {
+      res.status(201).send(response.data);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+}
+
 module.exports.getAllQ = getAllQ;
 module.exports.getAllA = getAllA;
+module.exports.postAnsw = postAnsw;
