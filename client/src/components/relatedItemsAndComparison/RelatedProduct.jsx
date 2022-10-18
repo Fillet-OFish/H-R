@@ -24,61 +24,71 @@ const smallStyle = {
   margin: '10px 0 10px 0'
 }
 
-const buttonStyle = {
-  position: 'absolute',
-  top: '4%',
-  left: '81%',
-  backgroundColor: 'rgba(0, 0, 0, .2)',
-  color: 'white',
-  fontSize: '22px',
-  fontWeight: 'bold',
-  border: 'none',
-  cursor: 'pointer'
-}
 
-export default function RelatedProduct({item, setProduct, list}) {
+export default function RelatedProduct({item, setProduct, list, outfit, setOutfit}) {
 
   const [currentItem, setCurrentItem] = useState([]);
   const [defaultStyle, setDefaultStyle] = useState([]);
+  const [hover, setHover] = useState(false)
 
   useEffect(() => {
     const source = axios.CancelToken.source();
 
     axios.get(`/api/products/${item}`, {cancelToken: source.token})
-      .then((data) => {setCurrentItem(data.data)})
-      .catch((err) => {console.log(err)});
+    .then((data) => {setCurrentItem(data.data)})
+    .catch((err) => {console.log(err)});
 
     axios.get(`/api/products/${item}/styles`, {cancelToken: source.token})
-      .then((data) => {
-        for (var i = 0; i < data.data.results.length; i++) {
-          if (data.data.results[i]['default?']) {
-            setDefaultStyle(data.data.results[i]);
-            return;
-          }
-          if (i === data.data.results.length - 1) {
-            setDefaultStyle(data.data.results[0]);
-          }
+    .then((data) => {
+      for (var i = 0; i < data.data.results.length; i++) {
+        if (data.data.results[i]['default?']) {
+          setDefaultStyle(data.data.results[i]);
+          return;
         }
-      })
-      .catch((err) => {console.log(err)});
+        if (i === data.data.results.length - 1) {
+          setDefaultStyle(data.data.results[0]);
+        }
+      }
+    })
+    .catch((err) => {console.log(err)});
   }, [])
+
+  const buttonStyle = {
+    position: 'absolute',
+    top: '3%',
+    left: '90%',
+    WebkitTransform: 'translateX(-50%)',
+    transform: 'translateX(-50%)',
+    backgroundColor: (hover ? 'white' : 'rgba(0, 0, 0, .2)'),
+    color: (hover ? 'grey' : 'white'),
+    fontSize: '22px',
+    fontWeight: 'bold',
+    border: 'none',
+    cursor: 'pointer',
+    borderRadius: '6px'
+
+  }
 
   const clickHandler = function (e) {
     e.preventDefault();
     setProduct(currentItem);
   }
 
-
-
-
+  const handleOutfitClick = (e) => {
+    e.preventDefault();
+    const i = outfit.indexOf(item);
+    const newOutfit = outfit.slice(0, i).concat(outfit.slice(i + 1));
+    localStorage.setItem('outfit', JSON.stringify(newOutfit));
+    setOutfit(newOutfit);
+  }
 
   return (
     <div>
       {currentItem && defaultStyle.photos ?
         <li style={style} onClick={(e) => {clickHandler(e)}} >
           <img style={imageStyle} src={defaultStyle.photos[0].thumbnail_url}></img>
-          {list === 'related' ? <button style={buttonStyle}>☆</button> : null}
-          {list === 'outfit' ? <button style={buttonStyle}>x</button> : null }
+          {list === 'related' ? <button onMouseEnter={()=>{setHover(true)}} onMouseLeave={()=>{setHover(false)}} style={buttonStyle}>☆</button> : null}
+          {list === 'outfit' ? <button onMouseEnter={()=>{setHover(true)}} onMouseLeave={()=>{setHover(false)}} style={buttonStyle} onClick={e=>{handleOutfitClick(e)}}>x</button> : null }
           <div style={{padding: '5px 10px 0 10px' }}>
             <small style={smallStyle}>{currentItem.category}</small>
             <div style={{height: '30px', padding: '3px 0 3px 0', fontSize: '13px'}}>{currentItem.name + ' - ' + currentItem.slogan}</div>

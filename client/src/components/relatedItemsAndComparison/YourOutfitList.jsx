@@ -12,24 +12,64 @@ const style = {
   overflow: "hidden"
 }
 
-const buttonStyle = {
-  position: 'absolute',
-  top: '50%',
-  left: '-2%',
 
-  fontSize: '22px',
-  border: 'none',
-  backgroundColor: 'transparent',
-
-}
 
 export default function YourOutfitList({currentItem, setProduct}) {
 
   const [outfit, setOutfit] = useState(() => {
-      let outfit = JSON.parse(localStorage.getItem('outfit')) || [];
-      return outfit;
-    }
+    let outfit = JSON.parse(localStorage.getItem('outfit')) || [];
+    return outfit;
+  }
   );
+  const [hideButton, setHideButton] = useState({buttonL: 'transparent', cursorL: 'default', buttonR: 'grey', cursorR: 'pointer'})
+  const [hover, setHover] = useState(false)
+
+  const liStyle = {
+    position: 'relative',
+    backgroundColor: (hover ? 'lightgrey' : 'white' ),
+    border: '1px solid lightgrey ',
+    margin: '8px',
+    overflow: 'hidden',
+    width: '257px',
+    height: '380px',
+    cursor: 'pointer',
+  }
+
+  const buttonStyle = {
+    cursor: 'pointer',
+    width: '100%',
+    height: '100%',
+    fontSize: '18px',
+    fontWeight: 'normal',
+    border: 'none',
+    color: (hover ? 'black' : 'grey'),
+    backgroundColor: 'transparent',
+  }
+
+  const buttonLStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '-2%',
+
+    fontSize: '22px',
+    border: 'none',
+    backgroundColor: 'transparent',
+    color: hideButton.buttonL,
+    cursor: hideButton.cursorL
+  }
+
+  const buttonRStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '100%',
+
+    fontSize: '22px',
+    border: 'none',
+    backgroundColor: 'transparent',
+    color: hideButton.buttonR,
+    cursor: hideButton.cursorR
+  }
+
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -39,14 +79,44 @@ export default function YourOutfitList({currentItem, setProduct}) {
     }
   }
 
+  const buttonL = (e) => {
+    e.preventDefault();
+    document.querySelector('.scrollOutfit').scrollBy(-275, 0)
+
+    if (e.target.nextSibling.scrollWidth - e.target.nextSibling.scrollLeft > 1100) {
+      setHideButton({...hideButton, buttonR: 'grey', cursorR: 'pointer'})
+    }
+    if (e.target.nextSibling.scrollLeft === 0) {
+      setHideButton({...hideButton, buttonL: 'transparent', cursorL: 'default'})
+    }
+  }
+
+  const buttonR = (e) => {
+    e.preventDefault();
+    document.querySelector('.scrollOutfit').scrollBy(275, 0)
+
+    setHideButton({...hideButton, buttonL: 'grey', cursorL: 'pointer'})
+    if (e.target.previousSibling.scrollWidth - e.target.previousSibling.scrollLeft === 1100) {
+      setHideButton({...hideButton, buttonR: 'transparent', cursorR: 'default'})
+    }
+  }
+
 
   return (
     <div style={{position: 'relative'}}>
       <h3>Your Outfit:</h3>
-      <ul style={style}>
-        <button style={buttonStyle} onClick={(e)=>{handleClick(e)}}>+</button>
-        {outfit ? outfit.map((item) => <RelatedProduct setProduct={setProduct} key={item} item={item} list={'outfit'} />) : null}
+      {outfit.length > 4 ? <button style={buttonLStyle} onClick={(e) => {buttonL(e)}}>{'<'}</button> : null}
+
+      <ul className='scrollOutfit' style={style}>
+        <div style={{position: 'relative'}}>
+          <li style={liStyle} onMouseEnter={()=>{setHover(true)}} onMouseLeave={()=>{setHover(false)}}>
+            <button style={buttonStyle} onClick={(e)=>{handleClick(e)}}>Add To Outfit</button>
+          </li>
+        </div>
+        {outfit ? outfit.map((item) => <RelatedProduct setProduct={setProduct} key={item} item={item} list={'outfit'} outfit={outfit} setOutfit={setOutfit} />) : null}
       </ul>
+      {outfit.length > 4 ? <button style={buttonRStyle} onClick={(e) => {buttonR(e)}}>{'>'}</button> : null}
+
     </div>
 )
 
