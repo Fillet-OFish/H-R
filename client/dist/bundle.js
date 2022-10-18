@@ -47,11 +47,6 @@ function App() {
     productRating = _useState8[0],
     setProductRating = _useState8[1]; //set current product's rating
 
-  // used to store questions data ---------------------------
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
-    _useState10 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState9, 2),
-    qaData = _useState10[0],
-    setQaData = _useState10[1];
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     axios__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/products').then(function (result) {
       setProducts(result.data);
@@ -76,19 +71,6 @@ function App() {
       });
     }
   }, [update]);
-
-  // get questions --------------------
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    axios__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/qa/questions', {
-      params: {
-        p_id: product.id
-      }
-    }).then(function (response) {
-      setQaData(response.data.results);
-    })["catch"](function (err) {
-      console.log('Error fetching data: ', err);
-    });
-  }, [product]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement((react__WEBPACK_IMPORTED_MODULE_1___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_header_index_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
     product: product
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
@@ -106,7 +88,7 @@ function App() {
   }) : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_qa_index_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    qaData: qaData
+    product: product
   })));
 }
 
@@ -701,7 +683,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var toDate = __webpack_require__(/*! date-fns/toDate */ "./node_modules/date-fns/esm/toDate/index.js");
 
 // ENTRY OF EACH ANSWER ----------
 var AWEntry = function AWEntry(props) {
@@ -710,16 +691,15 @@ var AWEntry = function AWEntry(props) {
     _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
     helpful = _useState2[0],
     setHelpful = _useState2[1];
-  console.log(props.ans.date, '------------------');
-  console.log(props.ans.helpfulness, '------------------');
-
-  // const result = toDate(new Date(2014, 1, 11, 11, 30, 30))
-  // console.log(result, '-------')
-
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, props.index === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("strong", null, "A:"), props.ans.body) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, props.ans.body), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null), props.ans.photos.map(function (img, index) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, props.index === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("strong", null, "A: "), props.ans.body) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, props.ans.body), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null), props.ans.photos.map(function (img, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("img", {
       src: img.url,
-      key: index
+      key: index,
+      onClick: function onClick() {
+        props.setModalOn(!props.modalOn);
+        props.setImage(img.url);
+      },
+      className: "answ-images"
     });
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "user_info"
@@ -731,6 +711,124 @@ var AWEntry = function AWEntry(props) {
   }, "Yes"), " (", props.ans.helpfulness, ") | ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("a", null, "Report"), " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AWEntry);
+
+/***/ }),
+
+/***/ "./client/src/components/qa/AddAnswModal.jsx":
+/*!***************************************************!*\
+  !*** ./client/src/components/qa/AddAnswModal.jsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+
+
+
+
+// ENTRY OF EACH ANSWER ----------
+var AddAnswModal = function AddAnswModal(props) {
+  console.log(props.QID, 'hola');
+  // post request to add answer
+  var postAnsw = function postAnsw(q_id, body, name, email, photos) {
+    axios__WEBPACK_IMPORTED_MODULE_1__["default"].post("/api/qa/questions/".concat(q_id, "/answers"), {
+      body: body,
+      name: name,
+      email: email,
+      photos: []
+    }).then(function (response) {
+      console.log(response, 'ADD ANSWER POST ----');
+    })["catch"](function (err) {
+      console.log(err);
+    });
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: props.modalAnswOn === true ? 'popup-answ' : ''
+  }, props.modalAnswOn === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "form-popup"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
+    onSubmit: function onSubmit(e) {
+      e.preventDefault();
+      postAnsw(props.QID.question_id, e.target.reply.value, e.target.user.value, e.target.email.value);
+      props.setModalAnswOn(!props.modalAnswOn);
+      e.target.reply.value = '';
+      e.target.user.value = '';
+      e.target.email.value = '';
+    },
+    className: "form-container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Submit your Answer"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
+    className: "subheading"
+  }, "".concat(props.product.name, ": ").concat(props.QID.question_body)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("b", null, "Answer")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("textarea", {
+    type: "text",
+    name: "reply",
+    placeholder: "Enter reply...",
+    maxLength: "1000",
+    onChange: function onChange(e) {
+      return console.log(e.target.value);
+    },
+    required: true
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("b", null, "Nickname")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    type: "text",
+    name: "user",
+    placeholder: "Example: jack543!",
+    maxLength: "60",
+    required: true
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "warnings"
+  }, "For privacy reasons, do not use your full name or email address"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("b", null, "Email")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    type: "text",
+    name: "email",
+    placeholder: "Example: jack@email.com",
+    required: true
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "warnings"
+  }, "For authentication reasons, you will not be emailed"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    type: "submit",
+    className: "form-button"
+  }, "Submit"))) : "");
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AddAnswModal);
+
+/***/ }),
+
+/***/ "./client/src/components/qa/ImageModal.jsx":
+/*!*************************************************!*\
+  !*** ./client/src/components/qa/ImageModal.jsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+
+// ENTRY OF EACH ANSWER ----------
+var ImageModal = function ImageModal(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: props.modalOn === true ? 'popup-img' : '',
+    onClick: function onClick() {
+      props.setModalOn(!props.modalOn);
+      // props.setImage(img.url);
+    }
+  }, props.modalOn === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "form-popup"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+    src: props.getImage,
+    className: "img-modal"
+  })) : "");
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ImageModal);
 
 /***/ }),
 
@@ -844,7 +942,13 @@ var QA = function QA(props) {
       react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_QAEntry_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
         ques: ques,
         key: index,
-        qaData: props.qaData
+        qaData: props.qaData,
+        setImage: props.setImage,
+        setModalOn: props.setModalOn,
+        modalOn: props.modalOn,
+        modalAnswOn: props.modalAnswOn,
+        setModalAnswOn: props.setModalAnswOn,
+        setQID: props.setQID
       })
     );
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Pagination_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -919,6 +1023,7 @@ var QAEntry = function QAEntry(props) {
   // render answers data when qaData or ques states change
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     getAnswers(props.ques.question_id);
+    console.log(props.ques);
   }, [props.qaData, props.ques]);
 
   // render answers data with an answers entry component and a button for more answers
@@ -934,13 +1039,21 @@ var QAEntry = function QAEntry(props) {
       helpful ? props.ques.question_helpfulness-- : props.ques.question_helpfulness++;
       setHelpful(!helpful);
     }
-  }, "Yes"), " (", props.ques.question_helpfulness, ") | ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("a", null, "Add Answer"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+  }, "Yes"), " (", props.ques.question_helpfulness, ") | ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("a", {
+    onClick: function onClick() {
+      props.setModalAnswOn(!props.modalAnswOn);
+      props.setQID(props.ques);
+    }
+  }, "Add Answer"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "AContainer"
   }, currentAnswers.length === 0 ? 'No answers yet!' : currentAnswers.map(function (ans, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_AWEntry_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
       ans: ans,
       key: index,
-      index: index
+      index: index,
+      setImage: props.setImage,
+      setModalOn: props.setModalOn,
+      modalOn: props.modalOn
     })
     // <div><strong>A: {`A: ${ans.body}`}</strong></div>
     ;
@@ -948,7 +1061,7 @@ var QAEntry = function QAEntry(props) {
     onClick: function onClick() {
       return addAnsw();
     }
-  }, "Load more answers") : ""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null));
+  }, "Load more answers") : ""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (QAEntry);
 
@@ -965,16 +1078,79 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var _QA_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./QA.jsx */ "./client/src/components/qa/QA.jsx");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var _QA_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./QA.jsx */ "./client/src/components/qa/QA.jsx");
+/* harmony import */ var _ImageModal_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ImageModal.jsx */ "./client/src/components/qa/ImageModal.jsx");
+/* harmony import */ var _AddAnswModal_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./AddAnswModal.jsx */ "./client/src/components/qa/AddAnswModal.jsx");
+
+
+
+
 
 
 
 var QuesnAnsw = function QuesnAnsw(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_QA_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    qaData: props.qaData
+  // used to store questions data ---------------------------
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+    _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
+    qaData = _useState2[0],
+    setQaData = _useState2[1];
+  // these states pass down the image url for the popup modal --------------
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
+    _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState3, 2),
+    getImage = _useState4[0],
+    setImage = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+    _useState6 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState5, 2),
+    modalOn = _useState6[0],
+    setModalOn = _useState6[1];
+  // popup modal for add new answers
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+    _useState8 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState7, 2),
+    modalAnswOn = _useState8[0],
+    setModalAnswOn = _useState8[1];
+  // question/question id for add answers
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
+    _useState10 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState9, 2),
+    QID = _useState10[0],
+    setQID = _useState10[1];
+
+  // get questions --------------------
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    if (props.product.id) {
+      axios__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/qa/questions', {
+        params: {
+          p_id: props.product.id
+        }
+      }).then(function (response) {
+        setQaData(response.data.results);
+      })["catch"](function (err) {
+        console.log('Error fetching data: ', err);
+      });
+    }
+  }, [props.product]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_QA_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    qaData: qaData,
+    setImage: setImage,
+    setModalOn: setModalOn,
+    modalOn: modalOn,
+    modalAnswOn: modalAnswOn,
+    setModalAnswOn: setModalAnswOn,
+    setQID: setQID
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_ImageModal_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    getImage: getImage,
+    modalOn: modalOn,
+    setModalOn: setModalOn
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_AddAnswModal_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    product: props.product,
+    modalOn: modalOn,
+    setModalOn: setModalOn,
+    modalAnswOn: modalAnswOn,
+    setModalAnswOn: setModalAnswOn,
+    QID: QID
   })));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (QuesnAnsw);

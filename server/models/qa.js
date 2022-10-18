@@ -13,7 +13,7 @@ function getQuestions(params, callback) {
 // get request
 function getAnswers(q_id, callback) {
   let options = {
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/qa/questions/${q_id}/answers`,
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/qa/questions/${q_id}/answers?count=100`,
     headers: {
       'User-Agent': 'request',
       'Authorization': `${process.env.TOKENS}`
@@ -34,12 +34,19 @@ function addQuestion(callback) {
   return axios(options);
 }
 // post request
-function addAnswer(q_id, callback) {
+function addAnswer(q_id, obj) {
   let options = {
+    method: 'POST',
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/qa/questions/${q_id}/answers`,
     headers: {
-      'User-Agent': 'request',
+      'Content-Type': 'application/json',
       'Authorization': `${process.env.TOKENS}`
+    },
+    data: {
+      'body': obj.body,
+      'name': obj.name,
+      'email': obj.email,
+      'photos': obj.photos
     }
   }
   return axios(options);

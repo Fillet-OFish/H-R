@@ -28,7 +28,7 @@ const QA = (props) => {
       <h2>Questions & Answers</h2>
       {currentRecords.map((ques, index) => (
         // set each question entry ---------
-        <QAEntry ques={ques} key={index} qaData={props.qaData} />
+        <QAEntry ques={ques} key={index} qaData={props.qaData} setImage={props.setImage} setModalOn={props.setModalOn} modalOn={props.modalOn} modalAnswOn={props.modalAnswOn} setModalAnswOn={props.setModalAnswOn} setQID={props.setQID} />
       ))}
 
       {/* set pagination ----------- */}
