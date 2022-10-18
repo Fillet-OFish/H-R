@@ -74,6 +74,28 @@ function reportQuestion(q_id, callback) {
   return axios(options);
 }
 // put request
+function markQHelpful(q_id, callback) {
+  let options = {
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/qa/questions/:${q_id}/helpful`,
+    headers: {
+      'User-Agent': 'request',
+      'Authorization': `${process.env.TOKENS}`
+    }
+  }
+  return axios(options);
+}
+// put request
+function reportQuestion(q_id, callback) {
+  let options = {
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/qa/questions/${q_id}/report`,
+    headers: {
+      'User-Agent': 'request',
+      'Authorization': `${process.env.TOKENS}`
+    }
+  }
+  return axios(options);
+}
+// put request
 function markAHelpful(a_id, callback) {
   let options = {
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/qa/answers/${a_id}/helpful`,

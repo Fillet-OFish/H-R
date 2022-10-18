@@ -14,7 +14,6 @@ export default function App() {
 
 
 
-
   useEffect(() => {
     axios.get('/api/products')
       .then(result => {setProducts(result.data)})

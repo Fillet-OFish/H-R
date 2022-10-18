@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
-export default function Description({product}) {
-  console.log('descrip', product.features)
+export default function Description({ product }) {
   return(
     <div className="description">
       <div className="d-left">

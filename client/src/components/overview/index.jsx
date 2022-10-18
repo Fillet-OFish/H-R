@@ -7,7 +7,7 @@ import Cart from './components/Cart.jsx'
 export default function Overview({product, rating}) {
   const [styles, setStyles] = useState([])
   const [style, setStyle] = useState([])
-  const [update, setUpdate] = useState(false)
+  const [noDefault, setNoDefault] = useState(false)
 
   // on load/product change, set styles/style based on default product/new product
   useEffect(() => {
@@ -17,7 +17,9 @@ export default function Overview({product, rating}) {
         .then(result => {
           setStyles(result.data.results);
           setStyle(result.data.results[0])
+          return result.data.results[0]
         })
+        .then(style => {if(style['default?']===false){setNoDefault(true)}})
       }
     }
   },[product])
@@ -25,7 +27,7 @@ export default function Overview({product, rating}) {
   return(
     <>
         {/* Gallery */}
-        <Gallery update={update} style={style}/>
+        <Gallery style={style} noDefault={noDefault}/>
 
         <div className="right">
           {/* Stars */}
@@ -34,14 +36,16 @@ export default function Overview({product, rating}) {
           {/* Category */}
           <p className="product-category">UNISEX / {product.category} / {product.name}</p>
 
-          {/* Product name */}
-          <p className="product-name">{product.name}</p>
+          {/* Product name (dependent on if a default style exists) */}
+          <div className="product-name">
+            {noDefault ? <><p className="coming-soon">COMING SOON:</p><p className="product-name-null">{product.name}</p></> : product.name}
+          </div>
 
-          {/* price */}
+          {/* price (dependent on sale price) */}
           <p className="price">{style.sale_price ? (<><span style={{textDecoration: 'line-through', textDecorationThickness:'2px', textDecorationColor:'black',color:'gray'}}>${style.original_price}</span> ${style.sale_price}</>) : <>${style.original_price}</>}</p>
 
           {/* Styles */}
-          <Styles setUpdate={setUpdate} styles={styles} style={style} setStyle={setStyle}/>
+          <Styles styles={styles} style={style} setStyle={setStyle} noDefault={noDefault}/>
 
           {/* Cart */}
           <Cart style={style}/>

@@ -44,10 +44,10 @@ const QAEntry = (props) => {
   return (
     <div className='QContainer2'>
       {/* set each question - with helpful and add answer properties --------------- */}
-      <div><strong>Q: {props.ques.question_body}</strong> <label style={{float: 'right'}} className='user_info' >Helpful? <a onClick={() => {
+      <div><strong>Q: {props.ques.question_body}</strong> <label style={{float: 'right'}} className='user_info' >Helpful? <a className='questions-and-answers' onClick={() => {
         (helpful) ? props.ques.question_helpfulness-- : props.ques.question_helpfulness++;
         setHelpful(!helpful);
-      }}>Yes</a> ({props.ques.question_helpfulness}) | <a onClick={() => {
+      }}>Yes</a> ({props.ques.question_helpfulness}) | <a className='questions-and-answers' onClick={() => {
         props.setModalAnswOn(!props.modalAnswOn);
         props.setQID(props.ques);
         }}>Add Answer</a></label></div>

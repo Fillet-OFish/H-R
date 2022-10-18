@@ -23,10 +23,10 @@ const AWEntry = (props) => {
         }} className='answ-images'></img>
       ))}
       {/* answer user info --- */}
-      <div className='user_info'>by {props.ans.answerer_name}, {formatDistanceToNow(parseISO(props.ans.date))} | Helpful? <a onClick={() => {
+      <div className='user_info'>by {props.ans.answerer_name}, {formatDistanceToNow(parseISO(props.ans.date))} | Helpful? <a className='questions-and-answers' onClick={() => {
         (helpful) ? props.ans.helpfulness-- : props.ans.helpfulness++;
         setHelpful(!helpful);
-      }}>Yes</a> ({props.ans.helpfulness}) | <a>Report</a> </div>
+      }}>Yes</a> ({props.ans.helpfulness}) | <a className='questions-and-answers' >Report</a> </div>
       <br></br>
     </div>
   )
