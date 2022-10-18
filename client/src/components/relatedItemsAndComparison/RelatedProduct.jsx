@@ -8,10 +8,9 @@ const style = {
   border: '1px solid lightgrey ',
   margin: '8px',
   overflow: 'hidden',
-  width: '230px',
+  width: '257px',
   height: '380px',
   cursor: 'pointer',
-  scrollSnapAlign: 'start'
 }
 
 const imageStyle = {
@@ -28,8 +27,9 @@ const smallStyle = {
 const buttonStyle = {
   position: 'absolute',
   top: '4%',
-  left: '79%',
-  backgroundColor: 'rgba(255, 255, 255, .2)',
+  left: '81%',
+  backgroundColor: 'rgba(0, 0, 0, .2)',
+  color: 'white',
   fontSize: '22px',
   fontWeight: 'bold',
   border: 'none',
@@ -71,13 +71,14 @@ export default function RelatedProduct({item, setProduct, list}) {
 
 
 
+
   return (
     <div>
       {currentItem && defaultStyle.photos ?
         <li style={style} onClick={(e) => {clickHandler(e)}} >
           <img style={imageStyle} src={defaultStyle.photos[0].thumbnail_url}></img>
           {list === 'related' ? <button style={buttonStyle}>☆</button> : null}
-          {list === 'outfit' ? <button style={buttonStyle}>❌</button> : null }
+          {list === 'outfit' ? <button style={buttonStyle}>x</button> : null }
           <div style={{padding: '5px 10px 0 10px' }}>
             <small style={smallStyle}>{currentItem.category}</small>
             <div style={{height: '30px', padding: '3px 0 3px 0', fontSize: '13px'}}>{currentItem.name + ' - ' + currentItem.slogan}</div>

@@ -3,7 +3,24 @@ import axios from 'axios';
 import RelatedProduct from './RelatedProduct.jsx'
 
 const style = {
-  display: 'flex'
+  display: 'flex',
+  margin: '0',
+  padding: '0',
+  maxWidth: '1100px',
+  width: '100%',
+  overflowX: 'auto',
+  overflow: "hidden"
+}
+
+const buttonStyle = {
+  position: 'absolute',
+  top: '50%',
+  left: '-2%',
+
+  fontSize: '22px',
+  border: 'none',
+  backgroundColor: 'transparent',
+
 }
 
 export default function YourOutfitList({currentItem, setProduct}) {
@@ -24,10 +41,10 @@ export default function YourOutfitList({currentItem, setProduct}) {
 
 
   return (
-    <div>
+    <div style={{position: 'relative'}}>
       <h3>Your Outfit:</h3>
       <ul style={style}>
-        <button onClick={(e)=>{handleClick(e)}}>+</button>
+        <button style={buttonStyle} onClick={(e)=>{handleClick(e)}}>+</button>
         {outfit ? outfit.map((item) => <RelatedProduct setProduct={setProduct} key={item} item={item} list={'outfit'} />) : null}
       </ul>
     </div>

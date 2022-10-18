@@ -4,71 +4,85 @@ import RelatedProduct from './RelatedProduct.jsx';
 
 const style = {
   display: 'grid',
+  margin: '0',
+  padding: '0',
   gridAutoFlow: 'column',
-  maxWidth: '1000px',
+  maxWidth: '1100px',
   width: '100%',
   overflowX: 'auto',
-  overflow: "hidden",
-  scrollSnapType: 'inline mandatory',
-  scrollPaddingInline: '50px'
+  overflow: "hidden"
 }
 
-const buttonLStyle = {
-  position: 'absolute',
-  top: '50%',
-  left: '-3%',
-
-  fontSize: '22px',
-  border: 'none',
-  backgroundColor: 'transparent',
-  color: 'grey',
-  cursor: 'pointer'
-}
-
-const buttonRStyle = {
-  position: 'absolute',
-  top: '50%',
-  left: '103%',
-
-  fontSize: '22px',
-  border: 'none',
-  backgroundColor: 'transparent',
-  color: 'grey',
-  cursor: 'pointer'
-}
 
 
 export default function RelatedProductsList ({currentItem, setProduct}) {
 
   const [relatedItems, setRelatedItems] = useState([])
+  const [hideButton, setHideButton] = useState({buttonL: 'transparent', cursorL: 'default', buttonR: 'grey', cursorR: 'pointer'})
+
 
   useEffect(() => {
     const source = axios.CancelToken.source();
 
     axios.get(`/api/products/${currentItem.id}/related`, {cancelToken: source.token})
-      .then(data => {setRelatedItems(data.data)})
-      .catch(err => console.log(err));
+    .then(data => {setRelatedItems(data.data)})
+    .catch(err => console.log(err));
   }, [currentItem])
+
+  const buttonLStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '-2%',
+
+    fontSize: '22px',
+    border: 'none',
+    backgroundColor: 'transparent',
+    color: hideButton.buttonL,
+    cursor: hideButton.cursorL
+  }
+
+  const buttonRStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '100%',
+
+    fontSize: '22px',
+    border: 'none',
+    backgroundColor: 'transparent',
+    color: hideButton.buttonR,
+    cursor: hideButton.cursorR
+  }
 
   const buttonL = (e) => {
     e.preventDefault();
-    document.querySelector('.scroll').scrollBy(-350, 0)
+    document.querySelector('.scroll').scrollBy(-275, 0)
+
+    if (e.target.nextSibling.scrollWidth - e.target.nextSibling.scrollLeft > 1100) {
+      setHideButton({...hideButton, buttonR: 'grey', cursorR: 'pointer'})
+    }
+    if (e.target.nextSibling.scrollLeft === 0) {
+      setHideButton({...hideButton, buttonL: 'transparent', cursorL: 'default'})
+    }
   }
 
   const buttonR = (e) => {
     e.preventDefault();
-    document.querySelector('.scroll').scrollBy(350, 0)
-  }
+    document.querySelector('.scroll').scrollBy(275, 0)
 
+    setHideButton({...hideButton, buttonL: 'grey', cursorL: 'pointer'})
+    if (e.target.previousSibling.scrollWidth - e.target.previousSibling.scrollLeft === 1100) {
+      setHideButton({...hideButton, buttonR: 'transparent', cursorR: 'default'})
+    }
+  }
 
   return (
     <div style={{position: 'relative'}}>
       <h3>Related Products:</h3>
-      <button style={buttonLStyle} onClick={(e) => {buttonL(e)}}>{'<'}</button>
+      {relatedItems.length > 4 ? <button style={buttonLStyle} onClick={(e) => {buttonL(e)}}>{'<'}</button> : null}
       <ul className='scroll' style={style}>
-        {relatedItems.map((item) => (<RelatedProduct setProduct={setProduct} key={item} item={item} list={'related'}/>))}
+        {relatedItems.map((item) => (<RelatedProduct  setProduct={setProduct} key={item} item={item} list={'related'}/>))}
       </ul>
-      <button style={buttonRStyle} onClick={(e) => {buttonR(e)}}>{'>'}</button>
+      {relatedItems.length > 4 ? <button style={buttonRStyle} onClick={(e) => {buttonR(e)}}>{'>'}</button> : null}
     </div>
   )
 }
