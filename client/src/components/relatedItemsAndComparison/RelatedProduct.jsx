@@ -10,7 +10,8 @@ const style = {
   overflow: 'hidden',
   width: '230px',
   height: '380px',
-  cursor: 'pointer'
+  cursor: 'pointer',
+  scrollSnapAlign: 'start'
 }
 
 const imageStyle = {
@@ -26,13 +27,13 @@ const smallStyle = {
 
 const buttonStyle = {
   position: 'absolute',
-  top: '3%',
-  left: '81%',
+  top: '4%',
+  left: '79%',
   backgroundColor: 'rgba(255, 255, 255, .2)',
   fontSize: '22px',
   fontWeight: 'bold',
   border: 'none',
-  cursor: 'pointer',
+  cursor: 'pointer'
 }
 
 export default function RelatedProduct({item, setProduct, list}) {
