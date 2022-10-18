@@ -9,7 +9,8 @@ const style = {
   maxWidth: '1100px',
   width: '100%',
   overflowX: 'auto',
-  overflow: "hidden"
+  overflow: "hidden",
+  scrollBehavior: 'smooth'
 }
 
 
@@ -33,13 +34,14 @@ export default function YourOutfitList({currentItem, setProduct}) {
     width: '257px',
     height: '380px',
     cursor: 'pointer',
+    borderRadius: '6px'
   }
 
   const buttonStyle = {
     cursor: 'pointer',
     width: '100%',
     height: '100%',
-    fontSize: '18px',
+    fontSize: '22px',
     fontWeight: 'normal',
     border: 'none',
     color: (hover ? 'black' : 'grey'),
@@ -81,24 +83,26 @@ export default function YourOutfitList({currentItem, setProduct}) {
 
   const buttonL = (e) => {
     e.preventDefault();
-    document.querySelector('.scrollOutfit').scrollBy(-275, 0)
 
-    if (e.target.nextSibling.scrollWidth - e.target.nextSibling.scrollLeft > 1100) {
+    if (e.target.nextSibling.scrollWidth - (e.target.nextSibling.scrollLeft -275) > 1100) {
       setHideButton({...hideButton, buttonR: 'grey', cursorR: 'pointer'})
     }
-    if (e.target.nextSibling.scrollLeft === 0) {
+    if (e.target.nextSibling.scrollLeft - 275 === 0) {
       setHideButton({...hideButton, buttonL: 'transparent', cursorL: 'default'})
     }
+
+    document.querySelector('.scrollOutfit').scrollBy(-275, 0)
   }
 
   const buttonR = (e) => {
     e.preventDefault();
-    document.querySelector('.scrollOutfit').scrollBy(275, 0)
 
     setHideButton({...hideButton, buttonL: 'grey', cursorL: 'pointer'})
-    if (e.target.previousSibling.scrollWidth - e.target.previousSibling.scrollLeft === 1100) {
+    if (e.target.previousSibling.scrollWidth - (e.target.previousSibling.scrollLeft + 275) === 1100) {
       setHideButton({...hideButton, buttonR: 'transparent', cursorR: 'default'})
     }
+
+    document.querySelector('.scrollOutfit').scrollBy(275, 0)
   }
 
 

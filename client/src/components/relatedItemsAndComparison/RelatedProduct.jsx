@@ -11,6 +11,7 @@ const style = {
   width: '257px',
   height: '380px',
   cursor: 'pointer',
+  borderRadius: '6px'
 }
 
 const imageStyle = {
@@ -86,7 +87,7 @@ export default function RelatedProduct({item, setProduct, list, outfit, setOutfi
     <div>
       {currentItem && defaultStyle.photos ?
         <li style={style} onClick={(e) => {clickHandler(e)}} >
-          <img style={imageStyle} src={defaultStyle.photos[0].thumbnail_url}></img>
+          <img style={imageStyle} src={defaultStyle.photos[0].thumbnail_url || 'https://i.postimg.cc/gjFHrzW3/image-4.png'}></img>
           {list === 'related' ? <button onMouseEnter={()=>{setHover(true)}} onMouseLeave={()=>{setHover(false)}} style={buttonStyle}>☆</button> : null}
           {list === 'outfit' ? <button onMouseEnter={()=>{setHover(true)}} onMouseLeave={()=>{setHover(false)}} style={buttonStyle} onClick={e=>{handleOutfitClick(e)}}>x</button> : null }
           <div style={{padding: '5px 10px 0 10px' }}>

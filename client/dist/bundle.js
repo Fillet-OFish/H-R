@@ -1040,7 +1040,8 @@ var style = {
   overflow: 'hidden',
   width: '257px',
   height: '380px',
-  cursor: 'pointer'
+  cursor: 'pointer',
+  borderRadius: '6px'
 };
 var imageStyle = {
   width: '100%',
@@ -1126,7 +1127,7 @@ function RelatedProduct(_ref) {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("img", {
     style: imageStyle,
-    src: defaultStyle.photos[0].thumbnail_url
+    src: defaultStyle.photos[0].thumbnail_url || 'https://i.postimg.cc/gjFHrzW3/image-4.png'
   }), list === 'related' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
     onMouseEnter: function onMouseEnter() {
       setHover(true);
@@ -1207,7 +1208,8 @@ var style = {
   maxWidth: '1100px',
   width: '100%',
   overflowX: 'auto',
-  overflow: "hidden"
+  overflow: "hidden",
+  scrollBehavior: 'smooth'
 };
 function RelatedProductsList(_ref) {
   var currentItem = _ref.currentItem,
@@ -1257,33 +1259,33 @@ function RelatedProductsList(_ref) {
   };
   var buttonL = function buttonL(e) {
     e.preventDefault();
-    document.querySelector('.scroll').scrollBy(-275, 0);
-    if (e.target.nextSibling.scrollWidth - e.target.nextSibling.scrollLeft > 1100) {
+    if (e.target.nextSibling.scrollWidth - (e.target.nextSibling.scrollLeft - 275) > 1100) {
       setHideButton(_objectSpread(_objectSpread({}, hideButton), {}, {
         buttonR: 'grey',
         cursorR: 'pointer'
       }));
     }
-    if (e.target.nextSibling.scrollLeft === 0) {
+    if (e.target.nextSibling.scrollLeft - 275 === 0) {
       setHideButton(_objectSpread(_objectSpread({}, hideButton), {}, {
         buttonL: 'transparent',
         cursorL: 'default'
       }));
     }
+    document.querySelector('.scroll').scrollBy(-275, 0);
   };
   var buttonR = function buttonR(e) {
     e.preventDefault();
-    document.querySelector('.scroll').scrollBy(275, 0);
     setHideButton(_objectSpread(_objectSpread({}, hideButton), {}, {
       buttonL: 'grey',
       cursorL: 'pointer'
     }));
-    if (e.target.previousSibling.scrollWidth - e.target.previousSibling.scrollLeft === 1100) {
+    if (e.target.previousSibling.scrollWidth - (e.target.previousSibling.scrollLeft + 275) === 1100) {
       setHideButton(_objectSpread(_objectSpread({}, hideButton), {}, {
         buttonR: 'transparent',
         cursorR: 'default'
       }));
     }
+    document.querySelector('.scroll').scrollBy(275, 0);
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", {
     style: {
@@ -1429,7 +1431,8 @@ var style = {
   maxWidth: '1100px',
   width: '100%',
   overflowX: 'auto',
-  overflow: "hidden"
+  overflow: "hidden",
+  scrollBehavior: 'smooth'
 };
 function YourOutfitList(_ref) {
   var currentItem = _ref.currentItem,
@@ -1462,13 +1465,14 @@ function YourOutfitList(_ref) {
     overflow: 'hidden',
     width: '257px',
     height: '380px',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    borderRadius: '6px'
   };
   var buttonStyle = {
     cursor: 'pointer',
     width: '100%',
     height: '100%',
-    fontSize: '18px',
+    fontSize: '22px',
     fontWeight: 'normal',
     border: 'none',
     color: hover ? 'black' : 'grey',
@@ -1503,33 +1507,33 @@ function YourOutfitList(_ref) {
   };
   var buttonL = function buttonL(e) {
     e.preventDefault();
-    document.querySelector('.scrollOutfit').scrollBy(-275, 0);
-    if (e.target.nextSibling.scrollWidth - e.target.nextSibling.scrollLeft > 1100) {
+    if (e.target.nextSibling.scrollWidth - (e.target.nextSibling.scrollLeft - 275) > 1100) {
       setHideButton(_objectSpread(_objectSpread({}, hideButton), {}, {
         buttonR: 'grey',
         cursorR: 'pointer'
       }));
     }
-    if (e.target.nextSibling.scrollLeft === 0) {
+    if (e.target.nextSibling.scrollLeft - 275 === 0) {
       setHideButton(_objectSpread(_objectSpread({}, hideButton), {}, {
         buttonL: 'transparent',
         cursorL: 'default'
       }));
     }
+    document.querySelector('.scrollOutfit').scrollBy(-275, 0);
   };
   var buttonR = function buttonR(e) {
     e.preventDefault();
-    document.querySelector('.scrollOutfit').scrollBy(275, 0);
     setHideButton(_objectSpread(_objectSpread({}, hideButton), {}, {
       buttonL: 'grey',
       cursorL: 'pointer'
     }));
-    if (e.target.previousSibling.scrollWidth - e.target.previousSibling.scrollLeft === 1100) {
+    if (e.target.previousSibling.scrollWidth - (e.target.previousSibling.scrollLeft + 275) === 1100) {
       setHideButton(_objectSpread(_objectSpread({}, hideButton), {}, {
         buttonR: 'transparent',
         cursorR: 'default'
       }));
     }
+    document.querySelector('.scrollOutfit').scrollBy(275, 0);
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement("div", {
     style: {
