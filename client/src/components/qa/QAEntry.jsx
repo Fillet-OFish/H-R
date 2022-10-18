@@ -27,10 +27,7 @@ const QAEntry = (props) => {
   const getAnswers = (q_id) => {
     axios.get(`/api/qa/questions/${q_id}/answers`)
     .then((response) => {
-<<<<<<< HEAD
-=======
       // console.log(response.data, 'THIS IS ANSWERS')
->>>>>>> master
       setAnswers(response.data);
     })
     .catch(err => {

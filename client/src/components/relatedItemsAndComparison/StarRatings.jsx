@@ -7,11 +7,6 @@ export default function StarRatings({item}) {
 
   const [rating, setRating] = useState(null);
 
-<<<<<<< HEAD
-=======
-  // console.log('rating: ', rating)
-
->>>>>>> master
   useEffect(() => {
     const source = axios.CancelToken.source();
 

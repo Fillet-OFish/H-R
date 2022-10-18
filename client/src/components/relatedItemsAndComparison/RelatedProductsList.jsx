@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef, useReducer } from 'react';
 import axios from 'axios';
 import RelatedProduct from './RelatedProduct.jsx';
 
+
+
 const style = {
   display: 'flex',
   margin: '0',
