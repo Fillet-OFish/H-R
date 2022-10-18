@@ -8,9 +8,6 @@ const AWEntry = (props) => {
   // state to keep track if an answers has been helpful
   const [helpful, setHelpful] = useState(false);
 
-  console.log(props.ans.date, '------------------');
-  console.log(props.ans.helpfulness, '------------------');
-
   // const result = toDate(new Date(2014, 1, 11, 11, 30, 30))
   // console.log(result, '-------')
 
