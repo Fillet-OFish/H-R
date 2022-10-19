@@ -746,6 +746,7 @@ textarea {
 .comparison-table table, th, td  {
   border-collapse: collapse;
   /* border-bottom: 1px solid; */
+  border-right: 2px solid white;
   padding: 10px 0 10px 0
 }
 
