@@ -22,13 +22,19 @@ function getAnswers(q_id, callback) {
   return axios(options);
 }
 // post request
-function addQuestion(callback) {
+function addQuestion(obj) {
   let options = {
+    method: 'POST',
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/qa/questions`,
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/questions/${q_id}/answers`,
     headers: {
       'User-Agent': 'request',
       'Authorization': `${process.env.TOKENS}`
+    },
+    data: {
+      'body': obj.body,
+      'name': obj.name,
+      'email': obj.email,
+      'product_id': obj.product_id
     }
   }
   return axios(options);

@@ -3,6 +3,7 @@ import axios from 'axios';
 import QA from './QA.jsx';
 import ImageModal from './ImageModal.jsx';
 import AddAnswModal from './AddAnswModal.jsx';
+import AddQuesModal from './AddQuesModal.jsx';
 import {useState, useEffect} from 'react';
 
 
@@ -17,6 +18,8 @@ const QuesnAnsw = (props) => {
   // question/question id for add answers
   const [QID, setQID] = useState();
 
+  // keep track of add question popup modal
+  const [modalQuesOn, setModalQuesOn] = useState(false);
 
   // get questions --------------------
   useEffect(() => {
@@ -35,15 +38,23 @@ const QuesnAnsw = (props) => {
   return (
     <div>
       <div>
-        <QA qaData={qaData} setImage={setImage} setModalOn={setModalOn} modalOn={modalOn} modalAnswOn={modalAnswOn} setModalAnswOn={setModalAnswOn} setQID={setQID} />
+        {/* rendering QA ----------- */}
+        <QA qaData={qaData} setImage={setImage} setModalOn={setModalOn} modalOn={modalOn} modalAnswOn={modalAnswOn} setModalAnswOn={setModalAnswOn} setQID={setQID} modalQuesOn={modalQuesOn} setModalQuesOn={setModalQuesOn} />
       </div>
 
       <div>
+        {/* popup when clicking images in answers ----------- */}
         <ImageModal getImage={getImage} modalOn={modalOn} setModalOn={setModalOn} />
       </div>
 
       <div>
-        <AddAnswModal product={props.product} modalOn={modalOn} setModalOn={setModalOn} modalAnswOn={modalAnswOn} setModalAnswOn={setModalAnswOn} QID={QID} />
+        {/* add new questions ----------- */}
+        <AddQuesModal product={props.product} modalQuesOn={modalQuesOn} setModalQuesOn={setModalQuesOn} />
+      </div>
+
+      <div>
+        {/* add new answers ----------- */}
+        <AddAnswModal product={props.product} modalAnswOn={modalAnswOn} setModalAnswOn={setModalAnswOn} QID={QID} />
       </div>
     </div>
   )

@@ -24,6 +24,16 @@ const getAllA = (req, res) => {
     })
 }
 
+const postQues = (req, res) => {
+  addQuestion(req.body)
+    .then(response => {
+      res.status(201).send(response.data);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+}
+
 const postAnsw = (req, res) => {
   addAnswer(req.params.id, req.body)
     .then(response => {
@@ -36,4 +46,5 @@ const postAnsw = (req, res) => {
 
 module.exports.getAllQ = getAllQ;
 module.exports.getAllA = getAllA;
+module.exports.postQues = postQues;
 module.exports.postAnsw = postAnsw;

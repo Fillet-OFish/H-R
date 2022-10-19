@@ -22,6 +22,7 @@ router.post('/cart', controllers.cart.postOne)
 router.get('/qa/questions', controllers.qa.getAllQ);
 router.get('/qa/questions/:id/answers', controllers.qa.getAllA);
 
+router.post('/qa/questions', controllers.qa.postQues);
 router.post('/qa/questions/:id/answers', controllers.qa.postAnsw);
 
 module.exports = router;

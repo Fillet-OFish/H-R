@@ -63,7 +63,7 @@ const QAEntry = (props) => {
 
       {/* display 'load more answers' button depending on condition --------------- */}
       <div>
-        {(answers.length === currentAnswers.length) ? "" : (answers.length > 2) ? <a onClick={() => addAnsw()}>Load more answers</a> : ""}
+        {(answers.length === currentAnswers.length) ? "" : (answers.length > 2) ? <a className='questions-and-answers' onClick={() => addAnsw()}>Load more answers</a> : ""}
       </div>
 
       <br></br>

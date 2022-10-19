@@ -2,6 +2,7 @@ import React from 'react';
 import QAEntry from './QAEntry.jsx';
 import Pagination from './Pagination.jsx';
 import {useState, useEffect} from 'react';
+import AddQuesBtn from './AddQuesBtn.jsx';
 
 
 const QA = (props) => {
@@ -22,17 +23,28 @@ const QA = (props) => {
   // ----------------------------------------------------------------
 
 
+
   // iterate through questions data
   return (
     <div className='QContainer'>
       <h2>Questions & Answers</h2>
-      {currentRecords.map((ques, index) => (
-        // set each question entry ---------
-        <QAEntry ques={ques} key={index} qaData={props.qaData} setImage={props.setImage} setModalOn={props.setModalOn} modalOn={props.modalOn} modalAnswOn={props.modalAnswOn} setModalAnswOn={props.setModalAnswOn} setQID={props.setQID} />
-      ))}
 
-      {/* set pagination ----------- */}
-      <Pagination nPages={nPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      <div>
+        {currentRecords.map((ques, index) => (
+          // set each question entry ---------
+          <QAEntry ques={ques} key={index} qaData={props.qaData} setImage={props.setImage} setModalOn={props.setModalOn} modalOn={props.modalOn} modalAnswOn={props.modalAnswOn} setModalAnswOn={props.setModalAnswOn} setQID={props.setQID} />
+        ))}
+      </div>
+
+      <div>
+        {/* set pagination ----------- */}
+        <Pagination nPages={nPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      </div>
+
+      <div>
+        {/* add question button ----------- */}
+        <AddQuesBtn modalQuesOn={props.modalQuesOn} setModalQuesOn={props.setModalQuesOn}/>
+      </div>
     </div>
   )
 }

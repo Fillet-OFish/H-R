@@ -445,7 +445,7 @@ nav {
   justify-content: center;
 }
 
-.questions-and-answers a {
+.questions-and-answers {
   cursor: pointer;
   text-decoration:underline;
 }
@@ -533,7 +533,15 @@ nav {
   height: 100%;
 }
 
-/* Add Answ Popup Modal Styling ----- */
+/* Add Answ/Ques Popup Modal Styling ----- */
+.popup-ques {
+  position: fixed;
+  background: #00000050;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
 .popup-answ {
   position: fixed;
   background: #00000050;
