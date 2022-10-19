@@ -1,39 +1,6 @@
-import React, { useEffect, useState, useRef, useReducer } from 'react';
-import axios from 'axios';
-import StarRatings from './StarRatings.jsx'
+import React from 'react';
 
-export default function PopupComparison ({relatedItem, currentItem, popup, setPopup}) {
-
-  const [display, setDisplay] = useState(popup ? 'block' : 'none')
-
-  useEffect(() => {
-    popup ? setDisplay('block') : setDisplay('none')
-  }, [popup])
-
-  const modal = {
-    display: display, /* Hidden by default */
-    zIndex: '100', /* Sit on top */
-    position: 'fixed',
-    background: '#00000050',
-    width: '100%',
-    height: '100vh',
-    top: '0',
-    left: '0'
-  }
-
-  const content = {
-    display: 'absolute',
-    backgroundColor: '#fefefe',
-    marginTop: '25%',
-    marginLeft: '50%',
-    transform: 'translate(-50%, -50%)',
-    overflow: 'auto',
-    border: '1px solid #888',
-    borderRadius: '8px',
-    padding: '0 5px 10px 5px',
-    maxWidth: '40%',
-    maxHeight: '50%',
-  }
+export default function PopupComparison ({relatedItem, currentItem, setPopup}) {
 
   const comparisonObj = {}
   currentItem.features.map((feature) => {
@@ -43,13 +10,9 @@ export default function PopupComparison ({relatedItem, currentItem, popup, setPo
     comparisonObj[feature.feature] ? comparisonObj[feature.feature].valueRelated = feature.value : comparisonObj[feature.feature] = {valueRelated: feature.value}
   })
 
-
-
   return (
-    <div style={modal} onClick={()=>{setPopup(!popup)}}>
-
-      <div className='comparison-table' style={content}>
-
+    <div className='popup' onClick={()=>setPopup(false)}>
+      <div className='comparison-table'>
         <table>
           <caption>Comparing</caption>
           <thead>
