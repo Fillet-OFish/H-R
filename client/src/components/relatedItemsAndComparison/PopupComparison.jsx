@@ -2,12 +2,11 @@ import React, { useEffect, useState, useRef, useReducer } from 'react';
 import axios from 'axios';
 import StarRatings from './StarRatings.jsx'
 
-export default function PopupComparison ({popup, setPopup}) {
+export default function PopupComparison ({relatedItem, currentItem, popup, setPopup}) {
 
   const [display, setDisplay] = useState(popup ? 'block' : 'none')
 
   const popupRef = useRef(null);
-
 
   useEffect(() => {
     popup ? setDisplay('block') : setDisplay('none')
@@ -42,6 +41,15 @@ export default function PopupComparison ({popup, setPopup}) {
     textAlign: 'center'
   }
 
+  const comparisonObj = {}
+  currentItem.features.map((feature) => {
+    comparisonObj[feature.feature] = {valueCurrent: feature.value}
+  })
+  relatedItem.features.map((feature) => {
+    comparisonObj[feature.feature] ? comparisonObj[feature.feature].valueRelated = feature.value : comparisonObj[feature.feature] = {valueRelated: feature.value}
+  })
+  console.log('comparisonObj: ', comparisonObj)
+
 
 
   return (
@@ -49,10 +57,27 @@ export default function PopupComparison ({popup, setPopup}) {
 
       <div style={content} onClick={()=>{setPopup(!popup)}}>
 
-        <p>some texts... <br/> click anywhere in the box to exit </p>
-
+        <table style={{width: '100%'}}>
+          <caption>Comparing</caption>
+          <thead>
+            <tr>
+              <th>{currentItem.name}</th>
+              <th></th>
+              <th>{relatedItem.name}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Object.keys(comparisonObj).map((feature) => (
+              <tr key={feature}>
+                <td>{comparisonObj[feature].valueCurrent === true ?  '✓' : comparisonObj[feature].valueCurrent}</td>
+                <td>{feature}</td>
+                <td>{comparisonObj[feature].valueRelated === true ?   '✓' : comparisonObj[feature].valueRelated}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p>click anywhere in the box to exit </p>
       </div>
-
     </div>
   )
 }

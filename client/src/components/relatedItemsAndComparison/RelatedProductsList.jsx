@@ -86,7 +86,7 @@ export default function RelatedProductsList ({currentItem, setProduct}) {
       <h3>Related Products:</h3>
       {relatedItems.length > 4 ? <button style={buttonLStyle} onClick={(e) => {buttonL(e)}}>{'<'}</button> : null}
       <ul className='scroll' style={style}>
-        {relatedItems.map((item) => (<RelatedProduct  setProduct={setProduct} key={item} item={item} list={'related'}/>))}
+        {relatedItems.map((item) => (<RelatedProduct currentItem={currentItem} setProduct={setProduct} key={item} item={item} list={'related'}/>))}
       </ul>
       {relatedItems.length > 4 ? <button style={buttonRStyle} onClick={(e) => {buttonR(e)}}>{'>'}</button> : null}
     </div>

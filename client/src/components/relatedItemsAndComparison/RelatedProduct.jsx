@@ -28,9 +28,9 @@ const smallStyle = {
 }
 
 
-export default function RelatedProduct({item, setProduct, list, outfit, setOutfit}) {
+export default function RelatedProduct({currentItem, item, setProduct, list, outfit, setOutfit}) {
 
-  const [currentItem, setCurrentItem] = useState([]);
+  const [relatedItem, setrelatedItem] = useState(null);
   const [defaultStyle, setDefaultStyle] = useState([]);
   const [hover, setHover] = useState(false);
   const [popup, setPopup] = useState(false);
@@ -39,7 +39,7 @@ export default function RelatedProduct({item, setProduct, list, outfit, setOutfi
     const source = axios.CancelToken.source();
 
     axios.get(`/api/products/${item}`, {cancelToken: source.token})
-    .then((data) => {setCurrentItem(data.data)})
+    .then((data) => {setrelatedItem(data.data)})
     .catch((err) => {console.log(err)});
 
     axios.get(`/api/products/${item}/styles`, {cancelToken: source.token})
@@ -76,7 +76,7 @@ export default function RelatedProduct({item, setProduct, list, outfit, setOutfi
   const clickHandler = function (e) {
     e.preventDefault();
     if(!hover) {
-      setProduct(currentItem);
+      setProduct(relatedItem);
     }
   }
 
@@ -96,8 +96,8 @@ export default function RelatedProduct({item, setProduct, list, outfit, setOutfi
 
   return (
     <div>
-      <PopupComparison popup={popup} setPopup={setPopup}/>
-      {currentItem && defaultStyle.photos ?
+      {list === 'related' && relatedItem ? <PopupComparison currentItem={currentItem} relatedItem={relatedItem} relatedItem={relatedItem} popup={popup} setPopup={setPopup}/> : null}
+      {relatedItem && defaultStyle.photos ?
         <li style={style} onClick={(e) => {clickHandler(e)}} >
           <img style={imageStyle} src={defaultStyle.photos[0].thumbnail_url || 'https://i.postimg.cc/gjFHrzW3/image-4.png'}></img>
 
@@ -114,8 +114,8 @@ export default function RelatedProduct({item, setProduct, list, outfit, setOutfi
           }
 
           <div style={{padding: '5px 10px 0 10px' }}>
-            <small style={smallStyle}>{currentItem.category}</small>
-            <div style={{height: '30px', padding: '3px 0 3px 0', fontSize: '13px'}}>{currentItem.name + ' - ' + currentItem.slogan}</div>
+            <small style={smallStyle}>{relatedItem.category}</small>
+            <div style={{height: '30px', padding: '3px 0 3px 0', fontSize: '13px'}}>{relatedItem.name + ' - ' + relatedItem.slogan}</div>
             <div>{defaultStyle.sale_price ?
               <div>
                 <p style={{color: 'red'}}>${defaultStyle.sale_price}</p>

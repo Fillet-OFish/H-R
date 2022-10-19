@@ -27,7 +27,7 @@ const QAEntry = (props) => {
   const getAnswers = (q_id) => {
     axios.get(`/api/qa/questions/${q_id}/answers`)
     .then((response) => {
-      console.log(response.data, 'THIS IS ANSWERS')
+      // console.log(response.data, 'THIS IS ANSWERS')
       setAnswers(response.data);
     })
     .catch(err => {
@@ -37,7 +37,7 @@ const QAEntry = (props) => {
   // render answers data when qaData or ques states change
   useEffect(() => {
     getAnswers(props.ques.question_id);
-    console.log(props.ques);
+    // console.log(props.ques);
   }, [props.qaData, props.ques])
 
   // render answers data with an answers entry component and a button for more answers

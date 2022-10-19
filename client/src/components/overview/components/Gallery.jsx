@@ -22,8 +22,8 @@ export default function Gallery({ style, noDefault }) {
   // on load/style change, set side photos and main photo to default
   useEffect(() => {
     // handle no default image
-    noDefault ? setPhotos([{thumbnail_url: "https://i.postimg.cc/gjFHrzW3/image-4.png"}])
-      : setPhotos(style.photos)
+    // noDefault ? setPhotos([{thumbnail_url: "https://i.postimg.cc/gjFHrzW3/image-4.png"}])
+       setPhotos(style.photos)
 
     // if(click){setPhoto(photos[click])}
 
@@ -58,7 +58,7 @@ export default function Gallery({ style, noDefault }) {
 
   return(
     <div className="left">
-      <div className="gallery-list">{photos ? (<div>{photos.map((photo, i) => <p key={i}><img src={photo.thumbnail_url} onClick={e=>{e.preventDefault();changePhoto({photo, i})}} /></p>)}</div>) : null}</div>
+      <div className="gallery-list">{photos ? (<div>{photos.map((photo, i) => <p key={i}><img src={photo.thumbnail_url || "https://i.postimg.cc/gjFHrzW3/image-4.png"} onClick={e=>{e.preventDefault();changePhoto({photo, i})}} /></p>)}</div>) : null}</div>
       <div className="gallery-main">
         {photo ?
           expand ?

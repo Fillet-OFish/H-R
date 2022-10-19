@@ -344,7 +344,7 @@ function Carousel(_ref) {
     className: "right-arrow",
     onClick: next
   }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("img", {
-    src: "".concat(photos[current].thumbnail_url),
+    src: "".concat(photos[current].thumbnail_url || "https://i.postimg.cc/gjFHrzW3/image-4.png"),
     className: "img-main",
     onClick: function onClick(e) {
       setExpand(function (prev) {
@@ -541,9 +541,8 @@ function Gallery(_ref) {
   // on load/style change, set side photos and main photo to default
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     // handle no default image
-    noDefault ? setPhotos([{
-      thumbnail_url: "https://i.postimg.cc/gjFHrzW3/image-4.png"
-    }]) : setPhotos(style.photos);
+    // noDefault ? setPhotos([{thumbnail_url: "https://i.postimg.cc/gjFHrzW3/image-4.png"}])
+    setPhotos(style.photos);
 
     // if(click){setPhoto(photos[click])}
 
@@ -585,7 +584,7 @@ function Gallery(_ref) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
       key: i
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("img", {
-      src: photo.thumbnail_url,
+      src: photo.thumbnail_url || "https://i.postimg.cc/gjFHrzW3/image-4.png",
       onClick: function onClick(e) {
         e.preventDefault();
         changePhoto({
@@ -976,7 +975,7 @@ __webpack_require__.r(__webpack_exports__);
 
 // ENTRY OF EACH ANSWER ----------
 var AddAnswModal = function AddAnswModal(props) {
-  console.log(props.QID, 'hola');
+  // console.log(props.QID, 'hola')
   // post request to add answer
   var postAnsw = function postAnsw(q_id, body, name, email, photos) {
     axios__WEBPACK_IMPORTED_MODULE_1__["default"].post("/api/qa/questions/".concat(q_id, "/answers"), {
@@ -1256,7 +1255,7 @@ var QAEntry = function QAEntry(props) {
   // make an axios get call for answers with each individual quest id
   var getAnswers = function getAnswers(q_id) {
     axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/qa/questions/".concat(q_id, "/answers")).then(function (response) {
-      console.log(response.data, 'THIS IS ANSWERS');
+      // console.log(response.data, 'THIS IS ANSWERS')
       setAnswers(response.data);
     })["catch"](function (err) {
       console.log(err);
@@ -1265,7 +1264,7 @@ var QAEntry = function QAEntry(props) {
   // render answers data when qaData or ques states change
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     getAnswers(props.ques.question_id);
-    console.log(props.ques);
+    // console.log(props.ques);
   }, [props.qaData, props.ques]);
 
   // render answers data with an answers entry component and a button for more answers
@@ -1422,7 +1421,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function PopupComparison(_ref) {
-  var popup = _ref.popup,
+  var relatedItem = _ref.relatedItem,
+    currentItem = _ref.currentItem,
+    popup = _ref.popup,
     setPopup = _ref.setPopup;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(popup ? 'block' : 'none'),
     _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
@@ -1466,6 +1467,18 @@ function PopupComparison(_ref) {
     height: '500px',
     textAlign: 'center'
   };
+  var comparisonObj = {};
+  currentItem.features.map(function (feature) {
+    comparisonObj[feature.feature] = {
+      valueCurrent: feature.value
+    };
+  });
+  relatedItem.features.map(function (feature) {
+    comparisonObj[feature.feature] ? comparisonObj[feature.feature].valueRelated = feature.value : comparisonObj[feature.feature] = {
+      valueRelated: feature.value
+    };
+  });
+  console.log('comparisonObj: ', comparisonObj);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     style: modal,
     ref: popupRef
@@ -1474,7 +1487,15 @@ function PopupComparison(_ref) {
     onClick: function onClick() {
       setPopup(!popup);
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", null, "some texts... ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null), " click anywhere in the box to exit ")));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("table", {
+    style: {
+      width: '100%'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("caption", null, "Comparing"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("th", null, currentItem.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("th", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("th", null, relatedItem.name))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("tbody", null, Object.keys(comparisonObj).map(function (feature) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("tr", {
+      key: feature
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("td", null, comparisonObj[feature].valueCurrent === true ? '✓' : comparisonObj[feature].valueCurrent), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("td", null, feature), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("td", null, comparisonObj[feature].valueRelated === true ? '✓' : comparisonObj[feature].valueRelated));
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", null, "click anywhere in the box to exit ")));
 }
 
 /***/ }),
@@ -1524,12 +1545,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ RelatedProduct)
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var _StarRatings_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./StarRatings.jsx */ "./client/src/components/relatedItemsAndComparison/StarRatings.jsx");
-/* harmony import */ var _PopupComparison_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./PopupComparison.jsx */ "./client/src/components/relatedItemsAndComparison/PopupComparison.jsx");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var _StarRatings_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./StarRatings.jsx */ "./client/src/components/relatedItemsAndComparison/StarRatings.jsx");
+/* harmony import */ var _PopupComparison_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./PopupComparison.jsx */ "./client/src/components/relatedItemsAndComparison/PopupComparison.jsx");
+
 
 
 
@@ -1556,37 +1579,39 @@ var smallStyle = {
   margin: '10px 0 10px 0'
 };
 function RelatedProduct(_ref) {
-  var item = _ref.item,
+  var _React$createElement;
+  var currentItem = _ref.currentItem,
+    item = _ref.item,
     setProduct = _ref.setProduct,
     list = _ref.list,
     outfit = _ref.outfit,
     setOutfit = _ref.setOutfit;
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
-    _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
-    currentItem = _useState2[0],
-    setCurrentItem = _useState2[1];
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
-    _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState3, 2),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
+    _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_useState, 2),
+    relatedItem = _useState2[0],
+    setrelatedItem = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
+    _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_useState3, 2),
     defaultStyle = _useState4[0],
     setDefaultStyle = _useState4[1];
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
-    _useState6 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState5, 2),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
+    _useState6 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_useState5, 2),
     hover = _useState6[0],
     setHover = _useState6[1];
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
-    _useState8 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState7, 2),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
+    _useState8 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_useState7, 2),
     popup = _useState8[0],
     setPopup = _useState8[1];
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    var source = axios__WEBPACK_IMPORTED_MODULE_2__["default"].CancelToken.source();
-    axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/products/".concat(item), {
+  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+    var source = axios__WEBPACK_IMPORTED_MODULE_3__["default"].CancelToken.source();
+    axios__WEBPACK_IMPORTED_MODULE_3__["default"].get("/api/products/".concat(item), {
       cancelToken: source.token
     }).then(function (data) {
-      setCurrentItem(data.data);
+      setrelatedItem(data.data);
     })["catch"](function (err) {
       console.log(err);
     });
-    axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/products/".concat(item, "/styles"), {
+    axios__WEBPACK_IMPORTED_MODULE_3__["default"].get("/api/products/".concat(item, "/styles"), {
       cancelToken: source.token
     }).then(function (data) {
       for (var i = 0; i < data.data.results.length; i++) {
@@ -1619,7 +1644,7 @@ function RelatedProduct(_ref) {
   var clickHandler = function clickHandler(e) {
     e.preventDefault();
     if (!hover) {
-      setProduct(currentItem);
+      setProduct(relatedItem);
     }
   };
   var handleOutfitClick = function handleOutfitClick(e) {
@@ -1633,18 +1658,18 @@ function RelatedProduct(_ref) {
     e.preventDefault();
     setPopup(!popup);
   };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_PopupComparison_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    popup: popup,
-    setPopup: setPopup
-  }), currentItem && defaultStyle.photos ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("li", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", null, list === 'related' && relatedItem ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(_PopupComparison_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], (_React$createElement = {
+    currentItem: currentItem,
+    relatedItem: relatedItem
+  }, (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(_React$createElement, "relatedItem", relatedItem), (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(_React$createElement, "popup", popup), (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(_React$createElement, "setPopup", setPopup), _React$createElement)) : null, relatedItem && defaultStyle.photos ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("li", {
     style: style,
     onClick: function onClick(e) {
       clickHandler(e);
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("img", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("img", {
     style: imageStyle,
     src: defaultStyle.photos[0].thumbnail_url || 'https://i.postimg.cc/gjFHrzW3/image-4.png'
-  }), list === 'related' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
+  }), list === 'related' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("button", {
     onMouseEnter: function onMouseEnter() {
       setHover(true);
     },
@@ -1655,7 +1680,7 @@ function RelatedProduct(_ref) {
     onClick: function onClick(e) {
       handleComparisonClick(e);
     }
-  }, "\u2606") : null, list === 'outfit' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
+  }, "\u2606") : null, list === 'outfit' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("button", {
     onMouseEnter: function onMouseEnter() {
       setHover(true);
     },
@@ -1666,29 +1691,29 @@ function RelatedProduct(_ref) {
     onClick: function onClick(e) {
       handleOutfitClick(e);
     }
-  }, "x") : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+  }, "x") : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", {
     style: {
       padding: '5px 10px 0 10px'
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("small", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("small", {
     style: smallStyle
-  }, currentItem.category), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+  }, relatedItem.category), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", {
     style: {
       height: '30px',
       padding: '3px 0 3px 0',
       fontSize: '13px'
     }
-  }, currentItem.name + ' - ' + currentItem.slogan), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, defaultStyle.sale_price ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
+  }, relatedItem.name + ' - ' + relatedItem.slogan), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", null, defaultStyle.sale_price ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("p", {
     style: {
       color: 'red'
     }
-  }, "$", defaultStyle.sale_price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("small", {
+  }, "$", defaultStyle.sale_price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("small", {
     style: (smallStyle, {
       textDecoration: 'line-through'
     })
-  }, "$", defaultSTyle.original_price)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("small", {
+  }, "$", defaultSTyle.original_price)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("small", {
     style: smallStyle
-  }, "$", defaultStyle.original_price)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_StarRatings_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, "$", defaultStyle.original_price)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(_StarRatings_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
     item: item
   }))) : null);
 }
@@ -1823,6 +1848,7 @@ function RelatedProductsList(_ref) {
     style: style
   }, relatedItems.map(function (item) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(_RelatedProduct_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      currentItem: currentItem,
       setProduct: setProduct,
       key: item,
       item: item,
