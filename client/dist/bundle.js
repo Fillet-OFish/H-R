@@ -297,64 +297,9 @@ function Header(_ref) {
 /*!****************************************************************!*\
   !*** ./client/src/components/overview/components/Carousel.jsx ***!
   \****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ Carousel)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-icons/fa */ "./node_modules/react-icons/fa/index.esm.js");
-
-
-
-function Carousel(_ref) {
-  var photos = _ref.photos,
-    click = _ref.click,
-    setPhoto = _ref.setPhoto,
-    setExpand = _ref.setExpand,
-    expandPhoto = _ref.expandPhoto;
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(click),
-    _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
-    current = _useState2[0],
-    setCurrent = _useState2[1];
-  var length = photos.length;
-  function next() {
-    setCurrent(current === length - 1 ? 0 : current + 1);
-    setPhoto(photos[current + 1]);
-  }
-  function prev() {
-    setCurrent(current === 0 ? length - 1 : current - 1);
-    setPhoto(photos[current + 1]);
-  }
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    if (click !== 0) {
-      setCurrent(click);
-    }
-  }, [click]);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
-    className: "carousel-container"
-  }, current !== 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_2__.FaAngleLeft, {
-    className: "left-arrow",
-    onClick: prev
-  }) : null, current !== length - 1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_2__.FaAngleRight, {
-    className: "right-arrow",
-    onClick: next
-  }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("img", {
-    src: "".concat(photos[current].thumbnail_url || "https://i.postimg.cc/gjFHrzW3/image-4.png"),
-    className: "img-main",
-    onClick: function onClick(e) {
-      setExpand(function (prev) {
-        return !prev;
-      });
-      expandPhoto();
-    }
-  }));
-}
-;
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/client/src/components/overview/components/Carousel.jsx: Unexpected token (26:1)\n\n\u001b[0m \u001b[90m 24 |\u001b[39m       {current\u001b[33m!==\u001b[39m\u001b[35m0\u001b[39m \u001b[33m?\u001b[39m \u001b[33m<\u001b[39m\u001b[33mFaAngleLeft\u001b[39m className\u001b[33m=\u001b[39m\u001b[32m'left-arrow'\u001b[39m onClick\u001b[33m=\u001b[39m{prev} \u001b[33m/\u001b[39m\u001b[33m>\u001b[39m \u001b[33m:\u001b[39m \u001b[36mnull\u001b[39m}\u001b[0m\n\u001b[0m \u001b[90m 25 |\u001b[39m       {current\u001b[33m!==\u001b[39mlength\u001b[33m-\u001b[39m\u001b[35m1\u001b[39m\u001b[33m?\u001b[39m \u001b[33m<\u001b[39m\u001b[33mFaAngleRight\u001b[39m className\u001b[33m=\u001b[39m\u001b[32m'right-arrow'\u001b[39m onClick\u001b[33m=\u001b[39m{next} \u001b[33m/\u001b[39m\u001b[33m>\u001b[39m\u001b[33m:\u001b[39m\u001b[36mnull\u001b[39m}\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 26 |\u001b[39m \u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 27 |\u001b[39m       \u001b[33m<\u001b[39m\u001b[33mimg\u001b[39m src\u001b[33m=\u001b[39m{\u001b[32m`${photos[current].thumbnail_url || \"https://i.postimg.cc/gjFHrzW3/image-4.png\" }`\u001b[39m} className\u001b[33m=\u001b[39m\u001b[32m'img-main'\u001b[39m onClick\u001b[33m=\u001b[39m{e\u001b[33m=>\u001b[39m{setExpand(prev\u001b[33m=>\u001b[39m\u001b[33m!\u001b[39mprev)\u001b[33m;\u001b[39mexpandPhoto()}}\u001b[33m/\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 28 |\u001b[39m \u001b[33m===\u001b[39m\u001b[33m===\u001b[39m\u001b[33m=\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 29 |\u001b[39m       {photos[current]\u001b[33m.\u001b[39mthumbnail_url \u001b[33m?\u001b[39m\u001b[0m\n    at instantiate (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:72:32)\n    at constructor (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:367:12)\n    at JSXParserMixin.raise (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:3706:19)\n    at JSXParserMixin.unexpected (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:3744:16)\n    at JSXParserMixin.jsxParseIdentifier (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:7947:12)\n    at JSXParserMixin.jsxParseNamespacedName (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:7957:23)\n    at JSXParserMixin.jsxParseElementName (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:7968:21)\n    at JSXParserMixin.jsxParseOpeningElementAt (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:8067:22)\n    at JSXParserMixin.jsxParseElementAt (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:8099:33)\n    at JSXParserMixin.jsxParseElementAt (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:8115:32)\n    at JSXParserMixin.jsxParseElement (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:8184:17)\n    at JSXParserMixin.parseExprAtom (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:8198:19)\n    at JSXParserMixin.parseExprSubscripts (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12875:23)\n    at JSXParserMixin.parseUpdate (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12854:21)\n    at JSXParserMixin.parseMaybeUnary (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12824:23)\n    at JSXParserMixin.parseMaybeUnaryOrPrivate (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12615:61)\n    at JSXParserMixin.parseExprOps (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12622:23)\n    at JSXParserMixin.parseMaybeConditional (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12592:23)\n    at JSXParserMixin.parseMaybeAssign (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12544:21)\n    at /Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12502:39\n    at JSXParserMixin.allowInAnd (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:14576:12)\n    at JSXParserMixin.parseMaybeAssignAllowIn (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12502:17)\n    at JSXParserMixin.parseParenAndDistinguishExpression (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:13631:28)\n    at JSXParserMixin.parseExprAtom (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:13203:23)\n    at JSXParserMixin.parseExprAtom (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:8203:20)\n    at JSXParserMixin.parseExprSubscripts (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12875:23)\n    at JSXParserMixin.parseUpdate (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12854:21)\n    at JSXParserMixin.parseMaybeUnary (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12824:23)\n    at JSXParserMixin.parseMaybeUnaryOrPrivate (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12615:61)\n    at JSXParserMixin.parseExprOps (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12622:23)\n    at JSXParserMixin.parseMaybeConditional (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12592:23)\n    at JSXParserMixin.parseMaybeAssign (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12544:21)\n    at JSXParserMixin.parseExpressionBase (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12480:23)\n    at /Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12474:39\n    at JSXParserMixin.allowInAnd (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:14570:16)\n    at JSXParserMixin.parseExpression (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12474:17)\n    at JSXParserMixin.parseReturnStatement (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:15302:28)\n    at JSXParserMixin.parseStatementContent (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:14925:21)\n    at JSXParserMixin.parseStatement (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:14871:17)\n    at JSXParserMixin.parseBlockOrModuleBlockBody (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:15531:25)\n    at JSXParserMixin.parseBlockBody (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:15522:10)\n    at JSXParserMixin.parseBlock (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:15505:10)\n    at JSXParserMixin.parseFunctionBody (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:14175:24)\n    at JSXParserMixin.parseFunctionBodyAndFinish (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:14159:10)\n    at /Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:15679:12\n    at JSXParserMixin.withSmartMixTopicForbiddingContext (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:14547:14)\n    at JSXParserMixin.parseFunction (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:15678:10)\n    at JSXParserMixin.parseExportDefaultExpression (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:16237:19)\n    at JSXParserMixin.parseExport (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:16149:31)\n    at JSXParserMixin.parseStatementContent (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:14987:27)");
 
 /***/ }),
 
@@ -517,8 +462,7 @@ function usePrevious(value) {
   return ref.current;
 }
 function Gallery(_ref) {
-  var style = _ref.style,
-    noDefault = _ref.noDefault;
+  var style = _ref.style;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
     _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
     photos = _useState2[0],
@@ -541,11 +485,7 @@ function Gallery(_ref) {
   // on load/style change, set side photos and main photo to default
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     // handle no default image
-    // noDefault ? setPhotos([{thumbnail_url: "https://i.postimg.cc/gjFHrzW3/image-4.png"}])
     setPhotos(style.photos);
-
-    // if(click){setPhoto(photos[click])}
-
     if (photos && !photo) {
       setPhoto(photos[0]);
     } else {
@@ -553,7 +493,9 @@ function Gallery(_ref) {
         setPhoto(newPhotos[0]);
       }
     }
-  }, [{}]);
+  }, [{
+    style: style
+  }]);
 
   // onClick function - input: img, output: change of gallery main photo
   function changePhoto(props) {
@@ -647,8 +589,7 @@ __webpack_require__.r(__webpack_exports__);
 function Styles(_ref) {
   var styles = _ref.styles,
     style = _ref.style,
-    setStyle = _ref.setStyle,
-    noDefault = _ref.noDefault;
+    setStyle = _ref.setStyle;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([styles]),
     _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
     display = _useState2[0],
@@ -670,29 +611,13 @@ function Styles(_ref) {
     className: "selected-style"
   }, " ", style.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
     className: "icons"
-  }, noDefault ? styles.map(function (one) {
+  }, styles.map(function (one) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", {
       key: one.style_id,
       className: "styles-icon-container"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("img", {
       className: "style-icon",
-      src: "https://i.postimg.cc/2ywh6z69/image-2.png",
-      onClick: function onClick(e) {
-        set(one);
-      },
-      style: {
-        opacity: '0.5'
-      }
-    }), style.style_id === one.style_id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_2__.FaCheck, {
-      className: "check-icon"
-    }) : null);
-  }) : styles.map(function (one) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", {
-      key: one.style_id,
-      className: "styles-icon-container"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("img", {
-      className: "style-icon",
-      src: one.photos[0].thumbnail_url,
+      src: one.photos[0].thumbnail_url || "https://i.postimg.cc/2ywh6z69/image-2.png",
       onClick: function onClick(e) {
         set(one);
       }
@@ -866,8 +791,7 @@ function Overview(_ref) {
     }
   }, [product]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement((react__WEBPACK_IMPORTED_MODULE_1___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_components_Gallery_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    style: style,
-    noDefault: noDefault
+    style: style
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "right"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", null, "\u2605\u2605\u2605\u2605\u2606 ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("a", {
@@ -892,8 +816,7 @@ function Overview(_ref) {
   }, "$", style.original_price), " $", style.sale_price) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement((react__WEBPACK_IMPORTED_MODULE_1___default().Fragment), null, "$", style.original_price)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_components_Styles_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
     styles: styles,
     style: style,
-    setStyle: setStyle,
-    noDefault: noDefault
+    setStyle: setStyle
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_components_Cart_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
     style: style
   })));

@@ -23,7 +23,11 @@ export default function Carousel({ photos, click, setPhoto, setExpand, expandPho
     <div className='carousel-container'>
       {current!==0 ? <FaAngleLeft className='left-arrow' onClick={prev} /> : null}
       {current!==length-1? <FaAngleRight className='right-arrow' onClick={next} />:null}
-      <img src={`${photos[current].thumbnail_url || "https://i.postimg.cc/gjFHrzW3/image-4.png" }`} className='img-main' onClick={e=>{setExpand(prev=>!prev);expandPhoto()}}/>
+      {photos[current].thumbnail_url ?
+        <img src={`${photos[current].thumbnail_url}`} className='img-main' onClick={e=>{setExpand(prev=>!prev);expandPhoto()}}/>
+        :
+        <img src="https://i.postimg.cc/gjFHrzW3/image-4.png" className='img-main' onClick={e=>{setExpand(prev=>!prev);expandPhoto()}}/>
+      }
     </div>
   );
 };

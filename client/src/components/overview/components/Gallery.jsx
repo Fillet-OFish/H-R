@@ -11,7 +11,7 @@ function usePrevious(value) { //credit: Ohans Emmanuel
   return ref.current;
 }
 
-export default function Gallery({ style, noDefault }) {
+export default function Gallery({ style }) {
   const [photos, setPhotos] = useState([])
   const [photo, setPhoto] = useState('')
   const [click, setClick] = useState(0)
@@ -22,10 +22,7 @@ export default function Gallery({ style, noDefault }) {
   // on load/style change, set side photos and main photo to default
   useEffect(() => {
     // handle no default image
-    // noDefault ? setPhotos([{thumbnail_url: "https://i.postimg.cc/gjFHrzW3/image-4.png"}])
-       setPhotos(style.photos)
-
-    // if(click){setPhoto(photos[click])}
+    setPhotos(style.photos)
 
     if(photos && !photo){setPhoto(photos[0])}
     else{
@@ -34,7 +31,7 @@ export default function Gallery({ style, noDefault }) {
       }
     }
 
-  },[{}])
+  },[{style}])
 
   // onClick function - input: img, output: change of gallery main photo
   function changePhoto(props) {
