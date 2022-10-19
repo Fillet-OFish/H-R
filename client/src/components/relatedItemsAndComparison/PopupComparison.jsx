@@ -6,39 +6,33 @@ export default function PopupComparison ({relatedItem, currentItem, popup, setPo
 
   const [display, setDisplay] = useState(popup ? 'block' : 'none')
 
-  const popupRef = useRef(null);
-
   useEffect(() => {
     popup ? setDisplay('block') : setDisplay('none')
   }, [popup])
 
-  useEffect(() => {
-    if (display === 'block') {
-      popupRef.current.scrollIntoView({behavior: 'smooth', block: 'center'})
-    }
-  }, [display])
-
   const modal = {
     display: display, /* Hidden by default */
-    position: 'absolute', /* Stay in place */
     zIndex: '100', /* Sit on top */
-    left: '50%',
-    top: '-40%',
-    WebkitTransform: 'translateX(-50%)',
-    transform: 'translateX(-50%)',
-    overflow: 'auto', /* Enable scroll if needed */
-    overflowBlcok: 'visible',
+    position: 'fixed',
+    background: '#00000050',
+    width: '100%',
+    height: '100vh',
+    top: '0',
+    left: '0'
   }
 
   const content = {
+    display: 'absolute',
     backgroundColor: '#fefefe',
-    // margin: '15% auto', /* 15% from the top and centered */
-    padding: '20px',
+    marginTop: '25%',
+    marginLeft: '50%',
+    transform: 'translate(-50%, -50%)',
+    overflow: 'auto',
     border: '1px solid #888',
-    borderRadius: '7px',
-    width: '800px', /* Could be more or less, depending on screen size */
-    height: '500px',
-    textAlign: 'center'
+    borderRadius: '8px',
+    padding: '0 5px 10px 5px',
+    maxWidth: '40%',
+    maxHeight: '50%',
   }
 
   const comparisonObj = {}
@@ -52,11 +46,11 @@ export default function PopupComparison ({relatedItem, currentItem, popup, setPo
 
 
   return (
-    <div style={modal} ref={popupRef} >
+    <div style={modal} onClick={()=>{setPopup(!popup)}}>
 
-      <div style={content} onClick={()=>{setPopup(!popup)}}>
+      <div className='comparison-table' style={content}>
 
-        <table style={{width: '100%'}}>
+        <table>
           <caption>Comparing</caption>
           <thead>
             <tr>
@@ -68,14 +62,13 @@ export default function PopupComparison ({relatedItem, currentItem, popup, setPo
           <tbody>
             {Object.keys(comparisonObj).map((feature) => (
               <tr key={feature}>
-                <td>{comparisonObj[feature].valueCurrent === true ?  '✓' : comparisonObj[feature].valueCurrent}</td>
-                <td>{feature}</td>
-                <td>{comparisonObj[feature].valueRelated === true ?   '✓' : comparisonObj[feature].valueRelated}</td>
+                <td className='td-left'>{comparisonObj[feature].valueCurrent === true ?  '✓' : comparisonObj[feature].valueCurrent}</td>
+                <td className='td-feature'>{feature}</td>
+                <td className='td-right'>{comparisonObj[feature].valueRelated === true ?   '✓' : comparisonObj[feature].valueRelated}</td>
               </tr>
             ))}
           </tbody>
         </table>
-        <p>click anywhere in the box to exit </p>
       </div>
     </div>
   )

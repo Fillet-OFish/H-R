@@ -1416,43 +1416,33 @@ function PopupComparison(_ref) {
     _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
     display = _useState2[0],
     setDisplay = _useState2[1];
-  var popupRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     popup ? setDisplay('block') : setDisplay('none');
   }, [popup]);
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    if (display === 'block') {
-      popupRef.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center'
-      });
-    }
-  }, [display]);
   var modal = {
     display: display,
     /* Hidden by default */
-    position: 'absolute',
-    /* Stay in place */
     zIndex: '100',
     /* Sit on top */
-    left: '50%',
-    top: '-40%',
-    WebkitTransform: 'translateX(-50%)',
-    transform: 'translateX(-50%)',
-    overflow: 'auto',
-    /* Enable scroll if needed */
-    overflowBlcok: 'visible'
+    position: 'fixed',
+    background: '#00000050',
+    width: '100%',
+    height: '100vh',
+    top: '0',
+    left: '0'
   };
   var content = {
+    display: 'absolute',
     backgroundColor: '#fefefe',
-    // margin: '15% auto', /* 15% from the top and centered */
-    padding: '20px',
+    marginTop: '25%',
+    marginLeft: '50%',
+    transform: 'translate(-50%, -50%)',
+    overflow: 'auto',
     border: '1px solid #888',
-    borderRadius: '7px',
-    width: '800px',
-    /* Could be more or less, depending on screen size */
-    height: '500px',
-    textAlign: 'center'
+    borderRadius: '8px',
+    padding: '0 5px 10px 5px',
+    maxWidth: '40%',
+    maxHeight: '50%'
   };
   var comparisonObj = {};
   currentItem.features.map(function (feature) {
@@ -1467,21 +1457,23 @@ function PopupComparison(_ref) {
   });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     style: modal,
-    ref: popupRef
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
-    style: content,
     onClick: function onClick() {
       setPopup(!popup);
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("table", {
-    style: {
-      width: '100%'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("caption", null, "Comparing"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("th", null, currentItem.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("th", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("th", null, relatedItem.name))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("tbody", null, Object.keys(comparisonObj).map(function (feature) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+    className: "comparison-table",
+    style: content
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("caption", null, "Comparing"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("th", null, currentItem.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("th", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("th", null, relatedItem.name))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("tbody", null, Object.keys(comparisonObj).map(function (feature) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("tr", {
       key: feature
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("td", null, comparisonObj[feature].valueCurrent === true ? '✓' : comparisonObj[feature].valueCurrent), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("td", null, feature), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("td", null, comparisonObj[feature].valueRelated === true ? '✓' : comparisonObj[feature].valueRelated));
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", null, "click anywhere in the box to exit ")));
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("td", {
+      className: "td-left"
+    }, comparisonObj[feature].valueCurrent === true ? '✓' : comparisonObj[feature].valueCurrent), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("td", {
+      className: "td-feature"
+    }, feature), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("td", {
+      className: "td-right"
+    }, comparisonObj[feature].valueRelated === true ? '✓' : comparisonObj[feature].valueRelated));
+  })))));
 }
 
 /***/ }),
@@ -1549,11 +1541,12 @@ var style = {
   position: 'relative',
   border: '1px solid lightgrey ',
   margin: '8px',
-  // overflow: 'hidden',
+  overflow: 'hidden',
   width: '257px',
   height: '380px',
   cursor: 'pointer',
-  borderRadius: '6px'
+  borderRadius: '6px',
+  textOverflow: 'ellipsis'
 };
 var imageStyle = {
   width: '100%',
@@ -1685,9 +1678,13 @@ function RelatedProduct(_ref) {
     style: smallStyle
   }, relatedItem.category), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", {
     style: {
+      display: '-webkit-box',
       height: '30px',
       padding: '3px 0 3px 0',
-      fontSize: '13px'
+      fontSize: '13px',
+      WebkitLineClamp: '2',
+      WebkitBoxOrient: 'vertical',
+      overflow: 'hidden'
     }
   }, relatedItem.name + ' - ' + relatedItem.slogan), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", null, defaultStyle.sale_price ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("p", {
     style: {

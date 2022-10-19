@@ -593,3 +593,36 @@ textarea {
   width: 96%;
   height: 70px;
 }
+
+
+/* Jaden ADDED THESE ------------------------------------------------- */
+
+.comparison-table table, th, td  {
+  border-collapse: collapse;
+  /* border-bottom: 1px solid; */
+  padding: 10px 0 10px 0
+}
+
+.comparison-table table {
+  width: 100%;
+  position: relative;
+}
+
+.comparison-table th {
+  position: sticky;
+  top: 0;
+  background: lightgrey;
+}
+
+.comparison-table caption {
+  position: sticky;
+  font-size: x-large;
+  padding: 15px 0 10px 0;
+}
+
+.comparison-table td {
+  width: 33%;
+  text-align: center;
+}
+
+.comparison-table tbody tr:nth-child(odd) {background-color: #f2f2f2;}

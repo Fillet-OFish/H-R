@@ -9,11 +9,12 @@ const style = {
   position: 'relative',
   border: '1px solid lightgrey ',
   margin: '8px',
-  // overflow: 'hidden',
+  overflow: 'hidden',
   width: '257px',
   height: '380px',
   cursor: 'pointer',
-  borderRadius: '6px'
+  borderRadius: '6px',
+  textOverflow: 'ellipsis'
 }
 
 const imageStyle = {
@@ -115,15 +116,20 @@ export default function RelatedProduct({currentItem, item, setProduct, list, out
 
           <div style={{padding: '5px 10px 0 10px' }}>
             <small style={smallStyle}>{relatedItem.category}</small>
-            <div style={{height: '30px', padding: '3px 0 3px 0', fontSize: '13px'}}>{relatedItem.name + ' - ' + relatedItem.slogan}</div>
+
+            <div style={{display: '-webkit-box', height: '30px', padding: '3px 0 3px 0', fontSize: '13px', WebkitLineClamp: '2', WebkitBoxOrient: 'vertical', overflow: 'hidden'}}>{relatedItem.name + ' - ' + relatedItem.slogan}
+            </div>
+
             <div>{defaultStyle.sale_price ?
               <div>
                 <p style={{color: 'red'}}>${defaultStyle.sale_price}</p>
                 <small style={smallStyle, {textDecoration: 'line-through'}}>${defaultSTyle.original_price}</small>
               </div>
-              : <small style={smallStyle}>${defaultStyle.original_price}</small>}</div>
+              : <small style={smallStyle}>${defaultStyle.original_price}</small>}
+            </div>
             <StarRatings item={item} />
           </div>
+
         </li>
         : null
       }
