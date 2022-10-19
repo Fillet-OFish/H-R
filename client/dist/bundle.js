@@ -343,8 +343,17 @@ function Carousel(_ref) {
   }) : null, current !== length - 1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_2__.FaAngleRight, {
     className: "right-arrow",
     onClick: next
-  }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("img", {
+  }) : null, photos[current].thumbnail_url ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("img", {
     src: "".concat(photos[current].thumbnail_url),
+    className: "img-main",
+    onClick: function onClick(e) {
+      setExpand(function (prev) {
+        return !prev;
+      });
+      expandPhoto();
+    }
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("img", {
+    src: "https://i.postimg.cc/gjFHrzW3/image-4.png",
     className: "img-main",
     onClick: function onClick(e) {
       setExpand(function (prev) {
@@ -517,8 +526,7 @@ function usePrevious(value) {
   return ref.current;
 }
 function Gallery(_ref) {
-  var style = _ref.style,
-    noDefault = _ref.noDefault;
+  var style = _ref.style;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
     _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
     photos = _useState2[0],
@@ -541,12 +549,7 @@ function Gallery(_ref) {
   // on load/style change, set side photos and main photo to default
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     // handle no default image
-    noDefault ? setPhotos([{
-      thumbnail_url: "https://i.postimg.cc/gjFHrzW3/image-4.png"
-    }]) : setPhotos(style.photos);
-
-    // if(click){setPhoto(photos[click])}
-
+    setPhotos(style.photos);
     if (photos && !photo) {
       setPhoto(photos[0]);
     } else {
@@ -554,7 +557,9 @@ function Gallery(_ref) {
         setPhoto(newPhotos[0]);
       }
     }
-  }, [{}]);
+  }, [{
+    style: style
+  }]);
 
   // onClick function - input: img, output: change of gallery main photo
   function changePhoto(props) {
@@ -585,7 +590,7 @@ function Gallery(_ref) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
       key: i
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("img", {
-      src: photo.thumbnail_url,
+      src: photo.thumbnail_url || "https://i.postimg.cc/gjFHrzW3/image-4.png",
       onClick: function onClick(e) {
         e.preventDefault();
         changePhoto({
@@ -648,8 +653,7 @@ __webpack_require__.r(__webpack_exports__);
 function Styles(_ref) {
   var styles = _ref.styles,
     style = _ref.style,
-    setStyle = _ref.setStyle,
-    noDefault = _ref.noDefault;
+    setStyle = _ref.setStyle;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([styles]),
     _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
     display = _useState2[0],
@@ -671,29 +675,13 @@ function Styles(_ref) {
     className: "selected-style"
   }, " ", style.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
     className: "icons"
-  }, noDefault ? styles.map(function (one) {
+  }, styles.map(function (one) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", {
       key: one.style_id,
       className: "styles-icon-container"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("img", {
       className: "style-icon",
-      src: "https://i.postimg.cc/2ywh6z69/image-2.png",
-      onClick: function onClick(e) {
-        set(one);
-      },
-      style: {
-        opacity: '0.5'
-      }
-    }), style.style_id === one.style_id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_2__.FaCheck, {
-      className: "check-icon"
-    }) : null);
-  }) : styles.map(function (one) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", {
-      key: one.style_id,
-      className: "styles-icon-container"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("img", {
-      className: "style-icon",
-      src: one.photos[0].thumbnail_url,
+      src: one.photos[0].thumbnail_url || "https://i.postimg.cc/2ywh6z69/image-2.png",
       onClick: function onClick(e) {
         set(one);
       }
@@ -867,8 +855,7 @@ function Overview(_ref) {
     }
   }, [product]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement((react__WEBPACK_IMPORTED_MODULE_1___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_components_Gallery_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    style: style,
-    noDefault: noDefault
+    style: style
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "right"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", null, "\u2605\u2605\u2605\u2605\u2606 ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("a", {
@@ -893,8 +880,7 @@ function Overview(_ref) {
   }, "$", style.original_price), " $", style.sale_price) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement((react__WEBPACK_IMPORTED_MODULE_1___default().Fragment), null, "$", style.original_price)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_components_Styles_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
     styles: styles,
     style: style,
-    setStyle: setStyle,
-    noDefault: noDefault
+    setStyle: setStyle
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_components_Cart_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
     style: style
   })));

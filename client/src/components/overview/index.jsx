@@ -27,7 +27,7 @@ export default function Overview({product, rating}) {
   return(
     <>
         {/* Gallery */}
-        <Gallery style={style} noDefault={noDefault}/>
+        <Gallery style={style}/>
 
         <div className="right">
           {/* Stars */}
@@ -45,7 +45,7 @@ export default function Overview({product, rating}) {
           <p className="price">{style.sale_price ? (<><span style={{textDecoration: 'line-through', textDecorationThickness:'2px', textDecorationColor:'black',color:'gray'}}>${style.original_price}</span> ${style.sale_price}</>) : <>${style.original_price}</>}</p>
 
           {/* Styles */}
-          <Styles styles={styles} style={style} setStyle={setStyle} noDefault={noDefault}/>
+          <Styles styles={styles} style={style} setStyle={setStyle} />
 
           {/* Cart */}
           <Cart style={style}/>
