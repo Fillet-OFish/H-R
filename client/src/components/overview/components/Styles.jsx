@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaCheck } from 'react-icons/fa'
 
-export default function Styles({ styles, style, setStyle, noDefault }) {
+export default function Styles({ styles, style, setStyle }) {
  const [display, setDisplay] = useState([styles])
  const [img, setImg] = useState('')
 
@@ -19,15 +19,9 @@ export default function Styles({ styles, style, setStyle, noDefault }) {
       <p className="icons">
 
       {/* checking if there is a default style or not */}
-      {noDefault ?
-        styles.map(one =>
-          <span key={one.style_id} className="styles-icon-container">
-            <img className="style-icon" src="https://i.postimg.cc/2ywh6z69/image-2.png" onClick={e => {set(one)}} style={{opacity:'0.5'}}/>
-            {style.style_id===one.style_id ? <FaCheck className="check-icon"/> : null}
-          </span>)
-      : styles.map(one =>
+      {styles.map(one =>
         <span key={one.style_id} className="styles-icon-container">
-          <img className="style-icon" src={one.photos[0].thumbnail_url} onClick={e => {set(one)}}/>
+          <img className="style-icon" src={one.photos[0].thumbnail_url || "https://i.postimg.cc/2ywh6z69/image-2.png"} onClick={e => {set(one)}}/>
           {style.style_id===one.style_id ? <FaCheck className="check-icon"/> : null}
         </span>)
       }
