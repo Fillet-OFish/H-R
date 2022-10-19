@@ -1369,18 +1369,13 @@ var QAEntry = function QAEntry(props) {
     _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
     answers = _useState2[0],
     setAnswers = _useState2[1];
-  // state to keep track if a question has been helpful
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
-    _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState3, 2),
-    helpful = _useState4[0],
-    setHelpful = _useState4[1];
 
   // PAGINATION FOR ANSWERS -------------------------------
   // No of Records to be displayed on each page
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(2),
-    _useState6 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState5, 2),
-    answersPerPage = _useState6[0],
-    setAnswersPerPage = _useState6[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(2),
+    _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState3, 2),
+    answersPerPage = _useState4[0],
+    setAnswersPerPage = _useState4[1];
   // Records to be displayed on the current page
   var currentAnswers = answers.slice(0, answersPerPage);
 
@@ -1399,6 +1394,25 @@ var QAEntry = function QAEntry(props) {
       console.log(err);
     });
   };
+
+  // make an axios put request to mark questions as helpful
+  var helpfulQues = function helpfulQues(q_id) {
+    axios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/api/qa/questions/".concat(q_id, "/helpful")).then(function (response) {
+      console.log('Successful put for helpfulQues!');
+    })["catch"](function (err) {
+      console.log(err);
+    });
+  };
+
+  // make an axios put request to report questions
+  var reportQues = function reportQues(q_id) {
+    axios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/api/qa/questions/".concat(q_id, "/report")).then(function (response) {
+      console.log('Successful put for reportQues!');
+    })["catch"](function (err) {
+      console.log(err);
+    });
+  };
+
   // render answers data when qaData or ques states change
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     getAnswers(props.ques.question_id);
@@ -1408,7 +1422,7 @@ var QAEntry = function QAEntry(props) {
   // render answers data with an answers entry component and a button for more answers
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "QContainer2"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("strong", null, "Q: ", props.ques.question_body), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("label", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("strong", null, "Q: ", props.ques.question_body), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("label", {
     style: {
       "float": 'right'
     },
@@ -1416,10 +1430,14 @@ var QAEntry = function QAEntry(props) {
   }, "Helpful? ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("a", {
     className: "questions-and-answers",
     onClick: function onClick() {
-      helpful ? props.ques.question_helpfulness-- : props.ques.question_helpfulness++;
-      setHelpful(!helpful);
+      return helpfulQues(props.ques.question_id);
     }
-  }, "Yes"), " (", props.ques.question_helpfulness, ") | ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("a", {
+  }, "Yes"), " (", props.ques.question_helpfulness, ") |", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("a", {
+    className: "questions-and-answers",
+    onClick: function onClick() {
+      return reportQues(props.ques.question_id);
+    }
+  }, "Report"), " |", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("a", {
     className: "questions-and-answers",
     onClick: function onClick() {
       props.setModalAnswOn(!props.modalAnswOn);

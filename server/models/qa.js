@@ -3,6 +3,7 @@ const axios = require('axios');
 // get request
 function getQuestions(params, callback) {
   let options = {
+    method: 'GET',
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${params.id}&count=${params.count}`,
     headers: {
       'Authorization': `${process.env.TOKENS}`
@@ -13,6 +14,7 @@ function getQuestions(params, callback) {
 // get request
 function getAnswers(q_id, callback) {
   let options = {
+    method: 'GET',
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/qa/questions/${q_id}/answers?count=100`,
     headers: {
       'User-Agent': 'request',
@@ -58,9 +60,10 @@ function addAnswer(q_id, obj) {
   return axios(options);
 }
 // put request
-function markQHelpful(q_id, callback) {
+function markQHelpful(q_id) {
   let options = {
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/qa/questions/:${q_id}/helpful`,
+    method: 'PUT',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/qa/questions/${q_id}/helpful`,
     headers: {
       'User-Agent': 'request',
       'Authorization': `${process.env.TOKENS}`
@@ -69,8 +72,9 @@ function markQHelpful(q_id, callback) {
   return axios(options);
 }
 // put request
-function reportQuestion(q_id, callback) {
+function reportQuestion(q_id) {
   let options = {
+    method: 'PUT',
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/qa/questions/${q_id}/report`,
     headers: {
       'User-Agent': 'request',
@@ -80,30 +84,9 @@ function reportQuestion(q_id, callback) {
   return axios(options);
 }
 // put request
-function markQHelpful(q_id, callback) {
+function markAHelpful(a_id) {
   let options = {
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/qa/questions/:${q_id}/helpful`,
-    headers: {
-      'User-Agent': 'request',
-      'Authorization': `${process.env.TOKENS}`
-    }
-  }
-  return axios(options);
-}
-// put request
-function reportQuestion(q_id, callback) {
-  let options = {
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/qa/questions/${q_id}/report`,
-    headers: {
-      'User-Agent': 'request',
-      'Authorization': `${process.env.TOKENS}`
-    }
-  }
-  return axios(options);
-}
-// put request
-function markAHelpful(a_id, callback) {
-  let options = {
+    method: 'PUT',
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/qa/answers/${a_id}/helpful`,
     headers: {
       'User-Agent': 'request',
@@ -113,8 +96,9 @@ function markAHelpful(a_id, callback) {
   return axios(options);
 }
 // put request
-function reportAnswer(a_id, callback) {
+function reportAnswer(a_id) {
   let options = {
+    method: 'PUT',
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/qa/answers/${a_id}/report`,
     headers: {
       'User-Agent': 'request',

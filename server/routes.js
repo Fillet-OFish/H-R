@@ -18,11 +18,14 @@ router.post('/interactions/:element/:widget/:time')
 router.get('/cart', controllers.cart.getAll)
 router.post('/cart', controllers.cart.postOne)
 
-// get questions and answers
+// QUESTIONS AND ANSWERS REQUESTS ---------------------------------------
 router.get('/qa/questions', controllers.qa.getAllQ);
 router.get('/qa/questions/:id/answers', controllers.qa.getAllA);
 
 router.post('/qa/questions', controllers.qa.postQues);
 router.post('/qa/questions/:id/answers', controllers.qa.postAnsw);
+
+router.put('/qa/questions/:id/helpful', controllers.qa.helpfulQues);
+router.put('/qa/questions/:id/report', controllers.qa.reportQues);
 
 module.exports = router;

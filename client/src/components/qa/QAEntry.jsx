@@ -7,8 +7,6 @@ import AWEntry from './AWEntry.jsx';
 const QAEntry = (props) => {
   // state will be intially empty array
   const [answers, setAnswers] = useState([]);
-  // state to keep track if a question has been helpful
-  const [helpful, setHelpful] = useState(false);
 
   // PAGINATION FOR ANSWERS -------------------------------
   // No of Records to be displayed on each page
@@ -34,6 +32,29 @@ const QAEntry = (props) => {
       console.log(err);
     })
   }
+
+  // make an axios put request to mark questions as helpful
+  const helpfulQues = (q_id) => {
+    axios.put(`/api/qa/questions/${q_id}/helpful`)
+    .then((response) => {
+      console.log('Successful put for helpfulQues!')
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
+
+  // make an axios put request to report questions
+  const reportQues = (q_id) => {
+    axios.put(`/api/qa/questions/${q_id}/report`)
+    .then((response) => {
+      console.log('Successful put for reportQues!')
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
+
   // render answers data when qaData or ques states change
   useEffect(() => {
     getAnswers(props.ques.question_id);
@@ -44,13 +65,18 @@ const QAEntry = (props) => {
   return (
     <div className='QContainer2'>
       {/* set each question - with helpful and add answer properties --------------- */}
-      <div><strong>Q: {props.ques.question_body}</strong> <label style={{float: 'right'}} className='user_info' >Helpful? <a className='questions-and-answers' onClick={() => {
-        (helpful) ? props.ques.question_helpfulness-- : props.ques.question_helpfulness++;
-        setHelpful(!helpful);
-      }}>Yes</a> ({props.ques.question_helpfulness}) | <a className='questions-and-answers' onClick={() => {
-        props.setModalAnswOn(!props.modalAnswOn);
-        props.setQID(props.ques);
-        }}>Add Answer</a></label></div>
+      <div><strong>Q: {props.ques.question_body}</strong>
+        {/* question on helpfulness */}
+        <label style={{float: 'right'}} className='user_info' >Helpful? <a className='questions-and-answers' onClick={() => helpfulQues(props.ques.question_id)}>Yes</a> ({props.ques.question_helpfulness}) |
+        {/* reporting question */}
+        <a className='questions-and-answers' onClick={() => reportQues(props.ques.question_id)}>Report</a> |
+        {/* adding an answer to question */}
+        <a className='questions-and-answers' onClick={() => {
+          props.setModalAnswOn(!props.modalAnswOn);
+          props.setQID(props.ques);
+          }}>Add Answer</a>
+        </label>
+      </div>
       <br></br>
 
       {/* set each answer ----------------- */}
