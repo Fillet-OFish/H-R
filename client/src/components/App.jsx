@@ -45,15 +45,11 @@ export default function App() {
 
     {/* overview */}
     <div className="container">
-<<<<<<< HEAD
-      {/* <Overview product={product}/> */}
-=======
       <Overview product={product} rating={productRating}/>
     </div>
 
     {/* description */}
     <Description product={product}/>
->>>>>>> 93dc84aa54530868dd2d0515a060f41c8f15cfdd
 
     {/* related products */}
     <div className="container">
