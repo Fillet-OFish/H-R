@@ -48,7 +48,6 @@ export default function PopupComparison ({relatedItem, currentItem, popup, setPo
   relatedItem.features.map((feature) => {
     comparisonObj[feature.feature] ? comparisonObj[feature.feature].valueRelated = feature.value : comparisonObj[feature.feature] = {valueRelated: feature.value}
   })
-  console.log('comparisonObj: ', comparisonObj)
 
 
 
