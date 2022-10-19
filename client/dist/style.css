@@ -462,7 +462,14 @@ nav {
 
 .QContainer {
   color: #525252;
-  width: 100%;
+  width: 200%;
+  max-width: 1100px;
+  height: 400px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  overflow: scroll;
+  scroll-behavior: smooth;
 }
 .QContainer2 {
   color: #525252;
@@ -600,4 +607,47 @@ nav {
 textarea {
   width: 96%;
   height: 70px;
+}
+
+/* horizontal line ----- */
+.hr3 {
+  margin: 40px 0;
+  border: 0;
+  height: 2px;
+  background-image: linear-gradient(to right, transparent, rgb(0, 0, 0), transparent);
+}
+
+/* search button ----- */
+.search-form {
+  background-color: #f9f9f9;
+  width: 350px;
+  height: 44px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.search-input {
+  all: unset;
+  font: 16px system-ui;
+  color: rgb(0, 0, 0);
+  height: 100%;
+  width: 100%;
+  padding: 6px 10px;
+}
+
+.search-button {
+  all: unset;
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+}
+
+.search-svg {
+  color: #9C9C9C;
+  fill: currentColor;
+  width: 24px;
+  height: 24px;
+  padding: 10px;
 }

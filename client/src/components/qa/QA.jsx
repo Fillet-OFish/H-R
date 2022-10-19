@@ -3,6 +3,7 @@ import QAEntry from './QAEntry.jsx';
 import Pagination from './Pagination.jsx';
 import {useState, useEffect} from 'react';
 import AddQuesBtn from './AddQuesBtn.jsx';
+import SearchQues from './SearchQues.jsx';
 
 
 const QA = (props) => {
@@ -17,23 +18,29 @@ const QA = (props) => {
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
   // Records to be displayed on the current page
-  const currentRecords = props.qaData.slice(indexOfFirstRecord, indexOfLastRecord);
+  const currentRecords = props.filter.slice(indexOfFirstRecord, indexOfLastRecord);
   // calculate the number of pages
-  const nPages = Math.ceil(props.qaData.length / recordsPerPage);
+  const nPages = Math.ceil(props.filter.length / recordsPerPage);
   // ----------------------------------------------------------------
 
 
 
   // iterate through questions data
   return (
-    <div className='QContainer'>
+    <div>
+      <hr className='hr3'></hr>
       <h2>Questions & Answers</h2>
 
       <div>
+        {/* search bar ----------- */}
+        <SearchQues searchFilter={props.searchFilter} />
+      </div>
+
+      <div className='QContainer'>
         {currentRecords.map((ques, index) => (
           // set each question entry ---------
           <QAEntry ques={ques} key={index} qaData={props.qaData} setImage={props.setImage} setModalOn={props.setModalOn} modalOn={props.modalOn} modalAnswOn={props.modalAnswOn} setModalAnswOn={props.setModalAnswOn} setQID={props.setQID} />
-        ))}
+          ))}
       </div>
 
       <div>
@@ -45,6 +52,7 @@ const QA = (props) => {
         {/* add question button ----------- */}
         <AddQuesBtn modalQuesOn={props.modalQuesOn} setModalQuesOn={props.setModalQuesOn}/>
       </div>
+      <hr className='hr3'></hr>
     </div>
   )
 }

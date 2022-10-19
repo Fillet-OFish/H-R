@@ -52,12 +52,32 @@ const helpfulQues = (req, res) => {
 
 const reportQues = (req, res) => {
   reportQuestion(req.params.id)
-    .then(response => {
-      res.status(204).send(response.data);
-    })
-    .catch(err => {
-      console.log(err);
-    })
+  .then(response => {
+    res.status(204).send(response.data);
+  })
+  .catch(err => {
+    console.log(err);
+  })
+}
+
+const helpfulAnsw = (req, res) => {
+  markAHelpful(req.params.id)
+  .then(response => {
+    res.status(204).send(response.data);
+  })
+  .catch(err => {
+    console.log(err);
+  })
+}
+
+const reportAnsw = (req, res) => {
+  reportAnswer(req.params.id)
+  .then(response => {
+    res.status(204).send(response.data);
+  })
+  .catch(err => {
+    console.log(err);
+  })
 }
 
 module.exports.getAllQ = getAllQ;
@@ -66,3 +86,5 @@ module.exports.postQues = postQues;
 module.exports.postAnsw = postAnsw;
 module.exports.helpfulQues = helpfulQues;
 module.exports.reportQues = reportQues;
+module.exports.helpfulAnsw = helpfulAnsw;
+module.exports.reportAnsw = reportAnsw;
