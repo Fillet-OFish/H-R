@@ -15,7 +15,7 @@ export default function PreviewCarousel({styles, setDefaultPhoto}) {
         {styles.results.map(style => {
           if (!style['default?']) {
             return style.photos.map(photo => (
-              <img key={Math.random() * 9999} className='preview-image' src={photo.thumbnail_url || noPhoto} onClick={() => clickHandler(photo.thumbnail_url)}></img>
+              <img key={Math.random() * 99999} className='preview-image' src={photo.thumbnail_url || noPhoto} onClick={() => clickHandler(photo.thumbnail_url)}></img>
             ))
           }
         })}

@@ -1469,7 +1469,7 @@ function PreviewCarousel(_ref) {
     if (!style['default?']) {
       return style.photos.map(function (photo) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          key: Math.random() * 9999,
+          key: Math.random() * 99999,
           className: "preview-image",
           src: photo.thumbnail_url || noPhoto,
           onClick: function onClick() {
@@ -1577,11 +1577,11 @@ function ProductCard(_ref) {
       return;
     }
     ;
-    if (e.target.tagName === 'button-left') {
+    if (e.target.className === 'button-left') {
       return;
     }
     ;
-    if (e.target.tagName === 'button-right') {
+    if (e.target.className === 'button-right') {
       return;
     }
     ;
@@ -1781,7 +1781,7 @@ function scrollButtons(_ref) {
     if (el.scrollLeft - scroll <= 0) {
       setTimeout(function () {
         return setShowButtonL(false);
-      }, 500);
+      }, 300);
     }
     el.scrollBy(-scroll, 0);
   };
@@ -1791,7 +1791,7 @@ function scrollButtons(_ref) {
     if (el.scrollWidth - (el.scrollLeft + scroll) <= width) {
       setTimeout(function () {
         return setShowButtonR(false);
-      }, 500);
+      }, 300);
     }
     el.scrollBy(scroll, 0);
   };
