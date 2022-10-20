@@ -35,12 +35,15 @@ export default function ProductCard({currentItem, item, setProduct, list, outfit
   }, [])
 
   const clickHandler = (e) => {
+<<<<<<< HEAD
     if (e.target.className === 'product-card-button') {return};
     if (e.target.className === 'preview-image') {return};
     if (e.target.tagName === 'svg') {return};
     if (e.target.tagName === 'path') {return};
     if (e.target.tagName === 'button-left') {return};
     if (e.target.tagName === 'button-right') {return};
+=======
+>>>>>>> master
     setProduct(relatedItem);
   }
 
@@ -61,7 +64,11 @@ export default function ProductCard({currentItem, item, setProduct, list, outfit
         <PopupComparison currentItem={currentItem} relatedItem={relatedItem} setPopup={setPopup}/> : null
       }
       {relatedItem && defaultStyle && styles ?
+<<<<<<< HEAD
         <li className='product-card' onClick={e => clickHandler(e)} >
+=======
+        <li className='product-card' >
+>>>>>>> master
           <ProductCardImage defaultStyle={defaultStyle} styles={styles}/>
           {list === 'related' ?
             <button className='product-card-button' onClick={handleComparisonClick}>
@@ -73,7 +80,11 @@ export default function ProductCard({currentItem, item, setProduct, list, outfit
               x
             </button> : null
           }
+<<<<<<< HEAD
           <div className='product-card-info'>
+=======
+          <div className='product-card-info' onClick={e => clickHandler(e)}>
+>>>>>>> master
             <small>{relatedItem.category}</small>
             <div className='product-card-name'>
               {relatedItem.name + ' - ' + relatedItem.slogan}

@@ -11,7 +11,11 @@ export default function scrollButtons({element, width, scroll}) {
     if (el.scrollWidth - (el.scrollLeft - scroll) > width) {
       setShowButtonR(true);
     }
+<<<<<<< HEAD
     if (el.scrollLeft - scroll <= 0) {
+=======
+    if (el.scrollLeft - scroll === 0) {
+>>>>>>> master
       setTimeout(()=>setShowButtonL(false), 500)
     }
     el.scrollBy(-scroll, 0);
@@ -20,7 +24,11 @@ export default function scrollButtons({element, width, scroll}) {
   const buttonR = () => {
     const el = document.querySelector(element);
     setShowButtonL(true);
+<<<<<<< HEAD
     if (el.scrollWidth - (el.scrollLeft + scroll) <= width) {
+=======
+    if (el.scrollWidth - (el.scrollLeft + scroll) === width) {
+>>>>>>> master
       setTimeout(()=>setShowButtonR(false), 500)
     }
     el.scrollBy(scroll, 0);
