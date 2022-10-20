@@ -11,8 +11,26 @@ export default function Cart({ style }) {
 
   // on load/style change, let skus = array of style skus
   useEffect(() => {
-    if(style.skus){setSkus(Object.values(style.skus))}
+    if(style.skus){
+      setSkus(Object.values(style.skus))
+    }
   }, [style])
+
+  // input: n/a, output: sizes, dependent on the style/product
+  function getSizes() {
+    let arr = [<option value="default">SELECT SIZE</option>]
+
+    skus.forEach((sku, i) => arr.push(<option key={i} value={sku.size}>{sku.size}</option>))
+
+    return arr
+    // <option value="default">SELECT SIZE</option>
+    // <option value="XS">XS</option>
+    // <option value="S">S</option>
+    // <option value="M">M</option>
+    // <option value="L">L</option>
+    // <option value="XL">XL</option>
+    // <option value="XXL">XXL</option>
+  }
 
   // input: n/a, output: a varying # of <option> elements, dependent on sizing
   function getOptions() {
@@ -42,19 +60,14 @@ export default function Cart({ style }) {
   return(
     <div className="cart">
       {/* select size dropdown */}
-      <select className="select-size" onChange={e=>{
-          setSize(e.target.value);
-          if(skus){
+      {skus ?
+        <select className="select-size" onChange={e=>{
+            setSize(e.target.value);
             skus.filter(sku => sku.size === e.target.value).map(sku => setQuantity(sku.quantity))
-          };
-        }}>
-        <option value="default">SELECT SIZE</option>
-        <option value="XS">XS</option>
-        <option value="S">S</option>
-        <option value="M">M</option>
-        <option value="L">L</option>
-        <option value="XL">XL</option>
-      </select>
+          }}>
+          {getSizes()}
+        </select>
+      :null}
 
       {/* select quantity dropdown */}
       <select className="select-qnt" onChange={e=>setSelectQnt(parseInt(e.target.value))}>

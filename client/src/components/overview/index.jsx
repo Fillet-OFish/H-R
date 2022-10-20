@@ -18,7 +18,6 @@ export default function Overview({product, rating}) {
         setStyles(result.data.results);
         setStyle(result.data.results[0])
         setPhotos(result.data.results[0].photos)
-        return result.data.results[0]
       })
     }
   },[product])

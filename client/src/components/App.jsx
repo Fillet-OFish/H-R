@@ -37,7 +37,6 @@ export default function App() {
     }
   },[update])
 
-
   return(<TrackProvider>
     {/* header */}
     <Header product={product}/>
