@@ -1469,6 +1469,8 @@ function PreviewCarousel(_ref) {
     if (!style['default?']) {
       return style.photos.map(function (photo) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+          key: Math.random() * 9999,
+          className: "preview-image",
           src: photo.thumbnail_url || noPhoto,
           onClick: function onClick() {
             return clickHandler(photo.thumbnail_url);
@@ -1559,6 +1561,30 @@ function ProductCard(_ref) {
     });
   }, []);
   var clickHandler = function clickHandler(e) {
+    if (e.target.className === 'product-card-button') {
+      return;
+    }
+    ;
+    if (e.target.className === 'preview-image') {
+      return;
+    }
+    ;
+    if (e.target.tagName === 'svg') {
+      return;
+    }
+    ;
+    if (e.target.tagName === 'path') {
+      return;
+    }
+    ;
+    if (e.target.tagName === 'button-left') {
+      return;
+    }
+    ;
+    if (e.target.tagName === 'button-right') {
+      return;
+    }
+    ;
     setProduct(relatedItem);
   };
   var handleComparisonClick = function handleComparisonClick() {
@@ -1575,7 +1601,10 @@ function ProductCard(_ref) {
     relatedItem: relatedItem,
     setPopup: setPopup
   }) : null, relatedItem && defaultStyle && styles ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("li", {
-    className: "product-card"
+    className: "product-card",
+    onClick: function onClick(e) {
+      return clickHandler(e);
+    }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_ProductCardImage_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
     defaultStyle: defaultStyle,
     styles: styles
@@ -1586,10 +1615,7 @@ function ProductCard(_ref) {
     className: "product-card-button",
     onClick: handleOutfitClick
   }, "x") : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
-    className: "product-card-info",
-    onClick: function onClick(e) {
-      return clickHandler(e);
-    }
+    className: "product-card-info"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("small", null, relatedItem.category), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "product-card-name"
   }, relatedItem.name + ' - ' + relatedItem.slogan), defaultStyle.sale_price ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
@@ -1752,7 +1778,7 @@ function scrollButtons(_ref) {
     if (el.scrollWidth - (el.scrollLeft - scroll) > width) {
       setShowButtonR(true);
     }
-    if (el.scrollLeft - scroll === 0) {
+    if (el.scrollLeft - scroll <= 0) {
       setTimeout(function () {
         return setShowButtonL(false);
       }, 500);
@@ -1762,7 +1788,7 @@ function scrollButtons(_ref) {
   var buttonR = function buttonR() {
     var el = document.querySelector(element);
     setShowButtonL(true);
-    if (el.scrollWidth - (el.scrollLeft + scroll) === width) {
+    if (el.scrollWidth - (el.scrollLeft + scroll) <= width) {
       setTimeout(function () {
         return setShowButtonR(false);
       }, 500);
