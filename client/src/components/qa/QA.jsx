@@ -37,8 +37,8 @@ const QA = (props) => {
       </div>
 
       <div className='QContainer'>
+        {/* set each question entry --------- */}
         {currentRecords.map((ques, index) => (
-          // set each question entry ---------
           <QAEntry ques={ques} key={index} qaData={props.qaData} setImage={props.setImage} setModalOn={props.setModalOn} modalOn={props.modalOn} modalAnswOn={props.modalAnswOn} setModalAnswOn={props.setModalAnswOn} setQID={props.setQID} />
           ))}
       </div>

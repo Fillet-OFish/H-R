@@ -1325,21 +1325,17 @@ var QA = function QA(props) {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "QContainer"
   }, currentRecords.map(function (ques, index) {
-    return (
-      /*#__PURE__*/
-      // set each question entry ---------
-      react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_QAEntry_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        ques: ques,
-        key: index,
-        qaData: props.qaData,
-        setImage: props.setImage,
-        setModalOn: props.setModalOn,
-        modalOn: props.modalOn,
-        modalAnswOn: props.modalAnswOn,
-        setModalAnswOn: props.setModalAnswOn,
-        setQID: props.setQID
-      })
-    );
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_QAEntry_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      ques: ques,
+      key: index,
+      qaData: props.qaData,
+      setImage: props.setImage,
+      setModalOn: props.setModalOn,
+      modalOn: props.modalOn,
+      modalAnswOn: props.modalAnswOn,
+      setModalAnswOn: props.setModalAnswOn,
+      setQID: props.setQID
+    });
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Pagination_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
     nPages: nPages,
     currentPage: currentPage,

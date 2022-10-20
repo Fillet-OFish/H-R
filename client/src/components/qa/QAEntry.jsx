@@ -61,6 +61,7 @@ const QAEntry = (props) => {
     console.log(props.ques);
   }, [props.qaData, props.ques])
 
+
   // render answers data with an answers entry component and a button for more answers
   return (
     <div className='QContainer2'>
