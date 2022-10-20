@@ -21,6 +21,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _overview_index_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./overview/index.jsx */ "./client/src/components/overview/index.jsx");
 /* harmony import */ var _description_index_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./description/index.jsx */ "./client/src/components/description/index.jsx");
 /* harmony import */ var _relatedItemsAndComparison_index_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./relatedItemsAndComparison/index.jsx */ "./client/src/components/relatedItemsAndComparison/index.jsx");
+/* harmony import */ var _TrackClickContext_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./TrackClickContext.jsx */ "./client/src/components/TrackClickContext.jsx");
+
 
 
 
@@ -71,7 +73,7 @@ function App() {
       });
     }
   }, [update]);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement((react__WEBPACK_IMPORTED_MODULE_1___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_header_index_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_TrackClickContext_jsx__WEBPACK_IMPORTED_MODULE_8__.TrackProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_header_index_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
     product: product
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "container"
@@ -90,6 +92,53 @@ function App() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_qa_index_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
     product: product
   })));
+}
+
+/***/ }),
+
+/***/ "./client/src/components/TrackClickContext.jsx":
+/*!*****************************************************!*\
+  !*** ./client/src/components/TrackClickContext.jsx ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TrackProvider": () => (/* binding */ TrackProvider),
+/* harmony export */   "useTracker": () => (/* binding */ useTracker)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ "./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/fromUnixTime/index.js");
+
+
+
+
+var TrackClickContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createContext();
+function useTracker() {
+  return (0,react__WEBPACK_IMPORTED_MODULE_2__.useContext)(TrackClickContext);
+}
+function TrackProvider(_ref) {
+  var children = _ref.children;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
+    _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_useState, 2),
+    tracker = _useState2[0],
+    setTracker = _useState2[1];
+  console.log(tracker);
+  function trackClick(e, module) {
+    var click = {
+      element: e.target.outerHTML,
+      module: module,
+      time: (0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(new Date().getTime())
+    };
+    setTracker([click].concat((0,_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(tracker)));
+  }
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(TrackClickContext.Provider, {
+    value: trackClick
+  }, children);
 }
 
 /***/ }),
@@ -1400,11 +1449,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _TrackClickContext_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../TrackClickContext.jsx */ "./client/src/components/TrackClickContext.jsx");
+
 
 function PopupComparison(_ref) {
   var relatedItem = _ref.relatedItem,
     currentItem = _ref.currentItem,
     setPopup = _ref.setPopup;
+  var clickTracker = (0,_TrackClickContext_jsx__WEBPACK_IMPORTED_MODULE_1__.useTracker)();
   var comparisonObj = {};
   currentItem.features.map(function (feature) {
     comparisonObj[feature.feature] = {
@@ -1418,8 +1470,9 @@ function PopupComparison(_ref) {
   });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "popup",
-    onClick: function onClick() {
-      return setPopup(false);
+    onClick: function onClick(e) {
+      setPopup(false);
+      clickTracker(e, 'Related Items & Outfit Creation');
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "comparison-table"
@@ -1452,11 +1505,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _ScrollButtons_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ScrollButtons.jsx */ "./client/src/components/relatedItemsAndComparison/ScrollButtons.jsx");
+/* harmony import */ var _TrackClickContext_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../TrackClickContext.jsx */ "./client/src/components/TrackClickContext.jsx");
+
 
 
 function PreviewCarousel(_ref) {
   var styles = _ref.styles,
     setDefaultPhoto = _ref.setDefaultPhoto;
+  var clickTracker = (0,_TrackClickContext_jsx__WEBPACK_IMPORTED_MODULE_2__.useTracker)();
   var noPhoto = 'https://i.postimg.cc/gjFHrzW3/image-4.png';
   var clickHandler = function clickHandler(img) {
     setDefaultPhoto(img);
@@ -1472,8 +1528,9 @@ function PreviewCarousel(_ref) {
           key: Math.random() * 99999,
           className: "preview-image",
           src: photo.thumbnail_url || noPhoto,
-          onClick: function onClick() {
-            return clickHandler(photo.thumbnail_url);
+          onClick: function onClick(e) {
+            clickHandler(photo.thumbnail_url);
+            clickTracker(e, 'Related Items & Outfit Creation');
           }
         });
       });
@@ -1505,6 +1562,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _StarRatings_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./StarRatings.jsx */ "./client/src/components/relatedItemsAndComparison/StarRatings.jsx");
 /* harmony import */ var _PopupComparison_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./PopupComparison.jsx */ "./client/src/components/relatedItemsAndComparison/PopupComparison.jsx");
 /* harmony import */ var _ProductCardImage_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ProductCardImage.jsx */ "./client/src/components/relatedItemsAndComparison/ProductCardImage.jsx");
+/* harmony import */ var _TrackClickContext_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../TrackClickContext.jsx */ "./client/src/components/TrackClickContext.jsx");
+
 
 
 
@@ -1534,6 +1593,7 @@ function ProductCard(_ref) {
     _useState8 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState7, 2),
     popup = _useState8[0],
     setPopup = _useState8[1];
+  var clickTracker = (0,_TrackClickContext_jsx__WEBPACK_IMPORTED_MODULE_6__.useTracker)();
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var source = axios__WEBPACK_IMPORTED_MODULE_2__["default"].CancelToken.source();
     axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/products/".concat(item), {
@@ -1603,17 +1663,24 @@ function ProductCard(_ref) {
   }) : null, relatedItem && defaultStyle && styles ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("li", {
     className: "product-card",
     onClick: function onClick(e) {
-      return clickHandler(e);
+      clickHandler(e);
+      clickTracker(e, 'Related Items & Outfit Creation');
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_ProductCardImage_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
     defaultStyle: defaultStyle,
     styles: styles
   }), list === 'related' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
     className: "product-card-button",
-    onClick: handleComparisonClick
+    onClick: function onClick(e) {
+      handleComparisonClick();
+      clickTracker(e, 'Related Items & Outfit Creation');
+    }
   }, "\u2606") : null, list === 'outfit' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
     className: "product-card-button",
-    onClick: handleOutfitClick
+    onClick: function onClick(e) {
+      handleOutfitClick;
+      clickTracker(e, 'Related Items & Outfit Creation');
+    }
   }, "x") : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "product-card-info"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("small", null, relatedItem.category), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
@@ -3072,6 +3139,49 @@ __webpack_require__.r(__webpack_exports__);
 function formatDistanceToNow(dirtyDate, options) {
   (0,_lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__["default"])(1, arguments);
   return (0,_formatDistance_index_js__WEBPACK_IMPORTED_MODULE_1__["default"])(dirtyDate, Date.now(), options);
+}
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/esm/fromUnixTime/index.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/date-fns/esm/fromUnixTime/index.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ fromUnixTime)
+/* harmony export */ });
+/* harmony import */ var _toDate_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/esm/toDate/index.js");
+/* harmony import */ var _lib_toInteger_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/esm/_lib/toInteger/index.js");
+/* harmony import */ var _lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/esm/_lib/requiredArgs/index.js");
+
+
+
+/**
+ * @name fromUnixTime
+ * @category Timestamp Helpers
+ * @summary Create a date from a Unix timestamp.
+ *
+ * @description
+ * Create a date from a Unix timestamp (in seconds). Decimal values will be discarded.
+ *
+ * @param {Number} unixTime - the given Unix timestamp (in seconds)
+ * @returns {Date} the date
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // Create the date 29 February 2012 11:45:05:
+ * const result = fromUnixTime(1330515905)
+ * //=> Wed Feb 29 2012 11:45:05
+ */
+
+function fromUnixTime(dirtyUnixTime) {
+  (0,_lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__["default"])(1, arguments);
+  var unixTime = (0,_lib_toInteger_index_js__WEBPACK_IMPORTED_MODULE_1__["default"])(dirtyUnixTime);
+  return (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_2__["default"])(unixTime * 1000);
 }
 
 /***/ }),
