@@ -5,6 +5,7 @@ import Header from './header/index.jsx'
 import Overview from './overview/index.jsx';
 import Description from './overview/components/Description.jsx';
 import RelatedItemsAndComparison from './relatedItemsAndComparison/index.jsx';
+import { TrackProvider } from './TrackClickContext.jsx';
 
 export default function App() {
   const [products, setProducts] = useState([]); // list of all products (needed for search bar)
@@ -37,7 +38,7 @@ export default function App() {
   },[update])
 
 
-  return(<>
+  return(<TrackProvider>
     {/* header */}
     <Header product={product}/>
 
@@ -49,12 +50,12 @@ export default function App() {
 
     {/* related products */}
     <div className="container">
-      {/* {product.id ? <RelatedItemsAndComparison currentItem={product} setProduct={setProduct} /> : null } */}
+      {product.id ? <RelatedItemsAndComparison currentItem={product} setProduct={setProduct} /> : null }
     </div>
 
     {/* Questions and Answers */}
     <div className="container">
       <QuesnAnsw product={product} />
     </div>
-  </>)
+  </TrackProvider>)
 }

@@ -677,7 +677,8 @@ textarea {
 /* related items and outfit ----- */
 
 .related-list {
-  position:  relative;
+  position: relative;
+
 }
 
 
@@ -695,17 +696,18 @@ textarea {
 }
 
 .button-left, .button-right {
-  position:  absolute;
-  height:  100%;
-  width:  15%;
-  transform:  translate(0, -50%);
-  top:  50%;
-  font-size:  28px;
-  border:  none;
-  color:  grey;
-  cursor:  pointer;
-  text-align:  center;
-  animation:  fade-in 0.3s ease;
+  position: absolute;
+  height: 100%;
+  width: 15%;
+  transform: translate(0, -50%);
+  top: 50%;
+  font-size: 28px;
+  border: none;
+  color: grey;
+  cursor: pointer;
+  text-align: center;
+  animation: fade-in 0.3s ease;
+  z-index: 2;
 }
 
 .button-left:hover, .button-right:hover {
@@ -753,27 +755,30 @@ textarea {
 /* product card style ----- */
 
 .product-card {
-  list-style-type:  none;
-  position:  relative;
-  border:  1px solid lightgrey;
-  margin:  8px;
-  width:  257px;
-  height:  380px;
-  cursor:  pointer;
-  border-radius:  6px;
-  overflow:  hidden;
+  list-style-type: none;
+  position: relative;
+  border: 1px solid lightgrey;
+  margin: 8px;
+  width: 257px;
+  height: 380px;
+  cursor: pointer;
+  border-radius: 6px;
+  overflow: hidden;
+  /* z-index: -1; */
 }
 
 .product-card-photo {
-  width:  100%;
-  height:  70%;
-  overflow:  hidden;
+  width: 100%;
+  height: 70%;
+  overflow: hidden;
+  /* z-index: -1; */
 }
 
 .product-card-photo img {
-  width:  100%;
-  height:  100%;
-  object-fit:  cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* z-index: -1; */
 }
 
 .preview-photos {
@@ -788,6 +793,8 @@ textarea {
   cursor:  pointer;
   animation:  fade-in 0.3s ease;
 }
+
+
 
 .preview-photos .button-left {
   left:  -3%;
@@ -819,18 +826,19 @@ textarea {
 }
 
 .product-card-button {
-  position:  absolute;
-  top:  3%;
-  left:  90%;
-  -webkit-transform:  translateX(-50%);
-  transform:  translateX(-50%);
-  background-color:  rgba(0, 0, 0, .2);
-  color:  white;
-  font-size:  22px;
-  font-weight:  bold;
-  border:  none;
-  cursor:  pointer;
-  border-radius:  6px;
+  position: absolute;
+  top: 3%;
+  left: 90%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, .2);
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  z-index: 2;
 }
 
 .product-card-button:  hover {
