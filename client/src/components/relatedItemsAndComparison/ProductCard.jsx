@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import StarRatings from './StarRatings.jsx'
-import PopupComparison from './PopupComparison.jsx'
+import StarRatings from './StarRatings.jsx';
+import PopupComparison from './PopupComparison.jsx';
+import ProductCardImage from './ProductCardImage.jsx';
 
 export default function ProductCard({currentItem, item, setProduct, list, outfit, setOutfit}) {
 
   const [relatedItem, setrelatedItem] = useState(null);
+  const [styles, setStyles] = useState(null);
   const [defaultStyle, setDefaultStyle] = useState(null);
   const [popup, setPopup] = useState(false);
 
@@ -18,6 +20,7 @@ export default function ProductCard({currentItem, item, setProduct, list, outfit
 
     axios.get(`/api/products/${item}/styles`, {cancelToken: source.token})
     .then(data => {
+      setStyles(data.data);
       for (var i = 0; i < data.data.results.length; i++) {
         if (data.data.results[i]['default?']) {
           setDefaultStyle(data.data.results[i]);
@@ -32,7 +35,6 @@ export default function ProductCard({currentItem, item, setProduct, list, outfit
   }, [])
 
   const clickHandler = (e) => {
-    if(e.target.className === 'product-card-button') {return}
     setProduct(relatedItem);
   }
 
@@ -52,9 +54,9 @@ export default function ProductCard({currentItem, item, setProduct, list, outfit
       {popup ?
         <PopupComparison currentItem={currentItem} relatedItem={relatedItem} setPopup={setPopup}/> : null
       }
-      {relatedItem && defaultStyle ?
-        <li className='product-card' onClick={e => clickHandler(e)} >
-          <img src={defaultStyle.photos[0].thumbnail_url || 'https://i.postimg.cc/gjFHrzW3/image-4.png'}></img>
+      {relatedItem && defaultStyle && styles ?
+        <li className='product-card' >
+          <ProductCardImage defaultStyle={defaultStyle} styles={styles}/>
           {list === 'related' ?
             <button className='product-card-button' onClick={handleComparisonClick}>
               ☆
@@ -65,7 +67,7 @@ export default function ProductCard({currentItem, item, setProduct, list, outfit
               x
             </button> : null
           }
-          <div className='product-card-info'>
+          <div className='product-card-info' onClick={e => clickHandler(e)}>
             <small>{relatedItem.category}</small>
             <div className='product-card-name'>
               {relatedItem.name + ' - ' + relatedItem.slogan}

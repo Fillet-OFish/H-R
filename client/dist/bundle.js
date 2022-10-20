@@ -1438,6 +1438,53 @@ function PopupComparison(_ref) {
 
 /***/ }),
 
+/***/ "./client/src/components/relatedItemsAndComparison/PreviewCarousel.jsx":
+/*!*****************************************************************************!*\
+  !*** ./client/src/components/relatedItemsAndComparison/PreviewCarousel.jsx ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ PreviewCarousel)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _ScrollButtons_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ScrollButtons.jsx */ "./client/src/components/relatedItemsAndComparison/ScrollButtons.jsx");
+
+
+function PreviewCarousel(_ref) {
+  var styles = _ref.styles,
+    setDefaultPhoto = _ref.setDefaultPhoto;
+  var noPhoto = 'https://i.postimg.cc/gjFHrzW3/image-4.png';
+  var clickHandler = function clickHandler(img) {
+    setDefaultPhoto(img);
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "preview-photos"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "preview-carousel"
+  }, styles.results.map(function (style) {
+    if (!style['default?']) {
+      return style.photos.map(function (photo) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+          src: photo.thumbnail_url || noPhoto,
+          onClick: function onClick() {
+            return clickHandler(photo.thumbnail_url);
+          }
+        });
+      });
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_ScrollButtons_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    element: '.preview-carousel',
+    width: 257,
+    scroll: 192.75
+  }));
+}
+
+/***/ }),
+
 /***/ "./client/src/components/relatedItemsAndComparison/ProductCard.jsx":
 /*!*************************************************************************!*\
   !*** ./client/src/components/relatedItemsAndComparison/ProductCard.jsx ***!
@@ -1455,6 +1502,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var _StarRatings_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./StarRatings.jsx */ "./client/src/components/relatedItemsAndComparison/StarRatings.jsx");
 /* harmony import */ var _PopupComparison_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./PopupComparison.jsx */ "./client/src/components/relatedItemsAndComparison/PopupComparison.jsx");
+/* harmony import */ var _ProductCardImage_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ProductCardImage.jsx */ "./client/src/components/relatedItemsAndComparison/ProductCardImage.jsx");
+
 
 
 
@@ -1473,12 +1522,16 @@ function ProductCard(_ref) {
     setrelatedItem = _useState2[1];
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
     _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState3, 2),
-    defaultStyle = _useState4[0],
-    setDefaultStyle = _useState4[1];
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+    styles = _useState4[0],
+    setStyles = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
     _useState6 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState5, 2),
-    popup = _useState6[0],
-    setPopup = _useState6[1];
+    defaultStyle = _useState6[0],
+    setDefaultStyle = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+    _useState8 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState7, 2),
+    popup = _useState8[0],
+    setPopup = _useState8[1];
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var source = axios__WEBPACK_IMPORTED_MODULE_2__["default"].CancelToken.source();
     axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/products/".concat(item), {
@@ -1491,6 +1544,7 @@ function ProductCard(_ref) {
     axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/products/".concat(item, "/styles"), {
       cancelToken: source.token
     }).then(function (data) {
+      setStyles(data.data);
       for (var i = 0; i < data.data.results.length; i++) {
         if (data.data.results[i]['default?']) {
           setDefaultStyle(data.data.results[i]);
@@ -1505,9 +1559,6 @@ function ProductCard(_ref) {
     });
   }, []);
   var clickHandler = function clickHandler(e) {
-    if (e.target.className === 'product-card-button') {
-      return;
-    }
     setProduct(relatedItem);
   };
   var handleComparisonClick = function handleComparisonClick() {
@@ -1523,13 +1574,11 @@ function ProductCard(_ref) {
     currentItem: currentItem,
     relatedItem: relatedItem,
     setPopup: setPopup
-  }) : null, relatedItem && defaultStyle ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("li", {
-    className: "product-card",
-    onClick: function onClick(e) {
-      return clickHandler(e);
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("img", {
-    src: defaultStyle.photos[0].thumbnail_url || 'https://i.postimg.cc/gjFHrzW3/image-4.png'
+  }) : null, relatedItem && defaultStyle && styles ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("li", {
+    className: "product-card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_ProductCardImage_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    defaultStyle: defaultStyle,
+    styles: styles
   }), list === 'related' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
     className: "product-card-button",
     onClick: handleComparisonClick
@@ -1537,7 +1586,10 @@ function ProductCard(_ref) {
     className: "product-card-button",
     onClick: handleOutfitClick
   }, "x") : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
-    className: "product-card-info"
+    className: "product-card-info",
+    onClick: function onClick(e) {
+      return clickHandler(e);
+    }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("small", null, relatedItem.category), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "product-card-name"
   }, relatedItem.name + ' - ' + relatedItem.slogan), defaultStyle.sale_price ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
@@ -1551,6 +1603,56 @@ function ProductCard(_ref) {
   }, "$", defaultSTyle.original_price)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("small", null, "$", defaultStyle.original_price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_StarRatings_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
     item: item
   }))) : null);
+}
+
+/***/ }),
+
+/***/ "./client/src/components/relatedItemsAndComparison/ProductCardImage.jsx":
+/*!******************************************************************************!*\
+  !*** ./client/src/components/relatedItemsAndComparison/ProductCardImage.jsx ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ProductCardImage)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _PreviewCarousel_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PreviewCarousel.jsx */ "./client/src/components/relatedItemsAndComparison/PreviewCarousel.jsx");
+
+
+
+function ProductCardImage(_ref) {
+  var defaultStyle = _ref.defaultStyle,
+    styles = _ref.styles;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+    _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
+    hover = _useState2[0],
+    setHover = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(defaultStyle.photos[0].thumbnail_url),
+    _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState3, 2),
+    defaultPhoto = _useState4[0],
+    setDefaultPhoto = _useState4[1];
+  var noPhoto = 'https://i.postimg.cc/gjFHrzW3/image-4.png';
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+    className: "product-card-photo",
+    onMouseEnter: function onMouseEnter() {
+      return setHover(true);
+    },
+    onMouseLeave: function onMouseLeave() {
+      setTimeout(function () {
+        setHover(false);
+      }, 300);
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("img", {
+    src: defaultPhoto || noPhoto
+  }), hover ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_PreviewCarousel_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    styles: styles,
+    setDefaultPhoto: setDefaultPhoto
+  }) : null);
 }
 
 /***/ }),
@@ -1571,7 +1673,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var _ProductCard_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ProductCard.jsx */ "./client/src/components/relatedItemsAndComparison/ProductCard.jsx");
-/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-icons/fa */ "./node_modules/react-icons/fa/index.esm.js");
+/* harmony import */ var _ScrollButtons_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ScrollButtons.jsx */ "./client/src/components/relatedItemsAndComparison/ScrollButtons.jsx");
 
 
 
@@ -1584,20 +1686,6 @@ function RelatedProductsList(_ref) {
     _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
     relatedItems = _useState2[0],
     setRelatedItems = _useState2[1];
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
-      button: 'transparent',
-      cursor: 'default'
-    }),
-    _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState3, 2),
-    hideButtonL = _useState4[0],
-    setHideButtonL = _useState4[1];
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
-      button: 'grey',
-      cursor: 'pointer'
-    }),
-    _useState6 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState5, 2),
-    hideButtonR = _useState6[0],
-    setHideButtonR = _useState6[1];
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var source = axios__WEBPACK_IMPORTED_MODULE_2__["default"].CancelToken.source();
     axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/products/".concat(currentItem.id, "/related"), {
@@ -1608,51 +1696,9 @@ function RelatedProductsList(_ref) {
       return console.log(err);
     });
   }, [currentItem]);
-  var buttonLStyle = {
-    color: hideButtonL.button,
-    cursor: hideButtonL.cursor
-  };
-  var buttonRStyle = {
-    color: hideButtonR.button,
-    cursor: hideButtonR.cursor
-  };
-  var buttonL = function buttonL() {
-    var el = document.querySelector('.related-list .related-ul');
-    if (el.scrollWidth - (el.scrollLeft - 275) > 1100) {
-      setHideButtonR({
-        button: 'grey',
-        cursor: 'pointer'
-      });
-    }
-    if (el.scrollLeft - 275 === 0) {
-      setHideButtonL({
-        button: 'transparent',
-        cursor: 'default'
-      });
-    }
-    el.scrollBy(-275, 0);
-  };
-  var buttonR = function buttonR() {
-    var el = document.querySelector('.related-list .related-ul');
-    setHideButtonL({
-      button: 'grey',
-      cursor: 'pointer'
-    });
-    if (el.scrollWidth - (el.scrollLeft + 275) === 1100) {
-      setHideButtonR({
-        button: 'transparent',
-        cursor: 'default'
-      });
-    }
-    el.scrollBy(275, 0);
-  };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "related-list"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h3", null, "Related Products:"), relatedItems.length > 4 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
-    className: "button-left",
-    style: buttonLStyle,
-    onClick: buttonL
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_4__.FaAngleLeft, null)) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("ul", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h3", null, "Related Products:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("ul", {
     className: "related-ul"
   }, relatedItems.map(function (item) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_ProductCard_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -1662,11 +1708,74 @@ function RelatedProductsList(_ref) {
       item: item,
       list: 'related'
     });
-  })), relatedItems.length > 4 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
+  })), relatedItems.length > 4 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_ScrollButtons_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    element: '.related-list .related-ul',
+    width: 1100,
+    scroll: 275
+  }) : null);
+}
+
+/***/ }),
+
+/***/ "./client/src/components/relatedItemsAndComparison/ScrollButtons.jsx":
+/*!***************************************************************************!*\
+  !*** ./client/src/components/relatedItemsAndComparison/ScrollButtons.jsx ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ scrollButtons)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-icons/fa */ "./node_modules/react-icons/fa/index.esm.js");
+
+
+
+function scrollButtons(_ref) {
+  var element = _ref.element,
+    width = _ref.width,
+    scroll = _ref.scroll;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+    _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
+    showButtonL = _useState2[0],
+    setShowButtonL = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(true),
+    _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState3, 2),
+    showButtonR = _useState4[0],
+    setShowButtonR = _useState4[1];
+  var buttonL = function buttonL() {
+    var el = document.querySelector(element);
+    if (el.scrollWidth - (el.scrollLeft - scroll) > width) {
+      setShowButtonR(true);
+    }
+    if (el.scrollLeft - scroll === 0) {
+      setTimeout(function () {
+        return setShowButtonL(false);
+      }, 500);
+    }
+    el.scrollBy(-scroll, 0);
+  };
+  var buttonR = function buttonR() {
+    var el = document.querySelector(element);
+    setShowButtonL(true);
+    if (el.scrollWidth - (el.scrollLeft + scroll) === width) {
+      setTimeout(function () {
+        return setShowButtonR(false);
+      }, 500);
+    }
+    el.scrollBy(scroll, 0);
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, showButtonL ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
+    className: "button-left",
+    onClick: buttonL
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_2__.FaAngleLeft, null)) : null, showButtonR ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
     className: "button-right",
-    style: buttonRStyle,
     onClick: buttonR
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_4__.FaAngleRight, null)) : null);
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_2__.FaAngleRight, null)) : null);
 }
 
 /***/ }),
@@ -1765,7 +1874,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var _ProductCard_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ProductCard.jsx */ "./client/src/components/relatedItemsAndComparison/ProductCard.jsx");
-/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-icons/fa */ "./node_modules/react-icons/fa/index.esm.js");
+/* harmony import */ var _ScrollButtons_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ScrollButtons.jsx */ "./client/src/components/relatedItemsAndComparison/ScrollButtons.jsx");
 
 
 
@@ -1781,71 +1890,15 @@ function YourOutfitList(_ref) {
     _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_useState, 2),
     outfit = _useState2[0],
     setOutfit = _useState2[1];
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)({
-      button: 'transparent',
-      cursor: 'default'
-    }),
-    _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_useState3, 2),
-    hideButtonL = _useState4[0],
-    setHideButtonL = _useState4[1];
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)({
-      button: 'grey',
-      cursor: 'pointer'
-    }),
-    _useState6 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_useState5, 2),
-    hideButtonR = _useState6[0],
-    setHideButtonR = _useState6[1];
-  var buttonLStyle = {
-    color: hideButtonL.button,
-    cursor: hideButtonL.cursor
-  };
-  var buttonRStyle = {
-    color: hideButtonR.button,
-    cursor: hideButtonR.cursor
-  };
   var handleClick = function handleClick() {
     if (!outfit.includes(currentItem.id)) {
       localStorage.setItem('outfit', JSON.stringify([].concat((0,_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(outfit), [currentItem.id])));
       setOutfit([currentItem.id].concat((0,_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(outfit)));
     }
   };
-  var buttonL = function buttonL() {
-    var el = document.querySelector('.related-list .outfit-ul');
-    if (el.scrollWidth - (el.scrollLeft - 275) > 1100) {
-      setHideButtonR({
-        button: 'grey',
-        cursor: 'pointer'
-      });
-    }
-    if (el.scrollLeft - 275 === 0) {
-      setHideButtonL({
-        button: 'transparent',
-        cursor: 'default'
-      });
-    }
-    el.scrollBy(-275, 0);
-  };
-  var buttonR = function buttonR() {
-    var el = document.querySelector('.related-list .outfit-ul');
-    setHideButtonL({
-      button: 'grey',
-      cursor: 'pointer'
-    });
-    if (el.scrollWidth - (el.scrollLeft + 275) === 1100) {
-      setHideButtonR({
-        button: 'transparent',
-        cursor: 'default'
-      });
-    }
-    el.scrollBy(275, 0);
-  };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("h3", null, "Your Outfit:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", {
     className: "related-list"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("h3", null, "Your Outfit:"), outfit.length > 3 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("button", {
-    className: "button-left",
-    style: buttonLStyle,
-    onClick: buttonL
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_5__.FaAngleLeft, null)) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("ul", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("ul", {
     className: "outfit-ul"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("li", {
     className: "add-to-outfit-button",
@@ -1859,11 +1912,11 @@ function YourOutfitList(_ref) {
       outfit: outfit,
       setOutfit: setOutfit
     });
-  }) : null), outfit.length > 3 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("button", {
-    className: "button-right",
-    style: buttonRStyle,
-    onClick: buttonR
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_5__.FaAngleRight, null)) : null);
+  }) : null), outfit.length > 3 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(_ScrollButtons_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    element: '.related-list .outfit-ul',
+    width: 1100,
+    scroll: 275
+  }) : null));
 }
 
 /***/ }),
