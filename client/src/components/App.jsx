@@ -3,8 +3,8 @@ import axios from 'axios';
 import QuesnAnsw from './qa/index.jsx';
 import Header from './header/index.jsx'
 import Overview from './overview/index.jsx';
-import Description from './description/index.jsx';
-import RelatedItemsAndComparison from './relatedItemsAndComparison/RelatedItemsAndComparison.jsx'
+import Description from './overview/components/Description.jsx';
+import RelatedItemsAndComparison from './relatedItemsAndComparison/index.jsx';
 
 export default function App() {
   const [products, setProducts] = useState([]); // list of all products (needed for search bar)
@@ -45,13 +45,11 @@ export default function App() {
     <div className="container">
       {product.id ? <Overview product={product} rating={productRating}/> : null}
     </div>
-
-    {/* description */}
     <Description product={product}/>
 
     {/* related products */}
     <div className="container">
-      {product.id ? <RelatedItemsAndComparison currentItem={product} setProduct={setProduct} /> : null }
+      {/* {product.id ? <RelatedItemsAndComparison currentItem={product} setProduct={setProduct} /> : null } */}
     </div>
 
     {/* Questions and Answers */}

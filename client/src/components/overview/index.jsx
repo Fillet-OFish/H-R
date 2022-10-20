@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Social from './components/Social.jsx'
 import Styles from './components/Styles.jsx'
-import Gallery from './components/Gallery.jsx'
+import Gallery from './components/gallery/Gallery.jsx'
 import Cart from './components/Cart.jsx'
 
 export default function Overview({product, rating}) {
@@ -31,6 +32,9 @@ export default function Overview({product, rating}) {
           {/* Stars */}
           <p>★★★★☆ <a href="/">Read all reviews</a></p>
 
+          {/* Social media */}
+          <Social product={product}/>
+
           {/* Category */}
           <p className="product-category">UNISEX / {product.category} / {product.name}</p>
 
@@ -39,7 +43,7 @@ export default function Overview({product, rating}) {
             {style.photos && !style.photos[0].thumbnail_url ? <><p className="coming-soon">COMING SOON:</p><p className="product-name-null">{product.name}</p></> : product.name}
           </div>
 
-          {/* price (dependent on sale price) */}
+          {/* Price (dependent on sale price) */}
           <p className="price">{style.sale_price ? (<><span style={{textDecoration: 'line-through', textDecorationThickness:'2px', textDecorationColor:'black',color:'gray'}}>${style.original_price}</span> ${style.sale_price}</>) : <>${style.original_price}</>}</p>
 
           {/* Styles */}
