@@ -6,7 +6,7 @@ import axios from 'axios';
 // ENTRY OF EACH ANSWER ----------
 const AddAnswModal = (props) => {
 
-  console.log(props.QID, 'hola')
+  // console.log(props.QID, 'hola')
   // post request to add answer
   const postAnsw = (q_id, body, name, email, photos) => {
     axios.post(`/api/qa/questions/${q_id}/answers`, {
