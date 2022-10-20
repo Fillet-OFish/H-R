@@ -4,7 +4,7 @@ import QuesnAnsw from './qa/index.jsx';
 import Header from './header/index.jsx'
 import Overview from './overview/index.jsx';
 import Description from './description/index.jsx';
-import RelatedItemsAndComparison from './relatedItemsAndComparison/RelatedItemsAndComparison.jsx'
+import RelatedItemsAndComparison from './relatedItemsAndComparison/index.jsx';
 
 export default function App() {
   const [products, setProducts] = useState([]); // list of all products (needed for search bar)

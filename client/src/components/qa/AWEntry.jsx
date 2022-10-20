@@ -35,7 +35,6 @@ const AWEntry = (props) => {
       {/* answer body - if index is 0 add the 'A' as the starting question ---------- */}
       {/* otherwise, just show questions without 'A' title */}
       {(props.index === 0) ? <div><strong>A: </strong>{props.ans.body}</div> : <div>{props.ans.body}</div>}
-
       <br></br>
 
       {/* answer images --- */}
