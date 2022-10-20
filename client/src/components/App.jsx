@@ -3,7 +3,7 @@ import axios from 'axios';
 import QuesnAnsw from './qa/index.jsx';
 import Header from './header/index.jsx'
 import Overview from './overview/index.jsx';
-import Description from './description/index.jsx';
+import Description from './overview/components/Description.jsx';
 import RelatedItemsAndComparison from './relatedItemsAndComparison/index.jsx';
 import { TrackProvider } from './TrackClickContext.jsx';
 
@@ -13,12 +13,10 @@ export default function App() {
   const [update, setUpdate] = useState(false);
   const [productRating, setProductRating] = useState([]); //set current product's rating
 
-
-
   useEffect(() => {
     axios.get('/api/products')
       .then(result => {setProducts(result.data)})
-    axios.get(`/api/products/${40344}`) // id 40344
+    axios.get('/api/products/40344') // id 40344
     .then(result => setProduct(result.data))
 
     if(product.id) {
@@ -46,10 +44,8 @@ export default function App() {
 
     {/* overview */}
     <div className="container">
-      <Overview product={product} rating={productRating}/>
+      {product.id ? <Overview product={product} rating={productRating}/> : null}
     </div>
-
-    {/* description */}
     <Description product={product}/>
 
     {/* related products */}
