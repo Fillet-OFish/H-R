@@ -1,10 +1,7 @@
-import React, { useEffect, useState, useRef, useReducer } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-
-
 export default function StarRatings({item}) {
-
   const [rating, setRating] = useState(null);
 
   useEffect(() => {
@@ -27,7 +24,6 @@ export default function StarRatings({item}) {
     .catch(err => {console.log(err)})
   }, [])
 
-
   return (
     <div>
       {rating ?
@@ -37,13 +33,13 @@ export default function StarRatings({item}) {
               return 100
             }
             if (rating.average - i >= 0.75) {
-              return 75
+              return 70
             }
             if (rating.average - i >= 0.50) {
               return 50
             }
             if (rating.average - i >= 0.25) {
-              return 25
+              return 30
             }
             return 0
           }
@@ -54,8 +50,6 @@ export default function StarRatings({item}) {
             WebkitTextFillColor: 'transparent'
           }
           return (
-            // <FaStar key={i} style={{backgroundColor: `linear-gradient(90deg, #f80 ${starFill()}%, #ddd ${100 - starFill()}%`}} />
-            // <FaStar key={i} color={starFill() ? '#f80' : '#ddd'} />
             <small key={i} style={style}>⭐</small>
             )
         }) : null}
