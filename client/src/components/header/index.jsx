@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Announcements from './components/Announcements.jsx'
 import Search from './components/Search.jsx'
 import Cart from './components/Cart.jsx'
 import { FaShoppingBag } from 'react-icons/fa';
@@ -13,9 +14,8 @@ export default function Header({ product }) {
 
   return(
     <>
-      <div className='announcement'>
-        <p>New windproof fleeces. <a href='/'>SHOP WOMEN</a> - <a href='/'>SHOP MEN</a></p>
-      </div>
+      {/* announcements */}
+      <Announcements/>
 
       <div className='header'>
         {/* logo */}

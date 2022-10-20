@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { FaAngleRight, FaAngleLeft } from 'react-icons/fa';
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
-export default function Carousel({ photos, click, setPhoto, setExpand, expandPhoto }) {
+export default function Carousel({ photos, click, setClick, setPhoto, setExpand, expandPhoto }) {
   const [current, setCurrent] = useState(click);
   const length = photos.length;
 
   function next(){
-    setCurrent(current === length - 1 ? 0 : current + 1);
+    setClick(current + 1)
     setPhoto(photos[current+1])
   }
 
   function prev(){
-    setCurrent(current === 0 ? length - 1 : current - 1)
-    setPhoto(photos[current+1])
+    setClick(current - 1)
+    setPhoto(photos[current-1])
   }
 
   useEffect(() => {
-    if(click!==0){setCurrent(click)}
+    setCurrent(click)
   }, [click])
 
   return (

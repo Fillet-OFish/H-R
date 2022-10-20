@@ -7,27 +7,25 @@ import Cart from './components/Cart.jsx'
 export default function Overview({product, rating}) {
   const [styles, setStyles] = useState([])
   const [style, setStyle] = useState([])
-  const [noDefault, setNoDefault] = useState(false)
+  const [photos, setPhotos] = useState([])
 
   // on load/product change, set styles/style based on default product/new product
   useEffect(() => {
-    if(product && product.length!==0){
-      if(product.id!==null) {
-        axios.get(`/api/products/${product.id}/styles`)
-        .then(result => {
-          setStyles(result.data.results);
-          setStyle(result.data.results[0])
-          return result.data.results[0]
-        })
-        .then(style => {if(style['default?']===false){setNoDefault(true)}})
-      }
+    if(product.id){
+      axios.get(`/api/products/${product.id}/styles`)
+      .then(result => {
+        setStyles(result.data.results);
+        setStyle(result.data.results[0])
+        setPhotos(result.data.results[0].photos)
+        return result.data.results[0]
+      })
     }
   },[product])
 
   return(
     <>
         {/* Gallery */}
-        <Gallery style={style}/>
+        {style && photos ? <Gallery style={style} photos={photos} setPhotos={setPhotos}/> : null }
 
         <div className="right">
           {/* Stars */}
@@ -38,7 +36,7 @@ export default function Overview({product, rating}) {
 
           {/* Product name (dependent on if a default style exists) */}
           <div className="product-name">
-            {noDefault ? <><p className="coming-soon">COMING SOON:</p><p className="product-name-null">{product.name}</p></> : product.name}
+            {style.photos && !style.photos[0].thumbnail_url ? <><p className="coming-soon">COMING SOON:</p><p className="product-name-null">{product.name}</p></> : product.name}
           </div>
 
           {/* price (dependent on sale price) */}

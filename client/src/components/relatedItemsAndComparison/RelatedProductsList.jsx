@@ -26,9 +26,11 @@ export default function RelatedProductsList ({currentItem, setProduct}) {
   useEffect(() => {
     const source = axios.CancelToken.source();
 
-    axios.get(`/api/products/${currentItem.id}/related`, {cancelToken: source.token})
-    .then(data => {setRelatedItems(data.data)})
-    .catch(err => console.log(err));
+    if(currentItem.length!==0){
+      axios.get(`/api/products/${currentItem.id}/related`, {cancelToken: source.token})
+        .then(data => {setRelatedItems(data.data)})
+        .catch(err => console.log(err));
+    }
   }, [currentItem])
 
   const buttonLStyle = {
