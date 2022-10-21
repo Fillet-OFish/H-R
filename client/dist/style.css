@@ -232,7 +232,6 @@ button {
   background-color: black;
   border-radius: 50%;
   padding:10%;
-<<<<<<< HEAD
 }
 .social-icons .pinterest{
   border:1px solid black;
@@ -246,21 +245,6 @@ button {
   border-radius: 50%;
   padding:10%;
 }
-=======
-}
-.social-icons .pinterest{
-  border:1px solid black;
-  background-color: black;
-  border-radius: 50%;
-  padding:10%;
-}
-.social-icons .twitter{
-  border:1px solid black;
-  background-color: black;
-  border-radius: 50%;
-  padding:10%;
-}
->>>>>>> 08d7314e0b31d489faeaabf4fc5813ad26271e10
 /* gallery - reg view */
 .gallery-list{
   margin: auto;
@@ -295,12 +279,9 @@ button {
   height: 500px;
   display: flex;
 }
-<<<<<<< HEAD
-=======
 .carousel-container img:hover{
   cursor: zoom-in;
 }
->>>>>>> 08d7314e0b31d489faeaabf4fc5813ad26271e10
 .carousel-container .right-arrow {
   position: absolute;
   top: 50%;
@@ -404,12 +385,9 @@ button {
 .cart{
   margin-top: 15px;
   font-size: 17px;
-<<<<<<< HEAD
 }
 .cart-warning{
   visibility: hidden;
-=======
->>>>>>> 08d7314e0b31d489faeaabf4fc5813ad26271e10
 }
 /* dropdown */
 .cart select{
