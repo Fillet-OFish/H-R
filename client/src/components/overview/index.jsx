@@ -1,12 +1,14 @@
 import React, { useState, useEffect, createContext } from 'react';
+import { useTracker } from '../TrackClickContext.jsx';
 import { Rating } from 'react-simple-star-rating'
 import axios from 'axios';
-import Social from './components/Social.jsx'
-import Styles from './components/Styles.jsx'
+import Social from './components/product-info/Social.jsx'
+import Styles from './components/product-info/Styles.jsx'
 import Gallery from './components/gallery/Gallery.jsx'
-import Cart from './components/Cart.jsx'
+import Cart from './components/product-info/Cart.jsx'
 
 export default function Overview({product, rating, numReviews}) {
+  const clickTracker = useTracker();
   const [styles, setStyles] = useState([])
   const [style, setStyle] = useState({})
   const [photos, setPhotos] = useState([])
@@ -24,7 +26,8 @@ export default function Overview({product, rating, numReviews}) {
   },[product])
 
   return(
-    <>
+    <div onClick={(e)=>{clickTracker(e, 'Overview')}}>
+      <div className="container">
         {/* Gallery */}
         {Object.keys(style).length!==0 && photos.length>0 ?
           <Gallery style={style} photos={photos} setPhotos={setPhotos} photo={photo} setPhoto={setPhoto}/>
@@ -46,9 +49,6 @@ export default function Overview({product, rating, numReviews}) {
           {/* Social media */}
           {<Social product={product} style={style} photo={photo}/>}
 
-          {/* Social media */}
-          <Social product={product}/>
-
           {/* Category */}
           <p className="product-category">UNISEX / {product.category} / {product.name}</p>
 
@@ -66,6 +66,7 @@ export default function Overview({product, rating, numReviews}) {
           {/* Cart */}
           <Cart style={style}/>
         </div>
-    </>
+      </div>
+    </div>
   )
 }

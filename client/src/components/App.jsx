@@ -4,10 +4,9 @@ import { TrackProvider } from './TrackClickContext.jsx';
 import Header from './header/index.jsx'
 import Overview from './overview/index.jsx';
 import Description from './overview/components/Description.jsx';
-import RelatedItemsAndComparison from './relatedItemsAndComparison/index.jsx';
+import RelatedItemsAndComparison from './related-items/index.jsx';
 import QuesnAnsw from './qa/index.jsx';
 import Ratings from './ratings/index.jsx'
-
 export default function App() {
   const [product, setProduct] = useState([]);
   const [rating, setRating] = useState([]);
@@ -25,9 +24,7 @@ export default function App() {
       <Header product={product}/>
 
       {/* overview */}
-      <div className="container">
-        <Overview product={product} rating={rating} numReviews={numReviews}/>
-      </div>
+      <Overview product={product} rating={rating} numReviews={numReviews}/>
       <Description product={product}/>
 
       {/* related products */}
