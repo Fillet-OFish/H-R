@@ -43,7 +43,7 @@ export default function Overview({product, rating, numReviews}) {
           </p>
 
           {/* Social media */}
-          {<Social product={product} style={style} photo={photo}/>}
+          {<Social product={product} style={style} photos={photos}/>}
 
           {/* Social media */}
           <Social product={product}/>

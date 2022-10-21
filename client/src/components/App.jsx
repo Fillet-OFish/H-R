@@ -8,7 +8,6 @@ import RelatedItemsAndComparison from './relatedItemsAndComparison/index.jsx';
 import QuesnAnsw from './qa/index.jsx';
 import Ratings from './ratings/index.jsx'
 
-
 export default function App() {
   const [products, setProducts] = useState([]); // list of all products (needed for search bar)
   const [product, setProduct] = useState([]); // one product (needed for page render)
