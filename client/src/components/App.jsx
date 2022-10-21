@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import QuesnAnsw from './qa/index.jsx';
+import { TrackProvider } from './TrackClickContext.jsx';
 import Header from './header/index.jsx'
 import Overview from './overview/index.jsx';
-import Description from './description/index.jsx';
+import Description from './overview/components/Description.jsx';
 import RelatedItemsAndComparison from './relatedItemsAndComparison/index.jsx';
+import QuesnAnsw from './qa/index.jsx';
+import Ratings from './ratings/index.jsx'
 
 export default function App() {
   const [products, setProducts] = useState([]); // list of all products (needed for search bar)
@@ -12,12 +14,10 @@ export default function App() {
   const [update, setUpdate] = useState(false);
   const [productRating, setProductRating] = useState([]); //set current product's rating
 
-
-
   useEffect(() => {
     axios.get('/api/products')
       .then(result => {setProducts(result.data)})
-    axios.get(`/api/products/${40344}`) // id 40344
+    axios.get('/api/products/40344') // id 40344
     .then(result => setProduct(result.data))
 
     if(product.id) {
@@ -39,16 +39,14 @@ export default function App() {
   },[update])
 
 
-  return(<>
+  return(<TrackProvider>
     {/* header */}
     <Header product={product}/>
 
     {/* overview */}
     <div className="container">
-      <Overview product={product} rating={productRating}/>
+      {product.id ? <Overview product={product} rating={productRating}/> : null}
     </div>
-
-    {/* description */}
     <Description product={product}/>
 
     {/* related products */}
@@ -60,5 +58,5 @@ export default function App() {
     <div className="container">
       <QuesnAnsw product={product} />
     </div>
-  </>)
+  </TrackProvider>)
 }
