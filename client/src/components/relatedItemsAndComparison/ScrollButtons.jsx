@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { FaAngleRight, FaAngleLeft } from 'react-icons/fa';
 
 export default function scrollButtons({element, width, scroll}) {
-
   const [showButtonL, setShowButtonL] = useState(false);
   const [showButtonR, setShowButtonR] = useState(true);
 
