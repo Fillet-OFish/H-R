@@ -8,21 +8,6 @@ import Cart from './components/Cart.jsx'
 
 export default function Overview({product, rating, numReviews}) {
   const [styles, setStyles] = useState([])
-<<<<<<< HEAD
-  const [style, setStyle] = useState({})
-  const [photos, setPhotos] = useState([])
-  const [photo, setPhoto] = useState('')
-
-  // on load/product change, set styles/style based on default product/new product
-  useEffect(() => {
-    axios.get(`/api/products/${product.id}/styles`)
-    .then(result => {
-      setStyles(result.data.results)
-      setStyle(result.data.results[0])
-      setPhotos(result.data.results[0].photos)
-      setPhoto(result.data.results[0].photos[0])
-    })
-=======
   const [style, setStyle] = useState([])
   const [photos, setPhotos] = useState([])
 
@@ -37,19 +22,12 @@ export default function Overview({product, rating, numReviews}) {
         return result.data.results[0]
       })
     }
->>>>>>> 08d7314e0b31d489faeaabf4fc5813ad26271e10
   },[product])
 
   return(
     <>
         {/* Gallery */}
-<<<<<<< HEAD
-        {Object.keys(style).length!==0 && photos.length>0 ?
-          <Gallery style={style} photos={photos} setPhotos={setPhotos} photo={photo} setPhoto={setPhoto}/>
-        : null }
-=======
         {style && photos ? <Gallery style={style} photos={photos} setPhotos={setPhotos}/> : null }
->>>>>>> 08d7314e0b31d489faeaabf4fc5813ad26271e10
 
         <div className="right">
           {/* Stars */}
@@ -65,7 +43,7 @@ export default function Overview({product, rating, numReviews}) {
           </p>
 
           {/* Social media */}
-          {<Social product={product} style={style} photo={photo}/>}
+          {<Social product={product} style={style} photos={photos}/>}
 
           {/* Social media */}
           <Social product={product}/>

@@ -232,7 +232,6 @@ button {
   background-color: black;
   border-radius: 50%;
   padding:10%;
-<<<<<<< HEAD
 }
 .social-icons .pinterest{
   border:1px solid black;
@@ -246,21 +245,6 @@ button {
   border-radius: 50%;
   padding:10%;
 }
-=======
-}
-.social-icons .pinterest{
-  border:1px solid black;
-  background-color: black;
-  border-radius: 50%;
-  padding:10%;
-}
-.social-icons .twitter{
-  border:1px solid black;
-  background-color: black;
-  border-radius: 50%;
-  padding:10%;
-}
->>>>>>> 08d7314e0b31d489faeaabf4fc5813ad26271e10
 /* gallery - reg view */
 .gallery-list{
   margin: auto;
@@ -295,12 +279,9 @@ button {
   height: 500px;
   display: flex;
 }
-<<<<<<< HEAD
-=======
 .carousel-container img:hover{
   cursor: zoom-in;
 }
->>>>>>> 08d7314e0b31d489faeaabf4fc5813ad26271e10
 .carousel-container .right-arrow {
   position: absolute;
   top: 50%;
@@ -404,12 +385,9 @@ button {
 .cart{
   margin-top: 15px;
   font-size: 17px;
-<<<<<<< HEAD
 }
 .cart-warning{
   visibility: hidden;
-=======
->>>>>>> 08d7314e0b31d489faeaabf4fc5813ad26271e10
 }
 /* dropdown */
 .cart select{
@@ -540,14 +518,14 @@ button {
 }
 
 
-/* FERNANDO ADDED THESE ------------------------------------------------- */
+/* FERNANDO ADDED THESE --------------------------------------------------------------- */
 nav {
   margin-top: 2%;
   display: inline-block;
   justify-content: center;
 }
 
-.questions-and-answers a {
+.questions-and-answers {
   cursor: pointer;
   text-decoration: underline;
 }
@@ -564,7 +542,14 @@ nav {
 
 .QContainer {
   color: #525252;
-  width: 100%;
+  width: 200%;
+  max-width: 1100px;
+  height: 400px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  overflow: scroll;
+  scroll-behavior: smooth;
 }
 .QContainer2 {
   color: #525252;
@@ -575,7 +560,6 @@ nav {
 
 .AContainer {
   color: #525252;
-  font-weight: lighter;
   font-size: small;
 }
 .user_info {
@@ -635,7 +619,15 @@ nav {
   height:  100%;
 }
 
-/* Add Answ Popup Modal Styling ----- */
+/* Add Answ/Ques Popup Modal Styling ----- */
+.popup-ques {
+  position: fixed;
+  background: #00000050;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
 .popup-answ {
   position:  fixed;
   background:  #00000050;
@@ -645,37 +637,87 @@ nav {
   left:  0;
 }
 .form-container {
-  max-width:  400px;
-  padding:  10px;
-  background-color:  white;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  margin-left: 37%;
+  margin-top: 10%;
+  border-radius: 10px;
+  border: 1.5px solid black;
+
+  max-width: 700px;
+  padding: 10px;
+  background-color: white;
 }
 .form-container input[type=text], .form-container input[type=password] {
-  width:  90%;
-  padding:  15px;
-  margin:  5px 0 22px 0;
-  border:  none;
-  background:  #f1f1f1;
+  width: 50%;
+  padding: 15px;
+  margin: 5px 15px 22px 0;
+  border: none;
+  background: #f1f1f1;
 }
 /* When the inputs get focus, do something */
 .form-container input[type=text]:  focus, .form-container input[type=reply]:  focus {
   background-color:  #ddd;
   outline:  none;
 }
+.form-close-btn {
+  margin-left: 98%;
+  cursor: pointer;
+}
+.form-close-btn:hover {
+  margin-left: 98%;
+  cursor: pointer;
+  color: rgb(52, 52, 52);
+}
 
+.align-input {
+  display:flex;
+}
+
+/* align buttons for more questions and add new questions ----- */
+.align-btns {
+  display: flex;
+}
 .form-button {
-  margin-top:  20px;
-  margin-left:  30%;
-  border:  2px solid black;
-  background-color:  white;
-  color:  black;
-  padding:  14px 28px;
-  font-size:  16px;
-  cursor:  pointer;
+  margin-top: 20px;
+  margin-left: 40%;
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
 }
-.form-button:hover {
-  background-color:  rgb(49, 49, 49);
-  color:  white;
+
+.form-button2 {
+  width: 100%;
+  margin-top: 25px;
+  margin-left: 30%;
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
 }
+.form-button3 {
+  width: 100%;
+  margin-left: 5%;
+  margin-top: 25px;
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.form-button:hover, .form-button2:hover, .form-button3:hover {
+  background-color: rgb(49, 49, 49);
+  color: white;
+}
+
 
 /* Subheading styling ----- */
 .subheading {
@@ -684,18 +726,62 @@ nav {
 
 /* Warning text ----- */
 .warnings {
-  font-weight:  lighter;
-  font-size:  x-small;
-  margin-top:  -15px;
-  margin-bottom:  10px;
+  font-weight: lighter;
+  font-size: x-small;
+  margin-top: -15px;
+  /* margin-bottom: 10px; */
 }
 
 /* textarea element ----- */
 textarea {
-  width:  96%;
-  height:  70px;
+  width: 96%;
+  height: 70px;
+  margin-bottom: 5%;
+  margin-top: 1%;
 }
 
+/* horizontal line ----- */
+.hr3 {
+  margin: 40px 0;
+  border: 0;
+  height: 2px;
+  background-image: linear-gradient(to right, transparent, rgb(0, 0, 0), transparent);
+}
+
+/* search button ----- */
+.search-form {
+  background-color: #f9f9f9;
+  width: 350px;
+  height: 44px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.search-input {
+  all: unset;
+  font: 16px system-ui;
+  color: rgb(0, 0, 0);
+  height: 100%;
+  width: 100%;
+  padding: 6px 10px;
+}
+
+.search-button {
+  all: unset;
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+}
+
+.search-svg {
+  color: #9C9C9C;
+  fill: currentColor;
+  width: 24px;
+  height: 24px;
+  padding: 10px;
+}
 
 /* Jaden ADDED THESE ------------------------------------------------- */
 
@@ -945,4 +1031,4 @@ textarea {
   color:  rgb(90, 90, 90);
 }
 
-.comparison-table tbody tr:nth-child(odd) {background-color:  #f2f2f2;}
+.comparison-table tbody tr:nth-child(odd) {background-color: #f2f2f2;}
