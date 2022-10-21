@@ -14,19 +14,20 @@ export default function RelatedProductsList ({currentItem, setProduct}) {
   }, [currentItem])
 
   return (
-    <div className='related-list'>
+    <>
       <h3>Related Products:</h3>
-
-      <ul className='related-ul'>
-        {relatedItems.map(item => (
-          <ProductCard currentItem={currentItem} setProduct={setProduct} key={item} item={item} list={'related'}/>
-          ))
+      <div className='related-list'>
+        <ul className='related-ul'>
+          {relatedItems.map(item => (
+            <ProductCard currentItem={currentItem} setProduct={setProduct} key={item} item={item} list={'related'}/>
+            ))
+          }
+        </ul>
+        {relatedItems.length > 4 ?
+          <ScrollButtons element={'.related-list .related-ul'} width={1100} scroll={275} />
+          : null
         }
-      </ul>
-      {relatedItems.length > 4 ?
-        <ScrollButtons element={'.related-list .related-ul'} width={1100} scroll={275} />
-        : null
-      }
-    </div>
+      </div>
+    </>
   )
 }

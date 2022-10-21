@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import ScrollButtons from './ScrollButtons.jsx'
-import { useTracker } from '../TrackClickContext.jsx';
-
 
 export default function PreviewCarousel({styles, setDefaultPhoto}) {
 
-  const clickTracker = useTracker();
   const noPhoto = 'https://i.postimg.cc/gjFHrzW3/image-4.png';
 
   const clickHandler = (img) => {
@@ -18,7 +15,7 @@ export default function PreviewCarousel({styles, setDefaultPhoto}) {
         {styles.results.map(style => {
           if (!style['default?']) {
             return style.photos.map(photo => (
-              <img key={Math.random() * 99999} className='preview-image' src={photo.thumbnail_url || noPhoto} onClick={(e) => {clickHandler(photo.thumbnail_url); clickTracker(e, 'Related Items & Outfit Creation') }}></img>
+              <img key={Math.random() * 99999} className='preview-image' src={photo.thumbnail_url || noPhoto} onClick={(e) => {clickHandler(photo.thumbnail_url);}}></img>
             ))
           }
         })}

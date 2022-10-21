@@ -1,10 +1,6 @@
 import React from 'react';
-import { useTracker } from '../TrackClickContext.jsx';
-
 
 export default function PopupComparison ({relatedItem, currentItem, setPopup}) {
-
-  const clickTracker = useTracker();
   const comparisonObj = {}
   currentItem.features.map((feature) => {
     comparisonObj[feature.feature] = {valueCurrent: feature.value}
@@ -14,7 +10,7 @@ export default function PopupComparison ({relatedItem, currentItem, setPopup}) {
   })
 
   return (
-    <div className='popup' onClick={(e)=>{setPopup(false); clickTracker(e, 'Related Items & Outfit Creation')}}>
+    <div className='popup' onClick={(e)=>{setPopup(false);}}>
       <div className='comparison-table'>
         <table>
           <caption>Comparing</caption>
