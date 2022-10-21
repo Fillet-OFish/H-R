@@ -780,17 +780,17 @@ textarea {
 /* Jaden ADDED THESE ------------------------------------------------- */
 
 /* related items and outfit ----- */
-.related-items{
+.related-list {
   position: relative;
   width: 92%;
-  margin: 0px auto;
-}
 
+}
 .related-ul, .outfit-ul {
   display:  flex;
   position:  relative;
   margin:  0;
   padding:  0;
+  max-width:  1100px;
   width:  100%;
   overflow-x:  auto;
   overflow:  hidden;
@@ -891,6 +891,8 @@ textarea {
   cursor:  pointer;
   animation:  fade-in 0.3s ease;
 }
+
+
 
 .preview-photos .button-left {
   left:  -3%;
