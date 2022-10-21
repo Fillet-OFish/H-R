@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import React, { useState, useEffect } from 'react';
-=======
 import React, { useState, useEffect, createContext } from 'react';
->>>>>>> 2cabe10c236b79733ebabf7c6640c6d7c6886210
 import { useTracker } from '../TrackClickContext.jsx';
 import { Rating } from 'react-simple-star-rating'
 import axios from 'axios';

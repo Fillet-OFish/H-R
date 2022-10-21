@@ -780,23 +780,27 @@ textarea {
 /* Jaden ADDED THESE ------------------------------------------------- */
 
 /* related items and outfit ----- */
-<<<<<<< HEAD
 .related-list {
   position: relative;
-  width: 92%;
-
-=======
-.related-items{
-  position: relative;
-  width: 92%;
-  margin: 0px auto;
->>>>>>> 2cabe10c236b79733ebabf7c6640c6d7c6886210
+}
+.related-list::before {
+  position: absolute;
+  content: '';
+  height: 100%;
+  width: 16%;
+  right: 0;
+  transform: translate(0, -50%);
+  top: 50%;
+  background:  linear-gradient(-90deg, white 30%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
 }
 .related-ul, .outfit-ul {
   display:  flex;
   position:  relative;
   margin:  0;
   padding:  0;
+  max-width:  1100px;
   width:  100%;
   overflow-x:  auto;
   overflow:  hidden;
@@ -815,6 +819,7 @@ textarea {
   cursor: pointer;
   text-align: center;
   animation: fade-in 0.3s ease;
+  z-index: 2;
 }
 
 .button-left:hover, .button-right:hover {
@@ -897,6 +902,8 @@ textarea {
   cursor:  pointer;
   animation:  fade-in 0.3s ease;
 }
+
+
 
 .preview-photos .button-left {
   left:  -3%;
