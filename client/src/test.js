@@ -7,7 +7,7 @@
 
 import {render} from '@testing-library/react';
 import React from 'react';
-import App from './index.jsx';
+// import App from './components/App.jsx';
 
 // describe('App component', () => {
 //  test('it renders', () => {
