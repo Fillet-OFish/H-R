@@ -24,7 +24,11 @@ export default function Carousel({ photos, click, setClick, setPhoto, setExpand,
       {current!==0 ? <FaAngleLeft className='left-arrow' onClick={prev} /> : null}
       {current!==length-1? <FaAngleRight className='right-arrow' onClick={next} />:null}
       {photos[current].thumbnail_url ?
-        <img src={`${photos[current].thumbnail_url}`} className='img-main' onClick={e=>{setExpand(prev=>!prev);expandPhoto()}}/>
+        <img
+          src={`${photos[current].thumbnail_url}`}
+          className='img-main'
+          onClick={e=>{setExpand(prev=>!prev);expandPhoto()}}
+          style={{cursor:'zoom-in'}}/>
         :
         <img src="https://i.postimg.cc/gjFHrzW3/image-4.png" className='img-main' onClick={e=>{setExpand(prev=>!prev);expandPhoto()}}/>
       }
