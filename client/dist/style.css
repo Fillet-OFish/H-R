@@ -548,7 +548,7 @@ nav {
   margin: 0;
   padding: 0;
   overflow-y: auto;
-  overflow: scroll;
+  overflow-x: hidden;
   scroll-behavior: smooth;
 }
 .QContainer2 {

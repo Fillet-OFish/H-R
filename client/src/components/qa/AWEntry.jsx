@@ -1,5 +1,5 @@
 import React from 'react';
-import {formatDistanceToNow, parseISO, setDate} from 'date-fns';
+import {format} from 'date-fns';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 
@@ -47,7 +47,7 @@ const AWEntry = (props) => {
       ))}
 
       {/* answer user info --- */}
-      <div className='user_info'>by {props.ans.answerer_name}, {formatDistanceToNow(parseISO(props.ans.date))} |
+      <div className='user_info'>by {props.ans.answerer_name}, {format(new Date(props.ans.date), 'MMMM dd, yyyy')} |
       {/* answer helpfulness */}
       Helpful? <a className='questions-and-answers' onClick={() => helpfulAnsw(props.ans.answer_id)}>Yes</a> ({props.ans.helpfulness}) |
       {/* reporting an answer */}
