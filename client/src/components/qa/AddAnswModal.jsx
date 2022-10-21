@@ -36,30 +36,47 @@ const AddAnswModal = (props) => {
             e.target.reply.value = '';
             e.target.user.value = '';
             e.target.email.value = '';
-            }} className='form-container'>
+          }} className='form-container'>
+
+            {/* close button for form */}
+            <span className='form-close-btn' onClick={() => props.setModalAnswOn(!props.modalAnswOn)}>X</span>
 
             {/* form title */}
             <h1>Submit your Answer</h1>
-            <h2 className='subheading'>{`${props.product.name}: ${props.QID.question_body}`}</h2>
+            <h2 className='subheading' style={{marginBottom: '5%'}} >{`${props.product.name}: ${props.QID.question_body}`} </h2>
+
             {/* answer */}
             <label><b>Answer</b></label>
             <br></br>
-            <textarea type='text' name='reply' placeholder='Enter reply...' maxLength="1000" onChange={(e) => console.log(e.target.value)} required></textarea>
+            <textarea type='text' name='reply' placeholder='Enter reply...' maxLength="1000" required></textarea>
             <br></br>
-            {/* nickname */}
+
+            {/* nickname and email labels --------- */}
             <label><b>Nickname</b></label>
-            <input type='text' name='user' placeholder='Example: jack543!' maxLength="60" required></input>
-            <div className='warnings'>For privacy reasons, do not use your full name or email address</div>
-            {/* email */}
-            <label><b>Email</b></label>
-            <input type='text' name='email' placeholder='Example: jack@email.com' required></input>
-            <div className='warnings'>For authentication reasons, you will not be emailed</div>
-            {/* photos */}
+            <label style={{marginLeft: '40%'}}><b>Email</b></label>
+            {/* aligning nickname and email inputs --------- */}
+            <div className='align-input'>
+              {/* nickname */}
+              <input type='text' name='user' placeholder='jack543!' maxLength="60" required></input>
+              {/* email */}
+              <input type='text' name='email' placeholder='jack@email.com' required></input>
+            </div>
+
+            {/* aligning warnings for inputs ---------- */}
+            <div className='align-input'>
+              <div className='warnings'>For privacy reasons, do not use your full name or email address</div>
+              <div className='warnings' style={{marginLeft: '11%', marginBottom: '2%'}}>For authentication reasons, you will not be emailed</div>
+            </div>
+            <br></br>
+
+            {/* photos ---------- */}
             <label><b>Photos</b></label>
             <br></br>
-            {(files <= 5) ?  <input type='file' name='photos' accept=".jpg, .jpeg, .png" onChange={(e) => setFiles(e.target.files.length)} multiple /> : `Max image uploads are 5. Your uploads: ${files}`}
-            {/* submit button */}
-            <button type='submit' className='form-button'>Submit</button>
+            {(files <= 5) ?  <input style={{marginTop: '1%', marginBottom: '3%'}} type='file' name='photos' accept=".jpg, .jpeg, .png" onChange={(e) => setFiles(e.target.files.length)} multiple /> : `Max image uploads are 5. Your uploads: ${files}`}
+            <br></br>
+
+            {/* submit button ---------- */}
+            <button type='submit' className='form-button' style={{marginBottom: '3%'}}>Submit</button>
           </form>
         </div> :
         ""}

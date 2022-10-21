@@ -32,6 +32,5 @@ router.put('/qa/questions/:id/report', controllers.qa.reportQues);
 router.put('/qa/answers/:id/helpful', controllers.qa.helpfulAnsw);
 router.put('/qa/answers/:id/report', controllers.qa.reportAnsw);
 
-router.post('/qa/questions/:id/answers', controllers.qa.postAnsw);
 
 module.exports = router;
