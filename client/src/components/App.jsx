@@ -7,6 +7,7 @@ import Description from './overview/components/Description.jsx';
 import RelatedItemsAndComparison from './relatedItemsAndComparison/index.jsx';
 import { TrackProvider } from './TrackClickContext.jsx';
 
+
 export default function App() {
   const [products, setProducts] = useState([]); // list of all products (needed for search bar)
   const [product, setProduct] = useState([]); // one product (needed for page render)

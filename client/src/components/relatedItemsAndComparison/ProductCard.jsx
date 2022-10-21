@@ -3,7 +3,6 @@ import axios from 'axios';
 import StarRatings from './StarRatings.jsx';
 import PopupComparison from './PopupComparison.jsx';
 import ProductCardImage from './ProductCardImage.jsx';
-import { useTracker } from '../TrackClickContext.jsx';
 
 export default function ProductCard({currentItem, item, setProduct, list, outfit, setOutfit}) {
 
@@ -11,7 +10,6 @@ export default function ProductCard({currentItem, item, setProduct, list, outfit
   const [styles, setStyles] = useState(null);
   const [defaultStyle, setDefaultStyle] = useState(null);
   const [popup, setPopup] = useState(false);
-  const clickTracker = useTracker();
 
   useEffect(() => {
     const source = axios.CancelToken.source();
@@ -63,15 +61,15 @@ export default function ProductCard({currentItem, item, setProduct, list, outfit
         <PopupComparison currentItem={currentItem} relatedItem={relatedItem} setPopup={setPopup}/> : null
       }
       {relatedItem && defaultStyle && styles ?
-        <li className='product-card' onClick={e => {clickHandler(e); clickTracker(e, 'Related Items & Outfit Creation')}} >
+        <li className='product-card' onClick={e => {clickHandler(e);}} >
           <ProductCardImage defaultStyle={defaultStyle} styles={styles}/>
           {list === 'related' ?
-            <button className='product-card-button' onClick={e => {handleComparisonClick(); clickTracker(e, 'Related Items & Outfit Creation')}}>
+            <button className='product-card-button' onClick={e => {handleComparisonClick();}}>
               ☆
             </button> : null
           }
           {list === 'outfit' ?
-            <button className='product-card-button' onClick={e => {handleOutfitClick; clickTracker(e, 'Related Items & Outfit Creation')}}>
+            <button className='product-card-button' onClick={e => {handleOutfitClick;}}>
               x
             </button> : null
           }
