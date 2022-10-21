@@ -1,38 +1,50 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
+import { Rating } from 'react-simple-star-rating'
 import axios from 'axios';
 import Social from './components/Social.jsx'
 import Styles from './components/Styles.jsx'
 import Gallery from './components/gallery/Gallery.jsx'
 import Cart from './components/Cart.jsx'
 
-export default function Overview({product, rating}) {
+export default function Overview({product, rating, numReviews}) {
   const [styles, setStyles] = useState([])
-  const [style, setStyle] = useState([])
+  const [style, setStyle] = useState({})
   const [photos, setPhotos] = useState([])
+  const [photo, setPhoto] = useState('')
 
   // on load/product change, set styles/style based on default product/new product
   useEffect(() => {
-    if(product.id){
-      axios.get(`/api/products/${product.id}/styles`)
-      .then(result => {
-        setStyles(result.data.results);
-        setStyle(result.data.results[0])
-        setPhotos(result.data.results[0].photos)
-      })
-    }
+    axios.get(`/api/products/${product.id}/styles`)
+    .then(result => {
+      setStyles(result.data.results)
+      setStyle(result.data.results[0])
+      setPhotos(result.data.results[0].photos)
+      setPhoto(result.data.results[0].photos[0])
+    })
   },[product])
 
   return(
     <>
         {/* Gallery */}
-        {style && photos ? <Gallery style={style} photos={photos} setPhotos={setPhotos}/> : null }
+        {Object.keys(style).length!==0 && photos.length>0 ?
+          <Gallery style={style} photos={photos} setPhotos={setPhotos} photo={photo} setPhoto={setPhoto}/>
+        : null }
 
         <div className="right">
           {/* Stars */}
-          <p>★★★★☆ <a href="/">Read all reviews</a></p>
+          <p>
+            <Rating
+              size={15}
+              initialValue={rating}
+              allowFraction={true}
+              fillColor={'#000000'}
+              style={{pointerEvents: 'none'}}
+            />
+            &nbsp; {numReviews ? <a href="/">Read all {numReviews} reviews</a> : null}
+          </p>
 
           {/* Social media */}
-          <Social product={product}/>
+          {<Social product={product} style={style} photo={photo}/>}
 
           {/* Category */}
           <p className="product-category">UNISEX / {product.category} / {product.name}</p>

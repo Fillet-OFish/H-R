@@ -17,7 +17,6 @@ export default function Styles({ styles, style, setStyle }) {
 
       {/* icons */}
       <p className="icons">
-
       {/* checking if there is a default style or not */}
       {styles.map(one =>
         <span key={one.style_id} className="styles-icon-container">
@@ -25,7 +24,6 @@ export default function Styles({ styles, style, setStyle }) {
           {style.style_id===one.style_id ? <FaCheck className="check-icon"/> : null}
         </span>)
       }
-
       </p>
     </div>
   )

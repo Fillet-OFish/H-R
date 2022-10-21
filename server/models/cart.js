@@ -19,7 +19,6 @@ module.exports = {
         'User-Agent': 'request',
         'Authorization': `${process.env.TOKENS}`,
       },
-
       data: {
         'sku_id': parseInt(id)
       }

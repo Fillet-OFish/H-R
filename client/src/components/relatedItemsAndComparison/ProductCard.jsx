@@ -16,25 +16,27 @@ export default function ProductCard({currentItem, item, setProduct, list, outfit
   useEffect(() => {
     const source = axios.CancelToken.source();
 
-    axios.get(`/api/products/${item}`, {cancelToken: source.token})
-    .then(data => setrelatedItem(data.data))
-    .catch(err => console.log(err));
+    if(item){
+      axios.get(`/api/products/${item}`, {cancelToken: source.token})
+        .then(data => setrelatedItem(data.data))
+        .catch(err => console.log(err));
+      axios.get(`/api/products/${item}/styles`, {cancelToken: source.token})
+        .then(data => {
+          setStyles(data.data);
+          for (var i = 0; i < data.data.results.length; i++) {
+            if (data.data.results[i]['default?']) {
+              setDefaultStyle(data.data.results[i]);
+              return;
+            }
+            if (i === data.data.results.length - 1) {
+              setDefaultStyle(data.data.results[0]);
+            }
+          }
+        })
+        .catch((err) => {console.log(err)});
+    }
+  }, [currentItem])
 
-    axios.get(`/api/products/${item}/styles`, {cancelToken: source.token})
-    .then(data => {
-      setStyles(data.data);
-      for (var i = 0; i < data.data.results.length; i++) {
-        if (data.data.results[i]['default?']) {
-          setDefaultStyle(data.data.results[i]);
-          return;
-        }
-        if (i === data.data.results.length - 1) {
-          setDefaultStyle(data.data.results[0]);
-        }
-      }
-    })
-    .catch((err) => {console.log(err)});
-  }, [])
 
   const clickHandler = (e) => {
     if (e.target.className === 'product-card-button') {return};

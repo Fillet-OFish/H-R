@@ -279,9 +279,6 @@ button {
   height: 500px;
   display: flex;
 }
-.carousel-container img:hover{
-  cursor: zoom-in;
-}
 .carousel-container .right-arrow {
   position: absolute;
   top: 50%;
@@ -385,6 +382,9 @@ button {
 .cart{
   margin-top: 15px;
   font-size: 17px;
+}
+.cart-warning{
+  visibility: hidden;
 }
 /* dropdown */
 .cart select{
