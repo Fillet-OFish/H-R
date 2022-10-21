@@ -1,9 +1,9 @@
 import React from 'react';
 import axios from 'axios';
-import QA from './QA.jsx';
-import ImageModal from './ImageModal.jsx';
-import AddAnswModal from './AddAnswModal.jsx';
-import AddQuesModal from './AddQuesModal.jsx';
+import QA from './components/QA.jsx';
+import ImageModal from './components/ImageModal.jsx';
+import AddAnswModal from './components/AddAnswModal.jsx';
+import AddQuesModal from './components/AddQuesModal.jsx';
 import {useState, useEffect} from 'react';
 
 
@@ -63,7 +63,7 @@ const QuesnAnsw = (props) => {
 
 
   return (
-    <div>
+    <div className="q-a">
       <div>
         {/* rendering QA ----------- */}
         <QA filter={filter} searchFilter={searchFilter} setImage={setImage} setModalOn={setModalOn} modalOn={modalOn} modalAnswOn={modalAnswOn} setModalAnswOn={setModalAnswOn} setQID={setQID} modalQuesOn={modalQuesOn} setModalQuesOn={setModalQuesOn} />

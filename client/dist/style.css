@@ -279,9 +279,6 @@ button {
   height: 500px;
   display: flex;
 }
-.carousel-container img:hover{
-  cursor: zoom-in;
-}
 .carousel-container .right-arrow {
   position: absolute;
   top: 50%;
@@ -385,12 +382,9 @@ button {
 .cart{
   margin-top: 15px;
   font-size: 17px;
-<<<<<<< HEAD
 }
 .cart-warning{
   visibility: hidden;
-=======
->>>>>>> 9b9ce26447d38e572a28cf1207372bb734e2c9e2
 }
 /* dropdown */
 .cart select{
@@ -465,13 +459,6 @@ button {
   line-height: 18px;
 }
 
-/* RELATED ITEMS ------------------------ */
-
-.related-items{
-  margin-top: 20px;
-}
-
-
 /* ANIMATIONS ------------------------ */
 @keyframes fade-in {
   0% { opacity: 0 }
@@ -522,6 +509,10 @@ button {
 
 
 /* FERNANDO ADDED THESE --------------------------------------------------------------- */
+.q-a{
+  width: 92%;
+  margin: 0px auto;
+}
 nav {
   margin-top: 2%;
   display: inline-block;
@@ -789,10 +780,10 @@ textarea {
 /* Jaden ADDED THESE ------------------------------------------------- */
 
 /* related items and outfit ----- */
-
-.related-list {
+.related-items{
   position: relative;
-
+  width: 92%;
+  margin: 0px auto;
 }
 
 .related-ul, .outfit-ul {
@@ -800,7 +791,6 @@ textarea {
   position:  relative;
   margin:  0;
   padding:  0;
-  max-width:  1100px;
   width:  100%;
   overflow-x:  auto;
   overflow:  hidden;
@@ -901,8 +891,6 @@ textarea {
   cursor:  pointer;
   animation:  fade-in 0.3s ease;
 }
-
-
 
 .preview-photos .button-left {
   left:  -3%;
