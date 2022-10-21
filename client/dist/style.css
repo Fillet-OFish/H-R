@@ -780,12 +780,18 @@ textarea {
 /* Jaden ADDED THESE ------------------------------------------------- */
 
 /* related items and outfit ----- */
+<<<<<<< HEAD
+.related-list {
+  position: relative;
+  width: 92%;
+
+=======
 .related-items{
   position: relative;
   width: 92%;
   margin: 0px auto;
+>>>>>>> 2cabe10c236b79733ebabf7c6640c6d7c6886210
 }
-
 .related-ul, .outfit-ul {
   display:  flex;
   position:  relative;
