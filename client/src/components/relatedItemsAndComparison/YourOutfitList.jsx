@@ -14,7 +14,7 @@ export default function YourOutfitList({currentItem, setProduct}) {
   }
 
   return (
-    <div>
+    <>
       <h3>Your Outfit:</h3>
       <div className='related-list'>
         <ul className='outfit-ul'>
@@ -31,6 +31,6 @@ export default function YourOutfitList({currentItem, setProduct}) {
         <ScrollButtons element={'.related-list .outfit-ul'} width={1100} scroll={275}  /> : null
       }
       </div>
-    </div>
+    </>
   )
 }
