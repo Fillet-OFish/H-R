@@ -10,46 +10,6 @@ import Ratings from './ratings/index.jsx'
 
 
 export default function App() {
-<<<<<<< HEAD
-  const [product, setProduct] = useState([]);
-  const [rating, setRating] = useState([]);
-  const [numReviews, setNumReviews] = useState(0);
-
-  useEffect(() => {
-    axios.get('/api/products/40344') // id 40344
-    .then(result => setProduct(result.data))
-  },[])
-
-  return(
-    product.id ?
-    <TrackProvider>
-      {/* header */}
-      <Header product={product}/>
-
-      {/* overview */}
-      <div className="container">
-        <Overview product={product} rating={rating} numReviews={numReviews}/>
-      </div>
-      <Description product={product}/>
-
-      {/* related products */}
-      <div className="container">
-        <RelatedItemsAndComparison currentItem={product} setProduct={setProduct} />
-      </div>
-
-      {/* Questions and Answers */}
-      <div className="container">
-        <QuesnAnsw product={product} />
-      </div>
-
-      {/* Reviews */}
-      <div className="container">
-        <Ratings product={product} setRating={setRating} setNumReviews={setNumReviews}/>
-      </div>
-    </TrackProvider>
-    : null
-  )
-=======
   const [products, setProducts] = useState([]); // list of all products (needed for search bar)
   const [product, setProduct] = useState([]); // one product (needed for page render)
   const [update, setUpdate] = useState(false);
@@ -100,5 +60,4 @@ export default function App() {
       <QuesnAnsw product={product} />
     </div>
   </TrackProvider>)
->>>>>>> 08d7314e0b31d489faeaabf4fc5813ad26271e10
 }
