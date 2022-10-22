@@ -7,10 +7,10 @@ export default function Reviews({ product, rating, setRating, numReviews, setNum
   const [reviewsMeta, setReviewsMeta] = useState(null)
   const [filter, setFilter] = useState([])
 
-  console.log('reviews: ', reviews)
-  console.log('reviewsMeta: ', reviewsMeta)
-  console.log('rating: ', rating)
-  console.log('numReviews: ', numReviews)
+  // console.log('reviews: ', reviews)
+  // console.log('reviewsMeta: ', reviewsMeta)
+  // console.log('rating: ', rating)
+  // console.log('numReviews: ', numReviews)
 
   useEffect(() => {
     axios.get(`/api/reviews/${product.id}`)
