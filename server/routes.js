@@ -9,6 +9,7 @@ router.get('/products/:id/styles', controllers.products.getStyles)
 router.get('/reviews/:id', controllers.reviews.getAll)
 
 // reviews
+router.get('/reviews/meta/:id', controllers.reviews.getMeta)
 router.get('/reviews/:id', controllers.reviews.getAll)
 
 // interactions

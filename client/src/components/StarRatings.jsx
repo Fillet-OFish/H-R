@@ -6,38 +6,32 @@ export default function StarRatings({item}) {
 
   useEffect(() => {
     const source = axios.CancelToken.source();
-    axios.get(`/api/reviews/${item}`, {cancelToken: source.token})
-    .then((data) => {
-      let rating = {};
-      rating.count = data.data.count;
-      let average = 0
-      for (var i = 0; i < data.data.results.length; i++) {
-        average += data.data.results[i].rating
-        if (i === data.data.results.length - 1) {
-          average = average / data.data.results.length
-        }
-      }
-      rating.average = average;
-      setRating(rating);
+    axios.get(`/api/reviews/meta/${item}`, {cancelToken: source.token})
+    .then(result => {
+      let data = result.data;
+      let totalNum = Number(data.recommended.true) + Number(data.recommended.false);
+      let rating = (Number(data.ratings[1]) + (Number(data.ratings[2]) * 2) + (Number(data.ratings[3]) * 3)+ (Number(data.ratings[4]) * 4) + (Number(data.ratings[5]) * 5)) / totalNum
+      let roundedRating = Math.round(rating * 10) / 10
+      setRating(roundedRating);
     })
     .catch(err => {console.log(err)})
-  }, [])
+  }, [item])
 
   return (
     <div>
       {rating ?
         [...Array(5)].map((star, i) => {
           const starFill = () => {
-            if (rating.average - i >= 1) {
+            if (rating - i >= 1) {
               return 100
             }
-            if (rating.average - i >= 0.75) {
+            if (rating - i >= 0.75) {
               return 70
             }
-            if (rating.average - i >= 0.50) {
+            if (rating - i >= 0.50) {
               return 50
             }
-            if (rating.average - i >= 0.25) {
+            if (rating - i >= 0.25) {
               return 30
             }
             return 0
