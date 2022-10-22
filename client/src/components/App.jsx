@@ -20,6 +20,22 @@ export default function App() {
   return(
     product.id ?
     <TrackProvider>
+      {/* header */}
+      <Header product={product}/>
+
+      {/* overview */}
+      <Overview product={product} rating={rating} numReviews={numReviews}/>
+      <Description product={product}/>
+
+      {/* related products */}
+      <div className="container">
+        <RelatedItemsAndComparison currentItem={product} setProduct={setProduct} />
+      </div>
+
+      {/* Questions and Answers */}
+      <div className="container">
+        <QuesnAnsw product={product} />
+      </div>
 
       {/* Reviews */}
       <div className="container">
@@ -29,19 +45,3 @@ export default function App() {
     : null
   )
 }
-      // {/* header */}
-      // <Header product={product}/>
-
-      // {/* overview */}
-      // <Overview product={product} rating={rating} numReviews={numReviews}/>
-      // <Description product={product}/>
-
-      // {/* related products */}
-      // <div className="container">
-      //   <RelatedItemsAndComparison currentItem={product} setProduct={setProduct} />
-      // </div>
-
-      // {/* Questions and Answers */}
-      // <div className="container">
-      //   <QuesnAnsw product={product} />
-      // </div>
