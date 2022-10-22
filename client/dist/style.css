@@ -783,7 +783,7 @@ textarea {
 .related-list {
   position: relative;
 }
-.related-list::before {
+/* .related-list::before {
   position: absolute;
   content: '';
   height: 100%;
@@ -794,7 +794,7 @@ textarea {
   background:  linear-gradient(-90deg, white 30%, transparent 100%);
   z-index: 1;
   pointer-events: none;
-}
+} */
 .related-ul, .outfit-ul {
   display:  flex;
   position:  relative;
@@ -1029,3 +1029,8 @@ textarea {
 }
 
 .comparison-table tbody tr:nth-child(odd) {background-color: #f2f2f2;}
+
+.star-breakdown:hover {
+  background: #f80;
+  cursor: pointer;
+}

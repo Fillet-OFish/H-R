@@ -10,7 +10,7 @@ export function useTracker() {
 export function TrackProvider({children}) {
   const [tracker, setTracker] = useState([]);
 
-  console.log(tracker)
+  // console.log(tracker)
 
   function trackClick(e, module) {
     const click = {
