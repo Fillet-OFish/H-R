@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Breakdown from './components/Breakdown/Breakdown.jsx'
+import ReviewsList from './components/ReviewsList/ReviewsList.jsx'
 
 export default function Reviews({ product, rating, setRating, numReviews, setNumReviews }) {
   const [reviews, setReviews] = useState(null)
+  const [reviewsPage, setReviewsPage] = useState(1)
   const [reviewsMeta, setReviewsMeta] = useState(null)
   const [filter, setFilter] = useState([])
 
@@ -13,15 +15,10 @@ export default function Reviews({ product, rating, setRating, numReviews, setNum
   // console.log('numReviews: ', numReviews)
 
   useEffect(() => {
-    axios.get(`/api/reviews/${product.id}`)
+    //revuews/:id/:page/:count/:sort
+    axios.get(`/api/reviews/${product.id}/${reviewsPage}/2`)
       .then(result => {
         setReviews(result.data.results)
-        // Average rating: sum rating, divide by results length -> setRating to computed rating
-        // setNumReviews(result.data.results.length)
-        // let rating = result.data.results.reduce(function(prev, review){
-        //   return prev + review.rating
-        // },0)/result.data.results.length
-        // setRating(rating)
       })
       .catch(err=>console.log(err));
     axios.get(`/api/reviews/meta/${product.id}`)
@@ -40,8 +37,11 @@ export default function Reviews({ product, rating, setRating, numReviews, setNum
   return(
     reviews && reviewsMeta ?
     <div>
-        <h3>Ratings & Reviews</h3>
+      <h2>Ratings and Reviews</h2><br/>
+      <div className='reviews-ratings'>
         <Breakdown product={product} rating={rating} numReviews={numReviews} reviews={reviews} reviewsMeta={reviewsMeta} filter={filter} setFilter={setFilter}/>
+        <ReviewsList product={product} reviews={reviews} reviewsPage={reviewsPage} setReviewsPage={setReviewsPage} setReviews={setReviews} />
+      </div>
     </div>
     : null
   )

@@ -28,6 +28,11 @@ button {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
+.container2{
+  max-width: 1100px;
+  margin: 30px auto;
+  display: grid;
+}
 
 /* ANNOUNCEMENT ------------------------ */
 .announcement{
@@ -1034,4 +1039,20 @@ textarea {
 .star-breakdown:hover {
   background: #f80;
   cursor: pointer;
+}
+
+.reviews-ratings {
+  display: flex;
+  max-width: 1100px;
+  margin: 30px auto;
+}
+
+.breakdown {
+  flex-basis: 33%;
+  display: inline-block;
+}
+
+.reviews-list {
+  flex-basis: 66%;
+  display: inline-block;
 }

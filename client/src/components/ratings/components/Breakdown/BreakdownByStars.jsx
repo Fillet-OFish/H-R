@@ -85,8 +85,7 @@ export default function BreakdownByStars({ reviews, reviewsMeta, numReviews, fil
             </span>
           : null}
           <small className='star-breakdown' onClick={() => clickHandler('5 stars')}>
-            5 stars <span style={styleFive()}
-            ></span>
+            5 stars <span style={styleFive()}></span>
             {ratingCount.five}
           </small><br/>
           <small className='star-breakdown' onClick={() => clickHandler('4 stars')}>

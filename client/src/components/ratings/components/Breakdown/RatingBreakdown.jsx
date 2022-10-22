@@ -9,7 +9,7 @@ export default function RatingBreakdown({ rating, product, numReviews, reviews, 
         <span style={{display: 'inline-block'}}>
           {rating}
         </span>
-        <span style={{display: 'inline-block'}}><StarRatings item={product.id} /></span><br/>
+        <span style={{display: 'inline-block'}}><StarRatings itemRating={rating} /></span><br/>
         {`${numReviews} reviews`}
       </div>
       <div>

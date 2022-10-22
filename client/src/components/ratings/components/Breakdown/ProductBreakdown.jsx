@@ -2,21 +2,12 @@ import React, { useState, useEffect } from 'react';
 
 export default function ProductBreakdown({ rating, product, numReviews, reviews, reviewsMeta, filter, setFilter }) {
 
-  console.log(reviewsMeta)
-
   const size = reviewsMeta.characteristics.Size;
   const width = reviewsMeta.characteristics.Width;
   const comfort = reviewsMeta.characteristics.Comfort;
   const quality = reviewsMeta.characteristics.Quality;
   const length = reviewsMeta.characteristics.Length;
   const fit = reviewsMeta.characteristics.Fit;
-
-  console.log('size: ', size)
-  console.log('width: ', width)
-  console.log('comfort: ', comfort)
-  console.log('quality: ', quality)
-  console.log('length: ', length)
-  console.log('fit: ', fit)
 
   const ratingBarStyle = {
     display: 'inline-block',
@@ -126,12 +117,3 @@ export default function ProductBreakdown({ rating, product, numReviews, reviews,
     </div>
   )
 }
-
-/*
-Size
-Width
-Comfort
-Quality
-Length
-Fit
-*/
