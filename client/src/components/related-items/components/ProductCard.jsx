@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import StarRatings from './StarRatings.jsx';
+import StarRatings from '../../StarRatings.jsx';
 import PopupComparison from './PopupComparison.jsx';
 import ProductCardImage from './ProductCardImage.jsx';
 

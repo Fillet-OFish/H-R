@@ -6,7 +6,6 @@ export default function StarRatings({item}) {
 
   useEffect(() => {
     const source = axios.CancelToken.source();
-
     axios.get(`/api/reviews/${item}`, {cancelToken: source.token})
     .then((data) => {
       let rating = {};

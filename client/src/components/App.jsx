@@ -39,7 +39,7 @@ export default function App() {
 
       {/* Reviews */}
       <div className="container">
-        <Ratings product={product} setRating={setRating} setNumReviews={setNumReviews}/>
+        <Ratings product={product} rating={rating} setRating={setRating} numReviews={numReviews} setNumReviews={setNumReviews}/>
       </div>
     </TrackProvider>
     : null
