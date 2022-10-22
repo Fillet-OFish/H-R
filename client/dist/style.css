@@ -385,12 +385,6 @@ button {
 .cart{
   margin-top: 15px;
   font-size: 17px;
-<<<<<<< HEAD
-}
-.cart-warning{
-  visibility: hidden;
-=======
->>>>>>> 9b9ce26447d38e572a28cf1207372bb734e2c9e2
 }
 /* dropdown */
 .cart select{
@@ -547,10 +541,10 @@ nav {
   color: #525252;
   width: 200%;
   max-width: 1100px;
-  height: 400px;
+  height: 350px;
   margin: 0;
   padding: 0;
-  overflow-y: auto;
+  overflow-y:auto;
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
@@ -645,7 +639,7 @@ nav {
   top: 0;
   left: 0;
   margin-left: 37%;
-  margin-top: 10%;
+  margin-top: 7%;
   border-radius: 10px;
   border: 1.5px solid black;
 
