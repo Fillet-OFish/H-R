@@ -95,7 +95,7 @@ export default function BreakdownByStars({ reviews, filter, setFilter }) {
             <span className='filter-applied'>
               filters applied: <br/>
               {filter.join(', ')}<br/>
-              <button onClick={removeAllFilters}>Remove all filters</button>
+              <button onClick={removeAllFilters}>Remove all filters</button><br/>
             </span>
           : null}
           <small className='star-breakdown' onClick={() => clickHandler('5 stars')}>
