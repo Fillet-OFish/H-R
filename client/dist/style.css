@@ -28,6 +28,11 @@ button {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
+.container2{
+  max-width: 1100px;
+  margin: 30px auto;
+  display: grid;
+}
 
 /* ANNOUNCEMENT ------------------------ */
 .announcement{
@@ -279,9 +284,6 @@ button {
   height: 500px;
   display: flex;
 }
-.carousel-container img:hover{
-  cursor: zoom-in;
-}
 .carousel-container .right-arrow {
   position: absolute;
   top: 50%;
@@ -386,6 +388,9 @@ button {
   margin-top: 15px;
   font-size: 17px;
 }
+.cart-warning{
+  visibility: hidden;
+}
 /* dropdown */
 .cart select{
   border: 1px black solid;
@@ -459,13 +464,6 @@ button {
   line-height: 18px;
 }
 
-/* RELATED ITEMS ------------------------ */
-
-.related-items{
-  margin-top: 20px;
-}
-
-
 /* ANIMATIONS ------------------------ */
 @keyframes fade-in {
   0% { opacity: 0 }
@@ -516,6 +514,10 @@ button {
 
 
 /* FERNANDO ADDED THESE --------------------------------------------------------------- */
+.q-a{
+  width: 92%;
+  margin: 0px auto;
+}
 nav {
   margin-top: 2%;
   display: inline-block;
@@ -783,11 +785,23 @@ textarea {
 /* Jaden ADDED THESE ------------------------------------------------- */
 
 /* related items and outfit ----- */
-
 .related-list {
   position: relative;
-
 }
+/*
+.related-list::before {
+  position: absolute;
+  content: '';
+  height: 100%;
+  width: 16%;
+  right: 0;
+  transform: translate(0, -50%);
+  top: 50%;
+  background:  linear-gradient(-90deg, white 30%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+*/
 
 .related-ul, .outfit-ul {
   display:  flex;
@@ -813,6 +827,7 @@ textarea {
   cursor: pointer;
   text-align: center;
   animation: fade-in 0.3s ease;
+  z-index: 2;
 }
 
 .button-left:hover, .button-right:hover {
@@ -989,6 +1004,7 @@ textarea {
   max-height:  50%;
 }
 
+
 .comparison-table table, th, td  {
   border-collapse:  collapse;
   /* border-bottom:  1px solid; */
@@ -1022,3 +1038,24 @@ textarea {
 }
 
 .comparison-table tbody tr:nth-child(odd) {background-color: #f2f2f2;}
+
+.star-breakdown:hover {
+  background: #f80;
+  cursor: pointer;
+}
+
+.reviews-ratings {
+  display: flex;
+  max-width: 1100px;
+  margin: 30px auto;
+}
+
+.breakdown {
+  flex-basis: 33%;
+  display: inline-block;
+}
+
+.reviews-list {
+  flex-basis: 66%;
+  display: inline-block;
+}
