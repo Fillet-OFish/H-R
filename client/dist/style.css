@@ -382,12 +382,6 @@ button {
 .cart{
   margin-top: 15px;
   font-size: 17px;
-<<<<<<< HEAD
-}
-.cart-warning{
-  visibility: hidden;
-=======
->>>>>>> 9b9ce26447d38e572a28cf1207372bb734e2c9e2
 }
 .cart-warning{
   visibility: hidden;
