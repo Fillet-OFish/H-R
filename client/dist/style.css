@@ -788,7 +788,8 @@ textarea {
 .related-list {
   position: relative;
 }
-/* .related-list::before {
+/*
+.related-list::before {
   position: absolute;
   content: '';
   height: 100%;
@@ -800,6 +801,8 @@ textarea {
   z-index: 1;
   pointer-events: none;
 }
+*/
+
 .related-ul, .outfit-ul {
   display:  flex;
   position:  relative;
