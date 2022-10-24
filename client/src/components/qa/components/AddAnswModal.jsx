@@ -4,8 +4,48 @@ import axios from 'axios';
 
 
 const AddAnswModal = (props) => {
-  // set state to keep track of rendering button to add more pics in add answer
-  const [files, setFiles] = useState(0);
+  // array of images uploaded using cloudinary
+  const [uploadImgs, setUploadImgs] = useState([]);
+  let tempImgs = [];
+
+  // CLOUDINARY ------------------------------------------------------------------------
+  const cloudName = "dkbpaia1x"; // replace with your own cloud name
+  const uploadPreset = "cloudinary-upload"; // replace with your own upload preset
+
+  // Remove the comments from the code below to add
+  // additional functionality.
+  // Note that these are only a few examples, to see
+  // the full list of possible parameters that you
+  // can add see:
+  //   https://cloudinary.com/documentation/upload_widget_reference
+
+  const myWidget = cloudinary.createUploadWidget(
+    {
+      cloudName: cloudName,
+      uploadPreset: uploadPreset,
+      maxFiles: 5,
+      // cropping: true, //add a cropping step
+      // showAdvancedOptions: true,  //add advanced options (public_id and tag)
+      sources: [ "local", "url", "camera", "google_drive", "instagram", "facebook", "gettyimages", "unsplash"], // restrict the upload sources to URL and local files
+      // multiple: false,  //restrict upload to a single file
+      // folder: "user_images", //upload files to the specified folder
+      // tags: ["users", "profile"], //add the given tags to the uploaded files
+      // context: {alt: "user_uploaded"}, //add the given context data to the uploaded files
+      // clientAllowedFormats: ["images"], //restrict uploading to image files only
+      // maxImageFileSize: 2000000,  //restrict file size to less than 2MB
+      // maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
+      // theme: "purple", //change to a purple theme
+    },
+    (error, result) => {
+      if (!error && result && result.event === "success") {
+        console.log("Done! Here is the image info: ", result.info);
+        tempImgs.push(result.info);
+        setUploadImgs([...tempImgs]);
+      }
+    }
+  );
+  // CLOUDINARY ------------------------------------------------------------------------
+
 
   // post request to add answer
   const postAnsw = (q_id, body, name, email, photos) => {
@@ -22,6 +62,12 @@ const AddAnswModal = (props) => {
       console.log(err);
     })
   }
+  // need this useEffect to re-render when uploadImgs gets new data
+  // this fixes array not updating in useState
+  useEffect(() => {
+    console.log("uploadImgs: ", uploadImgs);
+  }, [uploadImgs])
+
 
   // if modal is true render the answer submission form
   return (
@@ -30,7 +76,7 @@ const AddAnswModal = (props) => {
         <div className='form-popup'>
           <form onSubmit={(e) => {
             e.preventDefault();
-            let pics = [...e.target.photos.files].map((cur, index) => cur.name);
+            let pics = uploadImgs.map((cur, index) => cur.thumbnail_url);
             postAnsw(props.QID.question_id, e.target.reply.value, e.target.user.value, e.target.email.value, pics);
             props.setModalAnswOn(!props.modalAnswOn);
             e.target.reply.value = '';
@@ -72,7 +118,32 @@ const AddAnswModal = (props) => {
             {/* photos ---------- */}
             <label><b>Photos</b></label>
             <br></br>
-            {(files <= 5) ?  <input style={{marginTop: '1%', marginBottom: '3%'}} type='file' name='photos' accept=".jpg, .jpeg, .png" onChange={(e) => setFiles(e.target.files.length)} multiple /> : `Max image uploads are 5. Your uploads: ${files}`}
+
+            {/* button for cloudinary uploads --- */}
+            <button
+              id="upload_widget"
+              className="cloudinary-button" onClick={() => myWidget.open()}>
+                Upload files
+            </button>
+            <br></br>
+
+            {/* if length of uploaded images is greater than 5 display message */}
+            {(uploadImgs.length < 5) ?
+              ""
+            :
+              'Max image uploads are 5.'
+            }
+            <br></br>
+
+            {/* show a thumbnail of each uploaded image */}
+            {(uploadImgs.length === 0) ? "" : uploadImgs.map((current, index) => (
+              <img
+                id="uploadedimage"
+                src={current.thumbnail_url}
+                style={{marginRight: '1%', marginTop: '2%'}}
+                key={index}
+              ></img>
+            ))}
             <br></br>
 
             {/* submit button ---------- */}

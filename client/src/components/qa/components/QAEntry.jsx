@@ -25,7 +25,7 @@ const QAEntry = (props) => {
   const getAnswers = (q_id) => {
     axios.get(`/api/qa/questions/${q_id}/answers`)
     .then((response) => {
-      console.log(response.data, 'THIS IS ANSWERS')
+      // console.log(response.data, 'THIS IS ANSWERS')
       setAnswers(response.data);
     })
     .catch(err => {
@@ -58,7 +58,7 @@ const QAEntry = (props) => {
   // render answers data when qaData or ques states change
   useEffect(() => {
     getAnswers(props.ques.question_id);
-    console.log(props.ques);
+    // console.log(props.ques);
   }, [props.qaData, props.ques])
 
   // render answers data with an answers entry component and a button for more answers
@@ -67,7 +67,7 @@ const QAEntry = (props) => {
       {/* set each question - with helpful and add answer properties --------------- */}
       <div><strong>Q: {props.ques.question_body}</strong>
         {/* question on helpfulness */}
-        <label style={{float: 'right'}} className='user_info' >Helpful? <a className='questions-and-answers' onClick={() => helpfulQues(props.ques.question_id)}>Yes</a> ({props.ques.question_helpfulness}) |
+        <label style={{float: 'right', marginRight: '3%'}} className='user_info' >Helpful? <a className='questions-and-answers' onClick={() => helpfulQues(props.ques.question_id)}>Yes</a> ({props.ques.question_helpfulness}) |
         {/* reporting question */}
         <a className='questions-and-answers' onClick={() => reportQues(props.ques.question_id)}>Report</a> |
         {/* adding an answer to question */}

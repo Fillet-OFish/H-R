@@ -40,54 +40,53 @@ export default function Gallery({ style, photos, setPhotos, photo, setPhoto }) {
   function expandPhoto(prop){
     if(expand === true && photo.thumbnail_url) {
       document.querySelector('.gallery-list').style.visibility = 'hidden'
+      document.querySelector('.img-main').style = {cursor: 'zoom-out', marginTop:'-30%'}
       document.querySelector('.right').style.visibility = 'hidden'
+      document.querySelector('.left').style = {width: '90vh', height:'70vh'}
     } else {
       document.querySelector('.gallery-list').style.visibility = 'visible'
       document.querySelector('.right').style.visibility = 'visible'
-
+      document.querySelector('.left').style = {width: '70vh', height:'60vh'}
     }
   }
 
-  return(<>
-  <div className="left">
-    {/* list of image thumbnails */}
-    <div className="gallery-list">
-            {photos?
-              (<div>
-                {photos.length>6 ?
-                  <>
-                  {XY[0] === 0 ? null : <FaAngleUp style={{cursor:'pointer'}} onClick={e=>scroll('up')} className="gallery-arrow"/>}
-                  {photos.slice(XY[0], XY[1]).map((photo, i) => <p key={i}><img src={photo.thumbnail_url} onClick={e=>{changePhoto({photo, i})}} /></p>)}
-                  {XY[1] === photos.length ? null : <FaAngleDown style={{cursor:'pointer'}} onClick={e=>scroll('down')} className="gallery-arrow"/>}
-                  </>
-                  :
-                  photos.slice(XY[0], XY[1]).map((photo, i) => <p key={i}><img src={photo.thumbnail_url || "https://i.postimg.cc/gjFHrzW3/image-4.png"} onClick={e=>{e.preventDefault();changePhoto({photo, i})}} /></p>)
-                }
-              </div>) : null}
-              </div>
+  return(
+    <div className="left">
+      {/* list of image thumbnails */}
+      <div className="gallery-list">
+        {photos?
+          (<div>
+            {photos.length>6 ?
+              <>
+              {XY[0] === 0 ? null : <FaAngleUp style={{cursor:'pointer'}} onClick={e=>scroll('up')} className="gallery-arrow"/>}
+              {photos.slice(XY[0], XY[1]).map((photo, i) => <p key={i}><img src={photo.thumbnail_url} onClick={e=>{changePhoto({photo, i})}} /></p>)}
+              {XY[1] === photos.length ? null : <FaAngleDown style={{cursor:'pointer'}} onClick={e=>scroll('down')} className="gallery-arrow"/>}
+              </>
+              :
+              photos.slice(XY[0], XY[1]).map((photo, i) => <p key={i}><img src={photo.thumbnail_url || "https://i.postimg.cc/gjFHrzW3/image-4.png"} onClick={e=>{e.preventDefault();changePhoto({photo, i})}} /></p>)
+            }
+          </div>) : null}
+           </div>
 
-    {/* main gallery */}
-    <div className="gallery-main">
-      {photo ?
-        !expand && photo.thumbnail_url ?
-          // expanded view
-          <>
-            <Zoom src={photos[click].thumbnail_url} photos={photos} setClick={setClick} click={click} setExpand={setExpand} expandPhoto={expandPhoto}/>
-            <FaCompress className="expand-icon" onClick={e=>{setExpand(prev=>!prev);expandPhoto()}}/>
-          </>
-          :
-          // reg view
-          <>
-            <Carousel photos={photos} click={click} setClick={setClick} setPhoto={setPhoto} setExpand={setExpand} expandPhoto={expandPhoto}/>
-            {photo.thumbnail_url ? <FaExpand  className="expand-icon" onClick={e=>{setExpand(prev=>!prev);expandPhoto()}}/> : null}
-          </>
+      {/* main gallery */}
+      <div className="gallery-main">
+        {photo ?
+          !expand && photo.thumbnail_url ?
+            // expanded view
+            <>
+              <Zoom src={photos[click].thumbnail_url} photos={photos} setClick={setClick} click={click} setExpand={setExpand} expandPhoto={expandPhoto}/>
+              <FaCompress className="expand-icon" onClick={e=>{setExpand(prev=>!prev);expandPhoto()}}/>
+            </>
+            :
+            // reg view
+            <>
+              <Carousel photos={photos} click={click} setClick={setClick} setPhoto={setPhoto} setExpand={setExpand} expandPhoto={expandPhoto}/>
+              {photo.thumbnail_url ? <FaExpand  className="expand-icon" onClick={e=>{setExpand(prev=>!prev);expandPhoto()}}/> : null}
+            </>
 
-      : null}
+        : null}
+      </div>
     </div>
-    </div>
-  </>
-
   )
 }
-
 
