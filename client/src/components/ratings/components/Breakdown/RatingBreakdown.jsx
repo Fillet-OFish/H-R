@@ -2,20 +2,18 @@ import React, { useState, useEffect } from 'react';
 import StarRatings from '../../../StarRatings.jsx';
 import BreakdownByStars from './BreakdownByStars.jsx';
 
-export default function RatingBreakdown({ rating, product, numReviews, reviews, filter, setFilter }) {
-  const ratingRoundedToTenth = Math.round(rating * 10) / 10;
-
+export default function RatingBreakdown({ rating, product, numReviews, reviews, reviewsMeta, filter, setFilter }) {
   return(
     <>
       <div className='rating-summary'>
         <span style={{display: 'inline-block'}}>
-          {ratingRoundedToTenth}
+          {rating}
         </span>
-        <span style={{display: 'inline-block'}}><StarRatings item={product.id} /></span><br/>
+        <span style={{display: 'inline-block'}}><StarRatings itemRating={rating} /></span><br/>
         {`${numReviews} reviews`}
       </div>
       <div>
-        <BreakdownByStars reviews={reviews} filter={filter} setFilter={setFilter} />
+        <BreakdownByStars reviews={reviews} numReviews={numReviews} reviewsMeta={reviewsMeta} filter={filter} setFilter={setFilter} />
       </div>
     </>
   )
