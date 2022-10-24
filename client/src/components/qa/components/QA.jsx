@@ -32,7 +32,7 @@ const QA = (props) => {
 
   // load more questions when click on button
   const loadQues = () => {
-    setRecordsPerPage(recordsPerPage + 4);
+    setRecordsPerPage(recordsPerPage + 2);
   }
   // ----------------------------------------------------------------
 

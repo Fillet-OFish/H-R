@@ -67,7 +67,7 @@ const QAEntry = (props) => {
       {/* set each question - with helpful and add answer properties --------------- */}
       <div><strong>Q: {props.ques.question_body}</strong>
         {/* question on helpfulness */}
-        <label style={{float: 'right'}} className='user_info' >Helpful? <a className='questions-and-answers' onClick={() => helpfulQues(props.ques.question_id)}>Yes</a> ({props.ques.question_helpfulness}) |
+        <label style={{float: 'right', marginRight: '3%'}} className='user_info' >Helpful? <a className='questions-and-answers' onClick={() => helpfulQues(props.ques.question_id)}>Yes</a> ({props.ques.question_helpfulness}) |
         {/* reporting question */}
         <a className='questions-and-answers' onClick={() => reportQues(props.ques.question_id)}>Report</a> |
         {/* adding an answer to question */}
