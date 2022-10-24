@@ -1,23 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FaCircle, FaRegCircle } from 'react-icons/fa';
 
-export default function Zoom({ src, magnifierHeight = 100, magnifieWidth = 100, zoomLevel = 1.5, photos, click, setClick, setExpand, expandPhoto }){
+export default function Zoom({ src, magnifierHeight = 120, magnifieWidth = 120, zoomLevel = 1.5, photos, click, setClick, setExpand, expandPhoto }){
   const [[x, y], setXY] = useState([0, 0]);
   const [[imgWidth, imgHeight], setSize] = useState([0, 0]);
   const [showMagnifier, setShowMagnifier] = useState(false);
 
   return (
-    <div
-      className="zoom"
-      style={{
-        margin:"0px 130px",
-        objectFit:"contain",
-      }}
-    >
-
+    <div className="zoom">
       {/* main photo */}
       <img
-        className="img-main"
         src={src}
         onMouseEnter={(e) => {
           const elem = e.currentTarget;
@@ -35,11 +27,6 @@ export default function Zoom({ src, magnifierHeight = 100, magnifieWidth = 100, 
         }}
         onMouseLeave={() => {
           setShowMagnifier(false);
-        }}
-        style={{
-          objectFit:"contain",
-          cursor:"none",
-          width:"600px"
         }}
         onClick={e=>{setExpand(prev=>!prev);expandPhoto()}}
       />

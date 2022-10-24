@@ -17,6 +17,7 @@
   "homepage": "https://github.com/Fillet-OFish/Frontend-Capstone-Ecommerce#readme",
   "dependencies": {
     "@babel/plugin-transform-runtime": "^7.19.1",
+    "@testing-library/jest-dom": "^5.16.5",
     "axios": "^1.1.2",
     "date-fns": "^2.29.3",
     "jest": "^29.2.1",

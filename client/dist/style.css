@@ -2,13 +2,20 @@
 
 body{
   font-family: 'Outfit', sans-serif;
-  margin: 0px auto;
+  max-width: 1080px;
+  padding: 0;
+	margin: 0 auto;
+	float: none;
+  font-size: 100%;
 }
 body::-webkit-scrollbar {
   display: none;
 }
-h3, h2{
-  font-weight: 600;
+h2{
+  font-weight: 500;
+}
+h3{
+  font-weight: 450
 }
 hr{
   border-top: 1px solid black;
@@ -22,24 +29,24 @@ button {
 #app{
   scroll-behavior: smooth;
 }
-.container{
-  max-width: 1100px;
-  margin: 30px auto;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+.contain{
+  max-width: 90%;
+  margin: 0 auto;
 }
 
 /* ANNOUNCEMENT ------------------------ */
 .announcement{
-  display: inline-block;
+  position: absolute;
+  top:0;
+  left:0;
   width: 100%;
-  margin: -7px 0px;
-  height: 35px;
+  margin: -.5% 0;
+  height: 3.5%;
   background-color: black;
   color: white;
 }
 .announcement p{
-  font-size: 13px;
+  font-size: 80%;
   position: relative;
   text-align: center;
 }
@@ -48,12 +55,13 @@ button {
 }
 /* HEADER ------------------------ */
 .header{
-  position: relative;
-  padding: 20px;
-  margin: 0px;
+  position: absolute;
+  top:5%;
+  left:0;
+  width:100%;
+  /* padding: 20px; */
   color: black;
   font-size: 30px;
-  font-weight: 1000px;
 }
 .logo{
   display: table;
@@ -70,31 +78,31 @@ button {
   position: absolute;
   top: 0;
   left: 0;
-  margin-top: 20px;
-  margin-left: 200px;
+  margin-top: 0.8%;
+  margin-left: 20%;
   background-color: transparent;
   color: black;
 }
 .search-bar input{
-  width: 100px;
+  width: 60%;
   background-color: transparent;
-  border: 0px;
+  border: 0;
   border-bottom: 1.5px black solid;
   transition: 0.8s;
 }
 .search-bar input:hover{
-  width: 180px;
+  width: 80%;
 }
 .search-bar input:focus{
   outline: none;
-  width: 180px;
+  width: 80%;
 }
 .search-bar input::placeholder{
   color: black;
 }
 .search-bar button{
   background-color: transparent;
-  border: 0px;
+  border: 0;
   color: black;
 }
 /* header links */
@@ -102,21 +110,21 @@ button {
   position: absolute;
   top: 0;
   right: 0;
-  margin-top: 35px;
-  margin-right: 240px;
+  margin-top: 2%;
+  margin-right: 15%;
   font-size: 14px;
   letter-spacing: 1.1px;
 }
 .header-link{
-  padding: 0px 15px;
+  padding: 0 15px;
 }
 /* header - cart */
 .shopping-bag-icon{
   position: absolute;
   top: 0;
   right: 0;
-  margin-top: 35px;
-  margin-right: 200px;
+  margin-top: 2%;
+  margin-right: 10%;
   font-size: 16px;
 }
 .cart-block{
@@ -124,8 +132,8 @@ button {
   position: absolute;
   top: 0;
   right: 0;
-  margin-top: 85px;
-  margin-right: 50px;
+  margin-top: 6%;
+  margin-right: 3%;
   padding: 30px;
   z-index: 100;
   width: 450px;
@@ -172,6 +180,13 @@ button {
   padding: 0px 20px;
 }
 /* OVERVIEW ------------------------ */
+.container{
+  max-width: 100%;
+  margin: 5% auto;
+  margin-top: 15%;
+  display: inline-grid;
+  grid-template-columns: repeat(2, 1fr);
+}
 .left{
   display: flex;
   height: 60vh;
@@ -267,7 +282,7 @@ button {
   display: flex;
   user-select: none;
 }
-.gallery-main img{
+.gallery-main .img-main{
   width: 500px;
   height: 100%;
   padding: 15px 60px;
@@ -307,18 +322,27 @@ button {
 }
 /* gallery - expanded view */
 .zoom{
-  align-items: center;
+  position: relative;
+}
+.zoom img{
+  position:absolute;
+  cursor:none;
+  width:150%;
+  height:100%;
 }
 .circle-icons{
-  margin-top: -15%;
-  margin-left: 30%;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  left: 10%;
   padding: 5%;
   z-index: 100 !important;
+  text-align: center;
 }
 .circle-icon{
   padding: 1%;
   font-size: 14px;
-  color: darkgray;
+  color: rgb(225, 221, 221);
   filter: drop-shadow(0px 0px 1px rgb(221, 221, 221));
   opacity: 0.8;
   transition: 1.5s;
@@ -424,16 +448,16 @@ button {
 }
 /* DESCRIPTION ------------------------ */
 .description{
-  margin: 50px auto;
-  margin-bottom: 40px;
   display: flex;
-  width: 1000px;
+  max-width: 100%;
+  justify-content: space-between;
+  margin:5% auto;
 }
 .d-left{
   display: flex;
   flex-direction: column;
   flex-basis: 100%;
-  border-right: 1px solid black;
+  border-right: 1.5px solid black;
   padding-right: 10px;
 }
 .d-left .product-slogan{
@@ -444,7 +468,7 @@ button {
 .d-right{
   display: flex;
   flex-direction: column;
-  flex-basis: 45%;
+  flex-basis: 40%;
   padding-left: 20px;
   font-size: 15px;
 }
@@ -510,7 +534,6 @@ button {
 
 /* FERNANDO ADDED THESE --------------------------------------------------------------- */
 .q-a{
-  width: 92%;
   margin: 0px auto;
 }
 nav {
@@ -537,7 +560,7 @@ nav {
 .QContainer {
   color: #525252;
   width: 200%;
-  max-width: 1100px;
+  max-width: 100%;
   height: 400px;
   margin: 0;
   padding: 0;
@@ -548,7 +571,7 @@ nav {
 .QContainer2 {
   color: #525252;
   margin-right: 63%;
-  width: 1100px;
+  width: 100%;
   /* font-size: larger; */
 }
 
@@ -780,24 +803,18 @@ textarea {
 /* Jaden ADDED THESE ------------------------------------------------- */
 
 /* related items and outfit ----- */
-<<<<<<< HEAD
+.related-items{
+}
 .related-list {
   position: relative;
-  width: 92%;
-
-=======
-.related-items{
-  position: relative;
-  width: 92%;
-  margin: 0px auto;
->>>>>>> 2cabe10c236b79733ebabf7c6640c6d7c6886210
+  width: auto;
 }
 .related-ul, .outfit-ul {
   display:  flex;
   position:  relative;
   margin:  0;
   padding:  0;
-  width:  100%;
+  width:  auto;
   overflow-x:  auto;
   overflow:  hidden;
   scroll-behavior:  smooth;
@@ -839,8 +856,8 @@ textarea {
   margin:  8px;
   background-color:  white;
   border:  1px solid lightgrey ;
-  width:  257px;
-  height:  380px;
+  width:  220px;
+  height:  335px;
   /* overflow:  hidden; */
   cursor:  pointer;
   border-radius:  6px;
@@ -866,8 +883,8 @@ textarea {
   position: relative;
   border: 1px solid lightgrey;
   margin: 8px;
-  width: 257px;
-  height: 380px;
+  width: 220px;
+  height: 335px;
   cursor: pointer;
   border-radius: 6px;
   overflow: hidden;
@@ -948,7 +965,7 @@ textarea {
 }
 
 .product-card-info {
-  padding:  5px 10px 0 10px;
+  padding:  5px 10px 0px 10px;
 }
 
 .product-card-name {
@@ -960,7 +977,6 @@ textarea {
   -webkit-box-orient:  vertical;
   overflow:  hidden;
 }
-
 
 /* popup comparison table ----- */
 
