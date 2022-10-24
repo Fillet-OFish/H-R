@@ -799,7 +799,7 @@ textarea {
   background:  linear-gradient(-90deg, white 30%, transparent 100%);
   z-index: 1;
   pointer-events: none;
-} */
+}
 .related-ul, .outfit-ul {
   display:  flex;
   position:  relative;
