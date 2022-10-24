@@ -90,4 +90,3 @@ export default function Gallery({ style, photos, setPhotos, photo, setPhoto }) {
   )
 }
 
-

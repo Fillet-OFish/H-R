@@ -20,27 +20,24 @@ export default function App() {
   return(
     product.id ?
     <TrackProvider>
-      {/* header */}
-      <Header product={product}/>
+        {/* header */}
+        <Header product={product}/>
 
-      {/* overview */}
-      <Overview product={product} rating={rating} numReviews={numReviews}/>
-      <Description product={product}/>
+        {/* overview */}
+        <Overview product={product} rating={rating} numReviews={numReviews}/>
 
-      {/* related products */}
-      <div className="container">
-        <RelatedItemsAndComparison currentItem={product} setProduct={setProduct} />
-      </div>
+        <div className="contain">
+          <Description product={product}/>
 
-      {/* Questions and Answers */}
-      <div className="container">
-        <QuesnAnsw product={product} />
-      </div>
+          {/* related products */}
+          <RelatedItemsAndComparison currentItem={product} setProduct={setProduct} />
 
-      {/* Reviews */}
-      <div className='container2'>
-        <Ratings product={product} rating={rating} setRating={setRating} numReviews={numReviews} setNumReviews={setNumReviews}/>
-      </div>
+          {/* Questions and Answers */}
+          <QuesnAnsw product={product} />
+
+          {/* Reviews */}
+          <Ratings product={product} setRating={setRating} setNumReviews={setNumReviews}/>
+        </div>
     </TrackProvider>
     : null
   )
