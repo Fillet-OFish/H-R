@@ -783,18 +783,6 @@ textarea {
 .related-list {
   position: relative;
 }
-.related-list::before {
-  position: absolute;
-  content: '';
-  height: 100%;
-  width: 16%;
-  right: 0;
-  transform: translate(0, -50%);
-  top: 50%;
-  background:  linear-gradient(-90deg, white 30%, transparent 100%);
-  z-index: 1;
-  pointer-events: none;
-}
 /* .related-list::before {
   position: absolute;
   content: '';
