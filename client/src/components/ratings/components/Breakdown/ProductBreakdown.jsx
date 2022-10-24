@@ -35,7 +35,7 @@ export default function ProductBreakdown({ rating, product, numReviews, reviews,
   const ratingValueStyle = (characteristics) => ({
     position: 'absolute',
     transform:  'translate(-50%, -50%)',
-    top: '20%',
+    top: '30%',
     left: `${((characteristics.value - 1)/4) * 100}%`,
     fontSize: 'large'
   })
@@ -60,9 +60,9 @@ export default function ProductBreakdown({ rating, product, numReviews, reviews,
             <div style={ratingValueStyle(width)}>😬</div>
           </span>
           <span style={{display: 'flex'}}>
-            <small style={rangeStyle1}>too small</small>
+            <small style={rangeStyle1}>too narrow</small>
             <small style={rangeStyle2}>perfect</small>
-            <small style={rangeStyle3}>too big</small>
+            <small style={rangeStyle3}>too wide</small>
           </span>
         </div>
       : null}
@@ -72,9 +72,9 @@ export default function ProductBreakdown({ rating, product, numReviews, reviews,
             <div style={ratingValueStyle(comfort)}>😬</div>
           </span>
           <span style={{display: 'flex'}}>
-            <small style={rangeStyle1}>sucks</small>
+            <small style={rangeStyle1}>uncomfortable</small>
             <small style={rangeStyle2}>okay</small>
-            <small style={rangeStyle3}>great</small>
+            <small style={rangeStyle3}>perfect</small>
           </span>
         </div>
       : null}
@@ -85,8 +85,8 @@ export default function ProductBreakdown({ rating, product, numReviews, reviews,
           </span>
           <span style={{display: 'flex'}}>
             <small style={rangeStyle1}>poor</small>
-            <small style={rangeStyle2}>okay</small>
-            <small style={rangeStyle3}>great</small>
+            <small style={rangeStyle2}>what i expected</small>
+            <small style={rangeStyle3}>perfect</small>
           </span>
         </div>
       : null}
@@ -96,9 +96,9 @@ export default function ProductBreakdown({ rating, product, numReviews, reviews,
             <div style={ratingValueStyle(length)}>😬</div>
           </span>
           <span style={{display: 'flex'}}>
-            <small style={rangeStyle1}>too small</small>
+            <small style={rangeStyle1}>runs short</small>
             <small style={rangeStyle2}>perfect</small>
-            <small style={rangeStyle3}>too big</small>
+            <small style={rangeStyle3}>runs long</small>
           </span>
         </div>
       : null}
@@ -108,9 +108,9 @@ export default function ProductBreakdown({ rating, product, numReviews, reviews,
             <div style={ratingValueStyle(fit)}>😬</div>
           </span>
           <span style={{display: 'flex'}}>
-            <small style={rangeStyle1}>meh</small>
-            <small style={rangeStyle2}>could be better</small>
-            <small style={rangeStyle3}>awesome</small>
+            <small style={rangeStyle1}>runs tight</small>
+            <small style={rangeStyle2}>perfect</small>
+            <small style={rangeStyle3}>runs long</small>
           </span>
         </div>
       : null}
