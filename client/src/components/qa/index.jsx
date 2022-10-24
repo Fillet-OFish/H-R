@@ -1,9 +1,9 @@
 import React from 'react';
 import axios from 'axios';
-import QA from './QA.jsx';
-import ImageModal from './ImageModal.jsx';
-import AddAnswModal from './AddAnswModal.jsx';
-import AddQuesModal from './AddQuesModal.jsx';
+import QA from './components/QA.jsx';
+import ImageModal from './components/ImageModal.jsx';
+import AddAnswModal from './components/AddAnswModal.jsx';
+import AddQuesModal from './components/AddQuesModal.jsx';
 import {useState, useEffect} from 'react';
 
 
