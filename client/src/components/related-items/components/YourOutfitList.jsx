@@ -15,7 +15,7 @@ export default function YourOutfitList({currentItem, setProduct}) {
 
   return (
     <>
-      <h3>Your Outfit:</h3>
+      <h3>Your Outfit</h3>
       <div className='related-list'>
         <ul className='outfit-ul'>
           <div>

@@ -1,5 +1,7 @@
 @import url('http://fonts.cdnfonts.com/css/outfit');
-
+html {
+  height: 100%;
+}
 body{
   font-family: 'Outfit', sans-serif;
   max-width: 1080px;
@@ -12,6 +14,7 @@ body::-webkit-scrollbar {
   display: none;
 }
 h2{
+  font-size:18px;
   font-weight: 500;
 }
 h3{
@@ -32,6 +35,8 @@ button {
 .contain{
   max-width: 95%;
   margin: 0 auto;
+  margin-top: -3%;
+  margin-bottom: 5%;
 }
 .container2{
   max-width: 1100px;
@@ -183,8 +188,18 @@ button {
 .category{
   padding: 0px 20px;
 }
+/* FOOTER ------------------------ */
+
+.footer{
+  /* background-color: purple; */
+  /* position: absolute; */
+  bottom: 0;
+  left: 0;
+  height:20%;
+  width:100%;
+}
 /* OVERVIEW ------------------------ */
-.container{
+.overview-container{
   max-width: 100%;
   margin: 5% auto;
   margin-top: 15%;
@@ -223,10 +238,14 @@ button {
   top: 0;
   font-size: 18px;
   padding: 10px;
+  cursor: pointer;
 }
 .social .share-icon{
   padding:  10%;
   margin-right: 8px;
+}
+.social .share-icon:hover{
+  filter: drop-shadow(1px 1px 2px #b6b6b8);
 }
 .social .exit-icon{
   font-weight: 600;
@@ -236,15 +255,19 @@ button {
   background-color: black;
   border-radius: 50%;
 }
+.social .exit-icon:hover {
+  filter: drop-shadow(1px 1px 2px #b6b6b8);
+}
 .social-icons{
+  visibility: hidden;
   position: absolute;
   right: 0;
-  top: 6%;
+  top: 0%;
   font-size: 18px;
-  visibility: hidden;
-  /* background-color: red; */
+  opacity:0;
   padding: 10px;
   color:white;
+  transition: all 0.2s  ease-in-out;
 }
 .social-icons .facebook{
   border:1px solid black;
@@ -275,15 +298,18 @@ button {
 .gallery-list img{
   cursor: pointer;
   width: 50px;
+  max-height: 70px;
   object-fit: contain;
+}
+.solo-img:hover {
+  border: 1px red solid;
 }
 .gallery-arrow{
   margin: 0% 35%;
 }
 .gallery-main{
-  position: relative;
-  margin-top: 0px;
   display: flex;
+  position: relative;
   user-select: none;
 }
 .gallery-main img{
@@ -298,15 +324,6 @@ button {
   height: 500px;
   display: flex;
 }
-.carousel-container .right-arrow {
-  position: absolute;
-  top: 50%;
-  right: 25px;
-  font-size: 25px;
-  font-weight: 100;
-  cursor: pointer;
-  z-index: 10;
-}
 .carousel-container .left-arrow {
   position: absolute;
   top: 50%;
@@ -316,6 +333,43 @@ button {
   cursor: pointer;
   z-index: 10;
 }
+.carousel-container .left-arrow:hover {
+  filter: drop-shadow(1px 1px 2px #b6b6b8);
+}
+.carousel-container .right-arrow {
+  position: absolute;
+  top: 50%;
+  right: 25px;
+  font-size: 25px;
+  font-weight: 100;
+  cursor: pointer;
+  z-index: 10;
+}
+.carousel-container .right-arrow:hover {
+  filter: drop-shadow(1px 1px 2px #b6b6b8);
+}
+.carousel-container .left-blocked{
+  position: absolute;
+  top: 49%;
+  left: 25px;
+  font-size: 45px;
+  font-weight: 100;
+  cursor: pointer;
+  z-index: 10;
+  opacity:0;
+  cursor: auto;
+}
+.carousel-container .right-blocked{
+  position: absolute;
+  top: 49%;
+  right: 25px;
+  font-size: 45px;
+  font-weight: 100;
+  cursor: pointer;
+  z-index: 10;
+  opacity:0;
+  cursor: auto;
+}
 .expand-icon{
   cursor: pointer;
   position: absolute;
@@ -323,6 +377,9 @@ button {
   font-size: 20px;
   margin-top: 10px;
   margin-right: 30px;
+}
+.expand-icon:hover{
+  filter: drop-shadow(1px 1px 2px #b6b6b8);
 }
 /* gallery - expanded view */
 .zoom{
@@ -332,15 +389,15 @@ button {
   margin-top: -5%;
   margin-left: 35%;
   padding: 5%;
-  z-index: 100 !important;
+  z-index: 100;
 }
 .circle-icon{
   padding: 1%;
-  font-size: 14px;
+  font-size: 15px;
   color: darkgray;
   filter: drop-shadow(0px 0px 1px rgb(221, 221, 221));
   opacity: 0.8;
-  transition: 1.5s;
+  transition: .5s;
   cursor: pointer;
 }
 .circle-icon:focus,
@@ -356,8 +413,11 @@ button {
   padding-left: 10px;
   user-select: none;
 }
-.right a{
-  color: black
+.right .overview-to-reviews{
+  text-decoration: underline;
+}
+.right .overview-to-reviews:hover{
+  cursor: pointer;
 }
 /* styles */
 .styles p{
@@ -399,7 +459,7 @@ button {
 }
 /* cart */
 .cart{
-  margin-top: 15px;
+  margin-top:-2%;
   font-size: 17px;
 }
 .cart-warning{
@@ -443,16 +503,16 @@ button {
 }
 /* DESCRIPTION ------------------------ */
 .description{
-  margin: 50px auto;
+  margin: 0 auto;
   margin-bottom: 40px;
   display: flex;
-  width: 1000px;
+  width: 100%;
 }
 .d-left{
   display: flex;
   flex-direction: column;
   flex-basis: 100%;
-  border-right: 1px solid black;
+  border-right: 1.5px solid black;
   padding-right: 10px;
 }
 .d-left .product-slogan{
@@ -529,8 +589,9 @@ button {
 
 /* FERNANDO ADDED THESE --------------------------------------------------------------- */
 .q-a{
-  margin: 0px auto;
+  margin: 10% auto;
 }
+
 nav {
   margin-top: 2%;
   display: inline-block;
@@ -540,10 +601,7 @@ nav {
 .questions-and-answers {
   cursor: pointer;
   text-decoration: underline;
-}
-
-.questions-and-answers h2 {
-  font-weight: lighter;
+  font-size: 13px;
 }
 
 .questions-and-answers img {
@@ -553,33 +611,63 @@ nav {
 }
 
 .QContainer {
-  color: #525252;
   width: 200%;
   max-width: 100%;
   height: 400px;
   margin: 0;
   padding: 0;
-  overflow-y: auto;
+  overflow-y:auto;
   overflow-x: hidden;
-  scroll-behavior: smooth;
 }
-.QContainer2 {
-  color: #525252;
+
+.QAContainer {
+  display:flex;
   margin-right: 63%;
   width: 100%;
+  height:auto;
   /* font-size: larger; */
 }
 
-.AContainer {
-  color: #525252;
-  font-size: small;
+.QContainer::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+  background-color: rgb(241, 239, 239);
+}
+
+.QContainer::-webkit-scrollbar-thumb {
+  background: rgb(212, 211, 211);
+}
+
+.QA-left{
+  display:flex;
+  width:2.5%;
+  font-weight:500;
+  font-size:17px;
+}
+.Q-right{
+  width:95%;
+}
+.A-right{
+  font-size: 14px;
+  margin-top: .25%;
+  width:100%;
 }
 .user_info {
   margin-top: 0.5%;
-  /* color: #525252; */
-  color: #808080;
+  margin-left: 2.5%;
+  color: #515151;
   font-weight: lighter;
-  font-size: x-small;
+  font-size: 13px;
+}
+.a-photos{
+  margin-top:.5%;
+  margin-left:2.5%;
+}
+.load-more-a{
+ font-size:13px;
+ text-decoration: underline;
+ cursor:pointer;
+ margin-left:2.5%;
 }
 
 /* PAGINATION STYLING ------------------------ */
@@ -654,7 +742,7 @@ nav {
   top: 0;
   left: 0;
   margin-left: 37%;
-  margin-top: 10%;
+  margin-top: 7%;
   border-radius: 10px;
   border: 1.5px solid black;
 
@@ -695,7 +783,7 @@ nav {
 .form-button {
   margin-top: 20px;
   margin-left: 40%;
-  border: 2px solid black;
+  border: 1px rgb(190, 190, 190) solid;
   background-color: white;
   color: black;
   padding: 14px 28px;
@@ -707,9 +795,9 @@ nav {
   width: 100%;
   margin-top: 25px;
   margin-left: 30%;
-  border: 2px solid black;
+  border: 1px rgb(190, 190, 190) solid;
   background-color: white;
-  color: black;
+  color: rgb(80, 79, 79);
   padding: 14px 28px;
   font-size: 16px;
   cursor: pointer;
@@ -718,9 +806,9 @@ nav {
   width: 100%;
   margin-left: 5%;
   margin-top: 25px;
-  border: 2px solid black;
+  border: 1px rgb(190, 190, 190) solid;
   background-color: white;
-  color: black;
+  color: rgb(80, 79, 79);
   padding: 14px 28px;
   font-size: 16px;
   cursor: pointer;
@@ -754,18 +842,20 @@ textarea {
 
 /* horizontal line ----- */
 .hr3 {
-  margin: 40px 0;
+  margin-left:1.5%;
+  margin: 1% auto;
+  width: 100%;
   border: 0;
-  height: 2px;
-  background-image: linear-gradient(to right, transparent, rgb(0, 0, 0), transparent);
+  border-top: 1px solid #ececec;
+  border-bottom: 1px solid #fff;
 }
 
 /* search button ----- */
 .search-form {
   background-color: #f9f9f9;
-  width: 350px;
+  width: 100%;
   height: 44px;
-  border-radius: 5px;
+  border: 1px rgb(190, 190, 190) solid;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -777,7 +867,11 @@ textarea {
   color: rgb(0, 0, 0);
   height: 100%;
   width: 100%;
-  padding: 6px 10px;
+  padding: 6px 20px;
+}
+
+.search-input::placeholder{
+  color: rgb(82, 82, 82);
 }
 
 .search-button {
@@ -1058,8 +1152,6 @@ textarea {
 
 .reviews-ratings {
   display: flex;
-  max-width: 1100px;
-  margin: 30px auto;
 }
 
 .breakdown {
@@ -1067,7 +1159,37 @@ textarea {
   display: inline-block;
 }
 
-.reviews-list {
-  flex-basis: 66%;
-  display: inline-block;
+.reviews-list-container {
+  color: #525252;
+  width: 200%;
+  max-width: 1100px;
+  height: 350px;
+  margin: 0;
+  padding: 0;
+  overflow-y:auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+.reviews-list-container2 {
+  color: #525252;
+  margin-right: 10%;
+  /* width: 1100px; */
+  /* font-size: larger; */
+}
+
+/* horizontal line ----- */
+.hr3-reviews {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  border: 0;
+  height: 2px;
+  background-image: linear-gradient(to right, transparent, rgb(0, 0, 0), transparent);
+}
+
+.rev-images {
+  cursor: zoom-in;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
 }

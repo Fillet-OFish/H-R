@@ -15,7 +15,7 @@ export default function RelatedProductsList ({currentItem, setProduct}) {
 
   return (
     <>
-      <h3>Related Products:</h3>
+      <h3>Related Products</h3>
       <div className='related-list'>
         <ul className='related-ul'>
           {relatedItems.map(item => (
