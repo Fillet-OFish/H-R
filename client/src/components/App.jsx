@@ -16,7 +16,7 @@ export default function App() {
 
   useEffect(() => {
     axios.get('/api/products/40344') // id 40344
-    .then(result => setProduct(result.data))
+      .then(result => setProduct(result.data))
   },[])
 
   return(
