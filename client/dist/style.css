@@ -1,5 +1,7 @@
 @import url('http://fonts.cdnfonts.com/css/outfit');
-
+html {
+  height: 100%;
+}
 body{
   font-family: 'Outfit', sans-serif;
   max-width: 1080px;
@@ -34,6 +36,7 @@ button {
   max-width: 95%;
   margin: 0 auto;
   margin-top: -3%;
+  margin-bottom: 5%;
 }
 .container2{
   max-width: 1100px;
@@ -184,6 +187,16 @@ button {
 }
 .category{
   padding: 0px 20px;
+}
+/* FOOTER ------------------------ */
+
+.footer{
+  /* background-color: purple; */
+  /* position: absolute; */
+  bottom: 0;
+  left: 0;
+  height:20%;
+  width:100%;
 }
 /* OVERVIEW ------------------------ */
 .overview-container{
@@ -400,8 +413,11 @@ button {
   padding-left: 10px;
   user-select: none;
 }
-.right a{
-  color: black
+.right .overview-to-reviews{
+  text-decoration: underline;
+}
+.right .overview-to-reviews:hover{
+  cursor: pointer;
 }
 /* styles */
 .styles p{
@@ -443,7 +459,7 @@ button {
 }
 /* cart */
 .cart{
-  margin-top: 15px;
+  margin-top:-2%;
   font-size: 17px;
 }
 .cart-warning{
@@ -487,10 +503,10 @@ button {
 }
 /* DESCRIPTION ------------------------ */
 .description{
-  margin: auto;
+  margin: 0 auto;
   margin-bottom: 40px;
   display: flex;
-  width: 1000px;
+  width: 100%;
 }
 .d-left{
   display: flex;
@@ -615,7 +631,7 @@ nav {
 .QContainer::-webkit-scrollbar {
   width: 5px;
   height: 8px;
-  background-color: rgb(241, 239, 239); /* or add it to the track */
+  background-color: rgb(241, 239, 239);
 }
 
 .QContainer::-webkit-scrollbar-thumb {
@@ -767,7 +783,7 @@ nav {
 .form-button {
   margin-top: 20px;
   margin-left: 40%;
-  border: 2px solid black;
+  border: 1px rgb(190, 190, 190) solid;
   background-color: white;
   color: black;
   padding: 14px 28px;
@@ -779,9 +795,9 @@ nav {
   width: 100%;
   margin-top: 25px;
   margin-left: 30%;
-  border: 2px solid black;
+  border: 1px rgb(190, 190, 190) solid;
   background-color: white;
-  color: black;
+  color: rgb(80, 79, 79);
   padding: 14px 28px;
   font-size: 16px;
   cursor: pointer;
@@ -790,9 +806,9 @@ nav {
   width: 100%;
   margin-left: 5%;
   margin-top: 25px;
-  border: 2px solid black;
+  border: 1px rgb(190, 190, 190) solid;
   background-color: white;
-  color: black;
+  color: rgb(80, 79, 79);
   padding: 14px 28px;
   font-size: 16px;
   cursor: pointer;
@@ -837,9 +853,9 @@ textarea {
 /* search button ----- */
 .search-form {
   background-color: #f9f9f9;
-  width: 350px;
+  width: 100%;
   height: 44px;
-  border-radius: 5px;
+  border: 1px rgb(190, 190, 190) solid;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -851,7 +867,11 @@ textarea {
   color: rgb(0, 0, 0);
   height: 100%;
   width: 100%;
-  padding: 6px 10px;
+  padding: 6px 20px;
+}
+
+.search-input::placeholder{
+  color: rgb(82, 82, 82);
 }
 
 .search-button {

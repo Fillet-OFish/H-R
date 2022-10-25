@@ -26,7 +26,9 @@ export default function Overview({product, rating, numReviews}) {
     })
   },[product])
 
-
+  const scroll = () => {
+    document.querySelector('.reviews-ratings').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   return(
     <div onClick={(e)=>{clickTracker(e, 'Overview')}}>
@@ -46,7 +48,10 @@ export default function Overview({product, rating, numReviews}) {
               fillColor={'#000000'}
               style={{pointerEvents: 'none'}}
             />
-            &nbsp; {numReviews ? <a href="/">Read all {numReviews} reviews</a> : null}
+            &nbsp;
+            {numReviews ?
+              <span className="overview-to-reviews" onClick={e=>scroll()} >Read all {numReviews} reviews</span>
+            : null}
           </p>
 
           {/* Social media */}
