@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 export default function ReviewsList({review}) {
 
-  console.log(review)
+  // console.log(review)
 
   return(
     <div style={{border: 'solid 1px'}}>

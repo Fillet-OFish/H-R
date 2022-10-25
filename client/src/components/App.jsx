@@ -36,7 +36,7 @@ export default function App() {
           <QuesnAnsw product={product} />
 
           {/* Reviews */}
-          <Ratings product={product} setRating={setRating} setNumReviews={setNumReviews}/>
+          <Ratings product={product} rating={rating} numReviews={numReviews} setRating={setRating} setNumReviews={setNumReviews}/>
         </div>
     </TrackProvider>
     : null
