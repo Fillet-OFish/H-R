@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FaCircle, FaRegCircle } from 'react-icons/fa';
 
-export default function Zoom({ src, magnifierHeight = 100, magnifieWidth = 100, zoomLevel = 1.5, photos, click, setClick, setExpand, expandPhoto }){
+export default function Zoom({ src, magnifierHeight = 100, magnifieWidth = 110, zoomLevel = 1.5, photos, click, setClick, setExpand, expandPhoto }){
   const [[x, y], setXY] = useState([0, 0]);
   const [[imgWidth, imgHeight], setSize] = useState([0, 0]);
   const [showMagnifier, setShowMagnifier] = useState(false);
@@ -10,7 +10,7 @@ export default function Zoom({ src, magnifierHeight = 100, magnifieWidth = 100, 
     <div
       className="zoom"
       style={{
-        margin:"0px 130px",
+        margin:"0px 100px",
         objectFit:"contain",
       }}
     >
@@ -39,7 +39,7 @@ export default function Zoom({ src, magnifierHeight = 100, magnifieWidth = 100, 
         style={{
           objectFit:"contain",
           cursor:"none",
-          width:"600px"
+          width:'650px'
         }}
         onClick={e=>{setExpand(prev=>!prev);expandPhoto()}}
       />
@@ -62,7 +62,7 @@ export default function Zoom({ src, magnifierHeight = 100, magnifieWidth = 100, 
           height: `${magnifierHeight}px`,
           width: `${magnifieWidth}px`,
           top: `${y - magnifierHeight / 2}px`,
-          left: `${(x - magnifieWidth / 2)+130}px`,
+          left: `${(x - magnifieWidth / 2)+100}px`,
           opacity: "1",
           border: "1px solid lightgray",
           backgroundColor: "white",
