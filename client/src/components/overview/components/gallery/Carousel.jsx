@@ -21,8 +21,8 @@ export default function Carousel({ photos, click, setClick, setPhoto, setExpand,
 
   return (
     <div className='carousel-container'>
-      {current!==0 ? <FaAngleLeft className='left-arrow' onClick={prev} /> : null}
-      {current!==length-1? <FaAngleRight className='right-arrow' onClick={next} />:null}
+      {current!==0 ? <FaAngleLeft className='left-arrow' onClick={prev} /> : <span className="left-blocked">O</span>}
+      {current!==length-1? <FaAngleRight className='right-arrow' onClick={next} />: <span className="right-blocked">O</span>}
       {photos[current].thumbnail_url ?
         <img
           src={`${photos[current].thumbnail_url}`}

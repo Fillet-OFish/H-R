@@ -7,6 +7,7 @@ import Description from './overview/components/Description.jsx';
 import RelatedItemsAndComparison from './related-items/index.jsx';
 import QuesnAnsw from './qa/index.jsx';
 import Ratings from './ratings/index.jsx'
+
 export default function App() {
   const [product, setProduct] = useState([]);
   const [rating, setRating] = useState([]);
@@ -36,7 +37,7 @@ export default function App() {
           <QuesnAnsw product={product} />
 
           {/* Reviews */}
-          <Ratings product={product} setRating={setRating} setNumReviews={setNumReviews}/>
+          <Ratings product={product} rating={rating} setRating={setRating} numReviews={numReviews} setNumReviews={setNumReviews}/>
         </div>
     </TrackProvider>
     : null

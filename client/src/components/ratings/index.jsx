@@ -37,7 +37,7 @@ export default function Reviews({ product, rating, setRating, numReviews, setNum
   return(
     reviews && reviewsMeta ?
     <div>
-      <h2>Ratings and Reviews</h2><br/>
+      <h3>Ratings and Reviews</h3><br/>
       <div className='reviews-ratings'>
         <Breakdown product={product} rating={rating} numReviews={numReviews} reviews={reviews} reviewsMeta={reviewsMeta} filter={filter} setFilter={setFilter}/>
         <ReviewsList product={product} reviews={reviews} reviewsPage={reviewsPage} setReviewsPage={setReviewsPage} setReviews={setReviews} />
