@@ -556,6 +556,18 @@ nav {
   width: 1100px;
   /* font-size: larger; */
 }
+.QContainer3 {
+  color: #525252;
+  flex-basis: 66%;
+  width: 200%;
+  max-width: 1100px;
+  height: 350px;
+  margin: 0;
+  padding: 0;
+  overflow-y:auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
 
 .AContainer {
   color: #525252;
@@ -1055,7 +1067,47 @@ textarea {
   display: inline-block;
 }
 
-.reviews-list {
-  flex-basis: 66%;
+.reviews-list-container {
+  /* flex-basis: 66%;
   display: inline-block;
+  color: #525252;
+  height: 550px;
+  margin: 0;
+  padding: 0;
+  overflow-y:auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth; */
+
+  color: #525252;
+  width: 200%;
+  max-width: 1100px;
+  height: 350px;
+  margin: 0;
+  padding: 0;
+  overflow-y:auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+.reviews-list-container2 {
+  color: #525252;
+  margin-right: 10%;
+  /* width: 1100px; */
+  /* font-size: larger; */
+}
+
+/* horizontal line ----- */
+.hr3-reviews {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  border: 0;
+  height: 2px;
+  background-image: linear-gradient(to right, transparent, rgb(0, 0, 0), transparent);
+}
+
+.rev-images {
+  cursor: zoom-in;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
 }

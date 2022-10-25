@@ -6,7 +6,9 @@ import Overview from './overview/index.jsx';
 import Description from './overview/components/Description.jsx';
 import RelatedItemsAndComparison from './related-items/index.jsx';
 import QuesnAnsw from './qa/index.jsx';
-import Ratings from './ratings/index.jsx'
+import Ratings from './ratings/index.jsx';
+
+
 export default function App() {
   const [product, setProduct] = useState([]);
   const [rating, setRating] = useState([]);
@@ -16,6 +18,7 @@ export default function App() {
     axios.get('/api/products/40344') // id 40344
     .then(result => setProduct(result.data))
   },[])
+
 
   return(
     product.id ?
