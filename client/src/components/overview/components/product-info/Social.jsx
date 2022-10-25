@@ -17,10 +17,15 @@ export default function Social({ product, photo, style }) {
   },[style])
 
   function handleClick(){
-    reveal ?
-    document.querySelector('.social-icons').style.visibility = 'hidden'
-    :
-    document.querySelector('.social-icons').style.visibility = 'visible'
+    if(reveal) {
+      document.querySelector('.social-icons').style.visibility = 'hidden'
+      document.querySelector('.social-icons').style.top = '-1%'
+      document.querySelector('.social-icons').style.opacity = '0'
+    } else {
+      document.querySelector('.social-icons').style.visibility = 'visible'
+      document.querySelector('.social-icons').style.top = '6%'
+      document.querySelector('.social-icons').style.opacity = '1'
+    }
   }
 
   return(

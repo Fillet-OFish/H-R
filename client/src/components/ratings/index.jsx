@@ -42,7 +42,7 @@ export default function Reviews(props) {
   return(
     reviews && reviewsMeta ?
     <div>
-      <h2>Ratings and Reviews</h2><br/>
+      <h3>Ratings and Reviews</h3><br/>
       <div className='reviews-ratings'>
         <Breakdown product={props.product} rating={props.rating} numReviews={props.numReviews} reviews={reviews} reviewsMeta={reviewsMeta} filter={filter} setFilter={setFilter}/>
         <ReviewsList product={props.product} reviews={reviews} reviewsPage={reviewsPage} setReviewsPage={setReviewsPage} setReviews={setReviews} modalRevOn={modalRevOn} setModalRevOn={setModalRevOn} />

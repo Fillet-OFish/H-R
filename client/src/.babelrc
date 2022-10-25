@@ -1,4 +1,0 @@
-// created for jest testing
-{
-  "presets": ["@babel/preset-react", "@babel/env"]
-}

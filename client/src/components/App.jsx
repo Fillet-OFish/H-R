@@ -7,7 +7,7 @@ import Description from './overview/components/Description.jsx';
 import RelatedItemsAndComparison from './related-items/index.jsx';
 import QuesnAnsw from './qa/index.jsx';
 import Ratings from './ratings/index.jsx';
-
+import Footer from './footer/index.jsx'
 
 export default function App() {
   const [product, setProduct] = useState([]);
@@ -23,27 +23,26 @@ export default function App() {
   return(
     product.id ?
     <TrackProvider>
-      {/* header */}
-      <Header product={product}/>
+        {/* header */}
+        <Header product={product}/>
 
-      {/* overview */}
-      <Overview product={product} rating={rating} numReviews={numReviews}/>
-      <Description product={product}/>
+        {/* overview */}
+        <Overview product={product} rating={rating} numReviews={numReviews}/>
 
-      {/* related products */}
-      <div className="container">
-        <RelatedItemsAndComparison currentItem={product} setProduct={setProduct} />
-      </div>
+        <div className="contain">
+          <Description product={product}/>
 
-      {/* Questions and Answers */}
-      <div className="container">
-        <QuesnAnsw product={product} />
-      </div>
+          {/* related products */}
+          <RelatedItemsAndComparison currentItem={product} setProduct={setProduct} />
 
-      {/* Reviews */}
-      <div className='container2'>
-        <Ratings product={product} rating={rating} setRating={setRating} numReviews={numReviews} setNumReviews={setNumReviews}/>
-      </div>
+          {/* Questions and Answers */}
+          <QuesnAnsw product={product} />
+
+          {/* Reviews */}
+          <Ratings product={product} rating={rating} setRating={setRating} numReviews={numReviews} setNumReviews={setNumReviews}/>
+        </div>
+
+        <Footer/>
     </TrackProvider>
     : null
   )
