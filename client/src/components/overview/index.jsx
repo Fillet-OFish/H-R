@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTracker } from '../TrackClickContext.jsx';
 import { Rating } from 'react-simple-star-rating'
 import axios from 'axios';
@@ -18,6 +18,7 @@ export default function Overview({product, rating, numReviews}) {
   useEffect(() => {
     axios.get(`/api/products/${product.id}/styles`)
     .then(result => {
+      console.log(result)
       setStyles(result.data.results)
       setStyle(result.data.results[0])
       setPhotos(result.data.results[0].photos)
@@ -25,9 +26,13 @@ export default function Overview({product, rating, numReviews}) {
     })
   },[product])
 
+  const scroll = () => {
+    document.querySelector('.reviews-ratings').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return(
     <div onClick={(e)=>{clickTracker(e, 'Overview')}}>
-      <div className="container">
+      <div className="overview-container">
         {/* Gallery */}
         {Object.keys(style).length!==0 && photos.length>0 ?
           <Gallery style={style} photos={photos} setPhotos={setPhotos} photo={photo} setPhoto={setPhoto}/>
@@ -43,7 +48,10 @@ export default function Overview({product, rating, numReviews}) {
               fillColor={'#000000'}
               style={{pointerEvents: 'none'}}
             />
-            &nbsp; {numReviews ? <a href="/">Read all {numReviews} reviews</a> : null}
+            &nbsp;
+            {numReviews ?
+              <span className="overview-to-reviews" onClick={e=>scroll()} >Read all {numReviews} reviews</span>
+            : null}
           </p>
 
           {/* Social media */}

@@ -32,7 +32,7 @@ const QA = (props) => {
 
   // load more questions when click on button
   const loadQues = () => {
-    setRecordsPerPage(recordsPerPage + 4);
+    setRecordsPerPage(recordsPerPage + 2);
   }
   // ----------------------------------------------------------------
 
@@ -41,8 +41,7 @@ const QA = (props) => {
   // iterate through questions data
   return (
     <div>
-      <hr className='hr3'></hr>
-      <h2>Questions & Answers</h2>
+      <h3>Questions & Answers</h3>
 
       <div>
         {/* search bar ----------- */}
@@ -73,7 +72,6 @@ const QA = (props) => {
           <AddQuesBtn modalQuesOn={props.modalQuesOn} setModalQuesOn={props.setModalQuesOn}/>
         </div>
       </div>
-      <hr className='hr3'></hr>
     </div>
   )
 }

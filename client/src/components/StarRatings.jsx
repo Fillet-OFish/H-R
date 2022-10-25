@@ -43,7 +43,7 @@ export default function StarRatings({item, itemRating}) {
           }
           const style = {
             display: 'inline-block',
-            backgroundImage: `linear-gradient(90deg, #f80 ${starFill()}%, #ddd 0 ${100 - starFill()}%`,
+            backgroundImage: `linear-gradient(90deg, black ${starFill()}%, #ddd 0 ${100 - starFill()}%`,
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
           }

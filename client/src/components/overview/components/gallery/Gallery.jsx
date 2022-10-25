@@ -40,13 +40,15 @@ export default function Gallery({ style, photos, setPhotos, photo, setPhoto }) {
   function expandPhoto(prop){
     if(expand === true && photo.thumbnail_url) {
       document.querySelector('.gallery-list').style.visibility = 'hidden'
-      document.querySelector('.img-main').style = {cursor: 'zoom-out', marginTop:'-30%'}
       document.querySelector('.right').style.visibility = 'hidden'
-      document.querySelector('.left').style = {width: '90vh', height:'70vh'}
+      document.querySelector('.contain').style.marginTop = '3%'
+      document.querySelector('.contain').style.transition = 'all .25s ease-in-out'
+
     } else {
       document.querySelector('.gallery-list').style.visibility = 'visible'
       document.querySelector('.right').style.visibility = 'visible'
-      document.querySelector('.left').style = {width: '70vh', height:'60vh'}
+      document.querySelector('.contain').style.marginTop = '-3%'
+
     }
   }
 
@@ -59,7 +61,7 @@ export default function Gallery({ style, photos, setPhotos, photo, setPhoto }) {
             {photos.length>6 ?
               <>
               {XY[0] === 0 ? null : <FaAngleUp style={{cursor:'pointer'}} onClick={e=>scroll('up')} className="gallery-arrow"/>}
-              {photos.slice(XY[0], XY[1]).map((photo, i) => <p key={i}><img src={photo.thumbnail_url} onClick={e=>{changePhoto({photo, i})}} /></p>)}
+              {photos.slice(XY[0], XY[1]).map((photo, i) => <p key={i}><img className="solo-img" src={photo.thumbnail_url} onClick={e=>{changePhoto({photo, i})}} /></p>)}
               {XY[1] === photos.length ? null : <FaAngleDown style={{cursor:'pointer'}} onClick={e=>scroll('down')} className="gallery-arrow"/>}
               </>
               :
@@ -89,5 +91,4 @@ export default function Gallery({ style, photos, setPhotos, photo, setPhoto }) {
     </div>
   )
 }
-
 
