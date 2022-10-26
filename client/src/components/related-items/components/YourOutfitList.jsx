@@ -3,9 +3,11 @@ import axios from 'axios';
 import ProductCard from './ProductCard.jsx';
 import ScrollButtons from './ScrollButtons.jsx';
 import { useDarkMode } from '../../DarkMode.jsx';
+import { FaSortDown, FaSortUp } from 'react-icons/fa';
 
 export default function YourOutfitList({currentItem, setProduct}) {
   const [outfit, setOutfit] = useState(() => (JSON.parse(localStorage.getItem('outfit')) || []));
+  const [show, setShow] = useState(false)
   const darkMode = useDarkMode();
 
   const handleClick = () => {
@@ -15,10 +17,14 @@ export default function YourOutfitList({currentItem, setProduct}) {
     }
   }
 
+  const outfitStyle = {
+    display: show ? '' : 'none'
+  }
+
   return (
     <>
-      <h3>Your Outfit</h3>
-      <div className='related-list'>
+      <h3 style={{cursor: 'pointer', borderBottom: '1px solid gray'}} onClick={() => setShow(!show)}>Your Outfit {show ? <FaSortUp /> : <FaSortDown />}</h3>
+      <div className='related-list' style={outfitStyle}>
         <ul className='outfit-ul'>
           <div>
             <li className={`add-to-outfit-button ${darkMode ? 'add-to-outfit-button-dark' : null}`} onClick={handleClick}>
@@ -29,9 +35,9 @@ export default function YourOutfitList({currentItem, setProduct}) {
             <ProductCard setProduct={setProduct} key={item} item={item} list={'outfit'} outfit={outfit} setOutfit={setOutfit} />) : null
           }
         </ul>
-      {outfit.length > 3 ?
-        <ScrollButtons element={'.related-list .outfit-ul'} width={1100} scroll={275}  /> : null
-      }
+        {outfit.length > 3 ?
+          <ScrollButtons element={'.related-list .outfit-ul'} width={1100} scroll={275}  /> : null
+        }
       </div>
     </>
   )

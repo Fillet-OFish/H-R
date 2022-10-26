@@ -23,7 +23,7 @@ export function DarkModeProvider({children}) {
   return (
     <DarkModeContext.Provider value={darkMode}>
         {children}
-        <button className={`dark-mode-button ${darkMode ? 'dark-mode-button-dark' : null}`} onClick={toggleDarkMode}>Dark Theme</button>
+        <button className={`dark-mode-button ${darkMode ? 'dark-mode-button-dark' : null}`} onClick={toggleDarkMode}>{darkMode ? 'Light' : 'Dark'}</button>
     </DarkModeContext.Provider>
   )
 }
