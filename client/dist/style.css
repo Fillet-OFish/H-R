@@ -43,46 +43,11 @@ img {
   scroll-behavior: smooth;
   width: 100%;
 }
-<<<<<<< HEAD
-.contain-description-related{
-  margin: -3% auto 3% 18%;
-  width: 75%
-}
-.contain-reviews-QnA{
-  display: table;
-  margin: auto;
-  width: 85%;
-  padding: 2%;
-}
-.contain-reviews-QnA .toggled{
-  margin-bottom: 3%;
-  border:0;
-  padding: 1% 2%;
-  background-color: white;
-  border-top: 2px solid gray;
-}
-.contain-reviews-QnA .reviewsToToggle{
-  margin-bottom: 3%;
-  padding: 1% 2%;
-  border:0;
-  border-top-left-radius: 5px;
-  background-color: #f0f0f0;
-  box-shadow: inset -7px 0 9px -7px rgba(0,0,0,0.3), inset 0 -7px 9px -7px rgba(0,0,0,0.3);
-}
-.contain-reviews-QnA .qnaToToggle{
-  margin-bottom: 3%;
-  padding: 1% 2%;
-  border:0;
-  border-top-right-radius: 5px;
-  background-color: #f0f0f0;
-  box-shadow: inset 7px 0 9px -7px rgba(0,0,0,0.3), inset 0 -7px 9px -7px rgba(0,0,0,0.3);
-=======
 .contain{
   max-width: 95%;
   margin: 0 auto;
   margin-top: -3%;
   margin-bottom: 3%;
->>>>>>> master
 }
 .container2{
   margin: 30px auto;
@@ -228,16 +193,6 @@ img {
 /* FOOTER ------------------------ */
 
 .footer{
-<<<<<<< HEAD
-  height: auto;
-  width: 90%;
-  line-height: 1;
-  background-color: black;
-  color:white;
-  margin-top: 5%;
-  padding: 2.5% 5%;
-
-=======
   height: 420px;
   /* background-color: white; */
   line-height: 1;
@@ -245,36 +200,20 @@ img {
 
 .footer-dark{
   background-color: transparent
->>>>>>> master
 }
 
 .start{
   display: flex;
-<<<<<<< HEAD
-  height: 60%;
-=======
   background-color: rgb(245,245,245, 40%);
   padding: 5%;
   height: auto;
   width: 200%;
   margin: 10% 0 0 -30%;
->>>>>>> master
 }
 
 .start-title{
   opacity: 60%;
   text-transform: uppercase;
-<<<<<<< HEAD
-}
-
-.start a{
-  color:white;
-  text-decoration: none;
-}
-
-.start .col1{
-  width:60%;
-=======
 }
 
 .start a{
@@ -284,43 +223,27 @@ img {
 
 .start .col1{
   width:35%;
->>>>>>> master
   font-size: 15px;
 }
 
 .start .col2{
-<<<<<<< HEAD
-  width:40%;
-=======
   width:20%;
->>>>>>> master
   font-size: 16px;
 }
 
 .col1 .newsletter-bar input{
   border:0;
   width: 70%;
-<<<<<<< HEAD
-  border-bottom: 1.5px white solid;
-=======
   border-bottom: 1.5px black solid;
->>>>>>> master
   background-color: transparent;
 }
 
 .end{
-<<<<<<< HEAD
-  font-weight:250;
-  text-transform: uppercase;
-  background-color: black;
-  opacity: 60%;
-=======
   width: 200%;
   margin: 2% 0 2% -30%;
   padding-left: 5%;
   font-weight:250;
   text-transform: uppercase;
->>>>>>> master
 }
 
 /* OVERVIEW ------------------------ */
@@ -1300,41 +1223,25 @@ textarea {
 /* Reviews --------------------------------------------------------------- */
 
 .reviews-ratings{
-<<<<<<< HEAD
-  width: 100%;
-=======
   width: 110%;
   margin-left:-4.5%;
->>>>>>> master
 }
 
 .reviews-ratings-container {
   display: flex;
   user-select: none;
   /* line-height: 1.5; */
-<<<<<<< HEAD
-  width: 95%;
-=======
   width: 100%;
->>>>>>> master
   margin-top: -3%;
 }
 
 .review-left{
-<<<<<<< HEAD
-  flex-basis: 20%;
-=======
   flex-basis: 33%;
->>>>>>> master
   display: inline-block;
 }
 
 .review-right{
-<<<<<<< HEAD
-  width: 80%;
-=======
   width: 95%;
->>>>>>> master
   overflow-y: auto;
   max-height: 900px;
 }
@@ -1378,11 +1285,7 @@ textarea {
 
 .product-breakdown .category{
   margin-top: 5%;
-<<<<<<< HEAD
-  margin-left: -4%;
-=======
   margin-left: -8.5%;
->>>>>>> master
   width: 98%;
 }
 
