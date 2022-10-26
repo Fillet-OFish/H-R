@@ -6,6 +6,7 @@ import Social from './components/product-info/Social.jsx'
 import Styles from './components/product-info/Styles.jsx'
 import Gallery from './components/gallery/Gallery.jsx'
 import Cart from './components/product-info/Cart.jsx'
+import { useDarkMode } from '../DarkMode.jsx'
 
 export default function Overview({product, rating, numReviews}) {
   const clickTracker = useTracker();
@@ -13,6 +14,7 @@ export default function Overview({product, rating, numReviews}) {
   const [style, setStyle] = useState({})
   const [photos, setPhotos] = useState([])
   const [photo, setPhoto] = useState('')
+  const darkMode = useDarkMode()
 
   // on load/product change, set styles/style based on default product/new product
   useEffect(() => {
@@ -45,7 +47,7 @@ export default function Overview({product, rating, numReviews}) {
               size={15}
               initialValue={rating}
               allowFraction={true}
-              fillColor={'#000000'}
+              fillColor={darkMode ? 'yellow' : '#000000'}
               style={{pointerEvents: 'none'}}
             />
             &nbsp;

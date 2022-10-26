@@ -63,7 +63,7 @@ const QuesnAnsw = (props) => {
 
 
   return (
-    <div className="q-a">
+    <div className='q-a'>
       <div>
         {/* rendering QA ----------- */}
         <QA filter={filter} searchFilter={searchFilter} setImage={setImage} setModalOn={setModalOn} modalOn={modalOn} modalAnswOn={modalAnswOn} setModalAnswOn={setModalAnswOn} setQID={setQID} modalQuesOn={modalQuesOn} setModalQuesOn={setModalQuesOn} />
