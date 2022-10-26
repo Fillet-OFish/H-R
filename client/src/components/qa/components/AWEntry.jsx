@@ -2,10 +2,12 @@ import React from 'react';
 import {format} from 'date-fns';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
+import { useDarkMode } from '../../DarkMode.jsx'
 
 
 // ENTRY OF EACH ANSWER ----------
 const AWEntry = (props) => {
+  const darkMode = useDarkMode();
 
   // make an axios put request to mark answers as helpful
   const helpfulAnsw = (a_id) => {
@@ -56,7 +58,7 @@ const AWEntry = (props) => {
       </div>
 
       {/* answer user info --- */}
-      <div className='user_info'>by {props.ans.answerer_name}, {format(new Date(props.ans.date), 'MMMM dd, yyyy')}
+      <div className={`user_info ${darkMode ? 'user_info-dark' : null}`}>by {props.ans.answerer_name}, {format(new Date(props.ans.date), 'MMMM dd, yyyy')}
       &nbsp;&nbsp;|&nbsp;&nbsp;
       {/* answer helpfulness */}
       Helpful?

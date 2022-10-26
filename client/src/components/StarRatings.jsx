@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useDarkMode } from './DarkMode.jsx'
+
 
 export default function StarRatings({item, itemRating}) {
   const [rating, setRating] = useState(itemRating || null);
+  const darkMode = useDarkMode();
 
   useEffect(() => {
     if (itemRating) {
@@ -43,12 +46,13 @@ export default function StarRatings({item, itemRating}) {
           }
           const style = {
             display: 'inline-block',
-            backgroundImage: `linear-gradient(90deg, black ${starFill()}%, #ddd 0 ${100 - starFill()}%`,
+            backgroundImage: `linear-gradient(90deg, ${darkMode ? 'yellow' : 'black'} ${starFill()}%, ${darkMode ? 'grey' : '#ddd'} 0 ${100 - starFill()}%`,
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
+            userSelect: 'none'
           }
           return (
-            <small key={i} style={style}>⭐</small>
+            <small key={i} style={style}>★</small>
             )
         }) : null}
     </div>
