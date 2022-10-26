@@ -12,6 +12,7 @@ export default function ProductCard({currentItem, item, setProduct, list, outfit
   const [styles, setStyles] = useState(null);
   const [defaultStyle, setDefaultStyle] = useState(null);
   const [popup, setPopup] = useState(false);
+  const [hover, setHover] = useState(false);
   const darkMode = useDarkMode();
 
   useEffect(() => {
@@ -78,26 +79,20 @@ export default function ProductCard({currentItem, item, setProduct, list, outfit
               x
             </button> : null
           }
-          <div className='product-card-info'>
-            <small>{relatedItem.category}</small>
-            <div className='product-card-name'>
-              {relatedItem.name + ' - ' + relatedItem.slogan}
-            </div>
+          <div className='product-card-info' onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+            <div className='product-card-name'>{relatedItem.name}</div>
             {defaultStyle.sale_price ?
               <div>
-                <p style={{color: 'red'}}>
-                  ${defaultStyle.sale_price}
-                </p>
-                <small style={smallStyle, {textDecoration: 'line-through'}}>
-                  ${defaultSTyle.original_price}
-                </small>
+                <p style={{color: 'red'}}>${defaultStyle.sale_price}</p>
+                <small style={{textDecoration: 'line-through'}}>${defaultSTyle.original_price}</small>
               </div>
               :
-              <small>
-                ${defaultStyle.original_price}
-              </small>
+              <small>${defaultStyle.original_price}</small>
             }
-            <StarRatings item={item} />
+            <div style={{display: hover ? 'block' : 'none'}}>
+              <small>{relatedItem.category}</small>
+              <StarRatings item={item} />
+            </div>
           </div>
         </li> : null
       }

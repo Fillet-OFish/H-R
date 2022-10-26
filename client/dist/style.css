@@ -33,7 +33,7 @@ button {
   cursor: pointer;
 }
 img {
-  border-radius: 5px;
+  /* border-radius: 5px; */
 }
 ::placeholder {
   color: lightgrey;
@@ -1026,7 +1026,7 @@ textarea {
   display:  table;
   margin:  8px;
   background-color:  white;
-  border:  1px solid lightgrey ;
+  /* border:  1px solid lightgrey ; */
   width:  220px;
   height:  335px;
   /* overflow:  hidden; */
@@ -1057,12 +1057,12 @@ textarea {
 .product-card {
   list-style-type: none;
   position: relative;
-  border: 1px solid lightgrey;
+  /* border: 1px solid lightgrey; */
   margin: 8px;
   width: 220px;
   height: 335px;
   cursor: pointer;
-  border-radius: 6px;
+  /* border-radius: 6px; */
   overflow: hidden;
 }
 
@@ -1153,13 +1153,13 @@ textarea {
 }
 
 .product-card-info {
-  padding:  3px 10px 5px 10px;
+  /* padding:  3px 10px 5px 10px; */
 }
 
 .product-card-name {
   display:  -webkit-box;
-  height:  30px;
-  padding-bottom: 3px;
+  /* height:  30px; */
+  /* padding-bottom: 3px; */
   font-size:  13px;
   -webkit-line-clamp:  2;
   -webkit-box-orient:  vertical;
@@ -1354,6 +1354,7 @@ textarea {
   position: fixed;
   bottom: 0;
   right: 0;
+  padding-bottom: 5px;
   border: none;
   background-color: transparent;
   color: grey;
@@ -1371,3 +1372,10 @@ textarea {
   color: white;
 }
 
+/* position Google Translate widget in bottom right corner */
+#translate {
+  position: fixed;
+  bottom: -13px;
+  right: 85px;
+  z-index:2;
+}
