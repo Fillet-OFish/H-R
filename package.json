@@ -7,7 +7,7 @@
     "server-dev": "npx nodemon --watch server server/index.js",
     "client-dev": "npx webpack --watch",
     "test": "jest",
-    "coverage": "jest --coverage"
+    "coverage": "react-scripts test --coverage --watchAll"
   },
   "repository": {
     "type": "git",

@@ -23,8 +23,15 @@ export default function Cart({ product }) {
           <hr/>
         <div>
           Subtotal:
-          <p>{showCart ? JSON.stringify(cart) : null}</p>
-          <span className="cart-block-buttons"><button className="view-btn" onClick={()=>{setShowCart(!showCart);setUpdateCart(!updateCart)}}>VIEW BAG</button> <button className="checkout-btn">CHECKOUT</button></span>
+          <p data-testid="cart-info">{showCart ? JSON.stringify(cart) : null}</p>
+          <span className="cart-block-buttons">
+            <button className="view-btn" data-testid="view-btn" onClick={()=>{setShowCart(!showCart);setUpdateCart(!updateCart)}}>
+              VIEW BAG
+            </button>
+            <button className="checkout-btn">
+              CHECKOUT
+            </button>
+          </span>
         </div>
     </div>
   )

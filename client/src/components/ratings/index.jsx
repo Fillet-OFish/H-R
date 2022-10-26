@@ -48,11 +48,17 @@ export default function Reviews(props) {
 
   return(
     reviews && reviewsMeta ?
-    <div>
+    <div className="reviews-ratings">
+
       <h3>Ratings and Reviews</h3><br/>
-      <div className='reviews-ratings'>
-        <Breakdown product={props.product} rating={props.rating} numReviews={props.numReviews} reviews={reviews} reviewsMeta={reviewsMeta} filter={filter} setFilter={setFilter}/>
-        <ReviewsList product={props.product} reviews={reviews} reviewsPage={reviewsPage} setReviewsPage={setReviewsPage} setReviews={setReviews} modalRevOn={modalRevOn} setModalRevOn={setModalRevOn} sort={sort} setSort={setSort} setImage={setImage} modalOn={modalOn} setModalOn={setModalOn} />
+
+      <div className='reviews-ratings-container'>
+        <div className='review-left'>
+          <Breakdown product={props.product} rating={props.rating} numReviews={props.numReviews} reviews={reviews} reviewsMeta={reviewsMeta} filter={filter} setFilter={setFilter}/>
+        </div>
+        <div className='review-right'>
+          <ReviewsList product={props.product} reviews={reviews} reviewsPage={reviewsPage} setReviewsPage={setReviewsPage} setReviews={setReviews} modalRevOn={modalRevOn} setModalRevOn={setModalRevOn} />
+        </div>
       </div>
 
       <div>
@@ -60,7 +66,7 @@ export default function Reviews(props) {
         <ImageModal getImage={getImage} modalOn={modalOn} setModalOn={setModalOn} />
       </div>
 
-      <div>
+      <div className='reviews-buttons'>
         {/* add new questions ----------- */}
         <AddRevModal product={props.product} modalRevOn={modalRevOn} setModalRevOn={setModalRevOn} reviewsMeta={reviewsMeta}/>
       </div>

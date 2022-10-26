@@ -19,7 +19,7 @@ export default function App() {
 
   useEffect(() => {
     axios.get('/api/products/40344') // id 40344
-    .then(result => setProduct(result.data))
+      .then(result => setProduct(result.data))
   },[])
 
 
@@ -47,7 +47,7 @@ export default function App() {
           <Ratings product={product} rating={rating} setRating={setRating} numReviews={numReviews} setNumReviews={setNumReviews}/>
         </div>
 
-        <Footer/>
+        <Footer product={product}/>
 
       </DarkModeProvider>
     </TrackProvider>

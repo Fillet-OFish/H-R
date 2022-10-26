@@ -41,9 +41,9 @@ export default function ProductBreakdown({ rating, product, numReviews, reviews,
   })
 
   return(
-    <div>
+    <div className="product-breakdown">
       {size ?
-        <div>Size<br/>
+        <div className="category">Size<br/>
           <span style={ratingBarStyle}>
             <div style={ratingValueStyle(size)}>😬</div>
           </span>
@@ -55,7 +55,7 @@ export default function ProductBreakdown({ rating, product, numReviews, reviews,
         </div>
       : null}
       {width ?
-        <div>Width<br/>
+        <div className="category">Width<br/>
           <span style={ratingBarStyle}>
             <div style={ratingValueStyle(width)}>😬</div>
           </span>
@@ -67,7 +67,7 @@ export default function ProductBreakdown({ rating, product, numReviews, reviews,
         </div>
       : null}
       {comfort ?
-        <div>Comfort<br/>
+        <div className="category">Comfort<br/>
           <span style={ratingBarStyle}>
             <div style={ratingValueStyle(comfort)}>😬</div>
           </span>
@@ -79,19 +79,19 @@ export default function ProductBreakdown({ rating, product, numReviews, reviews,
         </div>
       : null}
       {quality ?
-        <div>Quality<br/>
+        <div className="category">Quality<br/>
           <span style={ratingBarStyle}>
             <div style={ratingValueStyle(quality)}>😬</div>
           </span>
           <span style={{display: 'flex'}}>
             <small style={rangeStyle1}>poor</small>
-            <small style={rangeStyle2}>what i expected</small>
+            <small style={rangeStyle2}>what I expected</small>
             <small style={rangeStyle3}>perfect</small>
           </span>
         </div>
       : null}
       {length ?
-        <div>Length<br/>
+        <div className="category">Length<br/>
           <span style={ratingBarStyle}>
             <div style={ratingValueStyle(length)}>😬</div>
           </span>
@@ -103,7 +103,7 @@ export default function ProductBreakdown({ rating, product, numReviews, reviews,
         </div>
       : null}
       {fit ?
-        <div>Fit<br/>
+        <div className="category">Fit<br/>
           <span style={ratingBarStyle}>
             <div style={ratingValueStyle(fit)}>😬</div>
           </span>

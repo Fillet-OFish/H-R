@@ -22,7 +22,7 @@ export default function ReviewsList(props) {
   }
 
   return(
-    <div>
+    <>
       <div>
         <SortRev sort={props.sort} setSort={props.setSort} />
       </div>
@@ -44,6 +44,6 @@ export default function ReviewsList(props) {
           <AddRevBtn modalRevOn={props.modalRevOn} setModalRevOn={props.setModalRevOn} />
         </div>
       </div>
-    </div>
+    </>
   )
 }
