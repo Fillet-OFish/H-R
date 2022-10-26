@@ -50,11 +50,7 @@ export default function Reviews(props) {
     reviews && reviewsMeta ?
     <div className="reviews-ratings">
 
-<<<<<<< HEAD
-      <br/>
-=======
       <h3>Ratings and Reviews</h3><br/>
->>>>>>> master
 
       <div className='reviews-ratings-container'>
         <div className='review-left'>
