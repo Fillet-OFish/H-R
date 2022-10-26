@@ -26,7 +26,7 @@ const QA = (props) => {
 
   // PAGINATION WITH LOAD MORE (STATES) ----------------------------------------------
   // No of Records to be displayed on each page
-  const [recordsPerPage, setRecordsPerPage] = useState(4);
+  const [recordsPerPage, setRecordsPerPage] = useState(2);
   // Records to be displayed on the current page
   const currentRecords = props.filter.slice(0, recordsPerPage);
 

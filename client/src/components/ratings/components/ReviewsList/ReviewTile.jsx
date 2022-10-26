@@ -33,10 +33,10 @@ export default function ReviewsList(props) {
 
 
   return(
-    <div className='reviews-list-container2'>
+    <div className='display-reviews'>
       {/* render ratings, user info, and date */}
       <div><StarRatings itemRating={props.review.rating} />
-        <label style={{float: 'right', marginRight: '3%'}} className='user_info'>by {props.review.reviwer_name}, {format(new Date(props.review.date), 'MMMM dd, yyyy')}</label>
+        <label style={{float: 'right', marginRight: '3%'}} className='user_info'>by {props.review.reviewer_name}, {format(new Date(props.review.date), 'MMMM dd, yyyy')}</label>
       </div>
 
       {/* render review title and body */}
@@ -46,7 +46,7 @@ export default function ReviewsList(props) {
       {/* render images of reviews ----------------- */}
       <div>
         {props.review.photos.map((photo, index) => (
-          <ReviewImgs photo={photo} key={index} />
+          <ReviewImgs photo={photo} key={index} setImage={props.setImage} modalOn={props.modalOn} setModalOn={props.setModalOn} />
         ))}
       </div>
 
@@ -80,7 +80,7 @@ export default function ReviewsList(props) {
           ))}
         </div> */}
 
-      <hr className='hr3-reviews'></hr>
+      <hr className='hr3'></hr>
 
     </div>
   )
