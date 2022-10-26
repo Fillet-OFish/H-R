@@ -24,7 +24,6 @@ export default function App() {
   },[])
 
   function toggledQnA(){
-    console.log('toggled', toggleQnA)
     if(!toggleQnA){
       document.querySelector('.reviews-ratings').style.display = 'none'
       document.querySelector('.q-a').style.display = 'block'
@@ -44,20 +43,23 @@ export default function App() {
         <Header product={product}/>
 
         {/* overview */}
-        <Overview product={product} rating={rating} numReviews={numReviews}/>
+        <div className="overview">
+          <Overview product={product} rating={rating} numReviews={numReviews}/>
+        </div>
 
         <div className="contain-description-related">
+          {/* description */}
           <Description product={product}/>
 
           {/* related products */}
-          {/* <RelatedItemsAndComparison currentItem={product} setProduct={setProduct} /> */}
+          <RelatedItemsAndComparison currentItem={product} setProduct={setProduct} />
         </div>
 
         <div className="contain-reviews-QnA">
-          <button className="toggle-reviews-QnA" onClick={e=>{ if(toggleQnA){setToggleQnA(!toggleQnA); toggledQnA()}}}>
+          <button className={!toggleQnA? "toggled" : "reviewsToToggle"} onClick={e=>{ if(toggleQnA){setToggleQnA(!toggleQnA); toggledQnA()}}}>
               Reviews
           </button>
-          <button className="toggle-reviews-QnA" onClick={e=>{ if(!toggleQnA){setToggleQnA(!toggleQnA); toggledQnA()}}}>
+          <button className={toggleQnA? "toggled" : "qnaToToggle"} onClick={e=>{ if(!toggleQnA){setToggleQnA(!toggleQnA); toggledQnA()}}}>
               Questions
           </button>
           {/* Questions and Answers */}
