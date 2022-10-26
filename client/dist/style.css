@@ -4,11 +4,11 @@ html {
 }
 body{
   font-family: 'Outfit', sans-serif;
-  max-width: 1080px;
   padding: 0;
-	margin: 0 auto;
+	margin: 0;
 	float: none;
   font-size: 100%;
+  overflow-x: hidden;
 }
 body::-webkit-scrollbar {
   display: none;
@@ -41,30 +41,64 @@ img {
 /* APP ------------------------ */
 #app{
   scroll-behavior: smooth;
+  width: 100%;
 }
+<<<<<<< HEAD
+.contain-description-related{
+  margin: -3% auto 3% 18%;
+  width: 75%
+}
+.contain-reviews-QnA{
+  display: table;
+  margin: auto;
+  width: 85%;
+  padding: 2%;
+}
+.contain-reviews-QnA .toggled{
+  margin-bottom: 3%;
+  border:0;
+  padding: 1% 2%;
+  background-color: white;
+  border-top: 2px solid gray;
+}
+.contain-reviews-QnA .reviewsToToggle{
+  margin-bottom: 3%;
+  padding: 1% 2%;
+  border:0;
+  border-top-left-radius: 5px;
+  background-color: #f0f0f0;
+  box-shadow: inset -7px 0 9px -7px rgba(0,0,0,0.3), inset 0 -7px 9px -7px rgba(0,0,0,0.3);
+}
+.contain-reviews-QnA .qnaToToggle{
+  margin-bottom: 3%;
+  padding: 1% 2%;
+  border:0;
+  border-top-right-radius: 5px;
+  background-color: #f0f0f0;
+  box-shadow: inset 7px 0 9px -7px rgba(0,0,0,0.3), inset 0 -7px 9px -7px rgba(0,0,0,0.3);
+=======
 .contain{
   max-width: 95%;
   margin: 0 auto;
   margin-top: -3%;
   margin-bottom: 3%;
+>>>>>>> master
 }
 .container2{
   margin: 30px auto;
   display: grid;
 }
+
 /* ANNOUNCEMENT ------------------------ */
 .announcement{
-  position: absolute;
-  top:0;
-  left:0;
   width: 100%;
-  margin: -.5% 0;
-  height: 3.5%;
+  margin: 0;
+  padding:.005%;
   background-color: black;
   color: white;
 }
 .announcement p{
-  font-size: 80%;
+  font-size: 82%;
   position: relative;
   text-align: center;
 }
@@ -73,21 +107,23 @@ img {
 }
 /* HEADER ------------------------ */
 .header{
-  position: absolute;
-  top:5%;
-  left:0;
+  display:flex;
+  padding: 1% 5% 1% 2%;
   width:100%;
-  /* padding: 20px; */
   color: black;
   font-size: 30px;
 }
 .header-dark{
   color: white;
 }
+.header-col-1{
+  flex-basis: 75%;
+}
+.header-col-2{
+  flex-basis: 25%;
+}
 .logo{
-  display: table;
-  margin: auto;
-  font-size: 35px;
+  font-size: 45px;
   font-weight: 500;
 }
 .logo a{
@@ -95,12 +131,10 @@ img {
   color: black;
 }
 /* header - search bar */
+.search-bar-icon{
+  font-size: 14px;
+}
 .search-bar{
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin-top: 0.8%;
-  margin-left: 20%;
   background-color: transparent;
   color: black;
 }
@@ -108,7 +142,6 @@ img {
   color: white;
 }
 .search-bar input{
-  width: 60%;
   background-color: transparent;
   border: 0;
   border-bottom: 1.5px black solid;
@@ -121,7 +154,7 @@ img {
   width: 80%;
 }
 .search-bar input::placeholder{
-  color: black;
+  /* color: black; */
 }
 .search-bar button{
   background-color: transparent;
@@ -130,12 +163,7 @@ img {
 }
 /* header links */
 .header-links{
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin-top: 2%;
-  margin-right: 15%;
-  font-size: 14px;
+  font-size: 15px;
   letter-spacing: 1.1px;
 }
 .header-link{
@@ -143,13 +171,9 @@ img {
 }
 /* header - cart */
 .shopping-bag-icon{
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin-top: 2%;
-  margin-right: 10%;
   font-size: 16px;
 }
+/* hidden cart */
 .cart-block{
   display: none;
   position: absolute;
@@ -186,8 +210,7 @@ img {
 }
 /* header - categories */
 .categories{
-  display: table;
-  margin: 10px auto;
+  padding: 0 1%;
   font-size: 16px;
   letter-spacing: 1.1px;
 }
@@ -205,6 +228,16 @@ img {
 /* FOOTER ------------------------ */
 
 .footer{
+<<<<<<< HEAD
+  height: auto;
+  width: 90%;
+  line-height: 1;
+  background-color: black;
+  color:white;
+  margin-top: 5%;
+  padding: 2.5% 5%;
+
+=======
   height: 420px;
   /* background-color: white; */
   line-height: 1;
@@ -212,20 +245,36 @@ img {
 
 .footer-dark{
   background-color: transparent
+>>>>>>> master
 }
 
 .start{
   display: flex;
+<<<<<<< HEAD
+  height: 60%;
+=======
   background-color: rgb(245,245,245, 40%);
   padding: 5%;
   height: auto;
   width: 200%;
   margin: 10% 0 0 -30%;
+>>>>>>> master
 }
 
 .start-title{
   opacity: 60%;
   text-transform: uppercase;
+<<<<<<< HEAD
+}
+
+.start a{
+  color:white;
+  text-decoration: none;
+}
+
+.start .col1{
+  width:60%;
+=======
 }
 
 .start a{
@@ -235,42 +284,65 @@ img {
 
 .start .col1{
   width:35%;
+>>>>>>> master
   font-size: 15px;
 }
 
 .start .col2{
+<<<<<<< HEAD
+  width:40%;
+=======
   width:20%;
+>>>>>>> master
   font-size: 16px;
 }
 
 .col1 .newsletter-bar input{
   border:0;
   width: 70%;
+<<<<<<< HEAD
+  border-bottom: 1.5px white solid;
+=======
   border-bottom: 1.5px black solid;
+>>>>>>> master
   background-color: transparent;
 }
 
 .end{
+<<<<<<< HEAD
+  font-weight:250;
+  text-transform: uppercase;
+  background-color: black;
+  opacity: 60%;
+=======
   width: 200%;
   margin: 2% 0 2% -30%;
   padding-left: 5%;
   font-weight:250;
   text-transform: uppercase;
+>>>>>>> master
 }
 
 /* OVERVIEW ------------------------ */
+.overview{
+  display: table;
+  margin: 2% 15%;
+  width: 80%;
+}
 .overview-container{
-  max-width: 100%;
-  margin: 5% auto;
-  margin-top: 15%;
-  display: inline-grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  height: 65vh;
+  width: 100%;
 }
 .left{
-  display: flex;
+  display:flex;
   height: 60vh;
-  width: 70vh;
+  width: auto;
   margin-bottom: 20px;
+}
+.middle{
+  width: 45%;
+  height: 100%;
 }
 .product-category{
   text-transform: uppercase;
@@ -294,8 +366,8 @@ img {
 /* share to social media */
 .social{
   position: absolute;
-  right: 0;
   top: 0;
+  right:0;
   font-size: 18px;
   padding: 10px;
   cursor: pointer;
@@ -350,9 +422,8 @@ img {
 /* gallery - reg view */
 .gallery-list{
   margin: auto;
-  position: relative;
+  width: 5%;
   display: flex;
-  flex-direction: column;
   user-select: none;
 }
 .gallery-list img{
@@ -369,6 +440,7 @@ img {
 }
 .gallery-main{
   display: flex;
+  height: 65vh;
   position: relative;
   user-select: none;
 }
@@ -441,6 +513,17 @@ img {
 .expand-icon:hover{
   filter: drop-shadow(1px 1px 2px #b6b6b8);
 }
+.compress-icon{
+  cursor:pointer;
+  position: absolute;
+  right: -70%;
+  top: 1%;
+  font-size: 20px;
+}
+.compress-icon:hover{
+  filter: drop-shadow(1px 1px 2px #b6b6b8);
+}
+
 /* gallery - expanded view */
 .zoom{
   align-items: center;
@@ -469,8 +552,9 @@ img {
 /* right container */
 .right{
   position: relative;
+  width: 35%;
   line-height: 1.8;
-  padding-left: 10px;
+  padding-left: 3%;
   user-select: none;
 }
 .right .overview-to-reviews{
@@ -560,9 +644,8 @@ img {
 }
 /* DESCRIPTION ------------------------ */
 .description{
-  margin: 0 auto;
-  margin-bottom: 40px;
   display: flex;
+  margin-bottom: 2.5%;
   width: 100%;
 }
 .d-left{
@@ -607,46 +690,21 @@ img {
 
 /* MEDIA QUERIES ------------------------ */
 @media only screen and (min-width: 480px){
-  /* header */
-  .search-bar{
-    margin-left: 10px;
-  }
-  .header-links{
-    visibility: hidden;
-  }
-  .shopping-bag-icon{
-    visibility: visible;
-    margin-right: 20px;
-  }
+
 }
 @media only screen and (min-width: 760px){
-  .header-links{
-    visibility: hidden;
-  }
-  .shopping-bag-icon{
-    visibility: visible;
-    margin-right: 80px;
-  }
-  .categories{
-    visibility: visible;
-  }
+
 }
 @media only screen and (min-width: 1100px){
-  .search-bar{
-    margin-left: 200px;
-  }
-  .header-links{
-    visibility: visible;
-  }
-  .shopping-bag-icon{
-    margin-right: 200px;
-  }
+
 }
 
 
 /* FERNANDO ADDED THESE --------------------------------------------------------------- */
 .q-a{
-  margin: 10% auto;
+  display: none;
+  width: 96%;
+  margin-top: -1%;
 }
 
 nav {
@@ -668,7 +726,7 @@ nav {
 }
 
 .QContainer {
-  width: 200%;
+  width: 100%;
   max-width: 100%;
   max-height: 680px;
   overflow-y:auto;
@@ -1242,25 +1300,41 @@ textarea {
 /* Reviews --------------------------------------------------------------- */
 
 .reviews-ratings{
+<<<<<<< HEAD
+  width: 100%;
+=======
   width: 110%;
   margin-left:-4.5%;
+>>>>>>> master
 }
 
 .reviews-ratings-container {
   display: flex;
   user-select: none;
   /* line-height: 1.5; */
+<<<<<<< HEAD
+  width: 95%;
+=======
   width: 100%;
+>>>>>>> master
   margin-top: -3%;
 }
 
 .review-left{
+<<<<<<< HEAD
+  flex-basis: 20%;
+=======
   flex-basis: 33%;
+>>>>>>> master
   display: inline-block;
 }
 
 .review-right{
+<<<<<<< HEAD
+  width: 80%;
+=======
   width: 95%;
+>>>>>>> master
   overflow-y: auto;
   max-height: 900px;
 }
@@ -1304,7 +1378,11 @@ textarea {
 
 .product-breakdown .category{
   margin-top: 5%;
+<<<<<<< HEAD
+  margin-left: -4%;
+=======
   margin-left: -8.5%;
+>>>>>>> master
   width: 98%;
 }
 
