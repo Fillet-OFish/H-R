@@ -1036,10 +1036,6 @@ textarea {
   color:  grey;
 }
 
-.add-to-outfit-button-dark {
-  color: white;
-}
-
 .add-to-outfit-button p {
   display:  table-cell;
   text-align:  center;
@@ -1049,6 +1045,10 @@ textarea {
 .add-to-outfit-button:hover {
   /* background-color:  lightgrey; */
   color:  black;
+}
+
+.add-to-outfit-button-dark:hover {
+  color: white
 }
 
 /* product card style ----- */
@@ -1362,7 +1362,7 @@ textarea {
 .dark-mode-button {
   position: fixed;
   bottom: 25px;
-  right: 18px;
+  right: 12px;
   padding-bottom: 5px;
   border: none;
   background-color: transparent;
@@ -1385,7 +1385,7 @@ textarea {
 #translate {
   position: fixed;
   bottom: -5px;
-  right: 0;
+  right: 18px;
   z-index:2;
 }
 iframe.goog-te-banner-frame{
@@ -1405,4 +1405,5 @@ body {
   border: none;
   appearance: none;
   color: gray;
+  text-align: right;
 }
