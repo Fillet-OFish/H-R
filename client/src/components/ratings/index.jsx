@@ -3,6 +3,7 @@ import axios from 'axios';
 import Breakdown from './components/Breakdown/Breakdown.jsx'
 import ReviewsList from './components/ReviewsList/ReviewsList.jsx'
 import AddRevModal from './components/ReviewsList/AddRevModal.jsx'
+import ImageModal from './components/ReviewsList/ImageModal.jsx'
 
 export default function Reviews(props) {
   const [reviews, setReviews] = useState(null)
@@ -12,15 +13,21 @@ export default function Reviews(props) {
 
   // keep track of add review popup modal
   const [modalRevOn, setModalRevOn] = useState(false);
+  // sort reviews by newest, helpful, relevant
+  const [sort, setSort] = useState();
+  // these states pass down the image url for the popup modal --------------
+  const [getImage, setImage] = useState();
+  const [modalOn, setModalOn] = useState(false);
 
   // console.log('reviews: ', reviews)
-  // console.log('reviewsMeta: ', reviewsMeta)
+  console.log('reviewsMeta: ', reviewsMeta)
   console.log('rating: ', props.rating)
   // console.log('numReviews: ', props.numReviews)
 
   useEffect(() => {
     //reviews/:id/:page/:count/:sort
-    axios.get(`/api/reviews/${props.product.id}/${reviewsPage}/2`)
+    console.log(sort, 'sorting')
+    axios.get(`/api/reviews/${props.product.id}/${reviewsPage}/2/${sort}`)
       .then(result => {
         setReviews(result.data.results)
       })
@@ -36,7 +43,7 @@ export default function Reviews(props) {
         props.setRating(roundedRating);
       })
       .catch(err => {console.log(err)})
-  },[props.product])
+  },[props.product, sort])
 
 
   return(
@@ -54,9 +61,14 @@ export default function Reviews(props) {
         </div>
       </div>
 
+      <div>
+        {/* popup when clicking images in reviews ----------- */}
+        <ImageModal getImage={getImage} modalOn={modalOn} setModalOn={setModalOn} />
+      </div>
+
       <div className='reviews-buttons'>
         {/* add new questions ----------- */}
-        <AddRevModal product={props.product} modalRevOn={modalRevOn} setModalRevOn={setModalRevOn} />
+        <AddRevModal product={props.product} modalRevOn={modalRevOn} setModalRevOn={setModalRevOn} reviewsMeta={reviewsMeta}/>
       </div>
 
     </div>

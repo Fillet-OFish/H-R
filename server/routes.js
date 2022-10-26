@@ -10,8 +10,10 @@ router.get('/products/:id/styles', controllers.products.getStyles)
 
 // reviews ----------
 //get info
-router.get('/reviews/:id/:page/:count', controllers.reviews.getReview)
+router.get('/reviews/:id/:page/:count/:sort', controllers.reviews.getReview)
 router.get('/reviews/meta/:id', controllers.reviews.getMeta)
+//post data
+router.post('/reviews', controllers.reviews.postRev)
 // change helpfulness and report
 router.put('/reviews/:id/helpful', controllers.reviews.helpfulRev);
 router.put('/reviews/:id/report', controllers.reviews.reportRev);

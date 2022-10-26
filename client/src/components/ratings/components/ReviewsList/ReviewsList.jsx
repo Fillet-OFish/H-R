@@ -3,6 +3,7 @@ import ReviewTile from './ReviewTile.jsx'
 import axios from 'axios';
 import LoadRevBtn from './LoadRevBtn.jsx';
 import AddRevBtn from './AddRevBtn.jsx';
+import SortRev from './SortRev.jsx';
 
 
 export default function ReviewsList(props) {
@@ -13,7 +14,7 @@ export default function ReviewsList(props) {
 
   // load more reviews with product id, next page, and two reviews per
   const loadMoreReviews=() => {
-    axios.get(`/api/reviews/${props.product.id}/${props.reviewsPage}/2`)
+    axios.get(`/api/reviews/${props.product.id}/${props.reviewsPage}/2/${props.sort}`)
     .then(result => {
       props.setReviews(props.reviews.concat(result.data.results))
     })
@@ -22,10 +23,14 @@ export default function ReviewsList(props) {
 
   return(
     <>
+      <div>
+        <SortRev sort={props.sort} setSort={props.setSort} />
+      </div>
+
       <div className='reviews-list-container'>
         {/* list every review entry --- */}
         {props.reviews.map((review, index) => (
-          <ReviewTile review={review} key={index} />
+          <ReviewTile review={review} key={index} setImage={props.setImage} modalOn={props.modalOn} setModalOn={props.setModalOn} />
           ))}
       </div>
 

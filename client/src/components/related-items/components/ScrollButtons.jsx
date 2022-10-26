@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { FaAngleRight, FaAngleLeft } from 'react-icons/fa';
+import { useDarkMode } from '../../DarkMode.jsx'
+
 
 export default function scrollButtons({element, width, scroll}) {
   const [showButtonL, setShowButtonL] = useState(false);
   const [showButtonR, setShowButtonR] = useState(true);
+  const darkMode = useDarkMode();
 
   const buttonL = () => {
     const el = document.querySelector(element);
@@ -27,10 +30,10 @@ export default function scrollButtons({element, width, scroll}) {
 
   return(
     <div>
-      {showButtonL ? <button className='button-left' onClick={buttonL}>
+      {showButtonL ? <button className={`button-left ${darkMode? 'button-left-dark' : null}`} onClick={buttonL}>
           <FaAngleLeft/>
       </button> : null }
-      {showButtonR ? <button className='button-right' onClick={buttonR}>
+      {showButtonR ? <button className={`button-right ${darkMode? 'button-right-dark' : null}`} onClick={buttonR}>
           <FaAngleRight/>
       </button> : null }
     </div>

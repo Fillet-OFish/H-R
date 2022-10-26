@@ -7,12 +7,15 @@ import Description from './overview/components/Description.jsx';
 import RelatedItemsAndComparison from './related-items/index.jsx';
 import QuesnAnsw from './qa/index.jsx';
 import Ratings from './ratings/index.jsx';
-import Footer from './footer/index.jsx'
+import Footer from './footer/index.jsx';
+import { DarkModeProvider } from './DarkMode.jsx';
+
 
 export default function App() {
   const [product, setProduct] = useState([]);
   const [rating, setRating] = useState([]);
   const [numReviews, setNumReviews] = useState(0);
+
 
   useEffect(() => {
     axios.get('/api/products/40344') // id 40344
@@ -23,6 +26,8 @@ export default function App() {
   return(
     product.id ?
     <TrackProvider>
+      <DarkModeProvider>
+
         {/* header */}
         <Header product={product}/>
 
@@ -43,6 +48,8 @@ export default function App() {
         </div>
 
         <Footer product={product}/>
+
+      </DarkModeProvider>
     </TrackProvider>
     : null
   )

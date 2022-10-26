@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useDarkMode } from '../../../DarkMode.jsx'
+
 
 export default function BreakdownByStars({ reviews, reviewsMeta, numReviews, filter, setFilter }) {
   const [breakdown, setBreakdown] = useState(null)
   const [ratingCount, setRatingCount] = useState(null)
   const [recommend, setRecommend] = useState(null);
+  const darkMode = useDarkMode();
 
   useEffect(() => {
     if (reviewsMeta) {
@@ -32,31 +35,31 @@ export default function BreakdownByStars({ reviews, reviewsMeta, numReviews, fil
     display: 'inline-block',
     width: '100%',
     height: '10px',
-    background: `linear-gradient(90deg, black ${(breakdown.five * 100)}%, #ddd 0 ${100 - (breakdown.five * 100)}%`
+    background: `linear-gradient(90deg, ${darkMode ? 'green' : 'black'} ${(breakdown.five * 100)}%, #ddd 0 ${100 - (breakdown.five * 100)}%`
   })
   const styleFour = () => ({
     display: 'inline-block',
     width: '100%',
     height: '10px',
-    background: `linear-gradient(90deg, black ${(breakdown.four * 100)}%, #ddd 0 ${100 - (breakdown.four * 100)}%`
+    background: `linear-gradient(90deg, ${darkMode ? 'green' : 'black'} ${(breakdown.four * 100)}%, #ddd 0 ${100 - (breakdown.four * 100)}%`
   })
   const styleThree = () => ({
     display: 'inline-block',
     width: '100%',
     height: '10px',
-    background: `linear-gradient(90deg, black ${(breakdown.three * 100)}%, #ddd 0 ${100 - (breakdown.three * 100)}%`
+    background: `linear-gradient(90deg, ${darkMode ? 'green' : 'black'} ${(breakdown.three * 100)}%, #ddd 0 ${100 - (breakdown.three * 100)}%`
   })
   const styleTwo = () => ({
     display: 'inline-block',
     width: '100%',
     height: '10px',
-    background: `linear-gradient(90deg, black ${(breakdown.two * 100)}%, #ddd 0 ${100 - (breakdown.two * 100)}%`
+    background: `linear-gradient(90deg, ${darkMode ? 'green' : 'black'} ${(breakdown.two * 100)}%, #ddd 0 ${100 - (breakdown.two * 100)}%`
   })
   const styleOne = () => ({
     display: 'inline-block',
     width: '100%',
     height: '10px',
-    background: `linear-gradient(90deg, black ${(breakdown.one * 100)}%, #ddd 0 ${100 - (breakdown.one * 100)}%`
+    background: `linear-gradient(90deg, ${darkMode ? 'green' : 'black'} ${(breakdown.one * 100)}%, #ddd 0 ${100 - (breakdown.one * 100)}%`
   })
 
   const clickHandler = (rating) => {

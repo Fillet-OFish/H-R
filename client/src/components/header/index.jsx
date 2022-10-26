@@ -4,8 +4,10 @@ import Announcements from './components/Announcements.jsx'
 import Search from './components/Search.jsx'
 import Cart from './components/Cart.jsx'
 import { FaShoppingBag } from 'react-icons/fa';
+import { useDarkMode } from '../DarkMode.jsx'
 
 export default function Header({ product }) {
+  const darkMode = useDarkMode();
 
   // on hover function - shows cart when hovering over shopping bag
   function showCart() {
@@ -17,9 +19,9 @@ export default function Header({ product }) {
       {/* announcements */}
       <Announcements/>
 
-      <div className='header'>
+      <div className={`header ${darkMode ? 'header-dark' : null}`}>
         {/* logo */}
-        <span className='logo'><a href='/'>Hack & Reactor</a></span> <Search/>
+        <span className='logo'><a style={darkMode ? {color: 'white'} : {}} href='/'>Hack & Reactor</a></span> <Search/>
 
         {/* sign in/register */}
         <span className='header-links'>
@@ -34,9 +36,9 @@ export default function Header({ product }) {
 
         {/* categories */}
         <p className='categories'>
-          <span className='category'><a href='/'>Women</a></span>
-          <span className='category'><a href='/'>Men</a></span>
-          <span className='category'><a href='/'>Accessories</a></span>
+          <span className='category'><a style={darkMode ? {color: 'white'} : {}} href='/'>Women</a></span>
+          <span className='category'><a style={darkMode ? {color: 'white'} : {}} href='/'>Men</a></span>
+          <span className='category'><a style={darkMode ? {color: 'white'} : {}} href='/'>Accessories</a></span>
         </p>
       </div>
 

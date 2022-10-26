@@ -78,6 +78,9 @@ img {
   color: black;
   font-size: 30px;
 }
+.header-dark{
+  color: white;
+}
 .logo{
   display: table;
   margin: auto;
@@ -97,6 +100,9 @@ img {
   margin-left: 20%;
   background-color: transparent;
   color: black;
+}
+.search-bar-dark{
+  color: white;
 }
 .search-bar input{
   width: 60%;
@@ -196,7 +202,7 @@ img {
 /* FOOTER ------------------------ */
 
 .footer{
-  height: 400px;
+  height: 420px;
   background-color: white;
   line-height: 1;
 }
@@ -701,6 +707,11 @@ nav {
   font-weight: lighter;
   font-size: 13px;
 }
+
+.user_info-dark {
+  color: lightgrey;
+}
+
 .a-photos{
   margin-top:.5%;
   margin-left:2.5%;
@@ -933,6 +944,7 @@ textarea {
 /* Jaden ADDED THESE ------------------------------------------------- */
 
 /* related items and outfit ----- */
+
 .related-list {
   position: relative;
 }
@@ -995,6 +1007,14 @@ textarea {
   background:  linear-gradient(-90deg, white 30%, transparent 100%);
 }
 
+.button-left-dark {
+  background:  linear-gradient(90deg, #180A0A 30%, transparent 100%);
+}
+
+.button-right-dark {
+  background:  linear-gradient(-90deg, #180A0A 30%, transparent 100%);
+}
+
 .add-to-outfit-button {
   display:  table;
   margin:  8px;
@@ -1007,6 +1027,11 @@ textarea {
   border-radius:  6px;
   font-size:  22px;
   color:  grey;
+}
+
+.add-to-outfit-button-dark {
+  background-color:  rgb(40, 40, 40);
+  color: white;
 }
 
 .add-to-outfit-button p {
@@ -1034,6 +1059,10 @@ textarea {
   overflow: hidden;
 }
 
+.product-card-dark {
+  background:rgb(40, 40, 40)
+}
+
 .product-card-photo {
   width: 100%;
   height: 70%;
@@ -1057,6 +1086,7 @@ textarea {
   padding:  1px;
   cursor:  pointer;
   animation:  fade-in 0.3s ease;
+  overflow: visible;
 }
 
 
@@ -1073,9 +1103,8 @@ textarea {
   display:  flex;
   width:  100%;
   height:  100%;
-  overflow-x:  auto;
-  scroll-behavior:  smooth;
   overflow:  hidden;
+  scroll-behavior:  smooth;
 }
 
 .preview-image {
@@ -1084,6 +1113,12 @@ textarea {
   width:  25%;
   margin-left:  1px;
   object-fit:  cover;
+}
+
+.preview-image:hover {
+  transform: scale(1.1);
+  transition: transform .1s;
+  border: 1px solid white;
 }
 
 .product-card small {
@@ -1111,13 +1146,13 @@ textarea {
 }
 
 .product-card-info {
-  padding:  5px 10px 0 10px;
+  padding:  3px 10px 5px 10px;
 }
 
 .product-card-name {
   display:  -webkit-box;
   height:  30px;
-  padding:  3px 0 3px 0;
+  padding-bottom: 3px;
   font-size:  13px;
   -webkit-line-clamp:  2;
   -webkit-box-orient:  vertical;
@@ -1307,3 +1342,25 @@ textarea {
   height: 100px;
   object-fit: cover;
 }
+
+.dark-mode-button {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  border: none;
+  background-color: transparent;
+  color: grey;
+}
+
+.dark-mode-button-dark {
+  color: grey;
+}
+
+.dark-mode-button:hover {
+  color: black;
+}
+
+.dark-mode-button-dark:hover {
+  color: white;
+}
+
