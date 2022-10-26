@@ -35,6 +35,9 @@ button {
 img {
   border-radius: 5px;
 }
+::placeholder {
+  color: lightgrey;
+}
 /* APP ------------------------ */
 #app{
   scroll-behavior: smooth;
@@ -203,8 +206,12 @@ img {
 
 .footer{
   height: 420px;
-  background-color: white;
+  /* background-color: white; */
   line-height: 1;
+}
+
+.footer-dark{
+  background-color: transparent
 }
 
 .start{
