@@ -4,11 +4,11 @@ html {
 }
 body{
   font-family: 'Outfit', sans-serif;
-  max-width: 1080px;
   padding: 0;
-	margin: 0 auto;
+	margin: 0;
 	float: none;
   font-size: 100%;
+  overflow-x: hidden;
 }
 body::-webkit-scrollbar {
   display: none;
@@ -32,18 +32,20 @@ option,
 button {
   cursor: pointer;
 }
-img {
-  border-radius: 5px;
-}
 /* APP ------------------------ */
 #app{
   scroll-behavior: smooth;
 }
-.contain{
+.contain-description-related{
   max-width: 95%;
   margin: 0 auto;
   margin-top: -3%;
   margin-bottom: 3%;
+}
+.contain-reviews-QnA{
+  width:100%;
+  margin: 0 auto;
+  padding: 2%;
 }
 .container2{
   margin: 30px auto;
@@ -74,7 +76,6 @@ img {
   top:5%;
   left:0;
   width:100%;
-  /* padding: 20px; */
   color: black;
   font-size: 30px;
 }
@@ -118,7 +119,7 @@ img {
   width: 80%;
 }
 .search-bar input::placeholder{
-  color: black;
+  /* color: black; */
 }
 .search-bar button{
   background-color: transparent;
@@ -202,18 +203,19 @@ img {
 /* FOOTER ------------------------ */
 
 .footer{
-  height: 420px;
-  background-color: white;
+  height: auto;
+  width: 90%;
   line-height: 1;
+  background-color: black;
+  color:white;
+  margin: 0;
+  padding: 2.5% 5%;
+
 }
 
 .start{
   display: flex;
-  background-color: rgb(245,245,245, 40%);
-  padding: 5%;
-  height: auto;
-  width: 200%;
-  margin: 10% 0 0 -30%;
+  height: 60%;
 }
 
 .start-title{
@@ -222,42 +224,40 @@ img {
 }
 
 .start a{
-  color:black;
+  color:white;
   text-decoration: none;
 }
 
 .start .col1{
-  width:35%;
+  width:60%;
   font-size: 15px;
 }
 
 .start .col2{
-  width:20%;
+  width:40%;
   font-size: 16px;
 }
 
 .col1 .newsletter-bar input{
   border:0;
   width: 70%;
-  border-bottom: 1.5px black solid;
+  border-bottom: 1.5px white solid;
   background-color: transparent;
 }
 
 .end{
-  width: 200%;
-  margin: 2% 0 2% -30%;
-  padding-left: 5%;
   font-weight:250;
   text-transform: uppercase;
+  background-color: black;
+  opacity: 60%;
 }
 
 /* OVERVIEW ------------------------ */
 .overview-container{
+  display: flex;
   max-width: 100%;
   margin: 5% auto;
   margin-top: 15%;
-  display: inline-grid;
-  grid-template-columns: repeat(2, 1fr);
 }
 .left{
   display: flex;
@@ -639,7 +639,8 @@ img {
 
 /* FERNANDO ADDED THESE --------------------------------------------------------------- */
 .q-a{
-  margin: 10% auto;
+  display: none;
+  width: 96%;
 }
 
 nav {
@@ -1226,25 +1227,24 @@ textarea {
 /* Reviews --------------------------------------------------------------- */
 
 .reviews-ratings{
-  width: 110%;
-  margin-left:-4.5%;
+  width: 100%;
 }
 
 .reviews-ratings-container {
   display: flex;
   user-select: none;
   /* line-height: 1.5; */
-  width: 100%;
+  width: 95%;
   margin-top: -3%;
 }
 
 .review-left{
-  flex-basis: 33%;
+  flex-basis: 20%;
   display: inline-block;
 }
 
 .review-right{
-  width: 95%;
+  width: 80%;
   overflow-y: auto;
   max-height: 900px;
 }
@@ -1288,7 +1288,7 @@ textarea {
 
 .product-breakdown .category{
   margin-top: 5%;
-  margin-left: -8.5%;
+  margin-left: -4%;
   width: 98%;
 }
 

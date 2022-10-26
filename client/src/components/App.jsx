@@ -13,6 +13,7 @@ import { DarkModeProvider } from './DarkMode.jsx';
 
 export default function App() {
   const [product, setProduct] = useState([]);
+  const [toggleQnA, setToggleQnA] = useState(false)
   const [rating, setRating] = useState([]);
   const [numReviews, setNumReviews] = useState(0);
 
@@ -21,6 +22,17 @@ export default function App() {
     axios.get('/api/products/40344') // id 40344
       .then(result => setProduct(result.data))
   },[])
+
+  function toggledQnA(){
+    console.log('toggled', toggleQnA)
+    if(!toggleQnA){
+      document.querySelector('.reviews-ratings').style.display = 'none'
+      document.querySelector('.q-a').style.display = 'block'
+    } else {
+      document.querySelector('.q-a').style.display = 'none'
+      document.querySelector('.reviews-ratings').style.display = 'block'
+    }
+  }
 
 
   return(
@@ -34,12 +46,20 @@ export default function App() {
         {/* overview */}
         <Overview product={product} rating={rating} numReviews={numReviews}/>
 
-        <div className="contain">
+        <div className="contain-description-related">
           <Description product={product}/>
 
           {/* related products */}
-          <RelatedItemsAndComparison currentItem={product} setProduct={setProduct} />
+          {/* <RelatedItemsAndComparison currentItem={product} setProduct={setProduct} /> */}
+        </div>
 
+        <div className="contain-reviews-QnA">
+          <button className="toggle-reviews-QnA" onClick={e=>{ if(toggleQnA){setToggleQnA(!toggleQnA); toggledQnA()}}}>
+              Reviews
+          </button>
+          <button className="toggle-reviews-QnA" onClick={e=>{ if(!toggleQnA){setToggleQnA(!toggleQnA); toggledQnA()}}}>
+              Questions
+          </button>
           {/* Questions and Answers */}
           <QuesnAnsw product={product} />
 
