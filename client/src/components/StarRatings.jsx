@@ -11,6 +11,7 @@ export default function StarRatings({item, itemRating}) {
       const source = axios.CancelToken.source();
       axios.get(`/api/reviews/meta/${item}`, {cancelToken: source.token})
       .then(result => {
+        console.log(result.data, 'RATINGS---------')
         let data = result.data;
         let totalNum = Number(data.recommended.true) + Number(data.recommended.false);
         let rating = (Number(data.ratings[1]) + (Number(data.ratings[2]) * 2) + (Number(data.ratings[3]) * 3)+ (Number(data.ratings[4]) * 4) + (Number(data.ratings[5]) * 5)) / totalNum
