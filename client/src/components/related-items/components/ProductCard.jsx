@@ -12,6 +12,7 @@ export default function ProductCard({currentItem, item, setProduct, list, outfit
   const [styles, setStyles] = useState(null);
   const [defaultStyle, setDefaultStyle] = useState(null);
   const [popup, setPopup] = useState(false);
+  const [hover, setHover] = useState(false);
   const darkMode = useDarkMode();
 
   useEffect(() => {
@@ -78,26 +79,20 @@ export default function ProductCard({currentItem, item, setProduct, list, outfit
               x
             </button> : null
           }
-          <div className='product-card-info'>
+          <div className='product-card-info' onMouseEnter={() => setHover(true)} onMouseLeave={() => {setTimeout(()=>{setHover(false)}, 300)}}>
             <small>{relatedItem.category}</small>
-            <div className='product-card-name'>
-              {relatedItem.name + ' - ' + relatedItem.slogan}
+            <div className='product-card-name'>{relatedItem.name}</div>
+            <div className='product-card-info-show-on-hover' style={{display: hover ? 'block' : 'none'}}>
+              <StarRatings item={item} />
+              {defaultStyle.sale_price ?
+                <div>
+                  <p style={{color: 'red'}}>${defaultStyle.sale_price}</p>
+                  <small style={{textDecoration: 'line-through'}}>${defaultSTyle.original_price}</small>
+                </div>
+                :
+                <small>${defaultStyle.original_price}</small>
+              }
             </div>
-            {defaultStyle.sale_price ?
-              <div>
-                <p style={{color: 'red'}}>
-                  ${defaultStyle.sale_price}
-                </p>
-                <small style={smallStyle, {textDecoration: 'line-through'}}>
-                  ${defaultSTyle.original_price}
-                </small>
-              </div>
-              :
-              <small>
-                ${defaultStyle.original_price}
-              </small>
-            }
-            <StarRatings item={item} />
           </div>
         </li> : null
       }
