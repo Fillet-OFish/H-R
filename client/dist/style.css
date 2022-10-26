@@ -32,11 +32,18 @@ option,
 button {
   cursor: pointer;
 }
+img {
+  /* border-radius: 5px; */
+}
+::placeholder {
+  color: lightgrey;
+}
 /* APP ------------------------ */
 #app{
   scroll-behavior: smooth;
   width: 100%;
 }
+<<<<<<< HEAD
 .contain-description-related{
   margin: -3% auto 3% 18%;
   width: 75%
@@ -69,6 +76,13 @@ button {
   border-top-right-radius: 5px;
   background-color: #f0f0f0;
   box-shadow: inset 7px 0 9px -7px rgba(0,0,0,0.3), inset 0 -7px 9px -7px rgba(0,0,0,0.3);
+=======
+.contain{
+  max-width: 95%;
+  margin: 0 auto;
+  margin-top: -3%;
+  margin-bottom: 3%;
+>>>>>>> master
 }
 .container2{
   margin: 30px auto;
@@ -214,6 +228,7 @@ button {
 /* FOOTER ------------------------ */
 
 .footer{
+<<<<<<< HEAD
   height: auto;
   width: 90%;
   line-height: 1;
@@ -222,16 +237,34 @@ button {
   margin-top: 5%;
   padding: 2.5% 5%;
 
+=======
+  height: 420px;
+  /* background-color: white; */
+  line-height: 1;
+}
+
+.footer-dark{
+  background-color: transparent
+>>>>>>> master
 }
 
 .start{
   display: flex;
+<<<<<<< HEAD
   height: 60%;
+=======
+  background-color: rgb(245,245,245, 40%);
+  padding: 5%;
+  height: auto;
+  width: 200%;
+  margin: 10% 0 0 -30%;
+>>>>>>> master
 }
 
 .start-title{
   opacity: 60%;
   text-transform: uppercase;
+<<<<<<< HEAD
 }
 
 .start a{
@@ -241,26 +274,53 @@ button {
 
 .start .col1{
   width:60%;
+=======
+}
+
+.start a{
+  color:black;
+  text-decoration: none;
+}
+
+.start .col1{
+  width:35%;
+>>>>>>> master
   font-size: 15px;
 }
 
 .start .col2{
+<<<<<<< HEAD
   width:40%;
+=======
+  width:20%;
+>>>>>>> master
   font-size: 16px;
 }
 
 .col1 .newsletter-bar input{
   border:0;
   width: 70%;
+<<<<<<< HEAD
   border-bottom: 1.5px white solid;
+=======
+  border-bottom: 1.5px black solid;
+>>>>>>> master
   background-color: transparent;
 }
 
 .end{
+<<<<<<< HEAD
   font-weight:250;
   text-transform: uppercase;
   background-color: black;
   opacity: 60%;
+=======
+  width: 200%;
+  margin: 2% 0 2% -30%;
+  padding-left: 5%;
+  font-weight:250;
+  text-transform: uppercase;
+>>>>>>> master
 }
 
 /* OVERVIEW ------------------------ */
@@ -1023,19 +1083,18 @@ textarea {
 .add-to-outfit-button {
   display:  table;
   margin:  8px;
-  background-color:  white;
-  border:  1px solid lightgrey ;
+  background-color: transparent;
+  /* border:  1px solid lightgrey ; */
   width:  220px;
   height:  335px;
   /* overflow:  hidden; */
   cursor:  pointer;
-  border-radius:  6px;
+  /* border-radius:  6px; */
   font-size:  22px;
   color:  grey;
 }
 
 .add-to-outfit-button-dark {
-  background-color:  rgb(40, 40, 40);
   color: white;
 }
 
@@ -1046,7 +1105,7 @@ textarea {
 }
 
 .add-to-outfit-button:hover {
-  background-color:  lightgrey;
+  /* background-color:  lightgrey; */
   color:  black;
 }
 
@@ -1055,17 +1114,17 @@ textarea {
 .product-card {
   list-style-type: none;
   position: relative;
-  border: 1px solid lightgrey;
+  /* border: 1px solid lightgrey; */
   margin: 8px;
   width: 220px;
   height: 335px;
   cursor: pointer;
-  border-radius: 6px;
+  /* border-radius: 6px; */
   overflow: hidden;
 }
 
 .product-card-dark {
-  background:rgb(40, 40, 40)
+  /* background:rgb(40, 40, 40) */
 }
 
 .product-card-photo {
@@ -1151,13 +1210,23 @@ textarea {
 }
 
 .product-card-info {
-  padding:  3px 10px 5px 10px;
+  /* padding:  3px 10px 5px 10px; */
+  position: relative;
+}
+
+.product-card-info-show-on-hover {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-right: 10px;
+  background-color: inherit;
+  text-align: right;
 }
 
 .product-card-name {
   display:  -webkit-box;
-  height:  30px;
-  padding-bottom: 3px;
+  /* height:  30px; */
+  /* padding-bottom: 3px; */
   font-size:  13px;
   -webkit-line-clamp:  2;
   -webkit-box-orient:  vertical;
@@ -1231,24 +1300,41 @@ textarea {
 /* Reviews --------------------------------------------------------------- */
 
 .reviews-ratings{
+<<<<<<< HEAD
   width: 100%;
+=======
+  width: 110%;
+  margin-left:-4.5%;
+>>>>>>> master
 }
 
 .reviews-ratings-container {
   display: flex;
   user-select: none;
   /* line-height: 1.5; */
+<<<<<<< HEAD
   width: 95%;
+=======
+  width: 100%;
+>>>>>>> master
   margin-top: -3%;
 }
 
 .review-left{
+<<<<<<< HEAD
   flex-basis: 20%;
+=======
+  flex-basis: 33%;
+>>>>>>> master
   display: inline-block;
 }
 
 .review-right{
+<<<<<<< HEAD
   width: 80%;
+=======
+  width: 95%;
+>>>>>>> master
   overflow-y: auto;
   max-height: 900px;
 }
@@ -1292,7 +1378,11 @@ textarea {
 
 .product-breakdown .category{
   margin-top: 5%;
+<<<<<<< HEAD
   margin-left: -4%;
+=======
+  margin-left: -8.5%;
+>>>>>>> master
   width: 98%;
 }
 
@@ -1349,8 +1439,9 @@ textarea {
 
 .dark-mode-button {
   position: fixed;
-  bottom: 0;
-  right: 0;
+  bottom: 25px;
+  right: 18px;
+  padding-bottom: 5px;
   border: none;
   background-color: transparent;
   color: grey;
@@ -1360,11 +1451,36 @@ textarea {
   color: grey;
 }
 
-.dark-mode-button:hover {
+/* .dark-mode-button:hover {
   color: black;
 }
 
 .dark-mode-button-dark:hover {
   color: white;
-}
+} */
 
+/*  Google Translate widget */
+#translate {
+  position: fixed;
+  bottom: -5px;
+  right: 0;
+  z-index:2;
+}
+iframe.goog-te-banner-frame{
+  display: none !important;
+}
+.goog-logo-link {
+  display:none !important;
+}
+.goog-te-gadget{
+  color: transparent !important;
+}
+body {
+  position: static !important; top:0px !important;
+}
+.goog-te-combo{
+  background: transparent;
+  border: none;
+  appearance: none;
+  color: gray;
+}
