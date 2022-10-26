@@ -6,11 +6,10 @@ export default function RatingBreakdown({ rating, product, numReviews, reviews, 
   return(
     <>
       <div className='rating-summary'>
-        <span style={{display: 'inline-block'}}>
+        <span className='rating' style={{display: 'inline-block'}}>
           {rating}
         </span>
-        <span style={{display: 'inline-block'}}><StarRatings itemRating={rating} /></span><br/>
-        {`${numReviews} reviews`}
+        <span className='star' style={{display: 'inline-block'}}><StarRatings itemRating={rating} /></span><br/>
       </div>
       <div>
         <BreakdownByStars reviews={reviews} numReviews={numReviews} reviewsMeta={reviewsMeta} filter={filter} setFilter={setFilter} />

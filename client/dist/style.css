@@ -18,15 +18,22 @@ h2{
   font-weight: 500;
 }
 h3{
-  font-weight: 450
+  font-weight: 320
 }
 hr{
   border-top: 1px solid black;
+}
+select:focus,
+input:focus{
+  outline: none;
 }
 select,
 option,
 button {
   cursor: pointer;
+}
+img {
+  border-radius: 5px;
 }
 /* APP ------------------------ */
 #app{
@@ -36,10 +43,9 @@ button {
   max-width: 95%;
   margin: 0 auto;
   margin-top: -3%;
-  margin-bottom: 5%;
+  margin-bottom: 3%;
 }
 .container2{
-  max-width: 1100px;
   margin: 30px auto;
   display: grid;
 }
@@ -109,7 +115,6 @@ button {
   width: 80%;
 }
 .search-bar input:focus{
-  outline: none;
   width: 80%;
 }
 .search-bar input::placeholder{
@@ -197,13 +202,55 @@ button {
 /* FOOTER ------------------------ */
 
 .footer{
-  /* background-color: purple; */
-  /* position: absolute; */
-  bottom: 0;
-  left: 0;
-  height:20%;
-  width:100%;
+  height: 420px;
+  background-color: white;
+  line-height: 1;
 }
+
+.start{
+  display: flex;
+  background-color: rgb(245,245,245, 40%);
+  padding: 5%;
+  height: auto;
+  width: 200%;
+  margin: 10% 0 0 -30%;
+}
+
+.start-title{
+  opacity: 60%;
+  text-transform: uppercase;
+}
+
+.start a{
+  color:black;
+  text-decoration: none;
+}
+
+.start .col1{
+  width:35%;
+  font-size: 15px;
+}
+
+.start .col2{
+  width:20%;
+  font-size: 16px;
+}
+
+.col1 .newsletter-bar input{
+  border:0;
+  width: 70%;
+  border-bottom: 1.5px black solid;
+  background-color: transparent;
+}
+
+.end{
+  width: 200%;
+  margin: 2% 0 2% -30%;
+  padding-left: 5%;
+  font-weight:250;
+  text-transform: uppercase;
+}
+
 /* OVERVIEW ------------------------ */
 .overview-container{
   max-width: 100%;
@@ -478,9 +525,6 @@ button {
   padding-left: 15px;
   font-size: 16px;
 }
-.cart select:focus{
-  outline: none;
-}
 .select-size{
   width: 250px;
   margin-right: 10px;
@@ -619,9 +663,7 @@ nav {
 .QContainer {
   width: 200%;
   max-width: 100%;
-  height: 400px;
-  margin: 0;
-  padding: 0;
+  max-height: 680px;
   overflow-y:auto;
   overflow-x: hidden;
 }
@@ -637,11 +679,11 @@ nav {
 .QContainer::-webkit-scrollbar {
   width: 5px;
   height: 8px;
-  background-color: rgb(241, 239, 239);
+  background-color: rgb(241, 239, 239, 50%);
 }
 
 .QContainer::-webkit-scrollbar-thumb {
-  background: rgb(212, 211, 211);
+  background: rgb(212, 211, 211, 50%);
 }
 
 .QA-left{
@@ -771,7 +813,6 @@ nav {
 /* When the inputs get focus, do something */
 .form-container input[type=text]:focus, .form-container input[type=reply]:focus {
   background-color:  #ddd;
-  outline:  none;
 }
 .form-close-btn {
   margin-left: 98%;
@@ -790,6 +831,7 @@ nav {
 /* align buttons for more questions and add new questions ----- */
 .align-btns {
   display: flex;
+  margin-top: -2.5%;
 }
 .form-button {
   margin-top: 20px;
@@ -857,7 +899,7 @@ textarea {
   margin: 1% auto;
   width: 100%;
   border: 0;
-  border-top: 1px solid #ececec;
+  border-top: 1px solid #d5d5d5;
   border-bottom: 1px solid #fff;
 }
 
@@ -866,7 +908,7 @@ textarea {
   background-color: #f9f9f9;
   width: 100%;
   height: 44px;
-  border: 1px rgb(190, 190, 190) solid;
+  border-radius: 5px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -1180,25 +1222,103 @@ textarea {
 
 .comparison-table tbody tr:nth-child(odd) {background-color: #f2f2f2;}
 
-.star-breakdown:hover {
-  background: #f80;
-  cursor: pointer;
+
+/* Reviews --------------------------------------------------------------- */
+
+.reviews-ratings{
+  width: 110%;
+  margin-left:-4.5%;
 }
 
-.reviews-ratings {
+.reviews-ratings-container {
   display: flex;
+  user-select: none;
+  /* line-height: 1.5; */
+  width: 100%;
+  margin-top: -3%;
 }
 
-.breakdown {
+.review-left{
   flex-basis: 33%;
   display: inline-block;
 }
 
+.review-right{
+  width: 95%;
+  overflow-y: auto;
+  max-height: 900px;
+}
+
+.review-right::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+  background-color: rgb(241, 239, 239, .5);
+}
+
+.review-right::-webkit-scrollbar-thumb {
+  background: rgb(212, 211, 211, .5);
+}
+
+.rating-summary {
+  position: relative;
+}
+.rating-summary .rating{
+  font-size: 50px;
+  font-weight: 500;
+  letter-spacing: 1.8px;
+}
+
+.rating-summary .star{
+  position: absolute;
+  top:0;
+  padding: 2% 0 0 3%;
+  padding-left:3%;
+}
+
+.rating-breakdown .title{
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.product-breakdown{
+  font-size: 14px;
+  margin-top: 5%;
+  width: 95%;
+}
+
+.product-breakdown .category{
+  margin-top: 5%;
+  margin-left: -8.5%;
+  width: 98%;
+}
+
+.star-bar{
+  display:flex;
+  flex-direction: row;
+}
+
+.star-bar:hover {
+  background: #f80;
+  cursor: pointer;
+  transition: .5s;
+}
+
+.bar-left{
+  width:16%
+}
+
+.bar-middle{
+  width:65%
+}
+
+.bar-right{
+  width:6%;
+  padding-left:2%;
+}
+
 .reviews-list-container {
-  color: #525252;
-  width: 200%;
-  max-width: 1100px;
-  height: 350px;
+  width:100%;
+  height: auto;
   margin: 0;
   padding: 0;
   overflow-y:auto;
@@ -1206,20 +1326,14 @@ textarea {
   scroll-behavior: smooth;
 }
 
-.reviews-list-container2 {
-  color: #525252;
+.display-reviews {
   margin-right: 10%;
-  /* width: 1100px; */
-  /* font-size: larger; */
+  padding: 0 2% 0 5%;
+  width: 95%;
 }
 
-/* horizontal line ----- */
-.hr3-reviews {
-  margin-top: 20px;
-  margin-bottom: 40px;
-  border: 0;
-  height: 2px;
-  background-image: linear-gradient(to right, transparent, rgb(0, 0, 0), transparent);
+.align-btns{
+  margin-left: 3%;
 }
 
 .rev-images {
