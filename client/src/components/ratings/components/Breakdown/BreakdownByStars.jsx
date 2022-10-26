@@ -33,31 +33,31 @@ export default function BreakdownByStars({ reviews, reviewsMeta, numReviews, fil
 
   const styleFive = () => ({
     display: 'inline-block',
-    width: '100px',
+    width: '100%',
     height: '10px',
     background: `linear-gradient(90deg, ${darkMode ? 'green' : 'black'} ${(breakdown.five * 100)}%, #ddd 0 ${100 - (breakdown.five * 100)}%`
   })
   const styleFour = () => ({
     display: 'inline-block',
-    width: '100px',
+    width: '100%',
     height: '10px',
     background: `linear-gradient(90deg, ${darkMode ? 'green' : 'black'} ${(breakdown.four * 100)}%, #ddd 0 ${100 - (breakdown.four * 100)}%`
   })
   const styleThree = () => ({
     display: 'inline-block',
-    width: '100px',
+    width: '100%',
     height: '10px',
     background: `linear-gradient(90deg, ${darkMode ? 'green' : 'black'} ${(breakdown.three * 100)}%, #ddd 0 ${100 - (breakdown.three * 100)}%`
   })
   const styleTwo = () => ({
     display: 'inline-block',
-    width: '100px',
+    width: '100%',
     height: '10px',
     background: `linear-gradient(90deg, ${darkMode ? 'green' : 'black'} ${(breakdown.two * 100)}%, #ddd 0 ${100 - (breakdown.two * 100)}%`
   })
   const styleOne = () => ({
     display: 'inline-block',
-    width: '100px',
+    width: '100%',
     height: '10px',
     background: `linear-gradient(90deg, ${darkMode ? 'green' : 'black'} ${(breakdown.one * 100)}%, #ddd 0 ${100 - (breakdown.one * 100)}%`
   })
@@ -79,7 +79,12 @@ export default function BreakdownByStars({ reviews, reviewsMeta, numReviews, fil
   return(
     <>
       {breakdown && ratingCount && recommend ?
-        <div className='rating-breakdown'> Rating Breakdown <br/>
+        <div className='rating-breakdown'>
+        <span className='title'>Rating breakdown</span>
+
+        <p>{recommend * 100}% recommend this product</p>
+
+        <div className="star-bars">
           {filter.length > 0 ?
             <span className='filter-applied'>
               filters applied: <br/>
@@ -87,27 +92,73 @@ export default function BreakdownByStars({ reviews, reviewsMeta, numReviews, fil
               <button onClick={removeAllFilters}>Remove all filters</button><br/>
             </span>
           : null}
-          <small className='star-breakdown' onClick={() => clickHandler('5 stars')}>
-            5 stars <span style={styleFive()}></span>
-            {ratingCount.five}
-          </small><br/>
-          <small className='star-breakdown' onClick={() => clickHandler('4 stars')}>
-            4 stars <span style={styleFour()}></span>
-            {ratingCount.four}
-          </small><br/>
-          <small className='star-breakdown' onClick={() => clickHandler('3 stars')}>
-            3 stars <span style={styleThree()}></span>
-            {ratingCount.three}
-          </small><br/>
-          <small className='star-breakdown' onClick={() => clickHandler('2 stars')}>
-            2 stars <span style={styleTwo()}></span>
-            {ratingCount.two}
-          </small><br/>
-          <small className='star-breakdown' onClick={() => clickHandler('1 stars')}>
-            1 stars <span style={styleOne()}></span>
-            {ratingCount.one}
-          </small><br/>
-          <span>{recommend * 100}% of reviews recommend this product</span>
+
+          {/* 5 stars bar */}
+          <div className="star-bar">
+            <div className="bar-left">
+              <small className='star-breakdown'>5 stars</small>
+            </div>
+            <div className="bar-middle">
+              <span style={styleFive()}></span>
+            </div>
+            <div className="bar-right">
+              <small>{ratingCount.five}</small>
+            </div>
+          </div>
+
+          {/* 4 stars bar */}
+          <div className="star-bar">
+            <div className="bar-left">
+              <small className='star-breakdown' onClick={() => clickHandler('4 stars')}>4 stars</small>
+            </div>
+            <div className="bar-middle">
+              <span style={styleFour()}></span>
+            </div>
+            <div className="bar-right">
+              <small>{ratingCount.four}</small>
+            </div>
+          </div>
+
+          {/* 3 stars bar */}
+          <div className="star-bar">
+            <div className="bar-left">
+              <small className='star-breakdown' onClick={() => clickHandler('4 stars')}>3 stars</small>
+            </div>
+            <div className="bar-middle">
+              <span style={styleThree()}></span>
+            </div>
+            <div className="bar-right">
+              <small>{ratingCount.three}</small>
+            </div>
+          </div>
+
+          {/* 2 stars bar */}
+          <div className="star-bar">
+            <div className="bar-left">
+              <small className='star-breakdown' onClick={() => clickHandler('2 stars')}>2 stars</small>
+            </div>
+            <div className="bar-middle">
+              <span style={styleTwo()}></span>
+            </div>
+            <div className="bar-right">
+              <small>{ratingCount.two}</small>
+            </div>
+          </div>
+
+          {/* 1 star bar */}
+          <div className="star-bar">
+            <div className="bar-left">
+              <small className='star-breakdown' onClick={() => clickHandler('1 stars')}>1 star</small>
+            </div>
+            <div className="bar-middle">
+              <span style={styleOne()}></span>
+            </div>
+            <div className="bar-right">
+              <small>{ratingCount.one }</small>
+            </div>
+          </div>
+        </div>
+
         </div>
       : null}
     </>
