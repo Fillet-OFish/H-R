@@ -7,6 +7,7 @@ const AddQuesModal = (props) => {
 
   // post request to add answer
   const postQues = (body, name, email, product_id) => {
+    console.log(body,name,email,product_id, 'POSTQUES ---')
     axios.post(`/api/qa/questions`, {
       body: body,
       name: name,
