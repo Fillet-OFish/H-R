@@ -79,19 +79,19 @@ export default function ProductCard({currentItem, item, setProduct, list, outfit
               x
             </button> : null
           }
-          <div className='product-card-info' onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+          <div className='product-card-info' onMouseEnter={() => setHover(true)} onMouseLeave={() => {setTimeout(()=>{setHover(false)}, 300)}}>
+            <small>{relatedItem.category}</small>
             <div className='product-card-name'>{relatedItem.name}</div>
-            {defaultStyle.sale_price ?
-              <div>
-                <p style={{color: 'red'}}>${defaultStyle.sale_price}</p>
-                <small style={{textDecoration: 'line-through'}}>${defaultSTyle.original_price}</small>
-              </div>
-              :
-              <small>${defaultStyle.original_price}</small>
-            }
-            <div style={{display: hover ? 'block' : 'none'}}>
-              <small>{relatedItem.category}</small>
+            <div className='product-card-info-show-on-hover' style={{display: hover ? 'block' : 'none'}}>
               <StarRatings item={item} />
+              {defaultStyle.sale_price ?
+                <div>
+                  <p style={{color: 'red'}}>${defaultStyle.sale_price}</p>
+                  <small style={{textDecoration: 'line-through'}}>${defaultSTyle.original_price}</small>
+                </div>
+                :
+                <small>${defaultStyle.original_price}</small>
+              }
             </div>
           </div>
         </li> : null
