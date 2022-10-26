@@ -171,7 +171,6 @@ const AddRevModal = (props) => {
             </div>
             <br></br>
 
-
             {/* characteristics ----- */}
             <label><b>* Size</b></label>
             <label style={{marginLeft: '40%'}}><b>* Width</b></label>

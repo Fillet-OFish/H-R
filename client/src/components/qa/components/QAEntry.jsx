@@ -2,9 +2,11 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import AWEntry from './AWEntry.jsx';
+import { useDarkMode } from '../../DarkMode.jsx'
 
 // ENTRY OF EACH QUESTION ----------
 const QAEntry = (props) => {
+  const darkMode = useDarkMode();
   // state will be intially empty array
   const [answers, setAnswers] = useState([]);
 
@@ -72,7 +74,7 @@ const QAEntry = (props) => {
       <span className="Q-right">
         <span>{props.ques.question_body}</span>
         {/* question on helpfulness */}
-        <span className='user_info' style={{float:'right'}}>
+        <span className={`user_info ${darkMode ? 'user_info-dark' : null}`} style={{float:'right'}}>
           Helpful?
           &nbsp;
           <a className='questions-and-answers' onClick={() => helpfulQues(props.ques.question_id)}>Yes</a> ({props.ques.question_helpfulness})
