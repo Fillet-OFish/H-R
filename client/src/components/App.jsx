@@ -19,6 +19,7 @@ export default function App() {
       .then(result => setProduct(result.data))
   },[])
 
+
   return(
     product.id ?
     <TrackProvider>
@@ -41,7 +42,7 @@ export default function App() {
           <Ratings product={product} rating={rating} setRating={setRating} numReviews={numReviews} setNumReviews={setNumReviews}/>
         </div>
 
-        <Footer/>
+        <Footer product={product}/>
     </TrackProvider>
     : null
   )
