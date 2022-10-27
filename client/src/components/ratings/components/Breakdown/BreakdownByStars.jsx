@@ -37,12 +37,12 @@ export default function BreakdownByStars({ reviews, reviewsMeta, numReviews, fil
     height: '10px',
     background: `linear-gradient(90deg, ${darkMode ? 'green' : 'black'} ${(breakdown.five * 100)}%, ${darkMode ? '#303135' : '#ddd'} 0 ${100 - (breakdown.five * 100)}%`
   })
-  const styleFour = () => ({
+  const styleFour = {
     display: 'inline-block',
     width: '100%',
     height: '10px',
-    background: `linear-gradient(90deg, ${darkMode ? 'green' : 'black'} ${(breakdown.four * 100)}%, ${darkMode ? '#303135' : '#ddd'} 0 ${100 - (breakdown.four * 100)}%`
-  })
+    background: `linear-gradient(90deg, ${darkMode ? 'green' : 'black'} ${(breakdown?.four * 100)}%, ${darkMode ? '#303135' : '#ddd'} 0 ${100 - (breakdown?.four * 100)}%`
+  }
   const styleThree = () => ({
     display: 'inline-block',
     width: '100%',
@@ -112,7 +112,7 @@ export default function BreakdownByStars({ reviews, reviewsMeta, numReviews, fil
               <small className='star-breakdown' onClick={() => clickHandler('4 stars')}>4 stars</small>
             </div>
             <div className="bar-middle">
-              <span style={styleFour()}></span>
+              <span style={styleFour}></span>
             </div>
             <div className="bar-right">
               <small>{ratingCount.four}</small>
