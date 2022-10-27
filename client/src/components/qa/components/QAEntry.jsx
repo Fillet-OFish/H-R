@@ -105,7 +105,7 @@ const QAEntry = (props) => {
       {(answers.length === currentAnswers.length) ? "" : (answers.length > 2) ? <a onClick={() => addAnsw()}>LOAD MORE ANSWERS</a> : ""}
     </div>
 
-    <hr className='hr3'></hr>
+    <hr className={`hr3 ${darkMode ? 'hr3-dark' : null}`} style={props.lastIndex === props.index ? {border: 'none'} : {}}></hr>
 
     <br></br>
   </>

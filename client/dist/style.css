@@ -1002,6 +1002,10 @@ textarea {
   /* margin-top: -350px; */
  }
 
+ .FaSortUpButton {
+  transform: translateY(40%);
+ }
+
  .list-title {
   cursor: pointer;
  }

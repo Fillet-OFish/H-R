@@ -79,7 +79,7 @@ export default function ReviewsList(props) {
         </label>
       </div>
 
-      <hr className={`hr3 ${darkMode ? 'hr3-dark' : null}`}></hr>
+      <hr className={`hr3 ${darkMode ? 'hr3-dark' : null}`} style={props.lastIndex === props.index ? {border: 'none'} : {}}></hr>
 
     </div>
   )
