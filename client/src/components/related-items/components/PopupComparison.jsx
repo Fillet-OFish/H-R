@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function PopupComparison ({relatedItem, currentItem, setPopup}) {
+export default function PopupComparison ({relatedItem, currentItem, setPopup, setHover}) {
   const comparisonObj = {}
   currentItem.features.map((feature) => {
     comparisonObj[feature.feature] = {valueCurrent: feature.value}
@@ -10,7 +10,7 @@ export default function PopupComparison ({relatedItem, currentItem, setPopup}) {
   })
 
   return (
-    <div className='popup' onClick={(e)=>{setPopup(false);}}>
+    <div className='popup' onClick={(e)=>{setPopup(false); setHover(false)}}>
       <div className='comparison-table'>
         <table>
           <caption>Comparing</caption>
