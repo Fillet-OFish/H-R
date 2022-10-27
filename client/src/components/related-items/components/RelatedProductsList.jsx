@@ -7,7 +7,11 @@ import { FaSortDown, FaSortUp } from 'react-icons/fa';
 
 export default function RelatedProductsList ({currentItem, setProduct}) {
   const [relatedItems, setRelatedItems] = useState([])
+<<<<<<< HEAD
   const [show, setShow] = useState(true)
+=======
+  const [show, setShow] = useState(false)
+>>>>>>> master
 
 
   useEffect(() => {
@@ -18,11 +22,18 @@ export default function RelatedProductsList ({currentItem, setProduct}) {
   }, [currentItem])
 
   const style = show ? {height: '100%', opacity: '1'} : {}
+<<<<<<< HEAD
   const h3Style = show ? {cursor: 'pointer'} : {cursor: 'pointer', borderBottom: '1px solid #3c4044'}
 
   return (
     <>
       <h3 style={h3Style} onClick={() => setShow(!show)}>Related Products {show ? null : <FaSortDown />}</h3>
+=======
+
+  return (
+    <>
+      <h3 style={{cursor: 'pointer', borderBottom: '1px solid #3c4044'}} onClick={() => setShow(!show)}>Related Products {show ? <FaSortUp /> : <FaSortDown />}</h3>
+>>>>>>> master
       <div className='related-list' style={style}>
         <ul className='related-ul'>
           {relatedItems.map(item => (

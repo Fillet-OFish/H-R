@@ -44,43 +44,44 @@ img {
   width: 100%;
 }
 .contain-description-related{
-  margin: -3% auto 3% 18%;
-  width: 75%
+  margin: -3% auto 3% 10%;
+  width: 100%
 }
 .contain-reviews-QnA{
   display: table;
   margin: auto;
-  width: 85%;
+  width: 95%;
   padding: 2%;
 }
-.contain-reviews-QnA .toggled{
+.container2{
+  margin: 30px auto;
+  display: grid;
+}
+.toggled{
   margin-bottom: 3%;
   border:0;
   padding: 1% 2%;
   background-color: white;
   border-top: 2px solid gray;
 }
-.contain-reviews-QnA .reviewsToToggle{
+.reviewsToToggle{
   margin-bottom: 3%;
   padding: 1% 2%;
   border:0;
   border-top-left-radius: 5px;
   background-color: #f0f0f0;
+  color: rgb(0, 0, 0, 0.5);
   box-shadow: inset -7px 0 9px -7px rgba(0,0,0,0.3), inset 0 -7px 9px -7px rgba(0,0,0,0.3);
 }
-.contain-reviews-QnA .qnaToToggle{
+.qnaToToggle{
   margin-bottom: 3%;
   padding: 1% 2%;
   border:0;
   border-top-right-radius: 5px;
   background-color: #f0f0f0;
+  color: rgb(0, 0, 0, 0.5);
   box-shadow: inset 7px 0 9px -7px rgba(0,0,0,0.3), inset 0 -7px 9px -7px rgba(0,0,0,0.3);
 }
-.container2{
-  margin: 30px auto;
-  display: grid;
-}
-
 /* ANNOUNCEMENT ------------------------ */
 .announcement{
   width: 100%;
@@ -282,17 +283,18 @@ img {
 .overview-container{
   display: flex;
   height: 65vh;
-  width: 100%;
+  width: 130vh;
 }
 .left{
   display:flex;
   height: 60vh;
-  width: auto;
+  width: 5%;
   margin-bottom: 20px;
 }
 .middle{
   width: 45%;
   height: 100%;
+  padding-left: 3%;
 }
 .product-category{
   text-transform: uppercase;
@@ -653,7 +655,7 @@ img {
 /* FERNANDO ADDED THESE --------------------------------------------------------------- */
 .q-a{
   display: none;
-  width: 96%;
+  width: 100%;
   margin-top: -1%;
 }
 
@@ -678,7 +680,7 @@ nav {
 .QContainer {
   width: 100%;
   max-width: 100%;
-  max-height: 680px;
+  max-height: 750px;
   overflow-y:auto;
   overflow-x: hidden;
 }
@@ -968,12 +970,20 @@ textarea {
 
 .related-items {
   overflow: hidden;
+<<<<<<< HEAD
+=======
+  width: 80%;
+>>>>>>> master
 }
 
 .related-list {
   position: relative;
   overflow: hidden;
+<<<<<<< HEAD
   transition: all .5s ease-in;
+=======
+  transition: all .5s ease-in-out;
+>>>>>>> master
   height: 0;
   opacity: 0;
   /* margin-top: -350px; */
@@ -999,7 +1009,10 @@ textarea {
   position:  relative;
   margin:  0;
   padding:  0;
+<<<<<<< HEAD
   /* max-width:  1100px; */
+=======
+>>>>>>> master
   width:  100%;
   overflow-x:  auto;
   overflow:  hidden;
@@ -1051,8 +1064,13 @@ textarea {
   margin:  8px;
   background-color: transparent;
   /* border:  1px solid lightgrey ; */
+<<<<<<< HEAD
   width:  220px;
   height:  280px;
+=======
+  width: 257px;
+  height: 380px;
+>>>>>>> master
   /* overflow:  hidden; */
   cursor:  pointer;
   /* border-radius:  6px; */
@@ -1266,13 +1284,13 @@ textarea {
 /* Reviews --------------------------------------------------------------- */
 
 .reviews-ratings{
-  width: 100%;
+  width: 105%;
 }
 
 .reviews-ratings-container {
   display: flex;
   user-select: none;
-  /* line-height: 1.5; */
+  line-height: 1.5;
   width: 95%;
   margin-top: -3%;
 }
