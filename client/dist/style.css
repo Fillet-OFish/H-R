@@ -328,10 +328,6 @@ img {
   font-size: 18px;
   padding: 10px;
   cursor: pointer;
-<<<<<<< HEAD
-  background-color: transparent;
-=======
->>>>>>> c4372d2dd77f22b725e0c4c36f282cd53f989310
 }
 .social .share-icon{
   padding:  10%;
@@ -1305,11 +1301,7 @@ textarea {
 }
 
 .sort-reviews {
-<<<<<<< HEAD
-  margin: 0 0 3% 5%;
-=======
   margin: 1% 0 3% 5%;
->>>>>>> c4372d2dd77f22b725e0c4c36f282cd53f989310
 }
 
 .review-sort {

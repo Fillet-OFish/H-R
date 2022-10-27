@@ -79,17 +79,6 @@ export default function ReviewsList(props) {
         </label>
       </div>
 
-<<<<<<< HEAD
-      {/* set each answer ----------------- */}
-      {/* <div className='AContainer'>
-        {currentAnswers.length === 0 ? 'No answers yet!' : currentAnswers.map((ans, index) => (
-          <AWEntry ans={ans} key={index} index={index} setImage={props.setImage} setModalOn={props.setModalOn} modalOn={props.modalOn} />
-          // <div><strong>A: {`A: ${ans.body}`}</strong></div>
-          ))}
-        </div> */}
-
-=======
->>>>>>> c4372d2dd77f22b725e0c4c36f282cd53f989310
       <hr className={`hr3 ${darkMode ? 'hr3-dark' : null}`} style={props.lastIndex === props.index ? {border: 'none'} : {}}></hr>
 
     </div>
