@@ -839,6 +839,21 @@ nav {
   padding: 10px;
   background-color: white;
 }
+.form-container-rev {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  margin-left: 37%;
+  /* margin-top: 7%; */
+  margin-top: 1%;
+  border-radius: 10px;
+  border: 1.5px solid black;
+
+  max-width: 700px;
+  padding: 10px;
+  background-color: white;
+}
 .form-container input[type=text], .form-container input[type=password] {
   width: 50%;
   padding: 15px;
@@ -983,6 +998,10 @@ textarea {
   width: 24px;
   height: 24px;
   padding: 10px;
+}
+
+#qaContainer {
+  scroll-behavior: smooth;
 }
 /* Jaden ADDED THESE ------------------------------------------------- */
 

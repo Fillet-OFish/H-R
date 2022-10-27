@@ -10,8 +10,8 @@ const AddRevModal = (props) => {
   let tempImgs = [];
 
   // CLOUDINARY ------------------------------------------------------------------------
-  const cloudName = "dkbpaia1x"; // replace with your own cloud name
-  const uploadPreset = "cloudinary-upload"; // replace with your own upload preset
+  const cloudName = 'dkbpaia1x'; // replace with your own cloud name
+  const uploadPreset = 'cloudinary-upload'; // replace with your own upload preset
 
   // Remove the comments from the code below to add
   // additional functionality.
@@ -113,7 +113,7 @@ const AddRevModal = (props) => {
             e.target.body.value = '';
             e.target.user.value = '';
             e.target.email.value = '';
-            }} className='form-container'>
+            }} className='form-container-rev'>
 
             {/* close button for form */}
             <span className='form-close-btn' onClick={() => props.setModalRevOn(!props.modalRevOn)}>X</span>
@@ -134,11 +134,16 @@ const AddRevModal = (props) => {
             </select>
 
             <br></br>
+            <br></br>
 
             {/* review - summary and body */}
             <label><b>* Review</b></label>
             <br></br>
+            <label>Title</label>
+            <br></br>
             <input type='text' name='summary' placeholder='Best purchase ever!' maxLength="60" required></input>
+            <br></br>
+            <label>Body</label>
             <br></br>
             <textarea type='text' name='body' placeholder='Why did you like the product or not?' minLength='50' maxLength="1000" required></textarea>
             <br></br>
@@ -151,6 +156,7 @@ const AddRevModal = (props) => {
               <option value={false}>No</option>
             </select>
 
+            <br></br>
             <br></br>
 
             {/* nickname and email labels --------- */}

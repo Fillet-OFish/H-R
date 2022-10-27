@@ -9,8 +9,8 @@ const AddAnswModal = (props) => {
   let tempImgs = [];
 
   // CLOUDINARY ------------------------------------------------------------------------
-  const cloudName = "dkbpaia1x"; // replace with your own cloud name
-  const uploadPreset = "cloudinary-upload"; // replace with your own upload preset
+  const cloudName = 'dkbpaia1x'; // replace with your own cloud name
+  const uploadPreset = 'cloudinary-upload'; // replace with your own upload preset
 
   // Remove the comments from the code below to add
   // additional functionality.
