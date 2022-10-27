@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { FaSearch } from 'react-icons/fa'
 import { useDarkMode } from '../../DarkMode.jsx'
 
@@ -7,7 +7,7 @@ export default function Search({ product }) {
   const darkMode = useDarkMode()
 
   function closeCart() {
-    document.querySelector('.cart-block').style.display = 'none';
+    document.querySelector('.search-block').style.display = 'none';
   }
 
   return(

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useTracker } from '../TrackClickContext.jsx';
+import { useDarkMode } from '../DarkMode.jsx'
 import { Rating } from 'react-simple-star-rating'
 import axios from 'axios';
 import Social from './components/product-info/Social.jsx'
 import Styles from './components/product-info/Styles.jsx'
 import Gallery from './components/gallery/Gallery.jsx'
 import Cart from './components/product-info/Cart.jsx'
-import { useDarkMode } from '../DarkMode.jsx'
 
 export default function Overview({product, rating, numReviews}) {
   const clickTracker = useTracker();
@@ -20,7 +20,6 @@ export default function Overview({product, rating, numReviews}) {
   useEffect(() => {
     axios.get(`/api/products/${product.id}/styles`)
     .then(result => {
-      console.log(result)
       setStyles(result.data.results)
       setStyle(result.data.results[0])
       setPhotos(result.data.results[0].photos)
@@ -73,7 +72,7 @@ export default function Overview({product, rating, numReviews}) {
             {/* Styles */}
             <Styles styles={styles} style={style} setStyle={setStyle} />
           </div>
-
+{/*
           {/* Cart */}
           <Cart style={style}/>
         </div>

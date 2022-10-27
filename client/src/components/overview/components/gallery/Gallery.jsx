@@ -39,22 +39,15 @@ export default function Gallery({ style, photos, setPhotos, photo, setPhoto }) {
   // onClick function to collapse/uncollapse gallery img
   function expandPhoto(prop){
     if(expand === true && photo.thumbnail_url) {
-      window.scrollTo({
-        top: 150,
-        behavior: 'smooth',
-      })
+      window.scrollTo({ top: 150, behavior: 'smooth' })
       document.querySelector('.gallery-list').style.display = 'none'
-      document.querySelector('.gallery-main').style.height = '70vh'
+      document.querySelector('.gallery-main').style.height = '73vh'
       document.querySelector('.right').style.visibility = 'hidden'
       document.querySelector('.middle').style.margin = '0 auto'
-      document.querySelector('.contain-description-related').style.marginTop = '6.5%'
+      document.querySelector('.contain-description-related').style.marginTop = '10%'
       document.querySelector('.contain-description-related').style.transition = 'all .25s ease-in-out'
-
     } else {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      })
+      window.scrollTo({ top: 0, behavior: 'smooth' })
       document.querySelector('.gallery-list').style.display = 'flex'
       document.querySelector('.gallery-main').style.height = '65vh'
       document.querySelector('.right').style.visibility = 'visible'
@@ -72,11 +65,11 @@ export default function Gallery({ style, photos, setPhotos, photo, setPhoto }) {
             {photos.length>6 ?
               <>
               {XY[0] === 0 ? null : <FaAngleUp style={{cursor:'pointer'}} onClick={e=>scroll('up')} className="gallery-arrow"/>}
-              {photos.slice(XY[0], XY[1]).map((photo, i) => <p key={i}><img className="solo-img" src={photo.thumbnail_url} onClick={e=>{changePhoto({photo, i})}} /></p>)}
+              {photos.slice(XY[0], XY[1]).map((photo, i) => <p key={i}><img className="solo-img" src={photo.thumbnail_url} alt="list of thumbnail images" onClick={e=>{changePhoto({photo, i})}} /></p>)}
               {XY[1] === photos.length ? null : <FaAngleDown style={{cursor:'pointer'}} onClick={e=>scroll('down')} className="gallery-arrow"/>}
               </>
               :
-              photos.slice(XY[0], XY[1]).map((photo, i) => <p key={i}><img src={photo.thumbnail_url || "https://i.postimg.cc/gjFHrzW3/image-4.png"} onClick={e=>{e.preventDefault();changePhoto({photo, i})}} /></p>)
+              photos.slice(XY[0], XY[1]).map((photo, i) => <p key={i}><img src={photo.thumbnail_url || "https://i.postimg.cc/gjFHrzW3/image-4.png"} alt="list of thumbnail images" onClick={e=>{e.preventDefault();changePhoto({photo, i})}} /></p>)
             }
           </div>) : null}
       </div>
@@ -89,7 +82,7 @@ export default function Gallery({ style, photos, setPhotos, photo, setPhoto }) {
             !expand && photo.thumbnail_url ?
               // expanded view
               <>
-                <Zoom src={photos[click].thumbnail_url} photos={photos} setClick={setClick} click={click} setExpand={setExpand} expandPhoto={expandPhoto}/>
+                <Zoom src={photos[click].url} photos={photos} setClick={setClick} click={click} setExpand={setExpand} expandPhoto={expandPhoto}/>
                 <FaCompress className="compress-icon" onClick={e=>{setExpand(prev=>!prev);expandPhoto()}}/>
               </>
               :
