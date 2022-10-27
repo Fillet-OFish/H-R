@@ -49,6 +49,7 @@ export default function Cart({ style }) {
       })
       axios.post('/api/cart', {sku_id: skuId, count: selectQnt})
         .then(res => console.log('posted to cart!', res.data))
+        .catch(e => console.log('erorr posting to cart', e))
     }
   }
 

@@ -49,7 +49,6 @@ export default function Gallery({ style, photos, setPhotos, photo, setPhoto }) {
       document.querySelector('.middle').style.margin = '0 auto'
       document.querySelector('.contain-description-related').style.marginTop = '6.5%'
       document.querySelector('.contain-description-related').style.transition = 'all .25s ease-in-out'
-
     } else {
       window.scrollTo({
         top: 0,

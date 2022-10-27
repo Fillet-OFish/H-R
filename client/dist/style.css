@@ -13,13 +13,13 @@ body{
 body::-webkit-scrollbar {
   display: none;
 }
-h2{
+h2, h3{
   font-size:18px;
   font-weight: 500;
 }
-h3{
+/* h3{
   font-weight: 320
-}
+} */
 hr{
   border-top: 1px solid black;
 }
@@ -252,6 +252,10 @@ img {
   text-decoration: none;
 }
 
+.start a:hover{
+  text-decoration: underline;
+}
+
 .start .col1{
   width:60%;
   font-size: 15px;
@@ -324,7 +328,7 @@ img {
   font-size: 18px;
   padding: 10px;
   cursor: pointer;
-  background-color: rgba(255,255,255,0.8);
+  background-color: transparent;
 }
 .social .share-icon{
   padding:  10%;
@@ -375,16 +379,17 @@ img {
 }
 /* gallery - reg view */
 .gallery-list{
-  margin: auto;
+  margin: auto 0;
   width: 5%;
   display: flex;
   user-select: none;
+  height: 100%;
 }
 .gallery-list img{
   cursor: pointer;
   width: 50px;
-  max-height: 70px;
-  object-fit: contain;
+  max-height: 60px;
+  object-fit: cover;
 }
 .solo-img:hover {
   border: 1px red solid;
@@ -394,7 +399,7 @@ img {
 }
 .gallery-main{
   display: flex;
-  height: 65vh;
+  height: 68vh;
   position: relative;
   user-select: none;
 }
@@ -1280,6 +1285,10 @@ textarea {
   margin-top: -3%;
 }
 
+.sort-reviews {
+  margin: 1% 0 3% 5%;
+}
+
 .review-sort {
   background: transparent;
   border: none;
@@ -1311,11 +1320,26 @@ textarea {
   background: rgb(212, 211, 211, .5);
 }
 
+.reviewer{
+  font-weight: 550;
+}
+
+.reviewer-time{
+  float:right;
+  opacity: 0.5;
+  font-size: 13px;
+}
+
+.reviewer-helpful{
+  opacity: 0.5;
+  font-size: 13px;
+}
+
 .rating-summary {
   position: relative;
 }
 .rating-summary .rating{
-  font-size: 50px;
+  font-size: 60px;
   font-weight: 500;
   letter-spacing: 1.8px;
 }
@@ -1382,6 +1406,7 @@ textarea {
   margin-right: 10%;
   padding: 0 2% 0 5%;
   width: 95%;
+  line-height: 1.5;
 }
 
 .align-btns{
