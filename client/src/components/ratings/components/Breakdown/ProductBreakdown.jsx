@@ -18,7 +18,7 @@ export default function ProductBreakdown({ rating, product, numReviews, reviews,
     position: 'relative',
     width: '100%',
     height: '10px',
-    background: darkMode ? '#303135' : '#ddd'
+    background: darkMode ? '#303135' : darkMode ? '#303135' : '#ddd'
   }
 
   const rangeStyle1 = {

@@ -970,20 +970,13 @@ textarea {
 
 .related-items {
   overflow: hidden;
-<<<<<<< HEAD
-=======
   width: 80%;
->>>>>>> master
 }
 
 .related-list {
   position: relative;
   overflow: hidden;
-<<<<<<< HEAD
-  transition: all .5s ease-in;
-=======
   transition: all .5s ease-in-out;
->>>>>>> master
   height: 0;
   opacity: 0;
   /* margin-top: -350px; */
@@ -1009,10 +1002,6 @@ textarea {
   position:  relative;
   margin:  0;
   padding:  0;
-<<<<<<< HEAD
-  /* max-width:  1100px; */
-=======
->>>>>>> master
   width:  100%;
   overflow-x:  auto;
   overflow:  hidden;
@@ -1064,13 +1053,8 @@ textarea {
   margin:  8px;
   background-color: transparent;
   /* border:  1px solid lightgrey ; */
-<<<<<<< HEAD
-  width:  220px;
-  height:  280px;
-=======
   width: 257px;
   height: 380px;
->>>>>>> master
   /* overflow:  hidden; */
   cursor:  pointer;
   /* border-radius:  6px; */
@@ -1446,5 +1430,4 @@ body {
   border: none;
   appearance: none;
   color: gray;
-  text-align: right;
 }
