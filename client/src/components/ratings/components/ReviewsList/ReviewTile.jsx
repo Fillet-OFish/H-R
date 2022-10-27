@@ -3,8 +3,10 @@ import {format} from 'date-fns';
 import ReviewImgs from './ReviewImgs.jsx';
 import StarRatings from '../../../StarRatings.jsx';
 import axios from 'axios';
+import { useDarkMode } from '../../../DarkMode.jsx'
 
 export default function ReviewsList(props) {
+  const darkMode = useDarkMode();
 
   console.log(props.review)
 
@@ -35,8 +37,11 @@ export default function ReviewsList(props) {
   return(
     <div className='display-reviews'>
       {/* render ratings, user info, and date */}
-      <div><StarRatings itemRating={props.review.rating} />
-        <label style={{float: 'right', marginRight: '3%'}} className='user_info'>by {props.review.reviewer_name}, {format(new Date(props.review.date), 'MMMM dd, yyyy')}</label>
+      <div>
+        <span className={`reviewer ${darkMode ? 'reviewer-dark' : null}`}>
+          {props.review.reviewer_name}</span>
+        <span className={`reviewer-time`}>{format(new Date(props.review.date), 'MM/dd/yyyy')}</span>
+        <StarRatings itemRating={props.review.rating} />
       </div>
 
       {/* render review title and body */}
@@ -66,9 +71,11 @@ export default function ReviewsList(props) {
 
       {/* rendering helpful/report */}
       <div>
-        <label className='user_info' >Helpful? <a className='questions-and-answers' onClick={() => helpfulRev(props.review.review_id)}>Yes</a> ({props.review.helpfulness}) |
+        <label className={`reviewer-helpful`} >Helpful?&nbsp;
+          <a onClick={() => helpfulRev(props.review.review_id)}>Yes</a> ({props.review.helpfulness})
+          &nbsp;&nbsp;|&nbsp;&nbsp;
           {/* reporting question */}
-          <a className='questions-and-answers' onClick={() => reportRev(props.review.review_id)}>Report</a>
+          <a onClick={() => reportRev(props.review.review_id)}>Report</a>
         </label>
       </div>
 
@@ -80,7 +87,7 @@ export default function ReviewsList(props) {
           ))}
         </div> */}
 
-      <hr className='hr3'></hr>
+      <hr className={`hr3 ${darkMode ? 'hr3-dark' : null}`}></hr>
 
     </div>
   )

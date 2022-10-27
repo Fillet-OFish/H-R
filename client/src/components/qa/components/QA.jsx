@@ -41,8 +41,6 @@ const QA = (props) => {
   // iterate through questions data
   return (
     <div>
-      <h3>Questions & Answers</h3>
-
       <div>
         {/* search bar ----------- */}
         <SearchQues searchFilter={props.searchFilter} />

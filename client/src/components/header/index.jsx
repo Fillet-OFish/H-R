@@ -3,7 +3,7 @@ import axios from 'axios';
 import Announcements from './components/Announcements.jsx'
 import Search from './components/Search.jsx'
 import Cart from './components/Cart.jsx'
-import { FaShoppingBag } from 'react-icons/fa';
+import { FaSearch, FaShoppingBag } from 'react-icons/fa';
 import { useDarkMode } from '../DarkMode.jsx'
 
 export default function Header({ product }) {
@@ -11,7 +11,11 @@ export default function Header({ product }) {
 
   // on hover function - shows cart when hovering over shopping bag
   function showCart() {
-    document.getElementsByClassName('cart-block')[0].style.display = 'block';
+    document.querySelector('.cart-block').style.display = 'block';
+  }
+
+  function showSearch() {
+    document.querySelector('.search-block').style.display = 'block';
   }
 
   return(
@@ -20,27 +24,36 @@ export default function Header({ product }) {
       <Announcements/>
 
       <div className={`header ${darkMode ? 'header-dark' : null}`}>
-        {/* logo */}
-        <span className='logo'><a style={darkMode ? {color: 'white'} : {}} href='/'>Hack & Reactor</a></span> <Search/>
 
-        {/* sign in/register */}
-        <span className='header-links'>
-          <span className='header-link'>SIGN IN/REGISTER</span>
-          <span className='header-link'>WISHLIST</span>
-        </span>
+        <div className="header-col-1">
+          {/* logo */}
+          <span className='logo'><a style={darkMode ? {color: 'white'} : {}} href='/'>Hack & Reactor</a></span>
+        </div>
 
-        {/* cart */}
-        <span className='shopping-bag' onMouseEnter={() => showCart()}>
-          <FaShoppingBag className='shopping-bag-icon'/>
-        </span>
+        <div className="header-col-3">
+          {/* search */}
+            <FaSearch className="search-bar-icon"/>
 
-        {/* categories */}
-        <p className='categories'>
+          {/* sign in/register */}
+            <span className='header-links'>
+              <span className='header-link'>SIGN IN/REGISTER</span>
+              <span className='header-link'>WISHLIST</span>
+            </span>
+
+          {/* cart */}
+          <span className='shopping-bag' onMouseEnter={() => showCart()}>
+            <FaShoppingBag className='shopping-bag-icon'/>
+          </span>
+        </div>
+
+      </div>
+
+       {/* categories */}
+      <div className='categories'>
           <span className='category'><a style={darkMode ? {color: 'white'} : {}} href='/'>Women</a></span>
           <span className='category'><a style={darkMode ? {color: 'white'} : {}} href='/'>Men</a></span>
           <span className='category'><a style={darkMode ? {color: 'white'} : {}} href='/'>Accessories</a></span>
-        </p>
-      </div>
+        </div>
 
       {/* add to cart */}
       <Cart />

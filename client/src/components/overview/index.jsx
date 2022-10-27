@@ -29,12 +29,11 @@ export default function Overview({product, rating, numReviews}) {
   },[product])
 
   const scroll = () => {
-    document.querySelector('.reviews-ratings').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.querySelector('.gallery-scroll-to-here').scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return(
-    <div onClick={(e)=>{clickTracker(e, 'Overview')}}>
-      <div className="overview-container">
+    <div className="overview-container" onClick={(e)=>{clickTracker(e, 'Overview')}}>
         {/* Gallery */}
         {Object.keys(style).length!==0 && photos.length>0 ?
           <Gallery style={style} photos={photos} setPhotos={setPhotos} photo={photo} setPhoto={setPhoto}/>
@@ -62,21 +61,22 @@ export default function Overview({product, rating, numReviews}) {
           {/* Category */}
           <p className="product-category">UNISEX / {product.category} / {product.name}</p>
 
-          {/* Product name (dependent on if a default style exists) */}
-          <div className="product-name">
-            {style.photos && !style.photos[0].thumbnail_url ? <><p className="coming-soon">COMING SOON:</p><p className="product-name-null">{product.name}</p></> : product.name}
+          <div className="info-style-container">
+            {/* Product name (dependent on if a default style exists) */}
+            <div className="product-name">
+              {style.photos && !style.photos[0].thumbnail_url ? <><p className="coming-soon">COMING SOON:</p><p className="product-name-null">{product.name}</p></> : product.name}
+            </div>
+
+            {/* Price (dependent on sale price) */}
+            <p className="price">{style.sale_price ? (<><span style={{textDecoration: 'line-through', textDecorationThickness:'2px', textDecorationColor:'black',color:'gray'}}>${style.original_price}</span> ${style.sale_price}</>) : <>${style.original_price}</>}</p>
+
+            {/* Styles */}
+            <Styles styles={styles} style={style} setStyle={setStyle} />
           </div>
-
-          {/* Price (dependent on sale price) */}
-          <p className="price">{style.sale_price ? (<><span style={{textDecoration: 'line-through', textDecorationThickness:'2px', textDecorationColor:'black',color:'gray'}}>${style.original_price}</span> ${style.sale_price}</>) : <>${style.original_price}</>}</p>
-
-          {/* Styles */}
-          <Styles styles={styles} style={style} setStyle={setStyle} />
 
           {/* Cart */}
           <Cart style={style}/>
         </div>
-      </div>
     </div>
   )
 }
