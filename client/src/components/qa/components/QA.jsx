@@ -60,7 +60,7 @@ const QA = (props) => {
       <div id='qaContainer' className='QContainer'>
         {/* set each question entry --------- */}
         {currentRecords.map((ques, index) => (
-          <QAEntry ques={ques} key={index} index={index} lastIndex={currentRecords.length - 1} qaData={props.qaData} setImage={props.setImage} setModalOn={props.setModalOn} modalOn={props.modalOn} modalAnswOn={props.modalAnswOn} setModalAnswOn={props.setModalAnswOn} setQID={props.setQID} />
+          <QAEntry ques={ques} key={index} index={index} lastIndex={currentRecords.length - 1} qaData={props.qaData} setImage={props.setImage} setModalOn={props.setModalOn} modalOn={props.modalOn} modalAnswOn={props.modalAnswOn} setModalAnswOn={props.setModalAnswOn} setQID={props.setQID} fetch={fetch} setFetch={setFetch} />
           ))}
       </div>
 
