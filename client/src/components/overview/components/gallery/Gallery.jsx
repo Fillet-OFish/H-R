@@ -65,11 +65,17 @@ export default function Gallery({ style, photos, setPhotos, photo, setPhoto }) {
             {photos.length>6 ?
               <>
               {XY[0] === 0 ? null : <FaAngleUp style={{cursor:'pointer'}} onClick={e=>scroll('up')} className="gallery-arrow"/>}
-              {photos.slice(XY[0], XY[1]).map((photo, i) => <p key={i}><img className="solo-img" src={photo.thumbnail_url} alt="list of thumbnail images" onClick={e=>{changePhoto({photo, i})}} /></p>)}
+              {photos.slice(XY[0], XY[1]).map((photo, i) =>
+                <div className="solo-img-container" key={i}>
+                  <img className="solo-img" src={photo.thumbnail_url} alt="list of thumbnail images" onClick={e=>{changePhoto({photo, i})}} />
+                </div>)}
               {XY[1] === photos.length ? null : <FaAngleDown style={{cursor:'pointer'}} onClick={e=>scroll('down')} className="gallery-arrow"/>}
               </>
               :
-              photos.slice(XY[0], XY[1]).map((photo, i) => <p key={i}><img src={photo.thumbnail_url || "https://i.postimg.cc/gjFHrzW3/image-4.png"} alt="list of thumbnail images" onClick={e=>{e.preventDefault();changePhoto({photo, i})}} /></p>)
+              photos.slice(XY[0], XY[1]).map((photo, i) =>
+                <div className="solo-img-container" key={i}>
+                  <img className="solo-img" src={photo.thumbnail_url || "https://i.postimg.cc/gjFHrzW3/image-4.png"} alt="list of thumbnail images" onClick={e=>{e.preventDefault();changePhoto({photo, i})}} />
+                </div>)
             }
           </div>) : null}
       </div>

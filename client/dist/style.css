@@ -388,14 +388,23 @@ img {
   user-select: none;
   height: 100%;
 }
+.solo-img-container{
+  padding: 8% 0;
+}
+.solo-img{
+  transition: all .3s ease-in-out;
+}
+.solo-img:after,
+.solo-img:hover{
+  width: 70px;
+  height: 70px;
+  box-shadow: -5px 0px 0px 0px black
+}
 .gallery-list img{
   cursor: pointer;
-  width: 50px;
-  max-height: 60px;
+  width: 60px;
+  height: 60px;
   object-fit: cover;
-}
-.solo-img:hover {
-  border: 1px red solid;
 }
 .gallery-arrow{
   margin: 0% 35%;
@@ -403,14 +412,15 @@ img {
 .gallery-main{
   display: flex;
   height: 100%;
+  width: 100%;
   position: relative;
   user-select: none;
 }
 .gallery-main img{
-  width: 500px;
+  width: 450px;
   height: 100%;
   padding: 15px 60px;
-  object-fit: contain;
+  object-fit: cover;
   user-select: none;
 }
 .carousel-container {
@@ -421,7 +431,7 @@ img {
 .carousel-container .left-arrow {
   position: absolute;
   top: 50%;
-  left: 25px;
+  left: 15px;
   font-size: 25px;
   font-weight: 100;
   cursor: pointer;
@@ -433,7 +443,7 @@ img {
 .carousel-container .right-arrow {
   position: absolute;
   top: 50%;
-  right: 25px;
+  right: 15px;
   font-size: 25px;
   font-weight: 100;
   cursor: pointer;
@@ -469,8 +479,8 @@ img {
   position: absolute;
   right: 0;
   font-size: 20px;
-  margin-top: 10px;
-  margin-right: 30px;
+  margin-top: 15px;
+  margin-right: 50px;
 }
 .expand-icon:hover{
   filter: drop-shadow(1px 1px 2px #b6b6b8);
@@ -517,7 +527,7 @@ img {
   position: relative;
   width: 40%;
   line-height: 1.8;
-  padding-left: 3%;
+  /* padding-left: 3%; */
   user-select: none;
 }
 .right .overview-to-reviews{
