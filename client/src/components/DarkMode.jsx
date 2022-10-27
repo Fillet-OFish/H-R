@@ -20,8 +20,6 @@ export function DarkModeProvider({children}) {
     setDarkMode(darkMode => !darkMode)
   }
 
-
-
   return (
     <DarkModeContext.Provider value={darkMode}>
         {children}
