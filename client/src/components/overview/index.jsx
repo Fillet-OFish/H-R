@@ -29,7 +29,7 @@ export default function Overview({product, rating, numReviews}) {
   },[product])
 
   const scroll = () => {
-    document.querySelector('.reviews-ratings').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.querySelector('.toggle-btns').scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return(
