@@ -8,11 +8,11 @@ import { useDarkMode } from '../../../DarkMode.jsx'
 export default function ReviewsList(props) {
   const darkMode = useDarkMode();
 
-  console.log(props.review)
+  // console.log(props.review)
 
   // make an axios put request to mark questions as helpful
   const helpfulRev = (r_id) => {
-    console.log('ENTER HELPFUL ---')
+    // console.log('ENTER HELPFUL ---')
     axios.put(`/api/reviews/${r_id}/helpful`)
     .then((response) => {
       console.log('Successful put for helpfulRev!')

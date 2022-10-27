@@ -9,7 +9,7 @@ export default function Start() {
 
       <div className="col2">
         <p className="start-title">hack & reactor</p>
-        <p><a href='/'>About Us</a></p>
+        <p><a href='https://github.com/Fillet-OFish/Frontend-Capstone-Ecommerce'>About Us</a></p>
         <p><a href='/'>Sustainability</a></p>
         <p><a href='/'>Accessibility</a></p>
         <p><a href='/'>Giftcards</a></p>

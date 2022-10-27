@@ -10,8 +10,6 @@ export function useTracker() {
 export function TrackProvider({children}) {
   const [tracker, setTracker] = useState([]);
 
-  // console.log(tracker)
-
   function trackClick(e, module) {
     const click = {
       element: e.target.outerHTML,
@@ -20,6 +18,8 @@ export function TrackProvider({children}) {
     }
     setTracker([click, ...tracker])
   }
+
+  if (tracker.length>0) {console.log('track click', tracker)}
 
   return (
     <TrackClickContext.Provider value={trackClick}>

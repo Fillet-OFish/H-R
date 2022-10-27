@@ -1,9 +1,10 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
-
+import { useDarkMode } from '../../../DarkMode.jsx';
 
 const AddRevModal = (props) => {
+  const darkMode = useDarkMode();
 
   // array of images uploaded using cloudinary
   const [uploadImgs, setUploadImgs] = useState([]);
@@ -62,7 +63,7 @@ const AddRevModal = (props) => {
       characteristics: characteristics
     })
     .then((response) => {
-      console.log(response, 'ADD REV POST ----')
+      // console.log(response, 'ADD REV POST ----')
     })
     .catch((err) => {
       console.log(err);
@@ -72,7 +73,7 @@ const AddRevModal = (props) => {
   // need this useEffect to re-render when uploadImgs gets new data
   // this fixes array not updating in useState
   useEffect(() => {
-    console.log("uploadImgs: ", uploadImgs);
+    // console.log("uploadImgs: ", uploadImgs);
   }, [uploadImgs])
 
 
@@ -113,7 +114,7 @@ const AddRevModal = (props) => {
             e.target.body.value = '';
             e.target.user.value = '';
             e.target.email.value = '';
-            }} className='form-container-rev'>
+            }} className={`form-container ${darkMode ? 'form-container-dark' : '' }`}>
 
             {/* close button for form */}
             <span className='form-close-btn' onClick={() => props.setModalRevOn(!props.modalRevOn)}>X</span>

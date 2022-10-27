@@ -1,31 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
 export default function Carousel({ photos, click, setClick, setPhoto, setExpand, expandPhoto }) {
-  const [current, setCurrent] = useState(click);
   const length = photos.length;
 
   function next(){
-    setClick(current + 1)
-    setPhoto(photos[current+1])
+    setClick(click + 1)
+    setPhoto(photos[click+1])
   }
 
   function prev(){
-    setClick(current - 1)
-    setPhoto(photos[current-1])
+    setClick(click - 1)
+    setPhoto(photos[click-1])
   }
-
-  useEffect(() => {
-    setCurrent(click)
-  }, [click])
 
   return (
     <div className='carousel-container'>
-      {current!==0 ? <FaAngleLeft className='left-arrow' onClick={prev} /> : <span className="left-blocked">O</span>}
-      {current!==length-1? <FaAngleRight className='right-arrow' onClick={next} />: <span className="right-blocked">O</span>}
-      {photos[current].thumbnail_url ?
+      {click!==0 ? <FaAngleLeft className='left-arrow' onClick={prev} /> : <span className="left-blocked">O</span>}
+      {click!==length-1? <FaAngleRight className='right-arrow' onClick={next} />: <span className="right-blocked">O</span>}
+      {photos[click].url ?
         <img
-          src={`${photos[current].thumbnail_url}`}
+          src={`${photos[click].url}`}
+          alt="main photo displayed in product overview"
           className='img-main'
           onClick={e=>{setExpand(prev=>!prev);expandPhoto()}}
           style={{cursor:'zoom-in'}}/>
