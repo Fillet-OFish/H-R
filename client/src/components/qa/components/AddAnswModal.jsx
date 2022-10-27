@@ -65,7 +65,6 @@ const AddAnswModal = (props) => {
   // need this useEffect to re-render when uploadImgs gets new data
   // this fixes array not updating in useState
   useEffect(() => {
-    console.log("uploadImgs: ", uploadImgs);
   }, [uploadImgs])
 
 

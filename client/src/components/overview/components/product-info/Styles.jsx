@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaCheck } from 'react-icons/fa';
-import Cart from './Cart.jsx'
+// import Cart from './Cart.jsx'
 
 
 export default function Styles({ styles, style, setStyle }) {
@@ -22,8 +22,6 @@ export default function Styles({ styles, style, setStyle }) {
         </span>)
       }
       </p>
-
-      <Cart style={style}/>
     </div>
   )
 }

@@ -13,7 +13,7 @@ const AWEntry = (props) => {
   const helpfulAnsw = (a_id) => {
     axios.put(`/api/qa/answers/${a_id}/helpful`)
     .then((response) => {
-      console.log('Successful put for helpfulAnsw!')
+      // console.log('Successful put for helpfulAnsw!')
     })
     .catch(err => {
       console.log(err);
@@ -24,7 +24,7 @@ const AWEntry = (props) => {
   const reportAnsw = (a_id) => {
     axios.put(`/api/qa/answers/${a_id}/report`)
     .then((response) => {
-      console.log('Successful put for reportAnsw!')
+      // console.log('Successful put for reportAnsw!')
     })
     .catch(err => {
       console.log(err);

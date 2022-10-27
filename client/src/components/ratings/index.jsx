@@ -4,8 +4,10 @@ import Breakdown from './components/Breakdown/Breakdown.jsx'
 import ReviewsList from './components/ReviewsList/ReviewsList.jsx'
 import AddRevModal from './components/ReviewsList/AddRevModal.jsx'
 import ImageModal from './components/ReviewsList/ImageModal.jsx'
+import { useTracker } from '../TrackClickContext.jsx';
 
 export default function Reviews(props) {
+  const clickTracker = useTracker();
   const [reviews, setReviews] = useState(null)
   const [reviewsPage, setReviewsPage] = useState(1)
   const [reviewsMeta, setReviewsMeta] = useState(null)
@@ -20,13 +22,13 @@ export default function Reviews(props) {
   const [modalOn, setModalOn] = useState(false);
 
   // console.log('reviews: ', reviews)
-  console.log('reviewsMeta: ', reviewsMeta)
-  console.log('rating: ', props.rating)
+  // console.log('reviewsMeta: ', reviewsMeta)
+  // console.log('rating: ', props.rating)
   // console.log('numReviews: ', props.numReviews)
 
   useEffect(() => {
     //reviews/:id/:page/:count/:sort
-    console.log(sort, 'sorting')
+    // console.log(sort, 'sorting')
     axios.get(`/api/reviews/${props.product.id}/${reviewsPage}/2/${sort}`)
       .then(result => {
         setReviews(result.data.results)
@@ -48,7 +50,7 @@ export default function Reviews(props) {
 
   return(
     reviews && reviewsMeta ?
-    <div className="reviews-ratings">
+    <div className="reviews-ratings" onClick={(e)=>{clickTracker(e, 'Ratings & Reviews')}}>
 
       <br/>
 
@@ -57,7 +59,7 @@ export default function Reviews(props) {
           <Breakdown product={props.product} rating={props.rating} numReviews={props.numReviews} reviews={reviews} reviewsMeta={reviewsMeta} filter={filter} setFilter={setFilter}/>
         </div>
         <div className='review-right'>
-          <ReviewsList product={props.product} reviews={reviews} reviewsPage={reviewsPage} setReviewsPage={setReviewsPage} setReviews={setReviews} modalRevOn={modalRevOn} setModalRevOn={setModalRevOn} />
+          <ReviewsList product={props.product} reviews={reviews} reviewsPage={reviewsPage} setReviewsPage={setReviewsPage} setReviews={setReviews} modalRevOn={modalRevOn} setModalRevOn={setModalRevOn} sort={sort} setSort={setSort} setImage={setImage} modalOn={modalOn} setModalOn={setModalOn} numReviews={props.numReviews} />
         </div>
       </div>
 
@@ -67,7 +69,7 @@ export default function Reviews(props) {
       </div>
 
       <div className='reviews-buttons'>
-        {/* add new questions ----------- */}
+        {/* add new reviews ----------- */}
         <AddRevModal product={props.product} modalRevOn={modalRevOn} setModalRevOn={setModalRevOn} reviewsMeta={reviewsMeta}/>
       </div>
 

@@ -18,9 +18,10 @@ export default function Carousel({ photos, click, setClick, setPhoto, setExpand,
     <div className='carousel-container'>
       {click!==0 ? <FaAngleLeft className='left-arrow' onClick={prev} /> : <span className="left-blocked">O</span>}
       {click!==length-1? <FaAngleRight className='right-arrow' onClick={next} />: <span className="right-blocked">O</span>}
-      {photos[click].thumbnail_url ?
+      {photos[click].url ?
         <img
-          src={`${photos[click].thumbnail_url}`}
+          src={`${photos[click].url}`}
+          alt="main photo displayed in product overview"
           className='img-main'
           onClick={e=>{setExpand(prev=>!prev);expandPhoto()}}
           style={{cursor:'zoom-in'}}/>

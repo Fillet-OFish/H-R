@@ -17,7 +17,6 @@ export default function ProductCard({currentItem, item, setProduct, list, outfit
 
   useEffect(() => {
     const source = axios.CancelToken.source();
-
     if(item){
       axios.get(`/api/products/${item}`, {cancelToken: source.token})
         .then(data => setrelatedItem(data.data))
@@ -36,6 +35,7 @@ export default function ProductCard({currentItem, item, setProduct, list, outfit
           }
         })
         .catch((err) => {console.log(err)});
+        return () => source.cancel();
     }
   }, [currentItem])
 
@@ -48,6 +48,7 @@ export default function ProductCard({currentItem, item, setProduct, list, outfit
     if (e.target.className === 'button-left') {return};
     if (e.target.className === 'button-right') {return};
     setProduct(relatedItem);
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   const handleComparisonClick = () => {

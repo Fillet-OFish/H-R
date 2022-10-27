@@ -36,7 +36,18 @@ const QA = (props) => {
   }
   // ----------------------------------------------------------------
 
+  // this is to auto scroll down on each question loaded ------------
+  const [fetch, setFetch] = useState(false);
 
+  function updateScroll() {
+    var element = document.getElementById('qaContainer');
+    element.scrollTop = element.scrollHeight;
+  }
+
+  useEffect(() => {
+    updateScroll();
+  }, [fetch])
+  // ----------------------------------------------------------------
 
   // iterate through questions data
   return (
@@ -46,10 +57,10 @@ const QA = (props) => {
         <SearchQues searchFilter={props.searchFilter} />
       </div>
 
-      <div className='QContainer'>
+      <div id='qaContainer' className='QContainer'>
         {/* set each question entry --------- */}
         {currentRecords.map((ques, index) => (
-          <QAEntry ques={ques} key={index} qaData={props.qaData} setImage={props.setImage} setModalOn={props.setModalOn} modalOn={props.modalOn} modalAnswOn={props.modalAnswOn} setModalAnswOn={props.setModalAnswOn} setQID={props.setQID} />
+          <QAEntry ques={ques} key={index} index={index} lastIndex={currentRecords.length - 1} qaData={props.qaData} setImage={props.setImage} setModalOn={props.setModalOn} modalOn={props.modalOn} modalAnswOn={props.modalAnswOn} setModalAnswOn={props.setModalAnswOn} setQID={props.setQID} />
           ))}
       </div>
 
