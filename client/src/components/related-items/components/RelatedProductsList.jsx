@@ -21,7 +21,7 @@ export default function RelatedProductsList ({currentItem, setProduct}) {
 
   return (
     <>
-      <h3 className='list-title' onClick={() => setShow(!show)}>Related Products {show ? null : <FaSortDown />}</h3>
+      <h3 className='list-title' onClick={() => setShow(!show)}>Related Products {show ? <FaSortUp className='FaSortUpButton' /> : <FaSortDown />}</h3>
       <div className='related-list' style={style}>
         <ul className='related-ul'>
           {relatedItems.map(item => (

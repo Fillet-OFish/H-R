@@ -13,13 +13,13 @@ body{
 body::-webkit-scrollbar {
   display: none;
 }
-h2{
+h2, h3{
   font-size:18px;
   font-weight: 500;
 }
-h3{
+/* h3{
   font-weight: 320
-}
+} */
 hr{
   border-top: 1px solid black;
 }
@@ -285,18 +285,17 @@ img {
 .overview-container{
   display: flex;
   height: 65vh;
-  width: 130vh;
+  width: 100%;
 }
 .left{
   display:flex;
   height: 60vh;
-  width: 5%;
+  width: auto;
   margin-bottom: 20px;
 }
 .middle{
   width: 45%;
   height: 100%;
-  padding-left: 3%;
 }
 .product-category{
   text-transform: uppercase;
@@ -325,7 +324,7 @@ img {
   font-size: 18px;
   padding: 10px;
   cursor: pointer;
-  background-color: rgba(255,255,255,0.8);
+  background-color: transparent;
 }
 .social .share-icon{
   padding:  10%;
@@ -985,6 +984,10 @@ textarea {
   /* margin-top: -350px; */
  }
 
+ .FaSortUpButton {
+  transform: translateY(40%);
+ }
+
  .list-title {
   cursor: pointer;
  }
@@ -1276,9 +1279,13 @@ textarea {
 .reviews-ratings-container {
   display: flex;
   user-select: none;
-  line-height: 1.5;
+  /* line-height: 1.5; */
   width: 95%;
   margin-top: -3%;
+}
+
+.sort-reviews {
+  margin: 0 0 3% 5%;
 }
 
 .review-sort {
@@ -1310,6 +1317,21 @@ textarea {
 
 .review-right::-webkit-scrollbar-thumb {
   background: rgb(212, 211, 211, .5);
+}
+
+.reviewer{
+  font-weight: 550;
+}
+
+.reviewer-time{
+  float:right;
+  opacity: 0.5;
+  font-size: 13px;
+}
+
+.reviewer-helpful{
+  opacity: 0.5;
+  font-size: 13px;
 }
 
 .rating-summary {
@@ -1383,6 +1405,7 @@ textarea {
   margin-right: 10%;
   padding: 0 2% 0 5%;
   width: 95%;
+  line-height: 1.5;
 }
 
 .align-btns{
