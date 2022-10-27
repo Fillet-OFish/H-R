@@ -62,6 +62,7 @@ img {
   border:0;
   padding: 1% 2%;
   background-color: white;
+  font-size: 18px;
   border-top: 2px solid gray;
 }
 .reviewsToToggle{
@@ -69,8 +70,8 @@ img {
   padding: 1% 2%;
   border:0;
   border-top-left-radius: 5px;
-  background-color: #f0f0f0;
-  color: rgb(0, 0, 0, 0.5);
+  background-color: black;
+  color: white;
   box-shadow: inset -7px 0 9px -7px rgba(0,0,0,0.3), inset 0 -7px 9px -7px rgba(0,0,0,0.3);
 }
 .qnaToToggle{
@@ -78,8 +79,8 @@ img {
   padding: 1% 2%;
   border:0;
   border-top-right-radius: 5px;
-  background-color: #f0f0f0;
-  color: rgb(0, 0, 0, 0.5);
+  background-color: black;
+  color: white;
   box-shadow: inset 7px 0 9px -7px rgba(0,0,0,0.3), inset 0 -7px 9px -7px rgba(0,0,0,0.3);
 }
 /* ANNOUNCEMENT ------------------------ */
@@ -182,6 +183,9 @@ img {
   background-color: white;
   animation: fade-in 0.3s ease-in;
 }
+.cart-block-dark{
+  background-color: #3c4044;
+}
 .cart-block-buttons{
   display: table;
   margin: 20px auto;
@@ -230,7 +234,9 @@ img {
   padding: 2.5% 5%;
 
 }
-
+.footer-dark{
+  background-color: transparent
+}
 .start{
   display: flex;
   height: 60%;
@@ -319,6 +325,7 @@ img {
   font-size: 18px;
   padding: 10px;
   cursor: pointer;
+  background-color: rgba(255,255,255,0.8);
 }
 .social .share-icon{
   padding:  10%;
@@ -978,6 +985,14 @@ textarea {
   /* margin-top: -350px; */
  }
 
+ .list-title {
+  cursor: pointer;
+ }
+
+ .list-title:hover {
+  text-decoration: underline;
+ }
+
 /*
 .related-list::before {
   position: absolute;
@@ -1037,11 +1052,11 @@ textarea {
 }
 
 .button-left-dark {
-  background:  linear-gradient(90deg, #180A0A 30%, transparent 100%);
+  background:  linear-gradient(90deg, #202123 30%, transparent 100%);
 }
 
 .button-right-dark {
-  background:  linear-gradient(-90deg, #180A0A 30%, transparent 100%);
+  background:  linear-gradient(-90deg, #202123 30%, transparent 100%);
 }
 
 .add-to-outfit-button {
@@ -1049,8 +1064,8 @@ textarea {
   margin:  8px;
   background-color: transparent;
   /* border:  1px solid lightgrey ; */
-  width: 257px;
-  height: 380px;
+  width: 220px;
+  height: 330px;
   /* overflow:  hidden; */
   cursor:  pointer;
   /* border-radius:  6px; */
@@ -1081,19 +1096,19 @@ textarea {
   /* border: 1px solid lightgrey; */
   margin: 8px;
   width: 220px;
-  height: 280px;
+  height: 330px;
   cursor: pointer;
   /* border-radius: 6px; */
   overflow: hidden;
 }
 
 .product-card-dark {
-  /* background:rgb(40, 40, 40) */
+  /* background: #3c4044; */
 }
 
 .product-card-photo {
   width: 100%;
-  height: 80%;
+  height: 75%;
   overflow: hidden;
 }
 
@@ -1174,17 +1189,8 @@ textarea {
 }
 
 .product-card-info {
-  /* padding:  3px 10px 5px 10px; */
+  padding-left: 3px;
   position: relative;
-}
-
-.product-card-info-show-on-hover {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding-right: 10px;
-  background-color: inherit;
-  text-align: right;
 }
 
 .product-card-name {
@@ -1273,6 +1279,16 @@ textarea {
   line-height: 1.5;
   width: 95%;
   margin-top: -3%;
+}
+
+.review-sort {
+  background: transparent;
+  border: none;
+  font-size: 15px;
+  color: black
+}
+.review-sort-dark {
+  color: white
 }
 
 .review-left{
@@ -1382,16 +1398,22 @@ textarea {
 
 .dark-mode-button {
   position: fixed;
-  bottom: 6px;
-  right: 12px;
-  padding-bottom: 5px;
+  transform: translate(-50%, -50%);
+  bottom: 6%;
+  right: 0.85%;
   border: none;
   background-color: transparent;
   color: grey;
+  font-size: large;
+  padding: 0;
+}
+.dark-mode-button:hover{
+  font-size: x-large;
+  transform: translate(-40%, -25%);
 }
 
 .dark-mode-button-dark {
-  color: grey;
+  color: white;
 }
 
 /* .dark-mode-button:hover {
@@ -1405,9 +1427,31 @@ textarea {
 /*  Google Translate widget */
 #translate {
   position: fixed;
-  bottom: -5px;
-  right: 80px;
+  transform: translate(-50%, -50%);
+  bottom: 3%;
+  right: 0.7%;
   z-index:2;
+  /* border-radius: 50%;
+  background-color: grey; */
+  height: 20px;
+  width: 20px;
+  /* color: white; */
+  cursor: pointer;
+  font-size: medium;
+}
+#translate:hover {
+  height: 28px;
+  width: 28px;
+  transform: translate(-40%, -25%);
+  font-size: x-large;
+}
+#translate a {
+  position: absolute;
+  font-size: medium;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: inherit;
 }
 iframe.goog-te-banner-frame{
   display: none !important;
@@ -1423,8 +1467,11 @@ body {
 }
 .goog-te-combo{
   background: transparent;
+  text-align: right;
+  transform: translate(0, 50%);
+  width: 100%;
+  height: 100%;
   border: none;
   appearance: none;
-  color: gray;
-  text-align: right;
+  color: transparent;
 }

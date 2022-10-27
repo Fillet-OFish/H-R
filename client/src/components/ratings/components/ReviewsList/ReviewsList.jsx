@@ -23,9 +23,7 @@ export default function ReviewsList(props) {
 
   return(
     <>
-      <div>
-        <SortRev sort={props.sort} setSort={props.setSort} />
-      </div>
+      <SortRev sort={props.sort} setSort={props.setSort} />
 
       <div className='reviews-list-container'>
         {/* list every review entry --- */}

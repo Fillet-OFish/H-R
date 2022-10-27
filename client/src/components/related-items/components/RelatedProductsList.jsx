@@ -7,7 +7,7 @@ import { FaSortDown, FaSortUp } from 'react-icons/fa';
 
 export default function RelatedProductsList ({currentItem, setProduct}) {
   const [relatedItems, setRelatedItems] = useState([])
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(true)
 
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function RelatedProductsList ({currentItem, setProduct}) {
 
   return (
     <>
-      <h3 style={{cursor: 'pointer', borderBottom: '1px solid #3c4044'}} onClick={() => setShow(!show)}>Related Products {show ? <FaSortUp /> : <FaSortDown />}</h3>
+      <h3 className='list-title' onClick={() => setShow(!show)}>Related Products {show ? null : <FaSortDown />}</h3>
       <div className='related-list' style={style}>
         <ul className='related-ul'>
           {relatedItems.map(item => (
@@ -30,7 +30,7 @@ export default function RelatedProductsList ({currentItem, setProduct}) {
           }
         </ul>
         {relatedItems.length > 4 ?
-          <ScrollButtons element={'.related-list .related-ul'} width={1100} scroll={275} />
+          <ScrollButtons element={'.related-list .related-ul'} width={1100} scroll={236} />
           : null
         }
       </div>

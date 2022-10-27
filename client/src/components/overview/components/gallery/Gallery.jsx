@@ -39,14 +39,24 @@ export default function Gallery({ style, photos, setPhotos, photo, setPhoto }) {
   // onClick function to collapse/uncollapse gallery img
   function expandPhoto(prop){
     if(expand === true && photo.thumbnail_url) {
+      window.scrollTo({
+        top: 150,
+        behavior: 'smooth',
+      })
       document.querySelector('.gallery-list').style.display = 'none'
+      document.querySelector('.gallery-main').style.height = '70vh'
       document.querySelector('.right').style.visibility = 'hidden'
       document.querySelector('.middle').style.margin = '0 auto'
-      document.querySelector('.contain-description-related').style.marginTop = '5%'
+      document.querySelector('.contain-description-related').style.marginTop = '6.5%'
       document.querySelector('.contain-description-related').style.transition = 'all .25s ease-in-out'
 
     } else {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      })
       document.querySelector('.gallery-list').style.display = 'flex'
+      document.querySelector('.gallery-main').style.height = '65vh'
       document.querySelector('.right').style.visibility = 'visible'
       document.querySelector('.contain-description-related').style.marginTop = '-3%'
       document.querySelector('.middle').style.margin = '0'
