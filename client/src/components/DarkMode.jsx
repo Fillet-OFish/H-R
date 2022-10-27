@@ -9,13 +9,14 @@ export function useDarkMode() {
 }
 
 export function DarkModeProvider({children}) {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => (JSON.parse(localStorage.getItem('darkMode')) || false));
 
   darkMode ?
     (document.body.style.backgroundColor = '#202123', document.body.style.color = 'white')
     : (document.body.style.backgroundColor = '', document.body.style.color = '');
 
   function toggleDarkMode() {
+    localStorage.setItem('darkMode', !darkMode);
     setDarkMode(darkMode => !darkMode)
   }
 
