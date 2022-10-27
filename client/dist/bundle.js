@@ -891,7 +891,8 @@ function Gallery(_ref) {
     },
     className: "gallery-arrow"
   }), photos.slice(XY[0], XY[1]).map(function (photo, i) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+      className: "solo-img-container",
       key: i
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("img", {
       className: "solo-img",
@@ -913,9 +914,11 @@ function Gallery(_ref) {
     },
     className: "gallery-arrow"
   })) : photos.slice(XY[0], XY[1]).map(function (photo, i) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+      className: "solo-img-container",
       key: i
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("img", {
+      className: "solo-img",
       src: photo.thumbnail_url || "https://i.postimg.cc/gjFHrzW3/image-4.png",
       alt: "list of thumbnail images",
       onClick: function onClick(e) {
@@ -1619,8 +1622,8 @@ var AddAnswModal = function AddAnswModal(props) {
   var tempImgs = [];
 
   // CLOUDINARY ------------------------------------------------------------------------
-  var cloudName = "dkbpaia1x"; // replace with your own cloud name
-  var uploadPreset = "cloudinary-upload"; // replace with your own upload preset
+  var cloudName = 'dkbpaia1x'; // replace with your own cloud name
+  var uploadPreset = 'cloudinary-upload'; // replace with your own upload preset
 
   // Remove the comments from the code below to add
   // additional functionality.
@@ -1903,7 +1906,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 
-
 // ENTRY OF EACH ANSWER ----------
 var ImageModal = function ImageModal(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -2097,7 +2099,9 @@ var QA = function QA(props) {
       modalOn: props.modalOn,
       modalAnswOn: props.modalAnswOn,
       setModalAnswOn: props.setModalAnswOn,
-      setQID: props.setQID
+      setQID: props.setQID,
+      fetch: fetch,
+      setFetch: setFetch
     });
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "align-btns"
@@ -2959,8 +2963,8 @@ var AddRevModal = function AddRevModal(props) {
   var tempImgs = [];
 
   // CLOUDINARY ------------------------------------------------------------------------
-  var cloudName = "dkbpaia1x"; // replace with your own cloud name
-  var uploadPreset = "cloudinary-upload"; // replace with your own upload preset
+  var cloudName = 'dkbpaia1x'; // replace with your own cloud name
+  var uploadPreset = 'cloudinary-upload'; // replace with your own upload preset
 
   // Remove the comments from the code below to add
   // additional functionality.
@@ -3075,13 +3079,13 @@ var AddRevModal = function AddRevModal(props) {
     value: 4
   }, "Good"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("option", {
     value: 5
-  }, "Great")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("b", null, "* Review")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("input", {
+  }, "Great")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("b", null, "* Review")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("label", null, "Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("input", {
     type: "text",
     name: "summary",
     placeholder: "Best purchase ever!",
     maxLength: "60",
     required: true
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("textarea", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("label", null, "Body"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("textarea", {
     type: "text",
     name: "body",
     placeholder: "Why did you like the product or not?",
@@ -3098,7 +3102,7 @@ var AddRevModal = function AddRevModal(props) {
     value: true
   }, "Yes"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("option", {
     value: false
-  }, "No")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("b", null, "* Nickname")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("label", {
+  }, "No")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("b", null, "* Nickname")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("label", {
     style: {
       marginLeft: '37%'
     }
