@@ -43,44 +43,12 @@ img {
   scroll-behavior: smooth;
   width: 100%;
 }
-.contain-description-related{
-  margin: -3% auto 3% 18%;
-  width: 75%
-}
-.contain-reviews-QnA{
-  display: table;
-  margin: auto;
-  width: 85%;
-  padding: 2%;
-}
-.contain-reviews-QnA .toggled{
+.contain{
+  max-width: 95%;
+  margin: 0 auto;
+  margin-top: -3%;
   margin-bottom: 3%;
-  border:0;
-  padding: 1% 2%;
-  background-color: white;
-  border-top: 2px solid gray;
 }
-.contain-reviews-QnA .reviewsToToggle{
-  margin-bottom: 3%;
-  padding: 1% 2%;
-  border:0;
-  border-top-left-radius: 5px;
-  background-color: #f0f0f0;
-  box-shadow: inset -7px 0 9px -7px rgba(0,0,0,0.3), inset 0 -7px 9px -7px rgba(0,0,0,0.3);
-}
-.contain-reviews-QnA .qnaToToggle{
-  margin-bottom: 3%;
-  padding: 1% 2%;
-  border:0;
-  border-top-right-radius: 5px;
-  background-color: #f0f0f0;
-  box-shadow: inset 7px 0 9px -7px rgba(0,0,0,0.3), inset 0 -7px 9px -7px rgba(0,0,0,0.3);
-}
-.container2{
-  margin: 30px auto;
-  display: grid;
-}
-
 /* ANNOUNCEMENT ------------------------ */
 .announcement{
   width: 100%;
@@ -220,19 +188,22 @@ img {
 /* FOOTER ------------------------ */
 
 .footer{
-  height: auto;
-  width: 90%;
+  height: 420px;
+  /* background-color: white; */
   line-height: 1;
-  background-color: black;
-  color:white;
-  margin-top: 5%;
-  padding: 2.5% 5%;
+}
 
+.footer-dark{
+  background-color: transparent
 }
 
 .start{
   display: flex;
-  height: 60%;
+  background-color: rgb(245,245,245, 40%);
+  padding: 5%;
+  height: auto;
+  width: 200%;
+  margin: 10% 0 0 -30%;
 }
 
 .start-title{
@@ -241,32 +212,33 @@ img {
 }
 
 .start a{
-  color:white;
+  color:black;
   text-decoration: none;
 }
 
 .start .col1{
-  width:60%;
+  width:35%;
   font-size: 15px;
 }
 
 .start .col2{
-  width:40%;
+  width:20%;
   font-size: 16px;
 }
 
 .col1 .newsletter-bar input{
   border:0;
   width: 70%;
-  border-bottom: 1.5px white solid;
+  border-bottom: 1.5px black solid;
   background-color: transparent;
 }
 
 .end{
+  width: 200%;
+  margin: 2% 0 2% -30%;
+  padding-left: 5%;
   font-weight:250;
   text-transform: uppercase;
-  background-color: black;
-  opacity: 60%;
 }
 
 /* OVERVIEW ------------------------ */
@@ -649,7 +621,7 @@ img {
 /* FERNANDO ADDED THESE --------------------------------------------------------------- */
 .q-a{
   display: none;
-  width: 96%;
+  width: 100%;
   margin-top: -1%;
 }
 
@@ -674,7 +646,7 @@ nav {
 .QContainer {
   width: 100%;
   max-width: 100%;
-  max-height: 680px;
+  max-height: 750px;
   overflow-y:auto;
   overflow-x: hidden;
 }
@@ -718,9 +690,8 @@ nav {
   font-weight: lighter;
   font-size: 13px;
 }
-
 .user_info-dark {
-  color: lightgrey;
+  color: gray;
 }
 
 .a-photos{
@@ -914,6 +885,12 @@ textarea {
   border-bottom: 1px solid #fff;
 }
 
+.hr3-dark {
+  border-top: 1px solid #3c4044;
+  border-bottom: 1px solid #3c4044;
+
+}
+
 /* search button ----- */
 .search-form {
   background-color: #f9f9f9;
@@ -940,6 +917,7 @@ textarea {
 
 .search-button {
   all: unset;
+
   cursor: pointer;
   width: 44px;
   height: 44px;
@@ -956,9 +934,20 @@ textarea {
 
 /* related items and outfit ----- */
 
+.related-items {
+  overflow: hidden;
+  width: 80%;
+}
+
 .related-list {
   position: relative;
-}
+  overflow: hidden;
+  transition: all .5s ease-in-out;
+  height: 0;
+  opacity: 0;
+  /* margin-top: -350px; */
+ }
+
 /*
 .related-list::before {
   position: absolute;
@@ -979,7 +968,6 @@ textarea {
   position:  relative;
   margin:  0;
   padding:  0;
-  max-width:  1100px;
   width:  100%;
   overflow-x:  auto;
   overflow:  hidden;
@@ -1031,17 +1019,13 @@ textarea {
   margin:  8px;
   background-color: transparent;
   /* border:  1px solid lightgrey ; */
-  width:  220px;
-  height:  335px;
+  width: 257px;
+  height: 380px;
   /* overflow:  hidden; */
   cursor:  pointer;
   /* border-radius:  6px; */
   font-size:  22px;
   color:  grey;
-}
-
-.add-to-outfit-button-dark {
-  color: white;
 }
 
 .add-to-outfit-button p {
@@ -1055,6 +1039,10 @@ textarea {
   color:  black;
 }
 
+.add-to-outfit-button-dark:hover {
+  color: white
+}
+
 /* product card style ----- */
 
 .product-card {
@@ -1063,7 +1051,7 @@ textarea {
   /* border: 1px solid lightgrey; */
   margin: 8px;
   width: 220px;
-  height: 335px;
+  height: 280px;
   cursor: pointer;
   /* border-radius: 6px; */
   overflow: hidden;
@@ -1075,7 +1063,7 @@ textarea {
 
 .product-card-photo {
   width: 100%;
-  height: 70%;
+  height: 80%;
   overflow: hidden;
 }
 
@@ -1246,24 +1234,25 @@ textarea {
 /* Reviews --------------------------------------------------------------- */
 
 .reviews-ratings{
-  width: 100%;
+  width: 110%;
+  margin-left:-4.5%;
 }
 
 .reviews-ratings-container {
   display: flex;
   user-select: none;
   /* line-height: 1.5; */
-  width: 95%;
+  width: 100%;
   margin-top: -3%;
 }
 
 .review-left{
-  flex-basis: 20%;
+  flex-basis: 33%;
   display: inline-block;
 }
 
 .review-right{
-  width: 80%;
+  width: 95%;
   overflow-y: auto;
   max-height: 900px;
 }
@@ -1307,7 +1296,7 @@ textarea {
 
 .product-breakdown .category{
   margin-top: 5%;
-  margin-left: -4%;
+  margin-left: -8.5%;
   width: 98%;
 }
 
@@ -1364,8 +1353,8 @@ textarea {
 
 .dark-mode-button {
   position: fixed;
-  bottom: 25px;
-  right: 18px;
+  bottom: 6px;
+  right: 12px;
   padding-bottom: 5px;
   border: none;
   background-color: transparent;
@@ -1388,7 +1377,7 @@ textarea {
 #translate {
   position: fixed;
   bottom: -5px;
-  right: 0;
+  right: 80px;
   z-index:2;
 }
 iframe.goog-te-banner-frame{
@@ -1408,4 +1397,5 @@ body {
   border: none;
   appearance: none;
   color: gray;
+  text-align: right;
 }

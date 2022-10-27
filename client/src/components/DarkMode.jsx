@@ -11,7 +11,7 @@ export function DarkModeProvider({children}) {
   const [darkMode, setDarkMode] = useState(false);
 
   darkMode ?
-    (document.body.style.backgroundColor = '#180A0A', document.body.style.color = 'white')
+    (document.body.style.backgroundColor = '#202123', document.body.style.color = 'white')
     : (document.body.style.backgroundColor = '', document.body.style.color = '');
 
   function toggleDarkMode() {
@@ -23,7 +23,10 @@ export function DarkModeProvider({children}) {
   return (
     <DarkModeContext.Provider value={darkMode}>
         {children}
-        <button className={`dark-mode-button ${darkMode ? 'dark-mode-button-dark' : null}`} onClick={toggleDarkMode}>Dark Theme</button>
+        <button className={`dark-mode-button ${darkMode ? 'dark-mode-button-dark' : null}`} onClick={toggleDarkMode}>{darkMode ? 'Light' : 'Dark'}</button>
     </DarkModeContext.Provider>
   )
 }
+
+//303135
+//3c4044

@@ -55,13 +55,16 @@ export default function App() {
           <RelatedItemsAndComparison currentItem={product} setProduct={setProduct} />
         </div>
 
-        <div className="contain-reviews-QnA">
+        <div className="toggle-btns">
           <button className={!toggleQnA? "toggled" : "reviewsToToggle"} onClick={e=>{ if(toggleQnA){setToggleQnA(!toggleQnA); toggledQnA()}}}>
               Reviews
           </button>
           <button className={toggleQnA? "toggled" : "qnaToToggle"} onClick={e=>{ if(!toggleQnA){setToggleQnA(!toggleQnA); toggledQnA()}}}>
               Questions
           </button>
+        </div>
+
+        <div className="contain-reviews-QnA">
           {/* Questions and Answers */}
           <QuesnAnsw product={product} />
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useDarkMode } from '../../../DarkMode.jsx'
 
 export default function ProductBreakdown({ rating, product, numReviews, reviews, reviewsMeta, filter, setFilter }) {
 
@@ -8,13 +9,14 @@ export default function ProductBreakdown({ rating, product, numReviews, reviews,
   const quality = reviewsMeta.characteristics.Quality;
   const length = reviewsMeta.characteristics.Length;
   const fit = reviewsMeta.characteristics.Fit;
+  const darkMode = useDarkMode();
 
   const ratingBarStyle = {
     display: 'inline-block',
     position: 'relative',
     width: '100%',
     height: '10px',
-    background: '#ddd'
+    background: darkMode ? '#303135' : '#ddd'
   }
 
   const rangeStyle1 = {
