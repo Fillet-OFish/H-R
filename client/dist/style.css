@@ -255,6 +255,10 @@ img {
   text-decoration: none;
 }
 
+.start a:hover{
+  text-decoration: underline;
+}
+
 .start .col1{
   width:60%;
   font-size: 15px;
@@ -378,16 +382,17 @@ img {
 }
 /* gallery - reg view */
 .gallery-list{
-  margin: auto;
+  margin: auto 0;
   width: 5%;
   display: flex;
   user-select: none;
+  height: 100%;
 }
 .gallery-list img{
   cursor: pointer;
   width: 50px;
-  max-height: 70px;
-  object-fit: contain;
+  max-height: 60px;
+  object-fit: cover;
 }
 .solo-img:hover {
   border: 1px red solid;
@@ -522,6 +527,9 @@ img {
   cursor: pointer;
 }
 /* styles */
+.styles{
+  height: 100%;
+}
 .styles p{
   font-size: 16px;
 }
@@ -832,6 +840,21 @@ nav {
   padding: 10px;
   background-color: white;
 }
+.form-container-rev {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  margin-left: 37%;
+  /* margin-top: 7%; */
+  margin-top: 1%;
+  border-radius: 10px;
+  border: 1.5px solid black;
+
+  max-width: 700px;
+  padding: 10px;
+  background-color: white;
+}
 
 .form-container-dark {
   background-color: #3c4044;
@@ -981,6 +1004,10 @@ textarea {
   width: 24px;
   height: 24px;
   padding: 10px;
+}
+
+#qaContainer {
+  scroll-behavior: smooth;
 }
 /* Jaden ADDED THESE ------------------------------------------------- */
 
