@@ -62,37 +62,35 @@ export default function ProductCard({currentItem, item, setProduct, list, outfit
   }
 
   return (
-    <div>
+    <div onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
       {popup ?
-        <PopupComparison currentItem={currentItem} relatedItem={relatedItem} setPopup={setPopup}/> : null
+        <PopupComparison currentItem={currentItem} relatedItem={relatedItem} setHover={setHover} setPopup={setPopup}/> : null
       }
       {relatedItem && defaultStyle && styles ?
         <li className={`product-card ${darkMode ? 'product-card-dark' : null}`} onClick={e => {clickHandler(e);}} >
           <ProductCardImage defaultStyle={defaultStyle} styles={styles}/>
-          {list === 'related' ?
+          {list === 'related' && hover ?
             <button className='product-card-button' onClick={e => {handleComparisonClick();}}>
               ☆
             </button> : null
           }
-          {list === 'outfit' ?
+          {list === 'outfit' && hover ?
             <button className='product-card-button' onClick={e => {handleOutfitClick;}}>
               x
             </button> : null
           }
-          <div className='product-card-info' onMouseEnter={() => setHover(true)} onMouseLeave={() => {setTimeout(()=>{setHover(false)}, 300)}}>
+          <div className='product-card-info'>
             <small>{relatedItem.category}</small>
             <div className='product-card-name'>{relatedItem.name}</div>
-            <div className='product-card-info-show-on-hover' style={{display: hover ? 'block' : 'none'}}>
-              <StarRatings item={item} />
-              {defaultStyle.sale_price ?
-                <div>
-                  <p style={{color: 'red'}}>${defaultStyle.sale_price}</p>
-                  <small style={{textDecoration: 'line-through'}}>${defaultSTyle.original_price}</small>
-                </div>
-                :
-                <small>${defaultStyle.original_price}</small>
-              }
-            </div>
+            {defaultStyle.sale_price ?
+              <div>
+                <p style={{color: 'red'}}>${defaultStyle.sale_price}</p>
+                <small style={{textDecoration: 'line-through'}}>${defaultSTyle.original_price}</small>
+              </div>
+              :
+              <small>${defaultStyle.original_price}</small>
+            }
+            <StarRatings item={item} />
           </div>
         </li> : null
       }
