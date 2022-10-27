@@ -973,7 +973,7 @@ textarea {
 .related-list {
   position: relative;
   overflow: hidden;
-  transition: all .5s ease-in-out;
+  transition: all .5s ease-in;
   height: 0;
   opacity: 0;
   /* margin-top: -350px; */
@@ -1039,11 +1039,11 @@ textarea {
 }
 
 .button-left-dark {
-  background:  linear-gradient(90deg, #180A0A 30%, transparent 100%);
+  background:  linear-gradient(90deg, #202123 30%, transparent 100%);
 }
 
 .button-right-dark {
-  background:  linear-gradient(-90deg, #180A0A 30%, transparent 100%);
+  background:  linear-gradient(-90deg, #202123 30%, transparent 100%);
 }
 
 .add-to-outfit-button {
