@@ -568,7 +568,7 @@ img {
   position: relative;
   /* margin-top:-2%; */
   font-size: 17px;
-  width: 100%;
+  width: auto;
   height: 100px;
 }
 
@@ -595,12 +595,14 @@ img {
 }
 .cart-btn{
   position: relative;
-  width: 300px;
+  width: 325px;
   height: 40px;
-  background-color: transparent;
+  background-color: black;
   border: 1px black solid;
   font-size: 16px;
-  text-align: left;
+  color: white;
+  text-align: center;
+  margin-top: 10px;
   padding-left: 15px;
   transition: 1s;
 }
