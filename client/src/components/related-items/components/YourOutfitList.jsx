@@ -21,7 +21,7 @@ export default function YourOutfitList({currentItem, setProduct}) {
 
   return (
     <>
-      <h3 className='list-title' onClick={() => setShow(!show)}>Your Outfit {show ? null : <FaSortDown />}</h3>
+      <h3 className='list-title' onClick={() => setShow(!show)}>Your Outfit {show ? <FaSortUp className='FaSortUpButton' /> : <FaSortDown />}</h3>
       <div className='related-list' style={outfitStyle}>
         <ul className='outfit-ul'>
           <div>

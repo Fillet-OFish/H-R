@@ -15,13 +15,14 @@ export default function RelatedProductsList ({currentItem, setProduct}) {
     axios.get(`/api/products/${currentItem.id}/related`, {cancelToken: source.token})
     .then(data => {setRelatedItems(data.data)})
     .catch(err => console.log(err));
+    return () => source.cancel();
   }, [currentItem])
 
   const style = show ? {height: '100%', opacity: '1'} : {}
 
   return (
     <>
-      <h3 className='list-title' onClick={() => setShow(!show)}>Related Products {show ? null : <FaSortDown />}</h3>
+      <h3 className='list-title' onClick={() => setShow(!show)}>Related Products {show ? <FaSortUp className='FaSortUpButton' /> : <FaSortDown />}</h3>
       <div className='related-list' style={style}>
         <ul className='related-ul'>
           {relatedItems.map(item => (

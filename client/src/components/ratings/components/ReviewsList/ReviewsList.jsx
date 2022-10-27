@@ -28,7 +28,7 @@ export default function ReviewsList(props) {
       <div className='reviews-list-container'>
         {/* list every review entry --- */}
         {props.reviews.map((review, index) => (
-          <ReviewTile review={review} key={index} setImage={props.setImage} modalOn={props.modalOn} setModalOn={props.setModalOn} />
+          <ReviewTile review={review} key={index} index={index} lastIndex={props.reviews.length - 1} setImage={props.setImage} modalOn={props.modalOn} setModalOn={props.setModalOn} />
           ))}
       </div>
 
