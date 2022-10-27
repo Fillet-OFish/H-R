@@ -37,9 +37,9 @@ export default function Cart({ style }) {
   // input: n/a, output: filter style.skus for the sku that matches the selected size before posting it to cart
   function postCart() {
     if(size===''||size==='default'){
-      document.querySelector('.cart-warning').style.visibility = 'visible'
+      document.querySelector('.cart-warning').style.display = 'block'
     } else {
-      document.querySelector('.cart-warning').style.visibility = 'hidden'
+      document.querySelector('.cart-warning').style.display = 'none'
       let obj = style.skus
       let skuId = ''
       Object.keys(obj).forEach(key =>{
