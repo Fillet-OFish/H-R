@@ -21,6 +21,7 @@ export default function App() {
   useEffect(() => {
     axios.get('/api/products/40344') // id 40344
       .then(result => setProduct(result.data))
+      .catch(e => console.log('product setting error', e))
   },[])
 
   function toggledQnA(){

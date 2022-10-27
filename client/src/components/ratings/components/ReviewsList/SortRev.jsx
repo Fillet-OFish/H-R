@@ -6,7 +6,7 @@ const SortRev = (props) => {
   const darkMode = useDarkMode()
   return(
     <div className="sort-reviews">
-      <label>Sort Reviews: </label>
+      <label>{props.numReviews} reviews, sorted by </label>
       <select className={`review-sort ${darkMode ? 'review-sort-dark' : null}`} name='sort' defaultValue={'DEFAULT'} onChange={(e) => props.setSort(e.target.value)}>
         <option value="DEFAULT" disabled>none selected</option>
         <option value='newest'>newest</option>
