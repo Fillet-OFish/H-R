@@ -29,6 +29,8 @@ const QAEntry = (props) => {
     .then((response) => {
       // console.log(response.data, 'THIS IS ANSWERS')
       setAnswers(response.data);
+      // as soon as answers are loaded scroll down on load more
+      props.setFetch(!props.fetch);
     })
     .catch(err => {
       console.log(err);

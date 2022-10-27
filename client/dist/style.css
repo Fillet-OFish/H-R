@@ -941,6 +941,10 @@ textarea {
   height: 24px;
   padding: 10px;
 }
+
+#qaContainer {
+  scroll-behavior:  smooth;
+}
 /* Jaden ADDED THESE ------------------------------------------------- */
 
 /* related items and outfit ----- */
