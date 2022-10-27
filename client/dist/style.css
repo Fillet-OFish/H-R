@@ -252,6 +252,10 @@ img {
   text-decoration: none;
 }
 
+.start a:hover{
+  text-decoration: underline;
+}
+
 .start .col1{
   width:60%;
   font-size: 15px;
@@ -375,16 +379,17 @@ img {
 }
 /* gallery - reg view */
 .gallery-list{
-  margin: auto;
+  margin: auto 0;
   width: 5%;
   display: flex;
   user-select: none;
+  height: 100%;
 }
 .gallery-list img{
   cursor: pointer;
   width: 50px;
-  max-height: 70px;
-  object-fit: contain;
+  max-height: 60px;
+  object-fit: cover;
 }
 .solo-img:hover {
   border: 1px red solid;
@@ -394,7 +399,7 @@ img {
 }
 .gallery-main{
   display: flex;
-  height: 65vh;
+  height: 68vh;
   position: relative;
   user-select: none;
 }
@@ -518,6 +523,9 @@ img {
   cursor: pointer;
 }
 /* styles */
+.styles{
+  height: 100%;
+}
 .styles p{
   font-size: 16px;
 }
@@ -557,14 +565,21 @@ img {
 }
 /* cart */
 .cart{
-  margin-top:-2%;
+  position: relative;
+  /* margin-top:-2%; */
   font-size: 17px;
+  width: auto;
+  height: 100px;
 }
+
 .cart-warning{
   visibility: hidden;
 }
 /* dropdown */
 .cart select{
+  position: absolute;
+  top:0;
+  left:0;
   border: 1px black solid;
   height: 45px;
   padding-left: 15px;
@@ -575,16 +590,19 @@ img {
   margin-right: 10px;
 }
 .select-qnt{
-  width: 130px;
+  width: 60px;
+  margin-left: 265px;
 }
 .cart-btn{
   position: relative;
-  width: 300px;
+  width: 325px;
   height: 40px;
-  background-color: transparent;
+  background-color: black;
   border: 1px black solid;
   font-size: 16px;
-  text-align: left;
+  color: white;
+  text-align: center;
+  margin-top: 10px;
   padding-left: 15px;
   transition: 1s;
 }
@@ -1285,7 +1303,7 @@ textarea {
 }
 
 .sort-reviews {
-  margin: 0 0 3% 5%;
+  margin: 1% 0 3% 5%;
 }
 
 .review-sort {
@@ -1338,7 +1356,7 @@ textarea {
   position: relative;
 }
 .rating-summary .rating{
-  font-size: 50px;
+  font-size: 60px;
   font-weight: 500;
   letter-spacing: 1.8px;
 }

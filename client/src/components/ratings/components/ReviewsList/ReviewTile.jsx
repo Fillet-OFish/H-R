@@ -55,7 +55,7 @@ export default function ReviewsList(props) {
         ))}
       </div>
 
-      {/* rendering reccomended */}
+      {/* rendering recommended */}
       <div>
         {(props.review.recommend === true) ? ':) I recommend this product' : ''}
       </div>
@@ -78,14 +78,6 @@ export default function ReviewsList(props) {
           <a onClick={() => reportRev(props.review.review_id)}>Report</a>
         </label>
       </div>
-
-      {/* set each answer ----------------- */}
-      {/* <div className='AContainer'>
-        {currentAnswers.length === 0 ? 'No answers yet!' : currentAnswers.map((ans, index) => (
-          <AWEntry ans={ans} key={index} index={index} setImage={props.setImage} setModalOn={props.setModalOn} modalOn={props.modalOn} />
-          // <div><strong>A: {`A: ${ans.body}`}</strong></div>
-          ))}
-        </div> */}
 
       <hr className={`hr3 ${darkMode ? 'hr3-dark' : null}`} style={props.lastIndex === props.index ? {border: 'none'} : {}}></hr>
 
