@@ -719,9 +719,8 @@ nav {
   font-weight: lighter;
   font-size: 13px;
 }
-
 .user_info-dark {
-  color: lightgrey;
+  color: gray;
 }
 
 .a-photos{
@@ -915,6 +914,12 @@ textarea {
   border-bottom: 1px solid #fff;
 }
 
+.hr3-dark {
+  border-top: 1px solid #3c4044;
+  border-bottom: 1px solid #3c4044;
+
+}
+
 /* search button ----- */
 .search-form {
   background-color: #f9f9f9;
@@ -941,6 +946,7 @@ textarea {
 
 .search-button {
   all: unset;
+
   cursor: pointer;
   width: 44px;
   height: 44px;
@@ -957,9 +963,20 @@ textarea {
 
 /* related items and outfit ----- */
 
+.related-items {
+  overflow: hidden;
+  width: 80%;
+}
+
 .related-list {
   position: relative;
-}
+  overflow: hidden;
+  transition: all .5s ease-in-out;
+  height: 0;
+  opacity: 0;
+  /* margin-top: -350px; */
+ }
+
 /*
 .related-list::before {
   position: absolute;
@@ -980,7 +997,6 @@ textarea {
   position:  relative;
   margin:  0;
   padding:  0;
-  max-width:  1100px;
   width:  100%;
   overflow-x:  auto;
   overflow:  hidden;
@@ -1041,10 +1057,6 @@ textarea {
   color:  grey;
 }
 
-.add-to-outfit-button-dark {
-  color: white;
-}
-
 .add-to-outfit-button p {
   display:  table-cell;
   text-align:  center;
@@ -1056,6 +1068,10 @@ textarea {
   color:  black;
 }
 
+.add-to-outfit-button-dark:hover {
+  color: white
+}
+
 /* product card style ----- */
 
 .product-card {
@@ -1063,8 +1079,8 @@ textarea {
   position: relative;
   /* border: 1px solid lightgrey; */
   margin: 8px;
-  width: 257px;
-  height: 380px;
+  width: 220px;
+  height: 280px;
   cursor: pointer;
   /* border-radius: 6px; */
   overflow: hidden;
@@ -1076,7 +1092,7 @@ textarea {
 
 .product-card-photo {
   width: 100%;
-  height: 70%;
+  height: 80%;
   overflow: hidden;
 }
 
@@ -1365,8 +1381,8 @@ textarea {
 
 .dark-mode-button {
   position: fixed;
-  bottom: 25px;
-  right: 18px;
+  bottom: 6px;
+  right: 12px;
   padding-bottom: 5px;
   border: none;
   background-color: transparent;
@@ -1389,7 +1405,7 @@ textarea {
 #translate {
   position: fixed;
   bottom: -5px;
-  right: 0;
+  right: 80px;
   z-index:2;
 }
 iframe.goog-te-banner-frame{
@@ -1409,4 +1425,5 @@ body {
   border: none;
   appearance: none;
   color: gray;
+  text-align: right;
 }
