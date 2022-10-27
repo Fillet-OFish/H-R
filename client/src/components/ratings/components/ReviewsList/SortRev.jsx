@@ -5,7 +5,7 @@ import { useDarkMode } from '../../../DarkMode.jsx'
 const SortRev = (props) => {
   const darkMode = useDarkMode()
   return(
-    <div>
+    <div className="sort-reviews">
       <label>Sort Reviews: </label>
       <select className={`review-sort ${darkMode ? 'review-sort-dark' : null}`} name='sort' defaultValue={'DEFAULT'} onChange={(e) => props.setSort(e.target.value)}>
         <option value="DEFAULT" disabled>none selected</option>

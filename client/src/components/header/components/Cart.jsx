@@ -15,7 +15,7 @@ export default function Cart({ product }) {
 
   // leave hover function - closes cart when mouse leaves cart
   function closeCart() {
-    document.getElementsByClassName('cart-block')[0].style.display = 'none';
+    document.querySelector('.cart-block').style.display = 'none';
   }
 
   return(

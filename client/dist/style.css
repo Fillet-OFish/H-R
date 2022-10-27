@@ -61,7 +61,8 @@ img {
   margin-bottom: 3%;
   border:0;
   padding: 1% 2%;
-  background-color: rgba(255,255,255,0.8);
+  background-color: white;
+  font-size: 18px;
   border-top: 2px solid gray;
 }
 .reviewsToToggle{
@@ -69,8 +70,8 @@ img {
   padding: 1% 2%;
   border:0;
   border-top-left-radius: 5px;
-  background-color: rgba(255,255,255,0.6);;
-  color: rgb(0, 0, 0, 0.5);
+  background-color: black;
+  color: white;
   box-shadow: inset -7px 0 9px -7px rgba(0,0,0,0.3), inset 0 -7px 9px -7px rgba(0,0,0,0.3);
 }
 .qnaToToggle{
@@ -78,8 +79,8 @@ img {
   padding: 1% 2%;
   border:0;
   border-top-right-radius: 5px;
-  background-color: rgba(255,255,255,0.6);;
-  color: rgb(0, 0, 0, 0.5);
+  background-color: black;
+  color: white;
   box-shadow: inset 7px 0 9px -7px rgba(0,0,0,0.3), inset 0 -7px 9px -7px rgba(0,0,0,0.3);
 }
 /* ANNOUNCEMENT ------------------------ */
@@ -233,11 +234,9 @@ img {
   padding: 2.5% 5%;
 
 }
-
 .footer-dark{
   background-color: transparent
 }
-
 .start{
   display: flex;
   height: 60%;
@@ -286,18 +285,17 @@ img {
 .overview-container{
   display: flex;
   height: 65vh;
-  width: 130vh;
+  width: 100%;
 }
 .left{
   display:flex;
   height: 60vh;
-  width: 5%;
+  width: auto;
   margin-bottom: 20px;
 }
 .middle{
   width: 45%;
   height: 100%;
-  padding-left: 3%;
 }
 .product-category{
   text-transform: uppercase;
@@ -326,6 +324,7 @@ img {
   font-size: 18px;
   padding: 10px;
   cursor: pointer;
+  background-color: rgba(255,255,255,0.8);
 }
 .social .share-icon{
   padding:  10%;
@@ -856,7 +855,7 @@ nav {
   margin-top: 20px;
   margin-left: 40%;
   border: 1px rgb(190, 190, 190) solid;
-  background-color: rgba(255,255,255,0.8);
+  background-color: white;
   color: black;
   padding: 14px 28px;
   font-size: 16px;
@@ -868,7 +867,7 @@ nav {
   margin-top: 25px;
   margin-left: 30%;
   border: 1px rgb(190, 190, 190) solid;
-  background-color: rgba(255,255,255,0.8);
+  background-color: white;
   color: rgb(80, 79, 79);
   padding: 14px 28px;
   font-size: 16px;
@@ -879,7 +878,7 @@ nav {
   margin-left: 5%;
   margin-top: 25px;
   border: 1px rgb(190, 190, 190) solid;
-  background-color: rgba(255,255,255,0.8);
+  background-color: white;
   color: rgb(80, 79, 79);
   padding: 14px 28px;
   font-size: 16px;
@@ -1276,9 +1275,19 @@ textarea {
 .reviews-ratings-container {
   display: flex;
   user-select: none;
-  line-height: 1.5;
+  /* line-height: 1.5; */
   width: 95%;
   margin-top: -3%;
+}
+
+.review-sort {
+  background: transparent;
+  border: none;
+  font-size: 15px;
+  color: black
+}
+.review-sort-dark {
+  color: white
 }
 
 .review-left{
@@ -1300,16 +1309,6 @@ textarea {
 
 .review-right::-webkit-scrollbar-thumb {
   background: rgb(212, 211, 211, .5);
-}
-
-.review-sort {
-  background: transparent;
-  border: none;
-  font-size: 15px;
-  color: black
-}
-.review-sort-dark {
-  color: white
 }
 
 .rating-summary {
@@ -1400,7 +1399,7 @@ textarea {
   position: fixed;
   transform: translate(-50%, -50%);
   bottom: 6%;
-  right: 0.8%;
+  right: 0.85%;
   border: none;
   background-color: transparent;
   color: grey;
@@ -1453,7 +1452,6 @@ textarea {
   transform: translate(-50%, -50%);
   font-size: inherit;
 }
-
 iframe.goog-te-banner-frame{
   display: none !important;
 }

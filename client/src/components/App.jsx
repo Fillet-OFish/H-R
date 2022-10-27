@@ -31,6 +31,7 @@ export default function App() {
       document.querySelector('.q-a').style.display = 'none'
       document.querySelector('.reviews-ratings').style.display = 'block'
     }
+    document.querySelector('.toggled').style.transition = 'font 0.3s ease'
   }
 
 
@@ -55,6 +56,12 @@ export default function App() {
           <RelatedItemsAndComparison currentItem={product} setProduct={setProduct} />
         </div>
 
+        {/* where you'll scroll to when you click reviews from overview */}
+        <div className="gallery-scroll-to-here">
+          <br/>
+        </div>
+
+        {/* toggles QnA or reviews */}
         <div className="toggle-btns">
           <button className={!toggleQnA? "toggled" : "reviewsToToggle"} onClick={e=>{ if(toggleQnA){setToggleQnA(!toggleQnA); toggledQnA()}}}>
               Reviews
