@@ -17,13 +17,11 @@ export default function RelatedProductsList ({currentItem, setProduct}) {
     .catch(err => console.log(err));
   }, [currentItem])
 
-  const style = {
-    display: show ? '' : 'none'
-  }
+  const style = show ? {height: '100%', opacity: '1'} : {}
 
   return (
     <>
-      <h3 style={{cursor: 'pointer', borderBottom: '1px solid gray'}} onClick={() => setShow(!show)}>Related Products {show ? <FaSortUp /> : <FaSortDown />}</h3>
+      <h3 style={{cursor: 'pointer', borderBottom: '1px solid #3c4044'}} onClick={() => setShow(!show)}>Related Products {show ? <FaSortUp /> : <FaSortDown />}</h3>
       <div className='related-list' style={style}>
         <ul className='related-ul'>
           {relatedItems.map(item => (

@@ -11,7 +11,7 @@ export function DarkModeProvider({children}) {
   const [darkMode, setDarkMode] = useState(false);
 
   darkMode ?
-    (document.body.style.backgroundColor = '#180A0A', document.body.style.color = 'white')
+    (document.body.style.backgroundColor = '#202123', document.body.style.color = 'white')
     : (document.body.style.backgroundColor = '', document.body.style.color = '');
 
   function toggleDarkMode() {
@@ -27,3 +27,6 @@ export function DarkModeProvider({children}) {
     </DarkModeContext.Provider>
   )
 }
+
+//303135
+//3c4044

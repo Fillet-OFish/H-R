@@ -17,13 +17,11 @@ export default function YourOutfitList({currentItem, setProduct}) {
     }
   }
 
-  const outfitStyle = {
-    display: show ? '' : 'none'
-  }
+  const outfitStyle = show ? {height: '100%', opacity: '1'} : {}
 
   return (
     <>
-      <h3 style={{cursor: 'pointer', borderBottom: '1px solid gray'}} onClick={() => setShow(!show)}>Your Outfit {show ? <FaSortUp /> : <FaSortDown />}</h3>
+      <h3 style={{cursor: 'pointer', borderBottom: '1px solid #3c4044'}} onClick={() => setShow(!show)}>Your Outfit {show ? <FaSortUp /> : <FaSortDown />}</h3>
       <div className='related-list' style={outfitStyle}>
         <ul className='outfit-ul'>
           <div>
