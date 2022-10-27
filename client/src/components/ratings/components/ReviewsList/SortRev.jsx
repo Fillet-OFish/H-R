@@ -2,7 +2,7 @@ import React from 'react';
 
 
 const SortRev = (props) => (
-  <div>
+  <div className="sort-reviews">
     <label>Sort Reviews: </label>
     <select name='sort' defaultValue={'DEFAULT'} onChange={(e) => props.setSort(e.target.value)}>
       <option value="DEFAULT" disabled>none selected</option>

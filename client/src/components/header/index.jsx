@@ -11,7 +11,11 @@ export default function Header({ product }) {
 
   // on hover function - shows cart when hovering over shopping bag
   function showCart() {
-    document.getElementsByClassName('cart-block')[0].style.display = 'block';
+    document.querySelector('.cart-block').style.display = 'block';
+  }
+
+  function showSearch() {
+    document.querySelector('.search-block').style.display = 'block';
   }
 
   return(
@@ -22,11 +26,8 @@ export default function Header({ product }) {
       <div className={`header ${darkMode ? 'header-dark' : null}`}>
 
         <div className="header-col-1">
-
           {/* logo */}
           <span className='logo'><a style={darkMode ? {color: 'white'} : {}} href='/'>Hack & Reactor</a></span>
-          {/* search */}
-          {/* <Search/> */}
         </div>
 
         <div className="header-col-3">
