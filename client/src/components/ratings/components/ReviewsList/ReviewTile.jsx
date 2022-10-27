@@ -8,11 +8,11 @@ import { useDarkMode } from '../../../DarkMode.jsx'
 export default function ReviewsList(props) {
   const darkMode = useDarkMode();
 
-  console.log(props.review)
+  // console.log(props.review)
 
   // make an axios put request to mark questions as helpful
   const helpfulRev = (r_id) => {
-    console.log('ENTER HELPFUL ---')
+    // console.log('ENTER HELPFUL ---')
     axios.put(`/api/reviews/${r_id}/helpful`)
     .then((response) => {
       console.log('Successful put for helpfulRev!')
@@ -55,7 +55,7 @@ export default function ReviewsList(props) {
         ))}
       </div>
 
-      {/* rendering reccomended */}
+      {/* rendering recommended */}
       <div>
         {(props.review.recommend === true) ? ':) I recommend this product' : ''}
       </div>
@@ -79,6 +79,7 @@ export default function ReviewsList(props) {
         </label>
       </div>
 
+<<<<<<< HEAD
       {/* set each answer ----------------- */}
       {/* <div className='AContainer'>
         {currentAnswers.length === 0 ? 'No answers yet!' : currentAnswers.map((ans, index) => (
@@ -87,6 +88,8 @@ export default function ReviewsList(props) {
           ))}
         </div> */}
 
+=======
+>>>>>>> c4372d2dd77f22b725e0c4c36f282cd53f989310
       <hr className={`hr3 ${darkMode ? 'hr3-dark' : null}`} style={props.lastIndex === props.index ? {border: 'none'} : {}}></hr>
 
     </div>

@@ -15,6 +15,7 @@ export default function RelatedProductsList ({currentItem, setProduct}) {
     axios.get(`/api/products/${currentItem.id}/related`, {cancelToken: source.token})
     .then(data => {setRelatedItems(data.data)})
     .catch(err => console.log(err));
+    return () => source.cancel();
   }, [currentItem])
 
   const style = show ? {height: '100%', opacity: '1'} : {}
