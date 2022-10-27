@@ -6,7 +6,6 @@ import axios from 'axios';
 import Social from './components/product-info/Social.jsx'
 import Styles from './components/product-info/Styles.jsx'
 import Gallery from './components/gallery/Gallery.jsx'
-import Cart from './components/product-info/Cart.jsx'
 
 export default function Overview({product, rating, numReviews}) {
   const clickTracker = useTracker();
@@ -73,9 +72,6 @@ export default function Overview({product, rating, numReviews}) {
             {/* Styles */}
             <Styles styles={styles} style={style} setStyle={setStyle} />
           </div>
-
-          {/* Cart */}
-          <Cart style={style}/>
         </div>
     </div>
   )
