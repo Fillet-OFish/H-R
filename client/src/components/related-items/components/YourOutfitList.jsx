@@ -18,12 +18,10 @@ export default function YourOutfitList({currentItem, setProduct}) {
   }
 
   const outfitStyle = show ? {height: '100%', opacity: '1'} : {}
-  const h3Style = show ? {cursor: 'pointer'} : {cursor: 'pointer', borderBottom: '1px solid #3c4044'}
-
 
   return (
     <>
-      <h3 style={h3Style} onClick={() => setShow(!show)}>Your Outfit {show ? null : <FaSortDown />}</h3>
+      <h3 className='list-title' onClick={() => setShow(!show)}>Your Outfit {show ? null : <FaSortDown />}</h3>
       <div className='related-list' style={outfitStyle}>
         <ul className='outfit-ul'>
           <div>
@@ -36,7 +34,7 @@ export default function YourOutfitList({currentItem, setProduct}) {
           }
         </ul>
         {outfit.length > 3 ?
-          <ScrollButtons element={'.related-list .outfit-ul'} width={1100} scroll={275}  /> : null
+          <ScrollButtons element={'.related-list .outfit-ul'} width={1100} scroll={236}  /> : null
         }
       </div>
     </>

@@ -18,11 +18,10 @@ export default function RelatedProductsList ({currentItem, setProduct}) {
   }, [currentItem])
 
   const style = show ? {height: '100%', opacity: '1'} : {}
-  const h3Style = show ? {cursor: 'pointer'} : {cursor: 'pointer', borderBottom: '1px solid #3c4044'}
 
   return (
     <>
-      <h3 style={h3Style} onClick={() => setShow(!show)}>Related Products {show ? null : <FaSortDown />}</h3>
+      <h3 className='list-title' onClick={() => setShow(!show)}>Related Products {show ? null : <FaSortDown />}</h3>
       <div className='related-list' style={style}>
         <ul className='related-ul'>
           {relatedItems.map(item => (
@@ -31,7 +30,7 @@ export default function RelatedProductsList ({currentItem, setProduct}) {
           }
         </ul>
         {relatedItems.length > 4 ?
-          <ScrollButtons element={'.related-list .related-ul'} width={1100} scroll={275} />
+          <ScrollButtons element={'.related-list .related-ul'} width={1100} scroll={236} />
           : null
         }
       </div>
