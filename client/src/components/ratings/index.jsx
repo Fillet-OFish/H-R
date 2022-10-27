@@ -50,7 +50,8 @@ export default function Reviews(props) {
     reviews && reviewsMeta ?
     <div className="reviews-ratings">
 
-      <h3>Ratings and Reviews</h3><br/>
+      <br/>
+
       <div className='reviews-ratings-container'>
         <div className='review-left'>
           <Breakdown product={props.product} rating={props.rating} numReviews={props.numReviews} reviews={reviews} reviewsMeta={reviewsMeta} filter={filter} setFilter={setFilter}/>

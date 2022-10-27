@@ -12,6 +12,7 @@ export default function ProductCard({currentItem, item, setProduct, list, outfit
   const [styles, setStyles] = useState(null);
   const [defaultStyle, setDefaultStyle] = useState(null);
   const [popup, setPopup] = useState(false);
+  const [hover, setHover] = useState(false);
   const darkMode = useDarkMode();
 
   useEffect(() => {
@@ -61,41 +62,33 @@ export default function ProductCard({currentItem, item, setProduct, list, outfit
   }
 
   return (
-    <div>
+    <div onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
       {popup ?
-        <PopupComparison currentItem={currentItem} relatedItem={relatedItem} setPopup={setPopup}/> : null
+        <PopupComparison currentItem={currentItem} relatedItem={relatedItem} setHover={setHover} setPopup={setPopup}/> : null
       }
       {relatedItem && defaultStyle && styles ?
         <li className={`product-card ${darkMode ? 'product-card-dark' : null}`} onClick={e => {clickHandler(e);}} >
           <ProductCardImage defaultStyle={defaultStyle} styles={styles}/>
-          {list === 'related' ?
+          {list === 'related' && hover ?
             <button className='product-card-button' onClick={e => {handleComparisonClick();}}>
               ☆
             </button> : null
           }
-          {list === 'outfit' ?
+          {list === 'outfit' && hover ?
             <button className='product-card-button' onClick={e => {handleOutfitClick;}}>
               x
             </button> : null
           }
           <div className='product-card-info'>
             <small>{relatedItem.category}</small>
-            <div className='product-card-name'>
-              {relatedItem.name + ' - ' + relatedItem.slogan}
-            </div>
+            <div className='product-card-name'>{relatedItem.name}</div>
             {defaultStyle.sale_price ?
               <div>
-                <p style={{color: 'red'}}>
-                  ${defaultStyle.sale_price}
-                </p>
-                <small style={smallStyle, {textDecoration: 'line-through'}}>
-                  ${defaultSTyle.original_price}
-                </small>
+                <p style={{color: 'red'}}>${defaultStyle.sale_price}</p>
+                <small style={{textDecoration: 'line-through'}}>${defaultSTyle.original_price}</small>
               </div>
               :
-              <small>
-                ${defaultStyle.original_price}
-              </small>
+              <small>${defaultStyle.original_price}</small>
             }
             <StarRatings item={item} />
           </div>

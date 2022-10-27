@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useDarkMode } from '../../DarkMode.jsx'
 
 export default function Cart({ product }) {
   const [cart, setCart] = useState(null)
   const [updateCart, setUpdateCart] = useState(false)
   const [showCart, setShowCart] = useState(false)
-
+  const darkMode = useDarkMode();
   // on load/view-button click, sets cart
   useEffect(() => {
     axios.get('/api/cart')
@@ -14,11 +15,11 @@ export default function Cart({ product }) {
 
   // leave hover function - closes cart when mouse leaves cart
   function closeCart() {
-    document.getElementsByClassName('cart-block')[0].style.display = 'none';
+    document.querySelector('.cart-block').style.display = 'none';
   }
 
   return(
-    <div className="cart-block" onMouseLeave={() => closeCart()}>
+    <div className={`cart-block ${darkMode ? 'cart-block-dark' : null}`} onMouseLeave={() => closeCart()}>
       <h2>Your bag</h2>
           <hr/>
         <div>

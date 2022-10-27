@@ -41,11 +41,9 @@ export default function ReviewsList(props) {
   // }
   // ----------------------------------------------------------------
 
-  return(
+  return (
     <div id='revContainer'>
-      <div>
-        <SortRev sort={props.sort} setSort={props.setSort} numReviews={props.numReviews} />
-      </div>
+      <SortRev sort={props.sort} setSort={props.setSort} numReviews={props.numReviews} />
 
       <div className='reviews-list-container'>
         {/* list every review entry --- */}

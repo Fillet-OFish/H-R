@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useDarkMode } from '../../../DarkMode.jsx';
+import { FaSortDown } from 'react-icons/fa';
+
 
 export default function ProductBreakdown({ rating, product, numReviews, reviews, reviewsMeta, filter, setFilter }) {
 
@@ -8,13 +11,14 @@ export default function ProductBreakdown({ rating, product, numReviews, reviews,
   const quality = reviewsMeta.characteristics.Quality;
   const length = reviewsMeta.characteristics.Length;
   const fit = reviewsMeta.characteristics.Fit;
+  const darkMode = useDarkMode();
 
   const ratingBarStyle = {
     display: 'inline-block',
     position: 'relative',
     width: '100%',
     height: '10px',
-    background: '#ddd'
+    background: darkMode ? '#303135' : darkMode ? '#303135' : '#ddd'
   }
 
   const rangeStyle1 = {
@@ -45,7 +49,7 @@ export default function ProductBreakdown({ rating, product, numReviews, reviews,
       {size ?
         <div className="category">Size<br/>
           <span style={ratingBarStyle}>
-            <div style={ratingValueStyle(size)}>😬</div>
+            <div style={ratingValueStyle(size)}><FaSortDown/></div>
           </span>
           <span style={{display: 'flex'}}>
             <small style={rangeStyle1}>too small</small>
@@ -57,7 +61,7 @@ export default function ProductBreakdown({ rating, product, numReviews, reviews,
       {width ?
         <div className="category">Width<br/>
           <span style={ratingBarStyle}>
-            <div style={ratingValueStyle(width)}>😬</div>
+            <div style={ratingValueStyle(width)}><FaSortDown/></div>
           </span>
           <span style={{display: 'flex'}}>
             <small style={rangeStyle1}>too narrow</small>
@@ -69,7 +73,7 @@ export default function ProductBreakdown({ rating, product, numReviews, reviews,
       {comfort ?
         <div className="category">Comfort<br/>
           <span style={ratingBarStyle}>
-            <div style={ratingValueStyle(comfort)}>😬</div>
+            <div style={ratingValueStyle(comfort)}><FaSortDown/></div>
           </span>
           <span style={{display: 'flex'}}>
             <small style={rangeStyle1}>uncomfortable</small>
@@ -81,7 +85,7 @@ export default function ProductBreakdown({ rating, product, numReviews, reviews,
       {quality ?
         <div className="category">Quality<br/>
           <span style={ratingBarStyle}>
-            <div style={ratingValueStyle(quality)}>😬</div>
+            <div style={ratingValueStyle(quality)}><FaSortDown/></div>
           </span>
           <span style={{display: 'flex'}}>
             <small style={rangeStyle1}>poor</small>
@@ -93,7 +97,7 @@ export default function ProductBreakdown({ rating, product, numReviews, reviews,
       {length ?
         <div className="category">Length<br/>
           <span style={ratingBarStyle}>
-            <div style={ratingValueStyle(length)}>😬</div>
+            <div style={ratingValueStyle(length)}><FaSortDown/></div>
           </span>
           <span style={{display: 'flex'}}>
             <small style={rangeStyle1}>runs short</small>
@@ -105,7 +109,7 @@ export default function ProductBreakdown({ rating, product, numReviews, reviews,
       {fit ?
         <div className="category">Fit<br/>
           <span style={ratingBarStyle}>
-            <div style={ratingValueStyle(fit)}>😬</div>
+            <div style={ratingValueStyle(fit)}><FaSortDown/></div>
           </span>
           <span style={{display: 'flex'}}>
             <small style={rangeStyle1}>runs tight</small>

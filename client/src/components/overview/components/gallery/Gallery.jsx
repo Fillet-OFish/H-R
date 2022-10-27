@@ -39,20 +39,31 @@ export default function Gallery({ style, photos, setPhotos, photo, setPhoto }) {
   // onClick function to collapse/uncollapse gallery img
   function expandPhoto(prop){
     if(expand === true && photo.thumbnail_url) {
-      document.querySelector('.gallery-list').style.visibility = 'hidden'
+      window.scrollTo({
+        top: 150,
+        behavior: 'smooth',
+      })
+      document.querySelector('.gallery-list').style.display = 'none'
+      document.querySelector('.gallery-main').style.height = '70vh'
       document.querySelector('.right').style.visibility = 'hidden'
-      document.querySelector('.contain').style.marginTop = '3%'
-      document.querySelector('.contain').style.transition = 'all .25s ease-in-out'
+      document.querySelector('.middle').style.margin = '0 auto'
+      document.querySelector('.contain-description-related').style.marginTop = '6.5%'
+      document.querySelector('.contain-description-related').style.transition = 'all .25s ease-in-out'
 
     } else {
-      document.querySelector('.gallery-list').style.visibility = 'visible'
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      })
+      document.querySelector('.gallery-list').style.display = 'flex'
+      document.querySelector('.gallery-main').style.height = '65vh'
       document.querySelector('.right').style.visibility = 'visible'
-      document.querySelector('.contain').style.marginTop = '-3%'
-
+      document.querySelector('.contain-description-related').style.marginTop = '-3%'
+      document.querySelector('.middle').style.margin = '0'
     }
   }
 
-  return(
+  return(<>
     <div className="left">
       {/* list of image thumbnails */}
       <div className="gallery-list">
@@ -68,27 +79,30 @@ export default function Gallery({ style, photos, setPhotos, photo, setPhoto }) {
               photos.slice(XY[0], XY[1]).map((photo, i) => <p key={i}><img src={photo.thumbnail_url || "https://i.postimg.cc/gjFHrzW3/image-4.png"} onClick={e=>{e.preventDefault();changePhoto({photo, i})}} /></p>)
             }
           </div>) : null}
-           </div>
-
-      {/* main gallery */}
-      <div className="gallery-main">
-        {photo ?
-          !expand && photo.thumbnail_url ?
-            // expanded view
-            <>
-              <Zoom src={photos[click].thumbnail_url} photos={photos} setClick={setClick} click={click} setExpand={setExpand} expandPhoto={expandPhoto}/>
-              <FaCompress className="expand-icon" onClick={e=>{setExpand(prev=>!prev);expandPhoto()}}/>
-            </>
-            :
-            // reg view
-            <>
-              <Carousel photos={photos} click={click} setClick={setClick} setPhoto={setPhoto} setExpand={setExpand} expandPhoto={expandPhoto}/>
-              {photo.thumbnail_url ? <FaExpand  className="expand-icon" onClick={e=>{setExpand(prev=>!prev);expandPhoto()}}/> : null}
-            </>
-
-        : null}
       </div>
     </div>
+
+      {/* main gallery */}
+    <div className="middle">
+        <div className="gallery-main">
+          {photo ?
+            !expand && photo.thumbnail_url ?
+              // expanded view
+              <>
+                <Zoom src={photos[click].thumbnail_url} photos={photos} setClick={setClick} click={click} setExpand={setExpand} expandPhoto={expandPhoto}/>
+                <FaCompress className="compress-icon" onClick={e=>{setExpand(prev=>!prev);expandPhoto()}}/>
+              </>
+              :
+              // reg view
+              <>
+                <Carousel photos={photos} click={click} setClick={setClick} setPhoto={setPhoto} setExpand={setExpand} expandPhoto={expandPhoto}/>
+                {photo.thumbnail_url ? <FaExpand  className="expand-icon" onClick={e=>{setExpand(prev=>!prev);expandPhoto()}}/> : null}
+              </>
+
+          : null}
+        </div>
+      </div>
+    </>
   )
 }
 
