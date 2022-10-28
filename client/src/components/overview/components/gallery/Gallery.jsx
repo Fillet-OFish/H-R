@@ -25,10 +25,9 @@ export default function Gallery({ style, photos, setPhotos, photo, setPhoto }) {
   },[style])
 
   // onClick function - input: img, output: change of gallery main photo
-  function changePhoto(props) {
-    let [index, newPhoto] = [props.i, props.photo]
-    setPhoto(newPhoto)
-    setClick(index)
+  function changePhoto(clickedPhoto) {
+    photos.filter((photoItem, i) => {if (photoItem === clickedPhoto) {
+      setClick(i) }})
   }
 
   // onClick function - input: direction, output: scroll up/down gallery list
@@ -65,11 +64,17 @@ export default function Gallery({ style, photos, setPhotos, photo, setPhoto }) {
             {photos.length>6 ?
               <>
               {XY[0] === 0 ? null : <FaAngleUp style={{cursor:'pointer'}} onClick={e=>scroll('up')} className="gallery-arrow"/>}
-              {photos.slice(XY[0], XY[1]).map((photo, i) => <p key={i}><img className="solo-img" src={photo.thumbnail_url} alt="list of thumbnail images" onClick={e=>{changePhoto({photo, i})}} /></p>)}
+              {photos.slice(XY[0], XY[1]).map((photo, i) =>
+                <div className="solo-img-container" key={i}>
+                  <img className="solo-img" src={photo.thumbnail_url} alt="list of thumbnail images" onClick={e=>{changePhoto(photo)}} />
+                </div>)}
               {XY[1] === photos.length ? null : <FaAngleDown style={{cursor:'pointer'}} onClick={e=>scroll('down')} className="gallery-arrow"/>}
               </>
               :
-              photos.slice(XY[0], XY[1]).map((photo, i) => <p key={i}><img src={photo.thumbnail_url || "https://i.postimg.cc/gjFHrzW3/image-4.png"} alt="list of thumbnail images" onClick={e=>{e.preventDefault();changePhoto({photo, i})}} /></p>)
+              photos.slice(XY[0], XY[1]).map((photo, i) =>
+                <div className="solo-img-container" key={i}>
+                  <img className="solo-img" src={photo.thumbnail_url || "https://i.postimg.cc/gjFHrzW3/image-4.png"} alt="list of thumbnail images" onClick={e=>{e.preventDefault();changePhoto(photo)}} />
+                </div>)
             }
           </div>) : null}
       </div>

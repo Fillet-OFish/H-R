@@ -11,6 +11,7 @@ export default function Header({ product }) {
 
   // on hover function - shows cart when hovering over shopping bag
   function showCart() {
+    document.querySelector('.wow-you-rlly-added-smth-to-cart').style.visibility = 'hidden'
     document.querySelector('.cart-block').style.display = 'block';
   }
 
@@ -27,6 +28,15 @@ export default function Header({ product }) {
 
         <div className="header-col-1">
           {/* logo */}
+          <div className="categories">
+          <span className='category'><a style={darkMode ? {color: 'white'} : {}} href='/'>Women</a></span>
+          <span className='category'><a style={darkMode ? {color: 'white'} : {}} href='/'>Men</a></span>
+          <span className='category'><a style={darkMode ? {color: 'white'} : {}} href='/'>Accessories</a></span>
+          </div>
+        </div>
+
+        <div className="header-col-2">
+          {/* logo */}
           <span className='logo'><a style={darkMode ? {color: 'white'} : {}} href='/'>Hack & Reactor</a></span>
         </div>
 
@@ -42,6 +52,7 @@ export default function Header({ product }) {
 
           {/* cart */}
           <span className='shopping-bag' onMouseEnter={() => showCart()}>
+            <span className='wow-you-rlly-added-smth-to-cart'>⬤</span>
             <FaShoppingBag className='shopping-bag-icon'/>
           </span>
         </div>
@@ -49,11 +60,11 @@ export default function Header({ product }) {
       </div>
 
        {/* categories */}
-      <div className='categories'>
+      {/* <div className='categories'>
           <span className='category'><a style={darkMode ? {color: 'white'} : {}} href='/'>Women</a></span>
           <span className='category'><a style={darkMode ? {color: 'white'} : {}} href='/'>Men</a></span>
           <span className='category'><a style={darkMode ? {color: 'white'} : {}} href='/'>Accessories</a></span>
-        </div>
+        </div> */}
 
       {/* add to cart */}
       <Cart />
