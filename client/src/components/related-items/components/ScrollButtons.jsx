@@ -18,6 +18,9 @@ export default function scrollButtons({element, scroll}) {
     } else {
       setScrollVisible(false)
     }
+    if (el?.scrollLeft === 0) {
+      setShowButtonL(false)
+    }
   }
 
   useEffect(() => {

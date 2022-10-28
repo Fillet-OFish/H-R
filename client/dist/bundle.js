@@ -4116,11 +4116,11 @@ function RelatedProductsList(_ref) {
     style: style
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("ul", {
     className: "related-ul"
-  }, relatedItems.map(function (item) {
+  }, relatedItems.map(function (item, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_ProductCard_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
       currentItem: currentItem,
       setProduct: setProduct,
-      key: item,
+      key: currentItem + item + index,
       item: item,
       list: 'related'
     });
@@ -4179,6 +4179,9 @@ function scrollButtons(_ref) {
       setScrollVisible(true);
     } else {
       setScrollVisible(false);
+    }
+    if ((el === null || el === void 0 ? void 0 : el.scrollLeft) === 0) {
+      setShowButtonL(false);
     }
   }
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {

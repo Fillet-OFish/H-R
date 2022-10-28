@@ -24,8 +24,8 @@ export default function RelatedProductsList ({currentItem, setProduct}) {
       <h3 className='list-title' onClick={() => setShow(!show)}>Related Products {show ? <FaSortUp className='FaSortUpButton' /> : <FaSortDown />}</h3>
       <div className='related-list' style={style}>
         <ul className='related-ul'>
-          {relatedItems.map(item => (
-            <ProductCard currentItem={currentItem} setProduct={setProduct} key={item} item={item} list={'related'}/>
+          {relatedItems.map((item, index) => (
+            <ProductCard currentItem={currentItem} setProduct={setProduct} key={currentItem + item + index} item={item} list={'related'}/>
           ))}
         </ul>
         <ScrollButtons element={'.related-list .related-ul'} scroll={236} />
