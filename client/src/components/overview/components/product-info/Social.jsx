@@ -53,7 +53,7 @@ export default function Social({ product, photo, style }) {
         <br/>
         {/* Pinterest */}
         <PinterestShareButton
-          media={photo.thumbnail_url}
+          media={photo.url}
           url='http://localhost:3000/' >
           <PinterestIcon size={25} round/>
         </PinterestShareButton>
