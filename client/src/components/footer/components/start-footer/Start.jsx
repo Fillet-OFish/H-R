@@ -19,12 +19,12 @@ export default function Start() {
 
       <div className="col2">
         <p className="start-title">get help</p>
-        <p><a href='/'>Contact Us</a></p>
+        <p><a href='https://github.com/Fillet-OFish/Frontend-Capstone-Ecommerce'>Contact Us</a></p>
         <p><a href='/'>Size Guide</a></p>
         <p><a href='/'>Shipping</a></p>
         <p><a href='/'>Returns & Exchanges</a></p>
         <p><a href='/'>Order Tracking</a></p>
-        <p><a href='/'>Send Us Feedback</a></p>
+        <p><a href='https://github.com/Fillet-OFish/Frontend-Capstone-Ecommerce'>Send Us Feedback</a></p>
       </div>
 
     </div>

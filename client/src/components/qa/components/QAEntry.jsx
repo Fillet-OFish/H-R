@@ -9,6 +9,7 @@ const QAEntry = (props) => {
   const darkMode = useDarkMode();
   // state will be intially empty array
   const [answers, setAnswers] = useState([]);
+  const [update, setUpdate] = useState(false);
 
   // PAGINATION FOR ANSWERS -------------------------------
   // No of Records to be displayed on each page
@@ -55,19 +56,18 @@ const QAEntry = (props) => {
   // make an axios put request to report questions
   const reportQues = (q_id) => {
     axios.put(`/api/qa/questions/${q_id}/report`)
-    .then((response) => {
-      console.log('Successful put for reportQues!')
-    })
+    // .then((response) => {})
     .catch(err => {
       console.log(err);
     })
+    setUpdate(prev=>!prev)
   }
 
   // render answers data when qaData or ques states change
   useEffect(() => {
     getAnswers(props.ques.question_id);
     // console.log(props.ques);
-  }, [props.qaData, props.ques])
+  }, [props.qaData, props.ques, update])
 
   // render answers data with an answers entry component and a button for more answers
   return (
