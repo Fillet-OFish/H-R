@@ -7,7 +7,8 @@ export default function Cart({ style }) {
   const [size, setSize] = useState('')
   const [OOS, setOOS] = useState(null)
   const [quantity, setQuantity] = useState(0)
-  const [selectQnt, setSelectQnt] = useState(1)
+  const [selectQnt, setSelectQnt] = useState(0)
+  const [cartAnimation, setCartAnimation] = useState(false)
 
   // on load/style change, let skus = array of style skus
   useEffect(() => {
@@ -25,7 +26,7 @@ export default function Cart({ style }) {
 
   // input: n/a, output: a varying # of <option> elements, dependent on sizing
   function getOptions() {
-    let arr = []
+    let arr = [<option key='default' value="0">-</option>]
     let num = 15
     if (quantity<15){num=quantity}
     for (let i=1; i<=num; i++) {
@@ -36,10 +37,12 @@ export default function Cart({ style }) {
 
   // input: n/a, output: filter style.skus for the sku that matches the selected size before posting it to cart
   function postCart() {
-    if(size===''||size==='default'){
+    if(selectQnt===0||size==='default'){
       document.querySelector('.cart-warning').style.display = 'block'
     } else {
       document.querySelector('.cart-warning').style.display = 'none'
+      document.querySelector('.shopping-bag-icon').style.animation = 'scale .5s ease-out'
+      document.querySelector('.wow-you-rlly-added-smth-to-cart').style.visibility = 'visible'
       let obj = style.skus
       let skuId = ''
       Object.keys(obj).forEach(key =>{
@@ -57,35 +60,34 @@ export default function Cart({ style }) {
     skus.length>0 && skus[0].quantity ?
       <div className="cart">
         {/* Hidden span, shows up if you try to add an item to cart with an invalid size */}
-        <span className="cart-warning">Please select a size to continue</span>
+        <span className="cart-warning">{size==='default' ? 'Please select a size to continue' : 'Please select an amount to continue'}</span>
 
         {/* Select size dropdown */}
-        {skus ?
-          <select className="select-size" onChange={e=>{
-              setSize(e.target.value);
-              skus.filter(sku => sku.size === e.target.value).map(sku => {
-                setQuantity(sku.quantity);
-                sku.quantity < 1 ? setOOS('OUT OF STOCK') : setOOS(null)
-              })
-            }}>
-            {getSizes()}
-          </select>
-        :null}
+        <select className="select-size" onChange={e=>{
+            setSize(e.target.value);
+            skus.filter(sku => sku.size === e.target.value).map(sku => {
+              setQuantity(sku.quantity);
+              sku.quantity < 1 ? setOOS('OUT OF STOCK') : setOOS(null)
+            })
+          }}>
+          {getSizes()}
+        </select>
 
         {/* select quantity dropdown */}
-        <select className="select-qnt" onChange={e=>setSelectQnt(parseInt(e.target.value))}>
-            {quantity&&size!=='default' ? getOptions() : <option value="0">-</option>}
+        <select className="select-qnt" onChange={e=>{
+          setSelectQnt(parseInt(e.target.value))
+          document.querySelector('.cart-warning').style.display = 'none'
+        }}>
+            {size!=='default'&&size!=='' ? getOptions() : <option value="0">-</option>}
         </select>
 
         {/* Add to cart */}
         {quantity===0 ?
           OOS
           :
-          <p>
-            <button className="cart-btn" onClick={e=>postCart()}>Add to bag
+          <button className="cart-btn" onClick={e=>postCart()}>Add to bag
             <span className="plus-sign"><FaPlus/></span>
-            </button>
-          </p>
+          </button>
         }
       </div>
     : 'OUT OF STOCK'
