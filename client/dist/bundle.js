@@ -886,7 +886,7 @@ function Gallery(_ref) {
   function changePhoto(clickedPhoto) {
     photos.filter(function (photoItem, i) {
       if (photoItem === clickedPhoto) {
-        setClick(i);
+        setClick(i), setPhoto(photoItem);
       }
     });
   }
@@ -1367,7 +1367,7 @@ function Social(_ref) {
     size: 25,
     round: true
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_share__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    media: photo.thumbnail_url,
+    media: photo.url,
     url: "http://localhost:3000/"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_share__WEBPACK_IMPORTED_MODULE_8__["default"], {
     size: 25,

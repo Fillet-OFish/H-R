@@ -27,7 +27,7 @@ export default function Gallery({ style, photos, setPhotos, photo, setPhoto }) {
   // onClick function - input: img, output: change of gallery main photo
   function changePhoto(clickedPhoto) {
     photos.filter((photoItem, i) => {if (photoItem === clickedPhoto) {
-      setClick(i) }})
+      setClick(i), setPhoto(photoItem) }})
   }
 
   // onClick function - input: direction, output: scroll up/down gallery list
