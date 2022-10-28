@@ -22,8 +22,8 @@ export default function PopupComparison ({relatedItem, currentItem, setPopup, se
             </tr>
           </thead>
           <tbody>
-            {Object.keys(comparisonObj).map((feature) => (
-              <tr key={feature}>
+            {Object.keys(comparisonObj).map((feature, index) => (
+              <tr key={index}>
                 <td className='td-left'>{comparisonObj[feature].valueCurrent === true ?  '✓' : comparisonObj[feature].valueCurrent}</td>
                 <td className='td-feature'>{feature}</td>
                 <td className='td-right'>{comparisonObj[feature].valueRelated === true ?   '✓' : comparisonObj[feature].valueRelated}</td>
