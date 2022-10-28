@@ -4116,11 +4116,11 @@ function RelatedProductsList(_ref) {
     style: style
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("ul", {
     className: "related-ul"
-  }, relatedItems.map(function (item, index) {
+  }, relatedItems.map(function (item) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_ProductCard_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
       currentItem: currentItem,
       setProduct: setProduct,
-      key: index,
+      key: item,
       item: item,
       list: 'related'
     });
@@ -4290,10 +4290,10 @@ function YourOutfitList(_ref) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("li", {
     className: "add-to-outfit-button ".concat(darkMode ? 'add-to-outfit-button-dark' : null),
     onClick: handleClick
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("p", null, "Add To Outfit"))), outfit === null || outfit === void 0 ? void 0 : outfit.map(function (item, index) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("p", null, "Add To Outfit"))), outfit === null || outfit === void 0 ? void 0 : outfit.map(function (item) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(_ProductCard_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
       setProduct: setProduct,
-      key: index,
+      key: item,
       item: item,
       list: 'outfit',
       outfit: outfit,

@@ -29,8 +29,8 @@ export default function YourOutfitList({currentItem, setProduct}) {
               <p>Add To Outfit</p>
             </li>
           </div>
-          {outfit?.map((item, index) => (
-              <ProductCard setProduct={setProduct} key={index} item={item} list={'outfit'} outfit={outfit} setOutfit={setOutfit} />
+          {outfit?.map(item => (
+              <ProductCard setProduct={setProduct} key={item} item={item} list={'outfit'} outfit={outfit} setOutfit={setOutfit} />
           ))}
         </ul>
         <ScrollButtons element={'.related-list .outfit-ul'} scroll={236} />
