@@ -3822,7 +3822,6 @@ function PreviewCarousel(_ref) {
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_ScrollButtons_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
     element: '.preview-carousel',
-    width: 257,
     scroll: 192.75
   }));
 }
@@ -4117,19 +4116,18 @@ function RelatedProductsList(_ref) {
     style: style
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("ul", {
     className: "related-ul"
-  }, relatedItems.map(function (item) {
+  }, relatedItems.map(function (item, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_ProductCard_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
       currentItem: currentItem,
       setProduct: setProduct,
-      key: item,
+      key: index,
       item: item,
       list: 'related'
     });
-  })), relatedItems.length > 4 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_ScrollButtons_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_ScrollButtons_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
     element: '.related-list .related-ul',
-    width: 1100,
     scroll: 236
-  }) : null));
+  })));
 }
 
 /***/ }),
@@ -4156,46 +4154,71 @@ __webpack_require__.r(__webpack_exports__);
 
 function scrollButtons(_ref) {
   var element = _ref.element,
-    width = _ref.width,
     scroll = _ref.scroll;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
     _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
-    showButtonL = _useState2[0],
-    setShowButtonL = _useState2[1];
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(true),
+    scrollVisible = _useState2[0],
+    setScrollVisible = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
     _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState3, 2),
-    showButtonR = _useState4[0],
-    setShowButtonR = _useState4[1];
+    showButtonL = _useState4[0],
+    setShowButtonL = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(true),
+    _useState6 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState5, 2),
+    showButtonR = _useState6[0],
+    setShowButtonR = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+    _useState8 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState7, 2),
+    width = _useState8[0],
+    setWidth = _useState8[1];
   var darkMode = (0,_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_2__.useDarkMode)();
+  function handleResize() {
+    var el = document.querySelector(element);
+    setWidth(el === null || el === void 0 ? void 0 : el.clientWidth);
+    if ((el === null || el === void 0 ? void 0 : el.scrollWidth) > (el === null || el === void 0 ? void 0 : el.clientWidth)) {
+      setScrollVisible(true);
+    } else {
+      setScrollVisible(false);
+    }
+  }
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("scroll", handleResize);
+    handleResize();
+    return function () {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleResize);
+    };
+  }, []);
   var buttonL = function buttonL() {
     var el = document.querySelector(element);
-    if (el.scrollWidth - (el.scrollLeft - scroll) > width) {
+    if ((el === null || el === void 0 ? void 0 : el.scrollWidth) - ((el === null || el === void 0 ? void 0 : el.scrollLeft) - scroll) > width) {
       setShowButtonR(true);
     }
-    if (el.scrollLeft - scroll <= 0) {
+    if ((el === null || el === void 0 ? void 0 : el.scrollLeft) - scroll <= 0) {
       setTimeout(function () {
         return setShowButtonL(false);
       }, 300);
     }
-    el.scrollBy(-scroll, 0);
+    el === null || el === void 0 ? void 0 : el.scrollBy(-scroll, 0);
   };
   var buttonR = function buttonR() {
     var el = document.querySelector(element);
     setShowButtonL(true);
-    if (el.scrollWidth - (el.scrollLeft + scroll) <= width) {
+    if ((el === null || el === void 0 ? void 0 : el.scrollWidth) - ((el === null || el === void 0 ? void 0 : el.scrollLeft) + scroll) <= width) {
       setTimeout(function () {
         return setShowButtonR(false);
       }, 300);
     }
-    el.scrollBy(scroll, 0);
+    el === null || el === void 0 ? void 0 : el.scrollBy(scroll, 0);
   };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, showButtonL ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
+  return scrollVisible ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, showButtonL ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
     className: "button-left ".concat(darkMode ? 'button-left-dark' : null),
     onClick: buttonL
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_3__.FaAngleLeft, null)) : null, showButtonR ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
     className: "button-right ".concat(darkMode ? 'button-right-dark' : null),
     onClick: buttonR
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_3__.FaAngleRight, null)) : null);
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_3__.FaAngleRight, null)) : null) : null;
 }
 
 /***/ }),
@@ -4267,20 +4290,19 @@ function YourOutfitList(_ref) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("li", {
     className: "add-to-outfit-button ".concat(darkMode ? 'add-to-outfit-button-dark' : null),
     onClick: handleClick
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("p", null, "Add To Outfit"))), outfit ? outfit.map(function (item) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("p", null, "Add To Outfit"))), outfit === null || outfit === void 0 ? void 0 : outfit.map(function (item, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(_ProductCard_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
       setProduct: setProduct,
-      key: item,
+      key: index,
       item: item,
       list: 'outfit',
       outfit: outfit,
       setOutfit: setOutfit
     });
-  }) : null), outfit.length > 3 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(_ScrollButtons_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(_ScrollButtons_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
     element: '.related-list .outfit-ul',
-    width: 1100,
     scroll: 236
-  }) : null));
+  })));
 }
 
 /***/ }),

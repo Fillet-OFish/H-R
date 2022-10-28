@@ -25,15 +25,11 @@ export default function RelatedProductsList ({currentItem, setProduct}) {
       <h3 className='list-title' onClick={() => setShow(!show)}>Related Products {show ? <FaSortUp className='FaSortUpButton' /> : <FaSortDown />}</h3>
       <div className='related-list' style={style}>
         <ul className='related-ul'>
-          {relatedItems.map(item => (
-            <ProductCard currentItem={currentItem} setProduct={setProduct} key={item} item={item} list={'related'}/>
-            ))
-          }
+          {relatedItems.map((item, index) => (
+            <ProductCard currentItem={currentItem} setProduct={setProduct} key={index} item={item} list={'related'}/>
+          ))}
         </ul>
-        {relatedItems.length > 4 ?
-          <ScrollButtons element={'.related-list .related-ul'} width={1100} scroll={236} />
-          : null
-        }
+        <ScrollButtons element={'.related-list .related-ul'} scroll={236} />
       </div>
     </>
   )

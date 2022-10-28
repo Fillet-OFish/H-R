@@ -16,7 +16,7 @@ export default function PreviewCarousel({styles, setDefaultPhoto}) {
           }
         })}
       </div>
-      <ScrollButtons element={'.preview-carousel'} width={257} scroll={192.75} />
+      <ScrollButtons element={'.preview-carousel'} scroll={192.75} />
     </div>
   )
 }
