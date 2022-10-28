@@ -60,19 +60,11 @@ export default function Header({ product }) {
       </div>
 
        {/* categories */}
-<<<<<<< HEAD
-      <div className='categories'>
-        <span className='category'><a style={darkMode ? {color: 'white'} : {}} href='/'>Women</a></span>
-        <span className='category'><a style={darkMode ? {color: 'white'} : {}} href='/'>Men</a></span>
-        <span className='category'><a style={darkMode ? {color: 'white'} : {}} href='/'>Accessories</a></span>
-      </div>
-=======
       {/* <div className='categories'>
           <span className='category'><a style={darkMode ? {color: 'white'} : {}} href='/'>Women</a></span>
           <span className='category'><a style={darkMode ? {color: 'white'} : {}} href='/'>Men</a></span>
           <span className='category'><a style={darkMode ? {color: 'white'} : {}} href='/'>Accessories</a></span>
         </div> */}
->>>>>>> master
 
       {/* add to cart */}
       <Cart />

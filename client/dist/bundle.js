@@ -438,13 +438,281 @@ function Footer(_ref) {
 
 /***/ }),
 
+/***/ "./client/src/components/header/components/Announcements.jsx":
+/*!*******************************************************************!*\
+  !*** ./client/src/components/header/components/Announcements.jsx ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Announcements)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function Announcements() {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('announcement-fade-in'),
+    _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
+    name = _useState2[0],
+    setName = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+    _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState3, 2),
+    count = _useState4[0],
+    setCount = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement((react__WEBPACK_IMPORTED_MODULE_1___default().Fragment), null, "New windproof fleeces. ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("a", {
+      href: "/"
+    }, "SHOP WOMEN"), " - ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("a", {
+      href: "/"
+    }, "SHOP MEN")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement((react__WEBPACK_IMPORTED_MODULE_1___default().Fragment), null, "Get early access on launches and offers. ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("a", {
+      href: "/"
+    }, "Sign Up For Texts")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement((react__WEBPACK_IMPORTED_MODULE_1___default().Fragment), null, "15* off your first purchase - use code NEW15.")]),
+    _useState6 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState5, 2),
+    textArr = _useState6[0],
+    setTextArr = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(textArr[0]),
+    _useState8 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState7, 2),
+    text = _useState8[0],
+    setText = _useState8[1];
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    var timeout = setInterval(function () {
+      if (name === 'announcement-fade-in') {
+        setName('announcement-fade-out');
+        count + 1 !== textArr.length ? setCount(count + 1) : setCount(0);
+      } else {
+        setText(textArr[count]);
+        setName('announcement-fade-in');
+      }
+    }, 6000);
+    return function () {
+      return clearInterval(timeout);
+    };
+  }, [name]);
+  function byeAnnouncements() {
+    document.querySelector('.announcement').style.display = 'none';
+  }
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+    className: "announcement"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
+    className: name
+  }, text), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", {
+    className: "exit-announcement",
+    onClick: byeAnnouncements
+  }, "X"));
+}
+
+/***/ }),
+
+/***/ "./client/src/components/header/components/Cart.jsx":
+/*!**********************************************************!*\
+  !*** ./client/src/components/header/components/Cart.jsx ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Cart)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var _DarkMode_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../DarkMode.jsx */ "./client/src/components/DarkMode.jsx");
+
+
+
+
+function Cart(_ref) {
+  var product = _ref.product;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
+    _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
+    cart = _useState2[0],
+    setCart = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+    _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState3, 2),
+    updateCart = _useState4[0],
+    setUpdateCart = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+    _useState6 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState5, 2),
+    showCart = _useState6[0],
+    setShowCart = _useState6[1];
+  var darkMode = (0,_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_3__.useDarkMode)();
+  // on load/view-button click, sets cart
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    axios__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/cart').then(function (res) {
+      return setCart(res.data);
+    });
+  }, [updateCart]);
+
+  // leave hover function - closes cart when mouse leaves cart
+  function closeCart() {
+    document.querySelector('.cart-block').style.display = 'none';
+  }
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+    className: "cart-block ".concat(darkMode ? 'cart-block-dark' : null),
+    onMouseLeave: function onMouseLeave() {
+      return closeCart();
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h2", null, "Your bag"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, "Subtotal:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
+    "data-testid": "cart-info"
+  }, showCart ? JSON.stringify(cart) : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", {
+    className: "cart-block-buttons"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
+    className: "view-btn",
+    "data-testid": "view-btn",
+    onClick: function onClick() {
+      setShowCart(!showCart);
+      setUpdateCart(!updateCart);
+    }
+  }, "VIEW BAG"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
+    className: "checkout-btn"
+  }, "CHECKOUT"))));
+}
+
+/***/ }),
+
+/***/ "./client/src/components/header/components/Search.jsx":
+/*!************************************************************!*\
+  !*** ./client/src/components/header/components/Search.jsx ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Search)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-icons/fa */ "./node_modules/react-icons/fa/index.esm.js");
+/* harmony import */ var _DarkMode_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../DarkMode.jsx */ "./client/src/components/DarkMode.jsx");
+
+
+
+function Search(_ref) {
+  var product = _ref.product;
+  var darkMode = (0,_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_1__.useDarkMode)();
+  function closeCart() {
+    document.querySelector('.search-block').style.display = 'none';
+  }
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "search-block"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
+    className: "search-bar ".concat(darkMode ? 'search-bar-dark' : null)
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    style: darkMode ? {
+      color: 'white'
+    } : {}
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_2__.FaSearch, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    style: darkMode ? {
+      color: 'white',
+      borderBottom: '1.5px white solid'
+    } : {},
+    placeholder: "SEARCH"
+  })));
+}
+
+/***/ }),
+
 /***/ "./client/src/components/header/index.jsx":
 /*!************************************************!*\
   !*** ./client/src/components/header/index.jsx ***!
   \************************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/client/src/components/header/index.jsx: Unexpected token (63:1)\n\n\u001b[0m \u001b[90m 61 |\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 62 |\u001b[39m        {\u001b[90m/* categories */\u001b[39m}\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 63 |\u001b[39m \u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 64 |\u001b[39m       \u001b[33m<\u001b[39m\u001b[33mdiv\u001b[39m className\u001b[33m=\u001b[39m\u001b[32m'categories'\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 65 |\u001b[39m         \u001b[33m<\u001b[39m\u001b[33mspan\u001b[39m className\u001b[33m=\u001b[39m\u001b[32m'category'\u001b[39m\u001b[33m>\u001b[39m\u001b[33m<\u001b[39m\u001b[33ma\u001b[39m style\u001b[33m=\u001b[39m{darkMode \u001b[33m?\u001b[39m {color\u001b[33m:\u001b[39m \u001b[32m'white'\u001b[39m} \u001b[33m:\u001b[39m {}} href\u001b[33m=\u001b[39m\u001b[32m'/'\u001b[39m\u001b[33m>\u001b[39m\u001b[33mWomen\u001b[39m\u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33ma\u001b[39m\u001b[33m>\u001b[39m\u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33mspan\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 66 |\u001b[39m         \u001b[33m<\u001b[39m\u001b[33mspan\u001b[39m className\u001b[33m=\u001b[39m\u001b[32m'category'\u001b[39m\u001b[33m>\u001b[39m\u001b[33m<\u001b[39m\u001b[33ma\u001b[39m style\u001b[33m=\u001b[39m{darkMode \u001b[33m?\u001b[39m {color\u001b[33m:\u001b[39m \u001b[32m'white'\u001b[39m} \u001b[33m:\u001b[39m {}} href\u001b[33m=\u001b[39m\u001b[32m'/'\u001b[39m\u001b[33m>\u001b[39m\u001b[33mMen\u001b[39m\u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33ma\u001b[39m\u001b[33m>\u001b[39m\u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33mspan\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n    at instantiate (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:72:32)\n    at constructor (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:367:12)\n    at JSXParserMixin.raise (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:3706:19)\n    at JSXParserMixin.unexpected (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:3744:16)\n    at JSXParserMixin.jsxParseIdentifier (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:7947:12)\n    at JSXParserMixin.jsxParseNamespacedName (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:7957:23)\n    at JSXParserMixin.jsxParseElementName (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:7968:21)\n    at JSXParserMixin.jsxParseOpeningElementAt (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:8067:22)\n    at JSXParserMixin.jsxParseElementAt (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:8099:33)\n    at JSXParserMixin.jsxParseElementAt (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:8115:32)\n    at JSXParserMixin.jsxParseElement (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:8184:17)\n    at JSXParserMixin.parseExprAtom (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:8198:19)\n    at JSXParserMixin.parseExprSubscripts (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12875:23)\n    at JSXParserMixin.parseUpdate (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12854:21)\n    at JSXParserMixin.parseMaybeUnary (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12824:23)\n    at JSXParserMixin.parseMaybeUnaryOrPrivate (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12615:61)\n    at JSXParserMixin.parseExprOps (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12622:23)\n    at JSXParserMixin.parseMaybeConditional (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12592:23)\n    at JSXParserMixin.parseMaybeAssign (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12544:21)\n    at /Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12502:39\n    at JSXParserMixin.allowInAnd (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:14576:12)\n    at JSXParserMixin.parseMaybeAssignAllowIn (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12502:17)\n    at JSXParserMixin.parseParenAndDistinguishExpression (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:13631:28)\n    at JSXParserMixin.parseExprAtom (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:13203:23)\n    at JSXParserMixin.parseExprAtom (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:8203:20)\n    at JSXParserMixin.parseExprSubscripts (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12875:23)\n    at JSXParserMixin.parseUpdate (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12854:21)\n    at JSXParserMixin.parseMaybeUnary (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12824:23)\n    at JSXParserMixin.parseMaybeUnaryOrPrivate (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12615:61)\n    at JSXParserMixin.parseExprOps (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12622:23)\n    at JSXParserMixin.parseMaybeConditional (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12592:23)\n    at JSXParserMixin.parseMaybeAssign (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12544:21)\n    at JSXParserMixin.parseExpressionBase (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12480:23)\n    at /Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12474:39\n    at JSXParserMixin.allowInAnd (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:14570:16)\n    at JSXParserMixin.parseExpression (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:12474:17)\n    at JSXParserMixin.parseReturnStatement (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:15302:28)\n    at JSXParserMixin.parseStatementContent (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:14925:21)\n    at JSXParserMixin.parseStatement (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:14871:17)\n    at JSXParserMixin.parseBlockOrModuleBlockBody (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:15531:25)\n    at JSXParserMixin.parseBlockBody (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:15522:10)\n    at JSXParserMixin.parseBlock (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:15505:10)\n    at JSXParserMixin.parseFunctionBody (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:14175:24)\n    at JSXParserMixin.parseFunctionBodyAndFinish (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:14159:10)\n    at /Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:15679:12\n    at JSXParserMixin.withSmartMixTopicForbiddingContext (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:14547:14)\n    at JSXParserMixin.parseFunction (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:15678:10)\n    at JSXParserMixin.parseExportDefaultExpression (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:16237:19)\n    at JSXParserMixin.parseExport (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:16149:31)\n    at JSXParserMixin.parseStatementContent (/Users/Jaden/Documents/hackreactor/rfp2209/Frontend-Capstone-Ecommerce/node_modules/@babel/parser/lib/index.js:14987:27)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Header)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var _components_Announcements_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Announcements.jsx */ "./client/src/components/header/components/Announcements.jsx");
+/* harmony import */ var _components_Search_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Search.jsx */ "./client/src/components/header/components/Search.jsx");
+/* harmony import */ var _components_Cart_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Cart.jsx */ "./client/src/components/header/components/Cart.jsx");
+/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-icons/fa */ "./node_modules/react-icons/fa/index.esm.js");
+/* harmony import */ var _DarkMode_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DarkMode.jsx */ "./client/src/components/DarkMode.jsx");
+
+
+
+
+
+
+
+function Header(_ref) {
+  var product = _ref.product;
+  var darkMode = (0,_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_5__.useDarkMode)();
+
+  // on hover function - shows cart when hovering over shopping bag
+  function showCart() {
+    document.querySelector('.wow-you-rlly-added-smth-to-cart').style.visibility = 'hidden';
+    document.querySelector('.cart-block').style.display = 'block';
+  }
+  function showSearch() {
+    document.querySelector('.search-block').style.display = 'block';
+  }
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Announcements_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "header ".concat(darkMode ? 'header-dark' : null)
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "header-col-1"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "categories"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "category"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+    style: darkMode ? {
+      color: 'white'
+    } : {},
+    href: "/"
+  }, "Women")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "category"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+    style: darkMode ? {
+      color: 'white'
+    } : {},
+    href: "/"
+  }, "Men")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "category"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+    style: darkMode ? {
+      color: 'white'
+    } : {},
+    href: "/"
+  }, "Accessories")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "header-col-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "logo"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+    style: darkMode ? {
+      color: 'white'
+    } : {},
+    href: "/"
+  }, "Hack & Reactor"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "header-col-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_6__.FaSearch, {
+    className: "search-bar-icon"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "header-links"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "header-link"
+  }, "SIGN IN/REGISTER"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "header-link"
+  }, "WISHLIST")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "shopping-bag",
+    onMouseEnter: function onMouseEnter() {
+      return showCart();
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "wow-you-rlly-added-smth-to-cart"
+  }, "\u2B24"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_6__.FaShoppingBag, {
+    className: "shopping-bag-icon"
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Cart_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+}
 
 /***/ }),
 
