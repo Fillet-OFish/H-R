@@ -19,7 +19,6 @@ export default function Zoom({ src, magnifierHeight = 100, magnifieWidth = 110, 
       <img
         className="img-main"
         src={src}
-        alt="expanded photo displayed in product overview"
         onMouseEnter={(e) => {
           const elem = e.currentTarget;
           const { width, height } = elem.getBoundingClientRect();
