@@ -2558,11 +2558,13 @@ function BreakdownByStars(_ref) {
       background: "linear-gradient(90deg, ".concat(darkMode ? 'green' : 'black', " ").concat(breakdown.five * 100, "%, ").concat(darkMode ? '#303135' : '#ddd', " 0 ").concat(100 - breakdown.five * 100, "%")
     };
   };
-  var styleFour = {
-    display: 'inline-block',
-    width: '100%',
-    height: '10px',
-    background: "linear-gradient(90deg, ".concat(darkMode ? 'green' : 'black', " ").concat((breakdown === null || breakdown === void 0 ? void 0 : breakdown.four) * 100, "%, ").concat(darkMode ? '#303135' : '#ddd', " 0 ").concat(100 - (breakdown === null || breakdown === void 0 ? void 0 : breakdown.four) * 100, "%")
+  var styleFour = function styleFour() {
+    return {
+      display: 'inline-block',
+      width: '100%',
+      height: '10px',
+      background: "linear-gradient(90deg, ".concat(darkMode ? 'green' : 'black', " ").concat(breakdown.four * 100, "%, ").concat(darkMode ? '#303135' : '#ddd', " 0 ").concat(100 - breakdown.four * 100, "%")
+    };
   };
   var styleThree = function styleThree() {
     return {
@@ -2634,7 +2636,7 @@ function BreakdownByStars(_ref) {
   }, "4 stars")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", {
     className: "bar-middle"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("span", {
-    style: styleFour
+    style: styleFour()
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", {
     className: "bar-right"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("small", null, ratingCount.four))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", {
