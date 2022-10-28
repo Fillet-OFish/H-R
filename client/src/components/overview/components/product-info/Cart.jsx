@@ -81,11 +81,9 @@ export default function Cart({ style }) {
         {quantity===0 ?
           OOS
           :
-          <p>
-            <button className="cart-btn" onClick={e=>postCart()}>Add to bag
+          <button className="cart-btn" onClick={e=>postCart()}>Add to bag
             <span className="plus-sign"><FaPlus/></span>
-            </button>
-          </p>
+          </button>
         }
       </div>
     : 'OUT OF STOCK'
