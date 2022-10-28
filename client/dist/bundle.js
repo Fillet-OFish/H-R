@@ -1751,17 +1751,17 @@ var AddAnswModal = function AddAnswModal(props) {
     style: {
       marginBottom: '5%'
     }
-  }, "".concat(props.product.name, ": ").concat(props.QID.question_body), " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("b", null, "Answer")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("textarea", {
+  }, "".concat(props.product.name, ": ").concat(props.QID.question_body), " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("b", null, "* Answer")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("textarea", {
     type: "text",
     name: "reply",
     placeholder: "Enter reply...",
     maxLength: "1000",
     required: true
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("b", null, "Nickname")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("label", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("b", null, "* Nickname")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("label", {
     style: {
-      marginLeft: '40%'
+      marginLeft: '38%'
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("b", null, "Email")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("b", null, "* Email")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "align-input"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("input", {
     type: "text",
@@ -1896,17 +1896,17 @@ var AddQuesModal = function AddQuesModal(props) {
     style: {
       marginBottom: '5%'
     }
-  }, "About the ".concat(props.product.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("b", null, "Question")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("textarea", {
+  }, "About the ".concat(props.product.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("b", null, "* Question")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("textarea", {
     type: "text",
     name: "ques",
     placeholder: "Enter question...",
     maxLength: "1000",
     required: true
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("b", null, "Nickname")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("b", null, "* Nickname")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
     style: {
-      marginLeft: '40%'
+      marginLeft: '38%'
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("b", null, "Email")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("b", null, "* Email")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "align-input"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "text",
@@ -2220,14 +2220,18 @@ var QAEntry = function QAEntry(props) {
 
   // make an axios get call for answers with each individual quest id
   var getAnswers = function getAnswers(q_id) {
-    axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/qa/questions/".concat(q_id, "/answers")).then(function (response) {
-      // console.log(response.data, 'THIS IS ANSWERS')
-      setAnswers(response.data);
-      // as soon as answers are loaded scroll down on load more
-      props.setFetch(!props.fetch);
-    })["catch"](function (err) {
-      console.log(err);
-    });
+    if (q_id === undefined) {
+      setAnswers([]);
+    } else {
+      axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/qa/questions/".concat(q_id, "/answers")).then(function (response) {
+        // console.log(response.data, 'THIS IS ANSWERS')
+        setAnswers(response.data);
+        // as soon as answers are loaded scroll down on load more
+        props.setFetch(!props.fetch);
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    }
   };
 
   // make an axios put request to mark questions as helpful
@@ -3562,27 +3566,22 @@ function ReviewsList(props) {
   };
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     updateReviewPage();
-    // scroll();
-    // updateScroll();
+    updateScroll();
   }, [load]);
 
   // this is to auto scroll down on each review loaded ------------
-  // const scroll = () => {
-  //   document.querySelector('#revContainer').scrollIntoView({ behavior: 'smooth', block: 'end' });
-  // };
-  // function updateScroll() {
-  //   var element = document.getElementById('revContainer');
-  //   element.scrollTop = element.scrollHeight;
-  // }
+  function updateScroll() {
+    var element = document.getElementById('revContainer');
+    element.scrollTop = element.scrollHeight;
+  }
   // ----------------------------------------------------------------
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
-    id: "revContainer"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_SortRev_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_SortRev_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], {
     sort: props.sort,
     setSort: props.setSort,
     numReviews: props.numReviews
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+    id: "revContainer",
     className: "reviews-list-container"
   }, props.reviews.map(function (review, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_ReviewTile_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
