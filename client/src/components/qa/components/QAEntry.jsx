@@ -25,16 +25,20 @@ const QAEntry = (props) => {
 
   // make an axios get call for answers with each individual quest id
   const getAnswers = (q_id) => {
-    axios.get(`/api/qa/questions/${q_id}/answers`)
-    .then((response) => {
-      // console.log(response.data, 'THIS IS ANSWERS')
-      setAnswers(response.data);
-      // as soon as answers are loaded scroll down on load more
-      props.setFetch(!props.fetch);
-    })
-    .catch(err => {
-      console.log(err);
-    })
+    if (q_id === undefined) {
+      setAnswers([]);
+    } else {
+      axios.get(`/api/qa/questions/${q_id}/answers`)
+      .then((response) => {
+        // console.log(response.data, 'THIS IS ANSWERS')
+        setAnswers(response.data);
+        // as soon as answers are loaded scroll down on load more
+        props.setFetch(!props.fetch);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    }
   }
 
   // make an axios put request to mark questions as helpful
