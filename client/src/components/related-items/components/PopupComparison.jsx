@@ -1,6 +1,8 @@
 import React from 'react';
+import { useDarkMode } from '../../DarkMode.jsx'
 
 export default function PopupComparison ({relatedItem, currentItem, setPopup, setHover}) {
+  const darkMode = useDarkMode()
   const comparisonObj = {}
   currentItem.features.map((feature) => {
     comparisonObj[feature.feature] = {valueCurrent: feature.value}
@@ -11,7 +13,7 @@ export default function PopupComparison ({relatedItem, currentItem, setPopup, se
 
   return (
     <div className='popup' onClick={(e)=>{setPopup(false); setHover(false)}}>
-      <div className='comparison-table'>
+      <div className={`comparison-table ${darkMode ? 'comparison-table-dark' : ''}`}>
         <table>
           <caption>Comparing</caption>
           <thead>

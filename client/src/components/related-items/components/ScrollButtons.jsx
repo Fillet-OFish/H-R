@@ -25,11 +25,11 @@ export default function scrollButtons({element, scroll}) {
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
-    window.addEventListener("scroll", handleResize);
+    window.addEventListener("mouseover", handleResize);
     handleResize();
     return () => {
       window.removeEventListener("resize", handleResize);
-      window.removeEventListener("scroll", handleResize);
+      window.removeEventListener("mouseover", handleResize);
     }
   }, [])
 

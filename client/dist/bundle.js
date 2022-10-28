@@ -3743,12 +3743,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _DarkMode_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../DarkMode.jsx */ "./client/src/components/DarkMode.jsx");
+
 
 function PopupComparison(_ref) {
   var relatedItem = _ref.relatedItem,
     currentItem = _ref.currentItem,
     setPopup = _ref.setPopup,
     setHover = _ref.setHover;
+  var darkMode = (0,_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_1__.useDarkMode)();
   var comparisonObj = {};
   currentItem.features.map(function (feature) {
     comparisonObj[feature.feature] = {
@@ -3767,7 +3770,7 @@ function PopupComparison(_ref) {
       setHover(false);
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "comparison-table"
+    className: "comparison-table ".concat(darkMode ? 'comparison-table-dark' : '')
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("caption", null, "Comparing"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, currentItem.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, relatedItem.name))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, Object.keys(comparisonObj).map(function (feature, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
       key: index
@@ -4120,7 +4123,7 @@ function RelatedProductsList(_ref) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_ProductCard_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
       currentItem: currentItem,
       setProduct: setProduct,
-      key: currentItem + item + index,
+      key: index,
       item: item,
       list: 'related'
     });
@@ -4186,11 +4189,11 @@ function scrollButtons(_ref) {
   }
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     window.addEventListener("resize", handleResize);
-    window.addEventListener("scroll", handleResize);
+    window.addEventListener("mouseover", handleResize);
     handleResize();
     return function () {
       window.removeEventListener("resize", handleResize);
-      window.removeEventListener("scroll", handleResize);
+      window.removeEventListener("mouseover", handleResize);
     };
   }, []);
   var buttonL = function buttonL() {

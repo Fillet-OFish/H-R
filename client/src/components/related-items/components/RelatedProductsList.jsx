@@ -25,7 +25,7 @@ export default function RelatedProductsList ({currentItem, setProduct}) {
       <div className='related-list' style={style}>
         <ul className='related-ul'>
           {relatedItems.map((item, index) => (
-            <ProductCard currentItem={currentItem} setProduct={setProduct} key={currentItem + item + index} item={item} list={'related'}/>
+            <ProductCard currentItem={currentItem} setProduct={setProduct} key={index} item={item} list={'related'}/>
           ))}
         </ul>
         <ScrollButtons element={'.related-list .related-ul'} scroll={236} />
