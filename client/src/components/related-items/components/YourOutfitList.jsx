@@ -29,13 +29,11 @@ export default function YourOutfitList({currentItem, setProduct}) {
               <p>Add To Outfit</p>
             </li>
           </div>
-          {outfit ? outfit.map(item =>
-            <ProductCard setProduct={setProduct} key={item} item={item} list={'outfit'} outfit={outfit} setOutfit={setOutfit} />) : null
-          }
+          {outfit?.map(item => (
+              <ProductCard setProduct={setProduct} key={item} item={item} list={'outfit'} outfit={outfit} setOutfit={setOutfit} />
+          ))}
         </ul>
-        {outfit.length > 3 ?
-          <ScrollButtons element={'.related-list .outfit-ul'} width={1100} scroll={236}  /> : null
-        }
+        <ScrollButtons element={'.related-list .outfit-ul'} scroll={236} />
       </div>
     </>
   )
