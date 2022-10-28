@@ -47,7 +47,7 @@ export default function ProductBreakdown({ rating, product, numReviews, reviews,
   return(
     <div className="product-breakdown">
       {size ?
-        <div className="category">Size<br/>
+        <div className="breakdown-category">Size<br/>
           <span style={ratingBarStyle}>
             <div style={ratingValueStyle(size)}><FaSortDown/></div>
           </span>
@@ -59,7 +59,7 @@ export default function ProductBreakdown({ rating, product, numReviews, reviews,
         </div>
       : null}
       {width ?
-        <div className="category">Width<br/>
+        <div className="breakdown-category">Width<br/>
           <span style={ratingBarStyle}>
             <div style={ratingValueStyle(width)}><FaSortDown/></div>
           </span>
@@ -71,7 +71,7 @@ export default function ProductBreakdown({ rating, product, numReviews, reviews,
         </div>
       : null}
       {comfort ?
-        <div className="category">Comfort<br/>
+        <div className="breakdown-category">Comfort<br/>
           <span style={ratingBarStyle}>
             <div style={ratingValueStyle(comfort)}><FaSortDown/></div>
           </span>
@@ -83,7 +83,7 @@ export default function ProductBreakdown({ rating, product, numReviews, reviews,
         </div>
       : null}
       {quality ?
-        <div className="category">Quality<br/>
+        <div className="breakdown-category">Quality<br/>
           <span style={ratingBarStyle}>
             <div style={ratingValueStyle(quality)}><FaSortDown/></div>
           </span>
@@ -95,7 +95,7 @@ export default function ProductBreakdown({ rating, product, numReviews, reviews,
         </div>
       : null}
       {length ?
-        <div className="category">Length<br/>
+        <div className="breakdown-category">Length<br/>
           <span style={ratingBarStyle}>
             <div style={ratingValueStyle(length)}><FaSortDown/></div>
           </span>
@@ -107,7 +107,7 @@ export default function ProductBreakdown({ rating, product, numReviews, reviews,
         </div>
       : null}
       {fit ?
-        <div className="category">Fit<br/>
+        <div className="breakdown-category">Fit<br/>
           <span style={ratingBarStyle}>
             <div style={ratingValueStyle(fit)}><FaSortDown/></div>
           </span>

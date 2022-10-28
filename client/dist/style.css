@@ -114,6 +114,7 @@ img {
   margin: 12px 20px;
   transform: scaleX(1.5);
   font-size: 80%;
+  cursor:pointer;
 }
 /* HEADER ------------------------ */
 .header{
@@ -197,12 +198,12 @@ img {
 }
 .wow-you-rlly-added-smth-to-cart{
   position: absolute;
-  top:5;
-  margin-left: 4.5px;
+  top:0;
+  margin-top: 38px;
+  margin-left: 20px;
   color: teal;
   font-size: 6px;
   visibility: hidden;
-  /* transition: all .25s ease-in-out; */
 }
 /* hidden cart */
 .cart-block{
@@ -324,7 +325,7 @@ img {
 /* OVERVIEW ------------------------ */
 .overview{
   display: table;
-  margin: 2% auto;
+  margin: 0 auto;
   width: 80%;
 }
 .overview-container{
@@ -561,7 +562,7 @@ img {
 .right{
   position: relative;
   width: 40%;
-  line-height: 1.5;
+  line-height: 1.8;
   /* padding-left: 3%; */
 }
 .right .overview-to-reviews{
@@ -658,6 +659,7 @@ img {
   font-size: 16px;
   color: white;
   text-align: center;
+  text-transform: uppercase;
   padding-left: 15px;
   transition: 1s;
 }
@@ -668,8 +670,7 @@ img {
 /* DESCRIPTION ------------------------ */
 .description{
   display: flex;
-  margin: 2.5% 7%;
-  /* margin-bottom: 2.5%; */
+  margin: 4% 7% 2.5%;
   width: 80%;
 }
 .d-left{
@@ -1463,9 +1464,9 @@ textarea {
   width: 95%;
 }
 
-.product-breakdown .category{
+.breakdown-category{
   margin-top: 5%;
-  margin-left: -4%;
+  margin-left: -1%;
   width: 98%;
 }
 
