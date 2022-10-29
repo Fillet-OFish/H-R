@@ -1576,7 +1576,7 @@ body {
     transition: all 0.5s ease;
   }
   .contain-description-related{
-    margin-top: 150%
+    margin: 130% 1% 0 1%
   }
 
   /* header */
@@ -1660,15 +1660,15 @@ body {
     margin-left: -10%;
 
   }
-
-
   .expand-icon{
+    display:none;
+  }
+  .compress-icon{
     display:none;
   }
   .zoom{
     margin:0;
   }
-
 
   /* ratings/reviews */
   .reviews-ratings-container {
@@ -1688,20 +1688,20 @@ body {
   }
 
   /* related-items/outfit */
-  .related-ul, .outfit-ul {
-    flex-direction: column;
+  .related-items {
+    width: 100%;
   }
 
-  .add-to-outfit-button {
-    margin: auto;
-    height: 100%;
-    padding: 10%;
-    width: 75%;
+  .related-ul, .outfit-ul {
+    overflow: auto;
   }
+
+  .button-left, .button-right {
+    display: none;
+  }
+
 
   .product-card {
-    margin: auto;
-    width: 75%;
   }
 
   /* footer */
