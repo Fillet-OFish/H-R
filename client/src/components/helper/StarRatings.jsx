@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useDarkMode } from './DarkMode.jsx'
-
+import { useDarkMode } from '../contexts/DarkMode.jsx'
 
 export default function StarRatings({item, itemRating}) {
   const [rating, setRating] = useState(itemRating || null);
@@ -23,7 +22,6 @@ export default function StarRatings({item, itemRating}) {
       .catch(err => {console.log(err)})
     }
   }, [item, itemRating])
-
 
   return (
     <div>

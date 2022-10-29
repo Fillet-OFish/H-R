@@ -20,7 +20,7 @@ export default function Announcements() {
         setText(textArr[count]);
         setName('announcement-fade-in')
       }
-    }, 6000);
+    }, 4000);
 
     return () => clearInterval(timeout)
 

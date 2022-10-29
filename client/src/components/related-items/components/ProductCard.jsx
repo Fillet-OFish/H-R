@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import StarRatings from '../../StarRatings.jsx';
+import StarRatings from '../../helper/StarRatings.jsx';
 import PopupComparison from './PopupComparison.jsx';
 import ProductCardImage from './ProductCardImage.jsx';
-import { useDarkMode } from '../../DarkMode.jsx'
+import { useDarkMode } from '../../contexts/DarkMode.jsx'
 
 
 export default function ProductCard({currentItem, item, setProduct, list, outfit, setOutfit}) {

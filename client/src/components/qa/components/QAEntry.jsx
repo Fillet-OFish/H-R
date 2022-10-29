@@ -2,7 +2,7 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import AWEntry from './AWEntry.jsx';
-import { useDarkMode } from '../../DarkMode.jsx'
+import { useDarkMode } from '../../contexts/DarkMode.jsx'
 
 // ENTRY OF EACH QUESTION ----------
 const QAEntry = (props) => {

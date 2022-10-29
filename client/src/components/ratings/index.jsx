@@ -4,7 +4,7 @@ import Breakdown from './components/Breakdown/Breakdown.jsx'
 import ReviewsList from './components/ReviewsList/ReviewsList.jsx'
 import AddRevModal from './components/ReviewsList/AddRevModal.jsx'
 import ImageModal from './components/ReviewsList/ImageModal.jsx'
-import { useTracker } from '../TrackClickContext.jsx';
+import { useTracker } from '../contexts/TrackClickContext.jsx';
 
 export default function Reviews(props) {
   const clickTracker = useTracker();

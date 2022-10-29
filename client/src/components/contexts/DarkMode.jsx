@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { FaMoon, FaSun } from "react-icons/fa";
 
-
 const DarkModeContext = React.createContext()
 
 export function useDarkMode() {

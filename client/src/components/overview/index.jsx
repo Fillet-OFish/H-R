@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useTracker } from '../TrackClickContext.jsx';
-import { useDarkMode } from '../DarkMode.jsx'
-import { Rating } from 'react-simple-star-rating'
+import { useTracker } from '../contexts/TrackClickContext.jsx';
+import { useDarkMode } from '../contexts/DarkMode.jsx'
+import StarRatings from '../helper/StarRatings.jsx';
 import axios from 'axios';
 import Social from './components/product-info/Social.jsx'
 import Styles from './components/product-info/Styles.jsx'
@@ -40,19 +40,13 @@ export default function Overview({product, rating, numReviews}) {
 
         <div className="right">
           {/* Stars */}
-          <p>
-            <Rating
-              size={15}
-              initialValue={rating}
-              allowFraction={true}
-              fillColor={darkMode ? 'yellow' : '#000000'}
-              style={{pointerEvents: 'none'}}
-            />
-            &nbsp;
-            {numReviews ?
-              <span className="overview-to-reviews" onClick={e=>scroll()} >Read all {numReviews} reviews</span>
-            : null}
-          </p>
+
+          <StarRatings itemRating={rating}/>
+          &nbsp;
+          {numReviews ?
+            <span className="overview-to-reviews" onClick={e=>scroll()} >Read all {numReviews} reviews</span>
+          : null}
+
 
           {/* Social media */}
           {<Social product={product} style={style} photo={photo}/>}

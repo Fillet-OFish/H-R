@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useDarkMode } from '../../DarkMode.jsx'
+import { useDarkMode } from '../../contexts/DarkMode.jsx'
 
 export default function Cart({ product }) {
   const [cart, setCart] = useState(null)

@@ -4,8 +4,7 @@ import Announcements from './components/Announcements.jsx'
 import Search from './components/Search.jsx'
 import Cart from './components/Cart.jsx'
 import { FaSearch, FaShoppingBag } from 'react-icons/fa';
-import { useDarkMode } from '../DarkMode.jsx'
-
+import { useDarkMode } from '../contexts/DarkMode.jsx'
 export default function Header({ product }) {
   const darkMode = useDarkMode();
 
@@ -22,7 +21,6 @@ export default function Header({ product }) {
   return(
     <>
       {/* announcements */}
-      <Announcements/>
 
       <div className={`header ${darkMode ? 'header-dark' : null}`}>
 

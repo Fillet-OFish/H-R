@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaSearch } from 'react-icons/fa'
-import { useDarkMode } from '../../DarkMode.jsx'
+import { useDarkMode } from '../../contexts/DarkMode.jsx'
 
 
 export default function Search({ product }) {
