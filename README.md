@@ -42,6 +42,11 @@
 </p>
 </details>
 
+### Features
+* Related items that dynamically generated based on the item currently being viewed
+* If an item is clicked on, a modal will appear with a comparison of the features of the current item and the item selected
+* A 'Your Outfit' section which allows you to save the currently viewed item into a list that persists while traversing the site
+
 
 ## QUESTIONS & ANSWERS
 <p align="center"><img width="1300" alt="qa" src="https://user-images.githubusercontent.com/102894133/199110755-e64bd3e1-b09c-4fed-be5e-2cc1aefc1094.png"></p>
