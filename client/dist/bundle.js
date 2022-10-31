@@ -16,8 +16,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./contexts/DarkMode.jsx */ "./client/src/components/contexts/DarkMode.jsx");
-/* harmony import */ var _contexts_TrackClickContext_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./contexts/TrackClickContext.jsx */ "./client/src/components/contexts/TrackClickContext.jsx");
+/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../contexts/DarkMode.jsx */ "./client/src/contexts/DarkMode.jsx");
+/* harmony import */ var _contexts_TrackClickContext_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../contexts/TrackClickContext.jsx */ "./client/src/contexts/TrackClickContext.jsx");
 /* harmony import */ var _header_components_Announcements_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./header/components/Announcements.jsx */ "./client/src/components/header/components/Announcements.jsx");
 /* harmony import */ var _header_index_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./header/index.jsx */ "./client/src/components/header/index.jsx");
 /* harmony import */ var _overview_index_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./overview/index.jsx */ "./client/src/components/overview/index.jsx");
@@ -124,106 +124,6 @@ function App() {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_footer_index_jsx__WEBPACK_IMPORTED_MODULE_12__["default"], {
     product: product
   }))) : null;
-}
-
-/***/ }),
-
-/***/ "./client/src/components/contexts/DarkMode.jsx":
-/*!*****************************************************!*\
-  !*** ./client/src/components/contexts/DarkMode.jsx ***!
-  \*****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "DarkModeProvider": () => (/* binding */ DarkModeProvider),
-/* harmony export */   "useDarkMode": () => (/* binding */ useDarkMode)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-icons/fa */ "./node_modules/react-icons/fa/index.esm.js");
-
-
-
-var DarkModeContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createContext();
-function useDarkMode() {
-  return (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(DarkModeContext);
-}
-function DarkModeProvider(_ref) {
-  var children = _ref.children;
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(function () {
-      return JSON.parse(localStorage.getItem('darkMode')) || false;
-    }),
-    _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
-    darkMode = _useState2[0],
-    setDarkMode = _useState2[1];
-  darkMode ? (document.body.style.backgroundColor = '#202123', document.body.style.color = 'white') : (document.body.style.backgroundColor = '', document.body.style.color = '');
-  function toggleDarkMode() {
-    localStorage.setItem('darkMode', !darkMode);
-    setDarkMode(function (darkMode) {
-      return !darkMode;
-    });
-  }
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(DarkModeContext.Provider, {
-    value: darkMode
-  }, children, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
-    className: "dark-mode-button ".concat(darkMode ? 'dark-mode-button-dark' : ''),
-    onClick: toggleDarkMode
-  }, darkMode ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_2__.FaSun, null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_2__.FaMoon, null)));
-}
-
-//303135
-//3c4044
-
-/***/ }),
-
-/***/ "./client/src/components/contexts/TrackClickContext.jsx":
-/*!**************************************************************!*\
-  !*** ./client/src/components/contexts/TrackClickContext.jsx ***!
-  \**************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "TrackProvider": () => (/* binding */ TrackProvider),
-/* harmony export */   "useTracker": () => (/* binding */ useTracker)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ "./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js");
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/fromUnixTime/index.js");
-
-
-
-
-var TrackClickContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createContext();
-function useTracker() {
-  return (0,react__WEBPACK_IMPORTED_MODULE_2__.useContext)(TrackClickContext);
-}
-function TrackProvider(_ref) {
-  var children = _ref.children;
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
-    _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_useState, 2),
-    tracker = _useState2[0],
-    setTracker = _useState2[1];
-  function trackClick(e, module) {
-    var click = {
-      element: e.target.outerHTML,
-      module: module,
-      time: (0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(new Date().getTime())
-    };
-    setTracker([click].concat((0,_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(tracker)));
-  }
-  if (tracker.length > 0) {
-    console.log('track click', tracker);
-  }
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(TrackClickContext.Provider, {
-    value: trackClick
-  }, children);
 }
 
 /***/ }),
@@ -444,7 +344,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../contexts/DarkMode.jsx */ "./client/src/components/contexts/DarkMode.jsx");
+/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../contexts/DarkMode.jsx */ "./client/src/contexts/DarkMode.jsx");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 
@@ -514,7 +414,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-icons/fa */ "./node_modules/react-icons/fa/index.esm.js");
-/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../contexts/DarkMode.jsx */ "./client/src/components/contexts/DarkMode.jsx");
+/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../contexts/DarkMode.jsx */ "./client/src/contexts/DarkMode.jsx");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var _components_Announcements_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Announcements.jsx */ "./client/src/components/header/components/Announcements.jsx");
 /* harmony import */ var _components_Cart_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Cart.jsx */ "./client/src/components/header/components/Cart.jsx");
@@ -592,86 +492,6 @@ function Header(_ref) {
   }, "\u2B24"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_5__.FaShoppingBag, {
     className: "shopping-bag-icon"
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Cart_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null));
-}
-
-/***/ }),
-
-/***/ "./client/src/components/helper/StarRatings.jsx":
-/*!******************************************************!*\
-  !*** ./client/src/components/helper/StarRatings.jsx ***!
-  \******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ StarRatings)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ "./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js");
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../contexts/DarkMode.jsx */ "./client/src/components/contexts/DarkMode.jsx");
-
-
-
-
-
-function StarRatings(_ref) {
-  var item = _ref.item,
-    itemRating = _ref.itemRating;
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(itemRating || null),
-    _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_useState, 2),
-    rating = _useState2[0],
-    setRating = _useState2[1];
-  var darkMode = (0,_contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_4__.useDarkMode)();
-  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
-    if (itemRating) {
-      setRating(itemRating);
-    } else {
-      var source = axios__WEBPACK_IMPORTED_MODULE_3__["default"].CancelToken.source();
-      axios__WEBPACK_IMPORTED_MODULE_3__["default"].get("/api/reviews/meta/".concat(item), {
-        cancelToken: source.token
-      }).then(function (result) {
-        var data = result.data;
-        var totalNum = Number(data.recommended["true"]) + Number(data.recommended["false"]);
-        var rating = (Number(data.ratings[1]) + Number(data.ratings[2]) * 2 + Number(data.ratings[3]) * 3 + Number(data.ratings[4]) * 4 + Number(data.ratings[5]) * 5) / totalNum;
-        var roundedRating = Math.round(rating * 10) / 10;
-        setRating(roundedRating);
-      })["catch"](function (err) {
-        console.log(err);
-      });
-    }
-  }, [item, itemRating]);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("span", null, rating ? (0,_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(Array(5)).map(function (star, i) {
-    var starFill = function starFill() {
-      if (rating - i >= 1) {
-        return 100;
-      }
-      if (rating - i >= 0.75) {
-        return 70;
-      }
-      if (rating - i >= 0.50) {
-        return 50;
-      }
-      if (rating - i >= 0.25) {
-        return 30;
-      }
-      return 0;
-    };
-    var style = {
-      display: 'inline-block',
-      backgroundImage: "linear-gradient(90deg, ".concat(darkMode ? 'yellow' : 'black', " ").concat(starFill(), "%, ").concat(darkMode ? 'grey' : '#ddd', " 0 ").concat(100 - starFill(), "%"),
-      WebkitBackgroundClip: 'text',
-      WebkitTextFillColor: 'transparent',
-      userSelect: 'none'
-    };
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("small", {
-      key: i,
-      style: style
-    }, "\u2605");
-  }) : null);
 }
 
 /***/ }),
@@ -1409,10 +1229,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _contexts_TrackClickContext_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../contexts/TrackClickContext.jsx */ "./client/src/components/contexts/TrackClickContext.jsx");
-/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../contexts/DarkMode.jsx */ "./client/src/components/contexts/DarkMode.jsx");
+/* harmony import */ var _contexts_TrackClickContext_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../contexts/TrackClickContext.jsx */ "./client/src/contexts/TrackClickContext.jsx");
+/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../contexts/DarkMode.jsx */ "./client/src/contexts/DarkMode.jsx");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var _helper_StarRatings_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../helper/StarRatings.jsx */ "./client/src/components/helper/StarRatings.jsx");
+/* harmony import */ var _helper_StarRatings_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../helper/StarRatings.jsx */ "./client/src/helper/StarRatings.jsx");
 /* harmony import */ var _components_product_info_Social_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/product-info/Social.jsx */ "./client/src/components/overview/components/product-info/Social.jsx");
 /* harmony import */ var _components_product_info_Styles_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/product-info/Styles.jsx */ "./client/src/components/overview/components/product-info/Styles.jsx");
 /* harmony import */ var _components_gallery_Gallery_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/gallery/Gallery.jsx */ "./client/src/components/overview/components/gallery/Gallery.jsx");
@@ -1536,7 +1356,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/format/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../contexts/DarkMode.jsx */ "./client/src/components/contexts/DarkMode.jsx");
+/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../contexts/DarkMode.jsx */ "./client/src/contexts/DarkMode.jsx");
 
 
 
@@ -2130,7 +1950,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var _AWEntry_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AWEntry.jsx */ "./client/src/components/qa/components/AWEntry.jsx");
-/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../contexts/DarkMode.jsx */ "./client/src/components/contexts/DarkMode.jsx");
+/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../contexts/DarkMode.jsx */ "./client/src/contexts/DarkMode.jsx");
 
 
 
@@ -2500,7 +2320,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../contexts/DarkMode.jsx */ "./client/src/components/contexts/DarkMode.jsx");
+/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../contexts/DarkMode.jsx */ "./client/src/contexts/DarkMode.jsx");
 
 
 
@@ -2707,7 +2527,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../contexts/DarkMode.jsx */ "./client/src/components/contexts/DarkMode.jsx");
+/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../contexts/DarkMode.jsx */ "./client/src/contexts/DarkMode.jsx");
 /* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-icons/fa */ "./node_modules/react-icons/fa/index.esm.js");
 
 
@@ -2874,7 +2694,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _helper_StarRatings_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../helper/StarRatings.jsx */ "./client/src/components/helper/StarRatings.jsx");
+/* harmony import */ var _helper_StarRatings_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../helper/StarRatings.jsx */ "./client/src/helper/StarRatings.jsx");
 /* harmony import */ var _BreakdownByStars_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./BreakdownByStars.jsx */ "./client/src/components/ratings/components/Breakdown/BreakdownByStars.jsx");
 
 
@@ -2953,7 +2773,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../contexts/DarkMode.jsx */ "./client/src/components/contexts/DarkMode.jsx");
+/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../contexts/DarkMode.jsx */ "./client/src/contexts/DarkMode.jsx");
 
 
 
@@ -3376,9 +3196,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/format/index.js");
 /* harmony import */ var _ReviewImgs_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ReviewImgs.jsx */ "./client/src/components/ratings/components/ReviewsList/ReviewImgs.jsx");
-/* harmony import */ var _helper_StarRatings_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../helper/StarRatings.jsx */ "./client/src/components/helper/StarRatings.jsx");
+/* harmony import */ var _helper_StarRatings_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../helper/StarRatings.jsx */ "./client/src/helper/StarRatings.jsx");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../contexts/DarkMode.jsx */ "./client/src/components/contexts/DarkMode.jsx");
+/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../contexts/DarkMode.jsx */ "./client/src/contexts/DarkMode.jsx");
 
 
 
@@ -3544,7 +3364,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../contexts/DarkMode.jsx */ "./client/src/components/contexts/DarkMode.jsx");
+/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../contexts/DarkMode.jsx */ "./client/src/contexts/DarkMode.jsx");
 
 
 var SortRev = function SortRev(props) {
@@ -3592,7 +3412,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ReviewsList_ReviewsList_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/ReviewsList/ReviewsList.jsx */ "./client/src/components/ratings/components/ReviewsList/ReviewsList.jsx");
 /* harmony import */ var _components_ReviewsList_AddRevModal_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/ReviewsList/AddRevModal.jsx */ "./client/src/components/ratings/components/ReviewsList/AddRevModal.jsx");
 /* harmony import */ var _components_ReviewsList_ImageModal_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/ReviewsList/ImageModal.jsx */ "./client/src/components/ratings/components/ReviewsList/ImageModal.jsx");
-/* harmony import */ var _contexts_TrackClickContext_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../contexts/TrackClickContext.jsx */ "./client/src/components/contexts/TrackClickContext.jsx");
+/* harmony import */ var _contexts_TrackClickContext_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../contexts/TrackClickContext.jsx */ "./client/src/contexts/TrackClickContext.jsx");
 
 
 
@@ -3719,7 +3539,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../contexts/DarkMode.jsx */ "./client/src/components/contexts/DarkMode.jsx");
+/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../contexts/DarkMode.jsx */ "./client/src/contexts/DarkMode.jsx");
 
 
 function PopupComparison(_ref) {
@@ -3822,10 +3642,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var _helper_StarRatings_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../helper/StarRatings.jsx */ "./client/src/components/helper/StarRatings.jsx");
+/* harmony import */ var _helper_StarRatings_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../helper/StarRatings.jsx */ "./client/src/helper/StarRatings.jsx");
 /* harmony import */ var _PopupComparison_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./PopupComparison.jsx */ "./client/src/components/related-items/components/PopupComparison.jsx");
 /* harmony import */ var _ProductCardImage_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ProductCardImage.jsx */ "./client/src/components/related-items/components/ProductCardImage.jsx");
-/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../contexts/DarkMode.jsx */ "./client/src/components/contexts/DarkMode.jsx");
+/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../contexts/DarkMode.jsx */ "./client/src/contexts/DarkMode.jsx");
 
 
 
@@ -4126,7 +3946,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-icons/fa */ "./node_modules/react-icons/fa/index.esm.js");
-/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../contexts/DarkMode.jsx */ "./client/src/components/contexts/DarkMode.jsx");
+/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../contexts/DarkMode.jsx */ "./client/src/contexts/DarkMode.jsx");
 
 
 
@@ -4223,7 +4043,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var _ProductCard_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ProductCard.jsx */ "./client/src/components/related-items/components/ProductCard.jsx");
 /* harmony import */ var _ScrollButtons_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ScrollButtons.jsx */ "./client/src/components/related-items/components/ScrollButtons.jsx");
-/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../contexts/DarkMode.jsx */ "./client/src/components/contexts/DarkMode.jsx");
+/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../contexts/DarkMode.jsx */ "./client/src/contexts/DarkMode.jsx");
 /* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-icons/fa */ "./node_modules/react-icons/fa/index.esm.js");
 
 
@@ -4304,7 +4124,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_RelatedProductsList_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/RelatedProductsList.jsx */ "./client/src/components/related-items/components/RelatedProductsList.jsx");
 /* harmony import */ var _components_YourOutfitList_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/YourOutfitList.jsx */ "./client/src/components/related-items/components/YourOutfitList.jsx");
-/* harmony import */ var _contexts_TrackClickContext_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../contexts/TrackClickContext.jsx */ "./client/src/components/contexts/TrackClickContext.jsx");
+/* harmony import */ var _contexts_TrackClickContext_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../contexts/TrackClickContext.jsx */ "./client/src/contexts/TrackClickContext.jsx");
 
 
 
@@ -4325,6 +4145,186 @@ function RelatedItemsAndComparison(_ref) {
     currentItem: currentItem,
     setProduct: setProduct
   }));
+}
+
+/***/ }),
+
+/***/ "./client/src/contexts/DarkMode.jsx":
+/*!******************************************!*\
+  !*** ./client/src/contexts/DarkMode.jsx ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DarkModeProvider": () => (/* binding */ DarkModeProvider),
+/* harmony export */   "useDarkMode": () => (/* binding */ useDarkMode)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-icons/fa */ "./node_modules/react-icons/fa/index.esm.js");
+
+
+
+var DarkModeContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createContext();
+function useDarkMode() {
+  return (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(DarkModeContext);
+}
+function DarkModeProvider(_ref) {
+  var children = _ref.children;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(function () {
+      return JSON.parse(localStorage.getItem('darkMode')) || false;
+    }),
+    _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
+    darkMode = _useState2[0],
+    setDarkMode = _useState2[1];
+  darkMode ? (document.body.style.backgroundColor = '#202123', document.body.style.color = 'white') : (document.body.style.backgroundColor = '', document.body.style.color = '');
+  function toggleDarkMode() {
+    localStorage.setItem('darkMode', !darkMode);
+    setDarkMode(function (darkMode) {
+      return !darkMode;
+    });
+  }
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(DarkModeContext.Provider, {
+    value: darkMode
+  }, children, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
+    className: "dark-mode-button ".concat(darkMode ? 'dark-mode-button-dark' : ''),
+    onClick: toggleDarkMode
+  }, darkMode ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_2__.FaSun, null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_2__.FaMoon, null)));
+}
+
+//303135
+//3c4044
+
+/***/ }),
+
+/***/ "./client/src/contexts/TrackClickContext.jsx":
+/*!***************************************************!*\
+  !*** ./client/src/contexts/TrackClickContext.jsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TrackProvider": () => (/* binding */ TrackProvider),
+/* harmony export */   "useTracker": () => (/* binding */ useTracker)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ "./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/fromUnixTime/index.js");
+
+
+
+
+var TrackClickContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createContext();
+function useTracker() {
+  return (0,react__WEBPACK_IMPORTED_MODULE_2__.useContext)(TrackClickContext);
+}
+function TrackProvider(_ref) {
+  var children = _ref.children;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
+    _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_useState, 2),
+    tracker = _useState2[0],
+    setTracker = _useState2[1];
+  function trackClick(e, module) {
+    var click = {
+      element: e.target.outerHTML,
+      module: module,
+      time: (0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(new Date().getTime())
+    };
+    setTracker([click].concat((0,_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(tracker)));
+  }
+  if (tracker.length > 0) {
+    console.log('track click', tracker);
+  }
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(TrackClickContext.Provider, {
+    value: trackClick
+  }, children);
+}
+
+/***/ }),
+
+/***/ "./client/src/helper/StarRatings.jsx":
+/*!*******************************************!*\
+  !*** ./client/src/helper/StarRatings.jsx ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ StarRatings)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ "./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../contexts/DarkMode.jsx */ "./client/src/contexts/DarkMode.jsx");
+
+
+
+
+
+function StarRatings(_ref) {
+  var item = _ref.item,
+    itemRating = _ref.itemRating;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(itemRating || null),
+    _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_useState, 2),
+    rating = _useState2[0],
+    setRating = _useState2[1];
+  var darkMode = (0,_contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_4__.useDarkMode)();
+  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+    if (itemRating) {
+      setRating(itemRating);
+    } else {
+      var source = axios__WEBPACK_IMPORTED_MODULE_3__["default"].CancelToken.source();
+      axios__WEBPACK_IMPORTED_MODULE_3__["default"].get("/api/reviews/meta/".concat(item), {
+        cancelToken: source.token
+      }).then(function (result) {
+        var data = result.data;
+        var totalNum = Number(data.recommended["true"]) + Number(data.recommended["false"]);
+        var rating = (Number(data.ratings[1]) + Number(data.ratings[2]) * 2 + Number(data.ratings[3]) * 3 + Number(data.ratings[4]) * 4 + Number(data.ratings[5]) * 5) / totalNum;
+        var roundedRating = Math.round(rating * 10) / 10;
+        setRating(roundedRating);
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    }
+  }, [item, itemRating]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("span", null, rating ? (0,_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(Array(5)).map(function (star, i) {
+    var starFill = function starFill() {
+      if (rating - i >= 1) {
+        return 100;
+      }
+      if (rating - i >= 0.75) {
+        return 70;
+      }
+      if (rating - i >= 0.50) {
+        return 50;
+      }
+      if (rating - i >= 0.25) {
+        return 30;
+      }
+      return 0;
+    };
+    var style = {
+      display: 'inline-block',
+      backgroundImage: "linear-gradient(90deg, ".concat(darkMode ? 'yellow' : 'black', " ").concat(starFill(), "%, ").concat(darkMode ? 'grey' : '#ddd', " 0 ").concat(100 - starFill(), "%"),
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      userSelect: 'none'
+    };
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("small", {
+      key: i,
+      style: style
+    }, "\u2605");
+  }) : null);
 }
 
 /***/ }),

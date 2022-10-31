@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { DarkModeProvider } from './contexts/DarkMode.jsx';
-import { TrackProvider } from './contexts/TrackClickContext.jsx';
+import { DarkModeProvider } from '../contexts/DarkMode.jsx';
+import { TrackProvider } from '../contexts/TrackClickContext.jsx';
 import Announcements from './header/components/Announcements.jsx'
 import Header from './header/index.jsx'
 import Overview from './overview/index.jsx';
@@ -41,7 +41,6 @@ export default function App() {
     product.id ?
     <TrackProvider>
       <DarkModeProvider>
-
         <Announcements/>
 
         <div className='app-body'>

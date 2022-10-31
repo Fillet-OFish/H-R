@@ -2,7 +2,7 @@ import React from 'react';
 import {format} from 'date-fns';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
-import { useDarkMode } from '../../contexts/DarkMode.jsx'
+import { useDarkMode } from '../../../contexts/DarkMode.jsx'
 
 
 // ENTRY OF EACH ANSWER ----------

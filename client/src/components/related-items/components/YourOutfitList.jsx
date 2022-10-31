@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import ProductCard from './ProductCard.jsx';
 import ScrollButtons from './ScrollButtons.jsx';
-import { useDarkMode } from '../../contexts/DarkMode.jsx';
+import { useDarkMode } from '../../../contexts/DarkMode.jsx';
 import { FaSortDown, FaSortUp } from 'react-icons/fa';
 
 export default function YourOutfitList({currentItem, setProduct}) {
