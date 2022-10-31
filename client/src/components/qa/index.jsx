@@ -6,7 +6,6 @@ import AddAnswModal from './components/AddAnswModal.jsx';
 import AddQuesModal from './components/AddQuesModal.jsx';
 import {useState, useEffect} from 'react';
 
-
 const QuesnAnsw = (props) => {
   // used to store questions data ---------------------------
   const [qaData, setQaData] = useState([]);

@@ -1,7 +1,7 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
-import { useDarkMode } from '../../../DarkMode.jsx';
+import { useDarkMode } from '../../../contexts/DarkMode.jsx';
 
 const AddRevModal = (props) => {
   const darkMode = useDarkMode();
@@ -26,21 +26,10 @@ const AddRevModal = (props) => {
       cloudName: cloudName,
       uploadPreset: uploadPreset,
       maxFiles: 5,
-      // cropping: true, //add a cropping step
-      // showAdvancedOptions: true,  //add advanced options (public_id and tag)
       sources: [ "local", "url", "camera", "google_drive", "instagram", "facebook", "gettyimages", "unsplash"], // restrict the upload sources to URL and local files
-      // multiple: false,  //restrict upload to a single file
-      // folder: "user_images", //upload files to the specified folder
-      // tags: ["users", "profile"], //add the given tags to the uploaded files
-      // context: {alt: "user_uploaded"}, //add the given context data to the uploaded files
-      // clientAllowedFormats: ["images"], //restrict uploading to image files only
-      // maxImageFileSize: 2000000,  //restrict file size to less than 2MB
-      // maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
-      // theme: "purple", //change to a purple theme
     },
     (error, result) => {
       if (!error && result && result.event === "success") {
-        console.log("Done! Here is the image info: ", result.info);
         tempImgs.push(result.info);
         setUploadImgs([...tempImgs]);
       }
@@ -62,9 +51,6 @@ const AddRevModal = (props) => {
       photos: photos,
       characteristics: characteristics
     })
-    .then((response) => {
-      // console.log(response, 'ADD REV POST ----')
-    })
     .catch((err) => {
       console.log(err);
     })
@@ -73,7 +59,6 @@ const AddRevModal = (props) => {
   // need this useEffect to re-render when uploadImgs gets new data
   // this fixes array not updating in useState
   useEffect(() => {
-    // console.log("uploadImgs: ", uploadImgs);
   }, [uploadImgs])
 
 
@@ -85,7 +70,6 @@ const AddRevModal = (props) => {
           <form onSubmit={(e) => {
             e.preventDefault();
             let pics = uploadImgs.map((cur, index) => cur.thumbnail_url);
-            console.log(props.reviewsMeta)
             let char = {};
             let meta = [
               props.reviewsMeta.characteristics.Size,
@@ -125,7 +109,7 @@ const AddRevModal = (props) => {
 
             {/* rating */}
             <label>* Rating: </label>
-            <select name='rating' defaultValue={'DEFAULT'} onChange={(e) => console.log(e.target.value)}>
+            <select name='rating' defaultValue={'DEFAULT'}>
               <option value="DEFAULT" disabled>none selected</option>
               <option value={1}>Poor</option>
               <option value={2}>Fair</option>

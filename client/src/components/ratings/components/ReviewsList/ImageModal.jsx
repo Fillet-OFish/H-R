@@ -1,6 +1,4 @@
 import React from 'react';
-import {useState, useEffect} from 'react';
-
 
 // ENTRY OF EACH ANSWER ----------
 const ImageModal = (props) => (

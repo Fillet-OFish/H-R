@@ -1,6 +1,5 @@
 import React from 'react';
-import { useDarkMode } from '../../../DarkMode.jsx'
-
+import { useDarkMode } from '../../../contexts/DarkMode.jsx'
 
 const SortRev = (props) => {
   const darkMode = useDarkMode()

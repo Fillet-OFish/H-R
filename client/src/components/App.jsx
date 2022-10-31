@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { TrackProvider } from './TrackClickContext.jsx';
+import { DarkModeProvider } from './contexts/DarkMode.jsx';
+import { TrackProvider } from './contexts/TrackClickContext.jsx';
+import Announcements from './header/components/Announcements.jsx'
 import Header from './header/index.jsx'
 import Overview from './overview/index.jsx';
 import Description from './overview/components/Description.jsx';
@@ -8,7 +10,6 @@ import RelatedItemsAndComparison from './related-items/index.jsx';
 import QuesnAnsw from './qa/index.jsx';
 import Ratings from './ratings/index.jsx';
 import Footer from './footer/index.jsx';
-import { DarkModeProvider } from './DarkMode.jsx';
 
 
 export default function App() {
@@ -41,20 +42,25 @@ export default function App() {
     <TrackProvider>
       <DarkModeProvider>
 
-        {/* header */}
-        <Header product={product}/>
+        <Announcements/>
 
-        {/* overview */}
-        <div className="overview">
-          <Overview product={product} rating={rating} numReviews={numReviews}/>
-        </div>
+        <div className='app-body'>
 
-        <div className="contain-description-related">
-          {/* description */}
-          <Description product={product}/>
+          {/* header */}
+          <Header product={product}/>
 
-          {/* related products */}
-          <RelatedItemsAndComparison currentItem={product} setProduct={setProduct} />
+          {/* overview */}
+          <div className="overview">
+            <Overview product={product} rating={rating} numReviews={numReviews}/>
+          </div>
+
+          <div className="contain-description-related">
+            {/* description */}
+            <Description product={product}/>
+
+            {/* related products */}
+            <RelatedItemsAndComparison currentItem={product} setProduct={setProduct} />
+          </div>
         </div>
 
         {/* where you'll scroll to when you click reviews from overview */}
@@ -79,6 +85,7 @@ export default function App() {
           {/* Reviews */}
           <Ratings product={product} rating={rating} setRating={setRating} numReviews={numReviews} setNumReviews={setNumReviews}/>
         </div>
+
 
         <Footer product={product}/>
 

@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { FaCheck } from 'react-icons/fa';
-// import Cart from './Cart.jsx'
-
 
 export default function Styles({ styles, style, setStyle }) {
  const [display, setDisplay] = useState([styles])
@@ -14,6 +12,7 @@ export default function Styles({ styles, style, setStyle }) {
 
       {/* icons */}
       <p className="icons">
+
       {/* checking if there is a default style or not */}
       {styles.map(styleItem =>
         <span key={styleItem.style_id} className="styles-icon-container">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDarkMode } from '../../../DarkMode.jsx'
+import { useDarkMode } from '../../../contexts/DarkMode.jsx'
 
 
 export default function BreakdownByStars({ reviews, reviewsMeta, numReviews, filter, setFilter }) {
