@@ -1,9 +1,9 @@
 import React from 'react';
 import { format } from 'date-fns';
 import ReviewImgs from './ReviewImgs.jsx';
-import StarRatings from '../../../helper/StarRatings.jsx';
+import StarRatings from '../../../../helper/StarRatings.jsx';
 import axios from 'axios';
-import { useDarkMode } from '../../../contexts/DarkMode.jsx'
+import { useDarkMode } from '../../../../contexts/DarkMode.jsx'
 
 export default function ReviewsList(props) {
   const darkMode = useDarkMode();

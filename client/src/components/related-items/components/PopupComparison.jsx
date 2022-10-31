@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDarkMode } from '../../contexts/DarkMode.jsx'
+import { useDarkMode } from '../../../contexts/DarkMode.jsx'
 
 export default function PopupComparison ({relatedItem, currentItem, setPopup, setHover}) {
   const darkMode = useDarkMode()

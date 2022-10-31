@@ -1,5 +1,5 @@
 import React from 'react';
-import StarRatings from '../../../helper/StarRatings.jsx';
+import StarRatings from '../../../../helper/StarRatings.jsx';
 import BreakdownByStars from './BreakdownByStars.jsx';
 
 export default function RatingBreakdown({ rating, product, numReviews, reviews, reviewsMeta, filter, setFilter }) {

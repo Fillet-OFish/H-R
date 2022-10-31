@@ -1,7 +1,7 @@
 import React from 'react';
 import RelatedProductsList from './components/RelatedProductsList.jsx';
 import YourOutfitList from './components/YourOutfitList.jsx';
-import { useTracker } from '../contexts/TrackClickContext.jsx';
+import { useTracker } from '../../contexts/TrackClickContext.jsx';
 
 export default function RelatedItemsAndComparison({currentItem, setProduct}) {
   const clickTracker = useTracker();

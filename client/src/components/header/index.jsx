@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaSearch, FaShoppingBag } from 'react-icons/fa';
-import { useDarkMode } from '../contexts/DarkMode.jsx'
+import { useDarkMode } from '../../contexts/DarkMode.jsx'
 import axios from 'axios';
 import Announcements from './components/Announcements.jsx'
 import Cart from './components/Cart.jsx'

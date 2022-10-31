@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useTracker } from '../contexts/TrackClickContext.jsx';
-import { useDarkMode } from '../contexts/DarkMode.jsx'
+import { useTracker } from '../../contexts/TrackClickContext.jsx';
+import { useDarkMode } from '../../contexts/DarkMode.jsx'
 import axios from 'axios';
-import StarRatings from '../helper/StarRatings.jsx';
+import StarRatings from '../../helper/StarRatings.jsx';
 import Social from './components/product-info/Social.jsx'
 import Styles from './components/product-info/Styles.jsx'
 import Gallery from './components/gallery/Gallery.jsx'
