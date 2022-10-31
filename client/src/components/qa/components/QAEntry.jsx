@@ -31,10 +31,6 @@ const QAEntry = (props) => {
     } else {
       axios.get(`/api/qa/questions/${q_id}/answers`)
       .then((response) => {
-<<<<<<< HEAD
-        // console.log(response.data, 'THIS IS ANSWERS')
-=======
->>>>>>> master
         setAnswers(response.data);
         // as soon as answers are loaded scroll down on load more
         props.setFetch(!props.fetch);
