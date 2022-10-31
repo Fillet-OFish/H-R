@@ -11,7 +11,6 @@ export default function Announcements() {
   const[text, setText] = useState(textArr[0])
 
   useEffect(() => {
-
     const timeout = setInterval(() => {
       if (name === 'announcement-fade-in') {
         setName('announcement-fade-out')
@@ -29,7 +28,6 @@ export default function Announcements() {
   function byeAnnouncements(){
     document.querySelector('.announcement').style.display = 'none'
   }
-
 
   return(
     <div className='announcement'>

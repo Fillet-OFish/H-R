@@ -786,8 +786,9 @@ nav {
 .user_info {
   margin-top: 0.5%;
   margin-left: 2.5%;
+  opacity: 0.5;
   color: #515151;
-  font-weight: lighter;
+  /* font-weight: lighter; */
   font-size: 13px;
 }
 .user_info-dark {
@@ -1631,14 +1632,14 @@ body {
     display:none;
   }
   .middle{
+    width: 50%;
     padding:0;
     margin:0;
-
   }
   .right{
-    display:block;
+    display: table;
     width: 100%;
-
+    margin: 0 auto;
   }
   .gallery-list{
     display:inline-block;
@@ -1647,18 +1648,29 @@ body {
   }
   .gallery-main{
     display:block;
-    margin:0;
-
+    width: 72%;
+    margin-left: -3.5%;
+    height: 100%;
   }
   .carousel-container{
-    display:block;
+    display: block;
     margin:0;
     padding:0;
-
+    width: 100%;
+  }
+  .carousel-container .left-arrow {
+    left: 30px;
+    font-size: 40px;
+    filter: drop-shadow(1px 3px 2px #b6b6b8);
+  }
+  .carousel-container .right-arrow {
+    font-size: 40px;
+    filter: drop-shadow(1px 3px 2px #b6b6b8);
   }
   .gallery-main img{
     margin-left: -10%;
-
+    height: 100%;
+    width: 100%;
   }
   .expand-icon{
     display:none;
@@ -1668,6 +1680,11 @@ body {
   }
   .zoom{
     margin:0;
+  }
+
+  /* description */
+  .description{
+    display: none;
   }
 
   /* ratings/reviews */
@@ -1732,31 +1749,45 @@ body {
 
   /* Q&A --- */
   .QContainer {
-    font-size: 10px;
+    font-size:100%;
+    width:80%
+  }
+  .load-more-a {
+    font-size:77%;
   }
   .Q-right {
-    font-size:10px;
+    font-size:100%;
+    margin-right: 3%
   }
   .QA-left {
-    font-size: 10px;
+    font-size: 100%;
+    margin-right: 2.5%
   }
   .A-right {
-    font-size:10px;
+    font-size:100%;
+    margin-bottom: 2%
   }
   .user_info {
-    font-size:7px;
+    font-size:13px;
   }
   .questions-and-answers {
-    font-size:7px;
+    font-size:90%;
   }
   .search-input {
-    font-size:10px;
+    font-size:100%;
   }
   .form-button3 {
-    font-size:12px;
+    font-size:85%;
   }
   .form-button2 {
-    font-size:12px;
+    font-size:85%;
+    margin-left: 25%;
+  }
+  .align-btns {
+    margin-left: 0%;
+  }
+  .search-form {
+    width: 80%
   }
 
 

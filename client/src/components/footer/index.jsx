@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Start from './components/start-footer/Start.jsx';
 import End from './components/end-footer/End.jsx';
 

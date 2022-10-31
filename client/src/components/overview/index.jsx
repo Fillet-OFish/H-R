@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useTracker } from '../contexts/TrackClickContext.jsx';
 import { useDarkMode } from '../contexts/DarkMode.jsx'
-import StarRatings from '../helper/StarRatings.jsx';
 import axios from 'axios';
+import StarRatings from '../helper/StarRatings.jsx';
 import Social from './components/product-info/Social.jsx'
 import Styles from './components/product-info/Styles.jsx'
 import Gallery from './components/gallery/Gallery.jsx'
@@ -10,13 +10,13 @@ import Cart from './components/product-info/Cart.jsx'
 
 export default function Overview({product, rating, numReviews}) {
   const clickTracker = useTracker();
+  const darkMode = useDarkMode()
   const [styles, setStyles] = useState([])
   const [style, setStyle] = useState({})
   const [photos, setPhotos] = useState([])
   const [photo, setPhoto] = useState('')
-  const darkMode = useDarkMode()
 
-  // on load/product change, set styles/style based on default product/new product
+  // on load/product change, set states based on default product/new product
   useEffect(() => {
     axios.get(`/api/products/${product.id}/styles`)
     .then(result => {
@@ -27,6 +27,7 @@ export default function Overview({product, rating, numReviews}) {
     })
   },[product])
 
+  // relevant for styles with more than 7 photos
   const scroll = () => {
     document.querySelector('.gallery-scroll-to-here').scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
@@ -41,12 +42,10 @@ export default function Overview({product, rating, numReviews}) {
         <div className="right">
           {/* Stars */}
 
-          <StarRatings itemRating={rating}/>
-          &nbsp;
+          <StarRatings itemRating={rating}/> &nbsp;
           {numReviews ?
             <span className="overview-to-reviews" onClick={e=>scroll()} >Read all {numReviews} reviews</span>
           : null}
-
 
           {/* Social media */}
           {<Social product={product} style={style} photo={photo}/>}
@@ -66,7 +65,7 @@ export default function Overview({product, rating, numReviews}) {
             {/* Styles */}
             <Styles styles={styles} style={style} setStyle={setStyle} />
           </div>
-{/*
+
           {/* Cart */}
           <Cart style={style}/>
         </div>

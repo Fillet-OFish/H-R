@@ -21,14 +21,7 @@ export default function Reviews(props) {
   const [getImage, setImage] = useState();
   const [modalOn, setModalOn] = useState(false);
 
-  // console.log('reviews: ', reviews)
-  // console.log('reviewsMeta: ', reviewsMeta)
-  // console.log('rating: ', props.rating)
-  // console.log('numReviews: ', props.numReviews)
-
   useEffect(() => {
-    //reviews/:id/:page/:count/:sort
-    // console.log(sort, 'sorting')
     axios.get(`/api/reviews/${props.product.id}/${reviewsPage}/2/${sort}`)
       .then(result => {
         setReviews(result.data.results)

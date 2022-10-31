@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useDarkMode } from '../../../contexts/DarkMode.jsx';
 import { FaSortDown } from 'react-icons/fa';
 

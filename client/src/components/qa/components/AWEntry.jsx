@@ -12,9 +12,6 @@ const AWEntry = (props) => {
   // make an axios put request to mark answers as helpful
   const helpfulAnsw = (a_id) => {
     axios.put(`/api/qa/answers/${a_id}/helpful`)
-    .then((response) => {
-      // console.log('Successful put for helpfulAnsw!')
-    })
     .catch(err => {
       console.log(err);
     })
@@ -23,9 +20,6 @@ const AWEntry = (props) => {
   // make an axios put request to report answers
   const reportAnsw = (a_id) => {
     axios.put(`/api/qa/answers/${a_id}/report`)
-    .then((response) => {
-      // console.log('Successful put for reportAnsw!')
-    })
     .catch(err => {
       console.log(err);
     })

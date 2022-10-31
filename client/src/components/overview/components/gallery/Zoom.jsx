@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { FaCircle, FaRegCircle } from 'react-icons/fa';
 
 export default function Zoom({ src, magnifierHeight = 100, magnifieWidth = 110, zoomLevel = 1.5, photos, click, setClick, setExpand, expandPhoto }){

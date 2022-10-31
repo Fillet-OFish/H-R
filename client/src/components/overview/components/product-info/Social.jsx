@@ -16,6 +16,7 @@ export default function Social({ product, photo, style }) {
     }
   },[style])
 
+  // hide/show social media buttons on user click
   function handleClick(){
     if(reveal) {
       document.querySelector('.social-icons').style.visibility = 'hidden'

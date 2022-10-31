@@ -24,7 +24,7 @@ export default function StarRatings({item, itemRating}) {
   }, [item, itemRating])
 
   return (
-    <div>
+    <span>
       {rating ?
         [...Array(5)].map((star, i) => {
           const starFill = () => {
@@ -53,6 +53,6 @@ export default function StarRatings({item, itemRating}) {
             <small key={i} style={style}>★</small>
             )
         }) : null}
-    </div>
+    </span>
   )
 }

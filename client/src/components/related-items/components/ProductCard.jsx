@@ -91,7 +91,7 @@ export default function ProductCard({currentItem, item, setProduct, list, outfit
               :
               <small>${defaultStyle.original_price}</small>
             }
-            <StarRatings item={item} />
+            <div><StarRatings item={item} /></div>
           </div>
         </li> : null
       }

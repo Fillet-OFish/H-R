@@ -16,16 +16,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var _contexts_TrackClickContext_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./contexts/TrackClickContext.jsx */ "./client/src/components/contexts/TrackClickContext.jsx");
-/* harmony import */ var _header_index_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./header/index.jsx */ "./client/src/components/header/index.jsx");
-/* harmony import */ var _overview_index_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./overview/index.jsx */ "./client/src/components/overview/index.jsx");
-/* harmony import */ var _overview_components_Description_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./overview/components/Description.jsx */ "./client/src/components/overview/components/Description.jsx");
-/* harmony import */ var _related_items_index_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./related-items/index.jsx */ "./client/src/components/related-items/index.jsx");
-/* harmony import */ var _qa_index_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./qa/index.jsx */ "./client/src/components/qa/index.jsx");
-/* harmony import */ var _ratings_index_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ratings/index.jsx */ "./client/src/components/ratings/index.jsx");
-/* harmony import */ var _footer_index_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./footer/index.jsx */ "./client/src/components/footer/index.jsx");
-/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./contexts/DarkMode.jsx */ "./client/src/components/contexts/DarkMode.jsx");
-/* harmony import */ var _header_components_Announcements_jsx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./header/components/Announcements.jsx */ "./client/src/components/header/components/Announcements.jsx");
+/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./contexts/DarkMode.jsx */ "./client/src/components/contexts/DarkMode.jsx");
+/* harmony import */ var _contexts_TrackClickContext_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./contexts/TrackClickContext.jsx */ "./client/src/components/contexts/TrackClickContext.jsx");
+/* harmony import */ var _header_components_Announcements_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./header/components/Announcements.jsx */ "./client/src/components/header/components/Announcements.jsx");
+/* harmony import */ var _header_index_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./header/index.jsx */ "./client/src/components/header/index.jsx");
+/* harmony import */ var _overview_index_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./overview/index.jsx */ "./client/src/components/overview/index.jsx");
+/* harmony import */ var _overview_components_Description_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./overview/components/Description.jsx */ "./client/src/components/overview/components/Description.jsx");
+/* harmony import */ var _related_items_index_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./related-items/index.jsx */ "./client/src/components/related-items/index.jsx");
+/* harmony import */ var _qa_index_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./qa/index.jsx */ "./client/src/components/qa/index.jsx");
+/* harmony import */ var _ratings_index_jsx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./ratings/index.jsx */ "./client/src/components/ratings/index.jsx");
+/* harmony import */ var _footer_index_jsx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./footer/index.jsx */ "./client/src/components/footer/index.jsx");
 
 
 
@@ -74,24 +74,24 @@ function App() {
     }
     document.querySelector('.toggled').style.transition = 'font 0.3s ease';
   }
-  return product.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_contexts_TrackClickContext_jsx__WEBPACK_IMPORTED_MODULE_3__.TrackProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_11__.DarkModeProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_header_components_Announcements_jsx__WEBPACK_IMPORTED_MODULE_12__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+  return product.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_contexts_TrackClickContext_jsx__WEBPACK_IMPORTED_MODULE_4__.TrackProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_3__.DarkModeProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_header_components_Announcements_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "app-body"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_header_index_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_header_index_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], {
     product: product
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "overview"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_overview_index_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_overview_index_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], {
     product: product,
     rating: rating,
     numReviews: numReviews
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "contain-description-related"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_overview_components_Description_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_overview_components_Description_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
     product: product
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_related_items_index_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_related_items_index_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], {
     currentItem: product,
     setProduct: setProduct
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "gallery-scroll-to-here"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "toggle-btns"
@@ -113,15 +113,15 @@ function App() {
     }
   }, "Questions")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "contain-reviews-QnA"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_qa_index_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_qa_index_jsx__WEBPACK_IMPORTED_MODULE_10__["default"], {
     product: product
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_ratings_index_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_ratings_index_jsx__WEBPACK_IMPORTED_MODULE_11__["default"], {
     product: product,
     rating: rating,
     setRating: setRating,
     numReviews: numReviews,
     setNumReviews: setNumReviews
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_footer_index_jsx__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_footer_index_jsx__WEBPACK_IMPORTED_MODULE_12__["default"], {
     product: product
   }))) : null;
 }
@@ -169,7 +169,7 @@ function DarkModeProvider(_ref) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(DarkModeContext.Provider, {
     value: darkMode
   }, children, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
-    className: "dark-mode-button ".concat(darkMode ? 'dark-mode-button-dark' : null),
+    className: "dark-mode-button ".concat(darkMode ? 'dark-mode-button-dark' : ''),
     onClick: toggleDarkMode
   }, darkMode ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_2__.FaSun, null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_2__.FaMoon, null)));
 }
@@ -444,8 +444,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../contexts/DarkMode.jsx */ "./client/src/components/contexts/DarkMode.jsx");
+/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../contexts/DarkMode.jsx */ "./client/src/components/contexts/DarkMode.jsx");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 
 
@@ -464,10 +464,11 @@ function Cart(_ref) {
     _useState6 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState5, 2),
     showCart = _useState6[0],
     setShowCart = _useState6[1];
-  var darkMode = (0,_contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_3__.useDarkMode)();
+  var darkMode = (0,_contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_2__.useDarkMode)();
+
   // on load/view-button click, sets cart
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    axios__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/cart').then(function (res) {
+    axios__WEBPACK_IMPORTED_MODULE_3__["default"].get('/api/cart').then(function (res) {
       return setCart(res.data);
     });
   }, [updateCart]);
@@ -499,49 +500,6 @@ function Cart(_ref) {
 
 /***/ }),
 
-/***/ "./client/src/components/header/components/Search.jsx":
-/*!************************************************************!*\
-  !*** ./client/src/components/header/components/Search.jsx ***!
-  \************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ Search)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-icons/fa */ "./node_modules/react-icons/fa/index.esm.js");
-/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../contexts/DarkMode.jsx */ "./client/src/components/contexts/DarkMode.jsx");
-
-
-
-function Search(_ref) {
-  var product = _ref.product;
-  var darkMode = (0,_contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_1__.useDarkMode)();
-  function closeCart() {
-    document.querySelector('.search-block').style.display = 'none';
-  }
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "search-block"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
-    className: "search-bar ".concat(darkMode ? 'search-bar-dark' : null)
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    style: darkMode ? {
-      color: 'white'
-    } : {}
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_2__.FaSearch, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-    style: darkMode ? {
-      color: 'white',
-      borderBottom: '1.5px white solid'
-    } : {},
-    placeholder: "SEARCH"
-  })));
-}
-
-/***/ }),
-
 /***/ "./client/src/components/header/index.jsx":
 /*!************************************************!*\
   !*** ./client/src/components/header/index.jsx ***!
@@ -555,13 +513,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var _components_Announcements_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Announcements.jsx */ "./client/src/components/header/components/Announcements.jsx");
-/* harmony import */ var _components_Search_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Search.jsx */ "./client/src/components/header/components/Search.jsx");
+/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-icons/fa */ "./node_modules/react-icons/fa/index.esm.js");
+/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../contexts/DarkMode.jsx */ "./client/src/components/contexts/DarkMode.jsx");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var _components_Announcements_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Announcements.jsx */ "./client/src/components/header/components/Announcements.jsx");
 /* harmony import */ var _components_Cart_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Cart.jsx */ "./client/src/components/header/components/Cart.jsx");
-/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-icons/fa */ "./node_modules/react-icons/fa/index.esm.js");
-/* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../contexts/DarkMode.jsx */ "./client/src/components/contexts/DarkMode.jsx");
-
 
 
 
@@ -570,7 +526,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function Header(_ref) {
   var product = _ref.product;
-  var darkMode = (0,_contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_5__.useDarkMode)();
+  var darkMode = (0,_contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_1__.useDarkMode)();
 
   // on hover function - shows cart when hovering over shopping bag
   function showCart() {
@@ -618,7 +574,7 @@ function Header(_ref) {
     href: "/"
   }, "Hack & Reactor"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "header-col-3"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_6__.FaSearch, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_5__.FaSearch, {
     className: "search-bar-icon"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     className: "header-links"
@@ -633,7 +589,7 @@ function Header(_ref) {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     className: "wow-you-rlly-added-smth-to-cart"
-  }, "\u2B24"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_6__.FaShoppingBag, {
+  }, "\u2B24"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_5__.FaShoppingBag, {
     className: "shopping-bag-icon"
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Cart_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null));
 }
@@ -688,7 +644,7 @@ function StarRatings(_ref) {
       });
     }
   }, [item, itemRating]);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", null, rating ? (0,_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(Array(5)).map(function (star, i) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("span", null, rating ? (0,_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__["default"])(Array(5)).map(function (star, i) {
     var starFill = function starFill() {
       if (rating - i >= 1) {
         return 100;
@@ -1333,6 +1289,8 @@ function Social(_ref) {
       style.photos[0].url ? setValid(true) : null;
     }
   }, [style]);
+
+  // hide/show social media buttons on user click
   function handleClick() {
     if (reveal) {
       document.querySelector('.social-icons').style.visibility = 'hidden';
@@ -1399,8 +1357,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// import Cart from './Cart.jsx'
-
 function Styles(_ref) {
   var styles = _ref.styles,
     style = _ref.style,
@@ -1455,8 +1411,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _contexts_TrackClickContext_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../contexts/TrackClickContext.jsx */ "./client/src/components/contexts/TrackClickContext.jsx");
 /* harmony import */ var _contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../contexts/DarkMode.jsx */ "./client/src/components/contexts/DarkMode.jsx");
-/* harmony import */ var _helper_StarRatings_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../helper/StarRatings.jsx */ "./client/src/components/helper/StarRatings.jsx");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var _helper_StarRatings_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../helper/StarRatings.jsx */ "./client/src/components/helper/StarRatings.jsx");
 /* harmony import */ var _components_product_info_Social_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/product-info/Social.jsx */ "./client/src/components/overview/components/product-info/Social.jsx");
 /* harmony import */ var _components_product_info_Styles_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/product-info/Styles.jsx */ "./client/src/components/overview/components/product-info/Styles.jsx");
 /* harmony import */ var _components_gallery_Gallery_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/gallery/Gallery.jsx */ "./client/src/components/overview/components/gallery/Gallery.jsx");
@@ -1476,6 +1432,7 @@ function Overview(_ref) {
     rating = _ref.rating,
     numReviews = _ref.numReviews;
   var clickTracker = (0,_contexts_TrackClickContext_jsx__WEBPACK_IMPORTED_MODULE_2__.useTracker)();
+  var darkMode = (0,_contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_3__.useDarkMode)();
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
     _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
     styles = _useState2[0],
@@ -1492,17 +1449,18 @@ function Overview(_ref) {
     _useState8 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState7, 2),
     photo = _useState8[0],
     setPhoto = _useState8[1];
-  var darkMode = (0,_contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_3__.useDarkMode)();
 
-  // on load/product change, set styles/style based on default product/new product
+  // on load/product change, set states based on default product/new product
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    axios__WEBPACK_IMPORTED_MODULE_5__["default"].get("/api/products/".concat(product.id, "/styles")).then(function (result) {
+    axios__WEBPACK_IMPORTED_MODULE_4__["default"].get("/api/products/".concat(product.id, "/styles")).then(function (result) {
       setStyles(result.data.results);
       setStyle(result.data.results[0]);
       setPhotos(result.data.results[0].photos);
       setPhoto(result.data.results[0].photos[0]);
     });
   }, [product]);
+
+  // relevant for styles with more than 7 photos
   var scroll = function scroll() {
     document.querySelector('.gallery-scroll-to-here').scrollIntoView({
       behavior: 'smooth',
@@ -1522,9 +1480,9 @@ function Overview(_ref) {
     setPhoto: setPhoto
   }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "right"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_helper_StarRatings_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_helper_StarRatings_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
     itemRating: rating
-  }), "\xA0", numReviews ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", {
+  }), " \xA0", numReviews ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", {
     className: "overview-to-reviews",
     onClick: function onClick(e) {
       return scroll();
@@ -1591,18 +1549,14 @@ var AWEntry = function AWEntry(props) {
 
   // make an axios put request to mark answers as helpful
   var helpfulAnsw = function helpfulAnsw(a_id) {
-    axios__WEBPACK_IMPORTED_MODULE_1__["default"].put("/api/qa/answers/".concat(a_id, "/helpful")).then(function (response) {
-      // console.log('Successful put for helpfulAnsw!')
-    })["catch"](function (err) {
+    axios__WEBPACK_IMPORTED_MODULE_1__["default"].put("/api/qa/answers/".concat(a_id, "/helpful"))["catch"](function (err) {
       console.log(err);
     });
   };
 
   // make an axios put request to report answers
   var reportAnsw = function reportAnsw(a_id) {
-    axios__WEBPACK_IMPORTED_MODULE_1__["default"].put("/api/qa/answers/".concat(a_id, "/report")).then(function (response) {
-      // console.log('Successful put for reportAnsw!')
-    })["catch"](function (err) {
+    axios__WEBPACK_IMPORTED_MODULE_1__["default"].put("/api/qa/answers/".concat(a_id, "/report"))["catch"](function (err) {
       console.log(err);
     });
   };
@@ -1697,7 +1651,6 @@ var AddAnswModal = function AddAnswModal(props) {
     // theme: "purple", //change to a purple theme
   }, function (error, result) {
     if (!error && result && result.event === "success") {
-      console.log("Done! Here is the image info: ", result.info);
       tempImgs.push(result.info);
       setUploadImgs([].concat(tempImgs));
     }
@@ -1856,15 +1809,12 @@ __webpack_require__.r(__webpack_exports__);
 var AddQuesModal = function AddQuesModal(props) {
   // post request to add answer
   var postQues = function postQues(body, name, email, product_id) {
-    // console.log(body,name,email,product_id, 'POSTQUES ---')
     axios__WEBPACK_IMPORTED_MODULE_1__["default"].post("/api/qa/questions", {
       body: body,
       name: name,
       email: email,
       product_id: product_id
-    }).then(function (response) {
-      // console.log(response, 'ADD QUES POST ----')
-    })["catch"](function (err) {
+    }).then(function (response) {})["catch"](function (err) {
       console.log(err);
     });
   };
@@ -2222,7 +2172,6 @@ var QAEntry = function QAEntry(props) {
       setAnswers([]);
     } else {
       axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/qa/questions/".concat(q_id, "/answers")).then(function (response) {
-        // console.log(response.data, 'THIS IS ANSWERS')
         setAnswers(response.data);
         // as soon as answers are loaded scroll down on load more
         props.setFetch(!props.fetch);
@@ -2234,9 +2183,7 @@ var QAEntry = function QAEntry(props) {
 
   // make an axios put request to mark questions as helpful
   var helpfulQues = function helpfulQues(q_id) {
-    axios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/api/qa/questions/".concat(q_id, "/helpful")).then(function (response) {
-      console.log('Successful put for helpfulQues!');
-    })["catch"](function (err) {
+    axios__WEBPACK_IMPORTED_MODULE_2__["default"].put("/api/qa/questions/".concat(q_id, "/helpful"))["catch"](function (err) {
       console.log(err);
     });
   };
@@ -2256,7 +2203,6 @@ var QAEntry = function QAEntry(props) {
   // render answers data when qaData or ques states change
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     getAnswers(props.ques.question_id);
-    // console.log(props.ques);
   }, [props.qaData, props.ques, update]);
 
   // render answers data with an answers entry component and a button for more answers
@@ -2948,7 +2894,7 @@ function RatingBreakdown(_ref) {
     style: {
       display: 'inline-block'
     }
-  }, rating), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+  }, rating), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "star",
     style: {
       display: 'inline-block'
@@ -3051,7 +2997,6 @@ var AddRevModal = function AddRevModal(props) {
     // theme: "purple", //change to a purple theme
   }, function (error, result) {
     if (!error && result && result.event === "success") {
-      console.log("Done! Here is the image info: ", result.info);
       tempImgs.push(result.info);
       setUploadImgs([].concat(tempImgs));
     }
@@ -3070,8 +3015,6 @@ var AddRevModal = function AddRevModal(props) {
       email: email,
       photos: photos,
       characteristics: characteristics
-    }).then(function (response) {
-      // console.log(response, 'ADD REV POST ----')
     })["catch"](function (err) {
       console.log(err);
     });
@@ -3079,9 +3022,7 @@ var AddRevModal = function AddRevModal(props) {
 
   // need this useEffect to re-render when uploadImgs gets new data
   // this fixes array not updating in useState
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    // console.log("uploadImgs: ", uploadImgs);
-  }, [uploadImgs]);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {}, [uploadImgs]);
 
   // if modal is true render the question submission form
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
@@ -3094,7 +3035,6 @@ var AddRevModal = function AddRevModal(props) {
       var pics = uploadImgs.map(function (cur, index) {
         return cur.thumbnail_url;
       });
-      console.log(props.reviewsMeta);
       var _char = {};
       var meta = [props.reviewsMeta.characteristics.Size, props.reviewsMeta.characteristics.Width, props.reviewsMeta.characteristics.Comfort, props.reviewsMeta.characteristics.Quality, props.reviewsMeta.characteristics.Length, props.reviewsMeta.characteristics.Fit];
       var targets = [e.target.size.value, e.target.width.value, e.target.comfort.value, e.target.quality.value, e.target.length.value, e.target.fit.value];
@@ -3123,10 +3063,7 @@ var AddRevModal = function AddRevModal(props) {
     }
   }, "About the ".concat(props.product.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("label", null, "* Rating: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("select", {
     name: "rating",
-    defaultValue: 'DEFAULT',
-    onChange: function onChange(e) {
-      return console.log(e.target.value);
-    }
+    defaultValue: 'DEFAULT'
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("option", {
     value: "DEFAULT",
     disabled: true
@@ -3352,7 +3289,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 
-
 // ENTRY OF EACH ANSWER ----------
 var ImageModal = function ImageModal(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -3452,23 +3388,15 @@ __webpack_require__.r(__webpack_exports__);
 function ReviewsList(props) {
   var darkMode = (0,_contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_4__.useDarkMode)();
 
-  // console.log(props.review)
-
   // make an axios put request to mark questions as helpful
   var helpfulRev = function helpfulRev(r_id) {
-    // console.log('ENTER HELPFUL ---')
-    axios__WEBPACK_IMPORTED_MODULE_3__["default"].put("/api/reviews/".concat(r_id, "/helpful")).then(function (response) {
-      console.log('Successful put for helpfulRev!');
-    })["catch"](function (err) {
+    axios__WEBPACK_IMPORTED_MODULE_3__["default"].put("/api/reviews/".concat(r_id, "/helpful"))["catch"](function (err) {
       console.log(err);
     });
   };
   // make an axios put request to report questions
   var reportRev = function reportRev(r_id) {
-    console.log('ENTER REPORT ---');
-    axios__WEBPACK_IMPORTED_MODULE_3__["default"].put("/api/reviews/".concat(r_id, "/report")).then(function (response) {
-      console.log('Successful put for reportRev!');
-    })["catch"](function (err) {
+    axios__WEBPACK_IMPORTED_MODULE_3__["default"].put("/api/reviews/".concat(r_id, "/report"))["catch"](function (err) {
       console.log(err);
     });
   };
@@ -3478,9 +3406,9 @@ function ReviewsList(props) {
     className: "reviewer ".concat(darkMode ? 'reviewer-dark' : null)
   }, props.review.reviewer_name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     className: "reviewer-time"
-  }, (0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(new Date(props.review.date), 'MM/dd/yyyy')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_helper_StarRatings_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, (0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(new Date(props.review.date), 'MM/dd/yyyy')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_helper_StarRatings_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
     itemRating: props.review.rating
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     style: {
       marginBottom: '3%'
     }
@@ -3711,15 +3639,7 @@ function Reviews(props) {
     _useState16 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState15, 2),
     modalOn = _useState16[0],
     setModalOn = _useState16[1];
-
-  // console.log('reviews: ', reviews)
-  // console.log('reviewsMeta: ', reviewsMeta)
-  // console.log('rating: ', props.rating)
-  // console.log('numReviews: ', props.numReviews)
-
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    //reviews/:id/:page/:count/:sort
-    // console.log(sort, 'sorting')
     axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("/api/reviews/".concat(props.product.id, "/").concat(reviewsPage, "/2/").concat(sort)).then(function (result) {
       setReviews(result.data.results);
     })["catch"](function (err) {
@@ -4054,9 +3974,9 @@ function ProductCard(_ref) {
     style: {
       textDecoration: 'line-through'
     }
-  }, "$", defaultSTyle.original_price)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("small", null, "$", defaultStyle.original_price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_helper_StarRatings_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, "$", defaultSTyle.original_price)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("small", null, "$", defaultStyle.original_price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_helper_StarRatings_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
     item: item
-  }))) : null);
+  })))) : null);
 }
 
 /***/ }),
@@ -52336,7 +52256,6 @@ __webpack_require__.r(__webpack_exports__);
 var container = document.getElementById('app') || document.createElement('div');
 var root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(container);
 root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_App_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null));
-// render(<App />, root);
 })();
 
 /******/ })()
