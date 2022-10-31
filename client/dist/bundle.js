@@ -40,6 +40,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function App() {
+  var darkMode = (0,_contexts_DarkMode_jsx__WEBPACK_IMPORTED_MODULE_3__.useDarkMode)();
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
     _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
     product = _useState2[0],
