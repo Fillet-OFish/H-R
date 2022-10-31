@@ -2,7 +2,7 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import AWEntry from './AWEntry.jsx';
-import { useDarkMode } from '../../DarkMode.jsx'
+import { useDarkMode } from '../../contexts/DarkMode.jsx'
 
 // ENTRY OF EACH QUESTION ----------
 const QAEntry = (props) => {
@@ -31,7 +31,6 @@ const QAEntry = (props) => {
     } else {
       axios.get(`/api/qa/questions/${q_id}/answers`)
       .then((response) => {
-        // console.log(response.data, 'THIS IS ANSWERS')
         setAnswers(response.data);
         // as soon as answers are loaded scroll down on load more
         props.setFetch(!props.fetch);
@@ -45,9 +44,6 @@ const QAEntry = (props) => {
   // make an axios put request to mark questions as helpful
   const helpfulQues = (q_id) => {
     axios.put(`/api/qa/questions/${q_id}/helpful`)
-    .then((response) => {
-      console.log('Successful put for helpfulQues!')
-    })
     .catch(err => {
       console.log(err);
     })
@@ -66,7 +62,6 @@ const QAEntry = (props) => {
   // render answers data when qaData or ques states change
   useEffect(() => {
     getAnswers(props.ques.question_id);
-    // console.log(props.ques);
   }, [props.qaData, props.ques, update])
 
   // render answers data with an answers entry component and a button for more answers

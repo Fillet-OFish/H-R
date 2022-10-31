@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Newsletter from './Newsletter.jsx'
 
 export default function Start() {

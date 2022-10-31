@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { FaSearch, FaShoppingBag } from 'react-icons/fa';
+import { useDarkMode } from '../contexts/DarkMode.jsx'
 import axios from 'axios';
 import Announcements from './components/Announcements.jsx'
-import Search from './components/Search.jsx'
 import Cart from './components/Cart.jsx'
-import { FaSearch, FaShoppingBag } from 'react-icons/fa';
-import { useDarkMode } from '../DarkMode.jsx'
 
 export default function Header({ product }) {
   const darkMode = useDarkMode();
@@ -22,8 +21,6 @@ export default function Header({ product }) {
   return(
     <>
       {/* announcements */}
-      <Announcements/>
-
       <div className={`header ${darkMode ? 'header-dark' : null}`}>
 
         <div className="header-col-1">
@@ -58,13 +55,6 @@ export default function Header({ product }) {
         </div>
 
       </div>
-
-       {/* categories */}
-      {/* <div className='categories'>
-          <span className='category'><a style={darkMode ? {color: 'white'} : {}} href='/'>Women</a></span>
-          <span className='category'><a style={darkMode ? {color: 'white'} : {}} href='/'>Men</a></span>
-          <span className='category'><a style={darkMode ? {color: 'white'} : {}} href='/'>Accessories</a></span>
-        </div> */}
 
       {/* add to cart */}
       <Cart />

@@ -4,7 +4,7 @@ import Breakdown from './components/Breakdown/Breakdown.jsx'
 import ReviewsList from './components/ReviewsList/ReviewsList.jsx'
 import AddRevModal from './components/ReviewsList/AddRevModal.jsx'
 import ImageModal from './components/ReviewsList/ImageModal.jsx'
-import { useTracker } from '../TrackClickContext.jsx';
+import { useTracker } from '../contexts/TrackClickContext.jsx';
 
 export default function Reviews(props) {
   const clickTracker = useTracker();
@@ -21,14 +21,7 @@ export default function Reviews(props) {
   const [getImage, setImage] = useState();
   const [modalOn, setModalOn] = useState(false);
 
-  // console.log('reviews: ', reviews)
-  // console.log('reviewsMeta: ', reviewsMeta)
-  // console.log('rating: ', props.rating)
-  // console.log('numReviews: ', props.numReviews)
-
   useEffect(() => {
-    //reviews/:id/:page/:count/:sort
-    // console.log(sort, 'sorting')
     axios.get(`/api/reviews/${props.product.id}/${reviewsPage}/2/${sort}`)
       .then(result => {
         setReviews(result.data.results)

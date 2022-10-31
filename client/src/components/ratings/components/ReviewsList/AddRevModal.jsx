@@ -1,7 +1,7 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
-import { useDarkMode } from '../../../DarkMode.jsx';
+import { useDarkMode } from '../../../contexts/DarkMode.jsx';
 
 const AddRevModal = (props) => {
   const darkMode = useDarkMode();
@@ -40,7 +40,6 @@ const AddRevModal = (props) => {
     },
     (error, result) => {
       if (!error && result && result.event === "success") {
-        console.log("Done! Here is the image info: ", result.info);
         tempImgs.push(result.info);
         setUploadImgs([...tempImgs]);
       }
@@ -62,9 +61,6 @@ const AddRevModal = (props) => {
       photos: photos,
       characteristics: characteristics
     })
-    .then((response) => {
-      // console.log(response, 'ADD REV POST ----')
-    })
     .catch((err) => {
       console.log(err);
     })
@@ -73,7 +69,6 @@ const AddRevModal = (props) => {
   // need this useEffect to re-render when uploadImgs gets new data
   // this fixes array not updating in useState
   useEffect(() => {
-    // console.log("uploadImgs: ", uploadImgs);
   }, [uploadImgs])
 
 
@@ -85,7 +80,6 @@ const AddRevModal = (props) => {
           <form onSubmit={(e) => {
             e.preventDefault();
             let pics = uploadImgs.map((cur, index) => cur.thumbnail_url);
-            console.log(props.reviewsMeta)
             let char = {};
             let meta = [
               props.reviewsMeta.characteristics.Size,
@@ -125,7 +119,7 @@ const AddRevModal = (props) => {
 
             {/* rating */}
             <label>* Rating: </label>
-            <select name='rating' defaultValue={'DEFAULT'} onChange={(e) => console.log(e.target.value)}>
+            <select name='rating' defaultValue={'DEFAULT'}>
               <option value="DEFAULT" disabled>none selected</option>
               <option value={1}>Poor</option>
               <option value={2}>Fair</option>

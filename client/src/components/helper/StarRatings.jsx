@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useDarkMode } from './DarkMode.jsx'
-
+import { useDarkMode } from '../contexts/DarkMode.jsx'
 
 export default function StarRatings({item, itemRating}) {
   const [rating, setRating] = useState(itemRating || null);
@@ -24,9 +23,8 @@ export default function StarRatings({item, itemRating}) {
     }
   }, [item, itemRating])
 
-
   return (
-    <div>
+    <span>
       {rating ?
         [...Array(5)].map((star, i) => {
           const starFill = () => {
@@ -55,6 +53,6 @@ export default function StarRatings({item, itemRating}) {
             <small key={i} style={style}>★</small>
             )
         }) : null}
-    </div>
+    </span>
   )
 }
