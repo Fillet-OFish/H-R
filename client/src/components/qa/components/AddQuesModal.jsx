@@ -7,7 +7,6 @@ const AddQuesModal = (props) => {
 
   // post request to add answer
   const postQues = (body, name, email, product_id) => {
-    // console.log(body,name,email,product_id, 'POSTQUES ---')
     axios.post(`/api/qa/questions`, {
       body: body,
       name: name,
@@ -15,7 +14,6 @@ const AddQuesModal = (props) => {
       product_id: product_id
     })
     .then((response) => {
-      // console.log(response, 'ADD QUES POST ----')
     })
     .catch((err) => {
       console.log(err);
@@ -44,14 +42,14 @@ const AddQuesModal = (props) => {
             <h2 className='subheading' style={{marginBottom: '5%'}} >{`About the ${props.product.name}`}</h2>
 
             {/* question */}
-            <label><b>Question</b></label>
+            <label><b>* Question</b></label>
             <br></br>
             <textarea type='text' name='ques' placeholder='Enter question...' maxLength="1000" required></textarea>
             <br></br>
 
             {/* nickname and email labels --------- */}
-            <label><b>Nickname</b></label>
-            <label style={{marginLeft: '40%'}}><b>Email</b></label>
+            <label><b>* Nickname</b></label>
+            <label style={{marginLeft: '38%'}}><b>* Email</b></label>
             {/* aligning nickname and email inputs --------- */}
             <div className='align-input'>
               {/* nickname */}

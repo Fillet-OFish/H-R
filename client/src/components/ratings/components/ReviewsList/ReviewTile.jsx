@@ -1,38 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import {format} from 'date-fns';
+import React from 'react';
+import { format } from 'date-fns';
 import ReviewImgs from './ReviewImgs.jsx';
-import StarRatings from '../../../StarRatings.jsx';
+import StarRatings from '../../../helper/StarRatings.jsx';
 import axios from 'axios';
-import { useDarkMode } from '../../../DarkMode.jsx'
+import { useDarkMode } from '../../../contexts/DarkMode.jsx'
 
 export default function ReviewsList(props) {
   const darkMode = useDarkMode();
 
-  // console.log(props.review)
-
   // make an axios put request to mark questions as helpful
   const helpfulRev = (r_id) => {
-    // console.log('ENTER HELPFUL ---')
     axios.put(`/api/reviews/${r_id}/helpful`)
-    .then((response) => {
-      console.log('Successful put for helpfulRev!')
-    })
     .catch(err => {
       console.log(err);
     })
   }
   // make an axios put request to report questions
   const reportRev = (r_id) => {
-    console.log('ENTER REPORT ---')
     axios.put(`/api/reviews/${r_id}/report`)
-    .then((response) => {
-      console.log('Successful put for reportRev!')
-    })
     .catch(err => {
       console.log(err);
     })
   }
-
 
   return(
     <div className='display-reviews'>
@@ -41,7 +30,7 @@ export default function ReviewsList(props) {
         <span className={`reviewer ${darkMode ? 'reviewer-dark' : null}`}>
           {props.review.reviewer_name}</span>
         <span className={`reviewer-time`}>{format(new Date(props.review.date), 'MM/dd/yyyy')}</span>
-        <StarRatings itemRating={props.review.rating} />
+        <div><StarRatings itemRating={props.review.rating} /></div>
       </div>
 
       {/* render review title and body */}

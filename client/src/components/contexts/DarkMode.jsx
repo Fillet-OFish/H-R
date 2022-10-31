@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { FaMoon, FaSun } from "react-icons/fa";
 
-
 const DarkModeContext = React.createContext()
 
 export function useDarkMode() {
@@ -23,7 +22,7 @@ export function DarkModeProvider({children}) {
   return (
     <DarkModeContext.Provider value={darkMode}>
         {children}
-        <button className={`dark-mode-button ${darkMode ? 'dark-mode-button-dark' : null}`} onClick={toggleDarkMode}>{darkMode ? <FaSun/> : <FaMoon/>}</button>
+        <button className={`dark-mode-button ${darkMode ? 'dark-mode-button-dark' : ''}`} onClick={toggleDarkMode}>{darkMode ? <FaSun/> : <FaMoon/>}</button>
     </DarkModeContext.Provider>
   )
 }

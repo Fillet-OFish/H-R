@@ -27,25 +27,21 @@ export default function ReviewsList(props) {
 
   useEffect(() => {
     updateReviewPage();
-    // scroll();
-    // updateScroll();
+    updateScroll();
   }, [load])
 
   // this is to auto scroll down on each review loaded ------------
-  // const scroll = () => {
-  //   document.querySelector('#revContainer').scrollIntoView({ behavior: 'smooth', block: 'end' });
-  // };
-  // function updateScroll() {
-  //   var element = document.getElementById('revContainer');
-  //   element.scrollTop = element.scrollHeight;
-  // }
+  function updateScroll() {
+    var element = document.getElementById('revContainer');
+    element.scrollTop = element.scrollHeight;
+  }
   // ----------------------------------------------------------------
 
   return (
-    <div id='revContainer'>
+    <div>
       <SortRev sort={props.sort} setSort={props.setSort} numReviews={props.numReviews} />
 
-      <div className='reviews-list-container'>
+      <div id='revContainer' className='reviews-list-container'>
         {/* list every review entry --- */}
         {props.reviews.map((review, index) => (
           <ReviewTile review={review} key={index} index={index} lastIndex={props.reviews.length - 1} setImage={props.setImage} modalOn={props.modalOn} setModalOn={props.setModalOn} />

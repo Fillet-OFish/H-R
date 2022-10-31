@@ -38,11 +38,18 @@ img {
 ::placeholder {
   color: lightgrey;
 }
-/* APP ------------------------ */
+/* APP ----------------------------------------------------------------------------------------- */
 #app{
   scroll-behavior: smooth;
   width: 100%;
 }
+
+.app-body {
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
 .contain-description-related{
   margin: -3% auto 3% 10%;
   width: 100%
@@ -83,7 +90,20 @@ img {
   color: white;
   box-shadow: inset 7px 0 9px -7px rgba(0,0,0,0.3), inset 0 -7px 9px -7px rgba(0,0,0,0.3);
 }
-/* ANNOUNCEMENT ------------------------ */
+
+/* HEADER ------------------------ */
+.header{
+  position: relative;
+  display:flex;
+  padding: 1% 5% 1% 2%;
+  width:100%;
+  color: black;
+  font-size: 30px;
+}
+.header-dark{
+  color: white;
+}
+/* ANNOUNCEMENT ------------- */
 .announcement{
   position: relative;
   width: 100%;
@@ -116,18 +136,7 @@ img {
   font-size: 80%;
   cursor:pointer;
 }
-/* HEADER ------------------------ */
-.header{
-  position: relative;
-  display:flex;
-  padding: 1% 5% 1% 2%;
-  width:100%;
-  color: black;
-  font-size: 30px;
-}
-.header-dark{
-  color: white;
-}
+/* NAV MENU ------------- */
 .header-col-1{
   flex-basis: 39%;
   font-size: 16px;
@@ -322,7 +331,7 @@ img {
   opacity: 60%;
 }
 
-/* OVERVIEW ------------------------ */
+/* OVERVIEW ------------------------------------------------------------------------------------ */
 .overview{
   display: table;
   margin: 0 auto;
@@ -620,7 +629,6 @@ img {
   width: auto;
   height: auto;
 }
-
 .cart-warning{
   display: none;
   position: absolute;
@@ -699,38 +707,7 @@ img {
   line-height: 18px;
 }
 
-/* ANIMATIONS ------------------------ */
-@keyframes fade-in {
-  0% { opacity: 0 }
-  100% { opacity: 1 }
-}
-@keyframes fade-out {
-  0% { opacity: 1 }
-  100% { opacity: 0 }
-}
-@keyframes fade {
-  0%,100% { opacity: 0 }
-  50% { opacity: 1 }
-}
-@keyframes scale {
-  0% {transform: scale(0)}
-  80% {transform: scale(1.2)}
-  100% {transform: scale(1)}
-}
-
-/* MEDIA QUERIES ------------------------ */
-@media only screen and (min-width: 480px){
-
-}
-@media only screen and (min-width: 760px){
-
-}
-@media only screen and (min-width: 1100px){
-
-}
-
-
-/* FERNANDO ADDED THESE --------------------------------------------------------------- */
+/* FERNANDO ADDED THESE ------------------------------------------------------------------------ */
 .q-a{
   display: none;
   width: 100%;
@@ -758,17 +735,17 @@ nav {
 .QContainer {
   width: 100%;
   max-width: 100%;
-  max-height: 950px;
-  overflow-y:auto;
+  /* max-height: 950px; */
+  max-height: 473px;
+  overflow-y:hidden;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
-.QAContainer {
-  display:flex;
-  margin-right: 63%;
-  width: 100%;
-  height: auto;
-  /* font-size: larger; */
+.QContainer:hover {
+  overflow-y:auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 .QContainer::-webkit-scrollbar {
@@ -781,6 +758,14 @@ nav {
   background: rgb(212, 211, 211, 50%);
 }
 
+.QAContainer {
+  display:flex;
+  margin-right: 63%;
+  width: 100%;
+  height: auto;
+  /* font-size: larger; */
+}
+
 .QA-left{
   display:flex;
   width:2.5%;
@@ -789,6 +774,9 @@ nav {
 }
 .Q-right{
   width:95%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .A-right{
   font-size: 14px;
@@ -798,8 +786,9 @@ nav {
 .user_info {
   margin-top: 0.5%;
   margin-left: 2.5%;
+  opacity: 0.5;
   color: #515151;
-  font-weight: lighter;
+  /* font-weight: lighter; */
   font-size: 13px;
 }
 .user_info-dark {
@@ -937,11 +926,9 @@ nav {
   cursor: pointer;
   color: rgb(52, 52, 52);
 }
-
 .align-input {
   display:flex;
 }
-
 /* align buttons for more questions and add new questions ----- */
 .align-btns {
   display: flex;
@@ -957,7 +944,6 @@ nav {
   font-size: 16px;
   cursor: pointer;
 }
-
 .form-button2 {
   width: 100%;
   margin-top: 25px;
@@ -984,13 +970,10 @@ nav {
   background-color: rgb(49, 49, 49);
   color: white;
 }
-
-
 /* Subheading styling ----- */
 .subheading {
   font-size:  small;
 }
-
 /* Warning text ----- */
 .warnings {
   font-weight: lighter;
@@ -998,7 +981,6 @@ nav {
   margin-top: -15px;
   /* margin-bottom: 10px; */
 }
-
 /* textarea element ----- */
 textarea {
   width: 96%;
@@ -1006,7 +988,6 @@ textarea {
   margin-bottom: 5%;
   margin-top: 1%;
 }
-
 /* horizontal line ----- */
 .hr3 {
   margin-left:1.5%;
@@ -1016,13 +997,10 @@ textarea {
   border-top: 1px solid #d5d5d5;
   border-bottom: 1px solid #fff;
 }
-
 .hr3-dark {
   border-top: 1px solid #3c4044;
   border-bottom: 1px solid #3c4044;
-
 }
-
 /* search button ----- */
 .search-form {
   background-color: #f9f9f9;
@@ -1033,7 +1011,6 @@ textarea {
   flex-direction: row;
   align-items: center;
 }
-
 .search-input {
   all: unset;
   font: 16px system-ui;
@@ -1042,19 +1019,15 @@ textarea {
   width: 100%;
   padding: 6px 20px;
 }
-
 .search-input::placeholder{
   color: rgb(82, 82, 82);
 }
-
 .search-button {
   all: unset;
-
   cursor: pointer;
   width: 44px;
   height: 44px;
 }
-
 .search-svg {
   color: #9C9C9C;
   fill: currentColor;
@@ -1062,19 +1035,16 @@ textarea {
   height: 24px;
   padding: 10px;
 }
-
 #qaContainer {
   scroll-behavior: smooth;
 }
-/* Jaden ADDED THESE ------------------------------------------------- */
+/* Jaden ADDED THESE --------------------------------------------------------------------------- */
 
 /* related items and outfit ----- */
-
 .related-items {
   overflow: hidden;
   width: 80%;
 }
-
 .related-list {
   position: relative;
   overflow: hidden;
@@ -1083,19 +1053,15 @@ textarea {
   opacity: 0;
   /* margin-top: -350px; */
  }
-
  .FaSortUpButton {
   transform: translateY(40%);
  }
-
  .list-title {
   cursor: pointer;
  }
-
  .list-title:hover {
   text-decoration: underline;
  }
-
 /*
 .related-list::before {
   position: absolute;
@@ -1110,7 +1076,6 @@ textarea {
   pointer-events: none;
 }
 */
-
 .related-ul, .outfit-ul {
   display:  flex;
   position:  relative;
@@ -1121,7 +1086,6 @@ textarea {
   overflow:  hidden;
   scroll-behavior:  smooth;
 }
-
 .button-left, .button-right {
   position: absolute;
   height: 100%;
@@ -1290,12 +1254,10 @@ textarea {
   background-color:  white;
   color:  grey;
 }
-
 .product-card-info {
   padding-left: 3px;
   position: relative;
 }
-
 .product-card-name {
   display:  -webkit-box;
   /* height:  30px; */
@@ -1305,10 +1267,7 @@ textarea {
   -webkit-box-orient:  vertical;
   overflow:  hidden;
 }
-
-
 /* popup comparison table ----- */
-
 .popup {
   display:  block;
   z-index:  100;
@@ -1319,7 +1278,6 @@ textarea {
   top:  0;
   left:  0;
 }
-
 .comparison-table {
   display:  absolute;
   background-color:  #fefefe;
@@ -1333,22 +1291,17 @@ textarea {
   max-width:  50%;
   max-height:  50%;
 }
-
 .comparison-table-dark {
   background-color:  #3c4044;
 }
-
-
 .comparison-table table, th, td  {
   border-collapse:  collapse;
   padding:  10px 0 10px 0;
 }
-
 .comparison-table table {
   width:  100%;
   position:  relative;
 }
-
 .comparison-table th {
   position:  sticky;
   top:  0;
@@ -1356,29 +1309,25 @@ textarea {
   font-weight:  normal;
   font-size:  large;
 }
-
 .comparison-table caption {
   position:  sticky;
   font-size:  x-large;
   padding:  15px 0 10px 0;
 }
-
 .comparison-table td {
   width:  33%;
   text-align:  center;
   color:  rgb(90, 90, 90);
 }
-
 .comparison-table-dark td {
   color:  rgba(255, 255, 255, .6);
 }
-
 .comparison-table tbody tr:nth-child(odd) {background-color: #f2f2f2;}
 .comparison-table-dark tbody tr:nth-child(odd) {background-color: #303135;}
 
 
 
-/* Reviews ------------------------------------------------- */
+/* Reviews ------------------------------------------------------------------------------------- */
 
 .reviews-ratings{
   width: 105%;
@@ -1407,43 +1356,36 @@ textarea {
 .review-sort-dark {
   color: white
 }
-
 .review-left{
   flex-basis: 20%;
   display: inline-block;
 }
-
 .review-right{
   width: 80%;
   overflow-y: auto;
   max-height: 900px;
 }
-
 .review-right::-webkit-scrollbar {
   width: 5px;
   height: 8px;
   background-color: rgb(241, 239, 239, .5);
 }
-
 .review-right::-webkit-scrollbar-thumb {
   background: rgb(212, 211, 211, .5);
 }
-
 .reviewer{
   font-weight: 550;
 }
-
 .reviewer-time{
   float:right;
+  margin-right: 0.5%;
   opacity: 0.5;
   font-size: 13px;
 }
-
 .reviewer-helpful{
   opacity: 0.5;
   font-size: 13px;
 }
-
 .rating-summary {
   position: relative;
 }
@@ -1452,7 +1394,6 @@ textarea {
   font-weight: 500;
   letter-spacing: 1.8px;
 }
-
 .rating-summary .star{
   position: absolute;
   top:0;
@@ -1460,76 +1401,77 @@ textarea {
   padding-left:3%;
   font-size: 18px;
 }
-
 .rating-breakdown .title{
   font-weight: 400;
   font-size: 18px;
 }
-
 .product-breakdown{
   font-size: 14px;
   margin-top: 5%;
   width: 95%;
 }
-
 .breakdown-category{
   margin-top: 5%;
   margin-left: -1%;
   width: 98%;
 }
-
 .star-bar{
   display:flex;
   flex-direction: row;
 }
-
 .star-bar:hover {
   background: #f80;
   cursor: pointer;
   transition: .5s;
 }
-
 .bar-left{
   width:16%
 }
-
 .bar-middle{
   width:65%
 }
-
 .bar-right{
   width:6%;
   padding-left:2%;
 }
-
 .reviews-list-container {
   width:100%;
-  height: auto;
+  /* height: auto; */
+  max-height: 500px;
   margin: 0;
   padding: 0;
+  overflow-y:hidden;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+.reviews-list-container:hover {
   overflow-y:auto;
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
-
+.reviews-list-container::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+  background-color: rgb(241, 239, 239, .5);
+}
+.reviews-list-container::-webkit-scrollbar-thumb {
+  background: rgb(212, 211, 211, .5);
+}
 .display-reviews {
   margin-right: 10%;
   padding: 0 2% 0 5%;
   width: 95%;
   line-height: 1.5;
 }
-
 .align-btns{
   margin-left: 3%;
 }
-
 .rev-images {
   cursor: zoom-in;
   width: 100px;
   height: 100px;
   object-fit: cover;
 }
-
 .dark-mode-button {
   position: fixed;
   transform: translate(-50%, -50%);
@@ -1545,11 +1487,9 @@ textarea {
   font-size: x-large;
   transform: translate(-40%, -25%);
 }
-
 .dark-mode-button-dark {
   color: white;
 }
-
 /* .dark-mode-button:hover {
   color: black;
 }
@@ -1557,7 +1497,6 @@ textarea {
 .dark-mode-button-dark:hover {
   color: white;
 } */
-
 /*  Google Translate widget */
 #translate {
   position: fixed;
@@ -1610,3 +1549,283 @@ body {
   appearance: none;
   color: transparent;
 }
+
+/* ANIMATIONS ---------------------------------------------------------------------------------- */
+@keyframes fade-in {
+  0% { opacity: 0 }
+  100% { opacity: 1 }
+}
+@keyframes fade-out {
+  0% { opacity: 1 }
+  100% { opacity: 0 }
+}
+@keyframes fade {
+  0%,100% { opacity: 0 }
+  50% { opacity: 1 }
+}
+@keyframes scale {
+  0% {transform: scale(0)}
+  80% {transform: scale(1.2)}
+  100% {transform: scale(1)}
+}
+
+/* MEDIA QUERIES ------------------------------------------------------------------------------- */
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 760px){
+  /* app */
+  body {
+    transition: all 0.5s ease;
+  }
+  .contain-description-related{
+    margin: 130% 1% 0 1%
+  }
+
+  /* header */
+  .header{
+    position: relative;
+    display: table;
+    flex-wrap: wrap;
+    margin: 5% auto 15%;
+  }
+  .header-col-1{
+    flex-direction: row;
+    width: 100%;
+  }
+  .header-col-2{
+    flex-direction: row;
+    width: 100%;
+    text-align: center;
+  }
+  .header-col-3{
+    display:none;
+  }
+  .logo{
+    font-size: 45px;
+    width: 100%;
+    text-align: center;
+  }
+  .categories{
+    position: absolute;
+    margin-top: 5%;
+    width: 100%;
+    text-align: center;
+  }
+  .category{
+    padding: 0;
+    padding-right: 10%;
+  }
+  .header-links{
+    margin-top: 5%;
+  }
+
+  /*  overview  */
+  .overview{
+    display: block;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  .overview-container{
+    display:block;
+  }
+  .left{
+    display:none;
+  }
+  .middle{
+    width: 50%;
+    padding:0;
+    margin:0;
+  }
+  .right{
+    display: table;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .gallery-list{
+    display:inline-block;
+    margin:0;
+    width: 100%;
+  }
+  .gallery-main{
+    display:block;
+    width: 72%;
+    margin-left: -3.5%;
+    height: 100%;
+  }
+  .carousel-container{
+    display: block;
+    margin:0;
+    padding:0;
+    width: 100%;
+  }
+  .carousel-container .left-arrow {
+    left: 30px;
+    font-size: 40px;
+    filter: drop-shadow(1px 3px 2px #b6b6b8);
+  }
+  .carousel-container .right-arrow {
+    font-size: 40px;
+    filter: drop-shadow(1px 3px 2px #b6b6b8);
+  }
+  .gallery-main img{
+    margin-left: -10%;
+    height: 100%;
+    width: 100%;
+  }
+  .expand-icon{
+    display:none;
+  }
+  .compress-icon{
+    display:none;
+  }
+  .zoom{
+    margin:0;
+  }
+
+  /* description */
+  .description{
+    display: none;
+  }
+
+  /* ratings/reviews */
+  .reviews-ratings-container {
+    display:block;
+    width: 90%;
+    margin: 0 auto;
+  }
+  .review-left{
+    display:block;
+    justify-content: center;
+    width: 80%;
+  }
+  .review-right{
+    display:block;
+    margin: 5% 0 0 -5%;
+    padding: 0;
+  }
+
+  /* related-items/outfit */
+  .related-items {
+    width: 100%;
+  }
+
+  .related-ul, .outfit-ul {
+    overflow: auto;
+  }
+
+  .button-left, .button-right {
+    display: none;
+  }
+
+
+  .product-card {
+  }
+
+  /* footer */
+  .footer{
+    display:block;
+    height: auto;
+    padding-bottom: 10%;
+  }
+  .start{
+   flex-wrap: wrap;
+  }
+  .start .col1{
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 5%;
+  }
+  .start .col2{
+    padding-right: 10%;
+  }
+
+  #translate {
+    display: none;
+  }
+
+  .dark-mode-button {
+    display: none;
+  }
+
+  /* Q&A --- */
+  .QContainer {
+    font-size:100%;
+    width:80%
+  }
+  .load-more-a {
+    font-size:77%;
+  }
+  .Q-right {
+    font-size:100%;
+    margin-right: 3%
+  }
+  .QA-left {
+    font-size: 100%;
+    margin-right: 2.5%
+  }
+  .A-right {
+    font-size:100%;
+    margin-bottom: 2%
+  }
+  .user_info {
+    font-size:13px;
+  }
+  .questions-and-answers {
+    font-size:90%;
+  }
+  .search-input {
+    font-size:100%;
+  }
+  .form-button3 {
+    font-size:85%;
+  }
+  .form-button2 {
+    font-size:85%;
+    margin-left: 25%;
+  }
+  .align-btns {
+    margin-left: 0%;
+  }
+  .search-form {
+    width: 80%
+  }
+
+
+}
+/* desktop - normal  */
+@media only screen and (max-width: 1200px){
+
+
+
+
+}
+/* desktop - wide  */
+@media only screen and (min-width: 1300px){
+
+
+
+
+
+
+}
+
+/* hello!
+
+live share is so much better isnt it
+
+
+*/
+
+/* yes indeed */
+
+/* Medium devices (landscape tablets, 768px and up) */
+/* @media only screen and (max-width: 760px){ */
+  /* header */
+  /* .logo{
+    font-size: 13px;
+    transition: all 0.5s ease;
+  } */
+
+
+
+/* } */

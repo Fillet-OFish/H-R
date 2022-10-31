@@ -38,7 +38,6 @@ const AddAnswModal = (props) => {
     },
     (error, result) => {
       if (!error && result && result.event === "success") {
-        console.log("Done! Here is the image info: ", result.info);
         tempImgs.push(result.info);
         setUploadImgs([...tempImgs]);
       }
@@ -91,14 +90,14 @@ const AddAnswModal = (props) => {
             <h2 className='subheading' style={{marginBottom: '5%'}} >{`${props.product.name}: ${props.QID.question_body}`} </h2>
 
             {/* answer */}
-            <label><b>Answer</b></label>
+            <label><b>* Answer</b></label>
             <br></br>
             <textarea type='text' name='reply' placeholder='Enter reply...' maxLength="1000" required></textarea>
             <br></br>
 
             {/* nickname and email labels --------- */}
-            <label><b>Nickname</b></label>
-            <label style={{marginLeft: '40%'}}><b>Email</b></label>
+            <label><b>* Nickname</b></label>
+            <label style={{marginLeft: '38%'}}><b>* Email</b></label>
             {/* aligning nickname and email inputs --------- */}
             <div className='align-input'>
               {/* nickname */}
