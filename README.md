@@ -11,7 +11,6 @@
   <br>
 </h4>
 
-
 ![-react](https://user-images.githubusercontent.com/103979716/199112745-aea0ac0c-11f8-40be-a7b5-08300e3945a5.svg)
 ![-javascript](https://user-images.githubusercontent.com/103979716/199113123-04739e76-7bf1-4ce8-a19b-68228ebabc5f.svg)
 ![-html](https://user-images.githubusercontent.com/103979716/199112762-f1a7148b-d9f0-4b29-9dbb-e9a350500eed.svg)
@@ -20,8 +19,6 @@
 ![-express](https://user-images.githubusercontent.com/103979716/199112780-09753942-cce4-4551-9b0d-91d391a5d0fe.svg)
 ![-aws (1)](https://user-images.githubusercontent.com/103979716/199112786-2dcb17cd-0650-478b-b1f7-aa7394574d8c.svg)
 
-
-IMAGE HERE
 ## Key Features
 * Dark/Light mode
 * Realtime interface language changes
@@ -51,4 +48,20 @@ IMAGE HERE
 
 ## RATING & REVIEWS
 <p align="center"><img width="1300" alt="reviews" src="https://user-images.githubusercontent.com/102894133/199101162-61b86f1a-9efd-41ab-b4b3-dba8e2450580.png"></p>
+
+## Getting Started
+Create a `.env` file that copies the contents of `example.env`:
+```
+campus='hr-rfp'
+TOKENS='add token here'
+
+PORT=3000
+```
+What you'll need to edit is `TOKENS='add token here'`, replacing the `add token here` with your own github token.
+
+Once completed, run the following commands:
+```
+ npm run build
+ npm run server-dev
+```
 
