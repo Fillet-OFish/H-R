@@ -7,7 +7,7 @@
 
 <h4 align="center">
   <br>
-  A minimalistic, sleek, and simple design introduction to the eCommerce future web browsing
+  A minimalistic and sleek design implementation for a modernized eCommerce web browsing experience. 
   <br>
 </h4>
 
@@ -23,9 +23,17 @@
 IMAGE HERE
 ## Key Features
 * Dark/Light mode
+* Realtime interface language changes
 
 ## OVERVIEW
 ![overview-img](https://i.postimg.cc/mBD49LMz/overview.png)
+
+### Features
+* An image gallery with interactivity
+   * Toggle between an expanded version or a collapsed version by clicking the main gallery photo
+* Relevant product information
+* Style selection
+* Add to cart
 
 ## RELATED ITEMS
 <p align="center"><img width="1300" alt="related-products" src="https://user-images.githubusercontent.com/102894133/199101605-3993101d-2749-477d-9099-cb1131928077.png">
@@ -38,6 +46,7 @@ IMAGE HERE
 
 
 ## QUESTIONS & ANSWERS
+<p align="center"><img width="1300" alt="qa" src="https://user-images.githubusercontent.com/102894133/199110755-e64bd3e1-b09c-4fed-be5e-2cc1aefc1094.png"></p>
 
 ## RATING & REVIEWS
 <p align="center"><img width="1300" alt="reviews" src="https://user-images.githubusercontent.com/102894133/199101162-61b86f1a-9efd-41ab-b4b3-dba8e2450580.png"></p>
