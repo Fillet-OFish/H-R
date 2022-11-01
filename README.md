@@ -46,6 +46,11 @@
 ## QUESTIONS & ANSWERS
 <p align="center"><img width="1300" alt="qa" src="https://user-images.githubusercontent.com/102894133/199110755-e64bd3e1-b09c-4fed-be5e-2cc1aefc1094.png"></p>
 
+### Features
+* Questions and answers loads two new questions at a time when clicking on "Load More Questions"
+* Search functionality that filters out questions by title
+* Add questions and answers through a unique custom modal form
+
 ## RATING & REVIEWS
 <p align="center"><img width="1300" alt="reviews" src="https://user-images.githubusercontent.com/102894133/199101162-61b86f1a-9efd-41ab-b4b3-dba8e2450580.png"></p>
 
