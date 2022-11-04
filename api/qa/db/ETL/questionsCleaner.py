@@ -14,7 +14,7 @@ if __name__ == '__main__':
         writer.writeheader()
         for row in reader:
             row['date_written'] = datetime.date.fromtimestamp(int(row['date_written'])/1000.0)
-            if row['reported'] == 0:
+            if int(row['reported']) == 0:
                 row['reported'] = 'false'
             else:
                 row['reported'] = 'true'
