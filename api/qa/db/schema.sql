@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS answers CASCADE;
 DROP TABLE IF EXISTS photos;
 
 CREATE TABLE questions (
-  id int,
+  id serial,
   product_id int,
   body text,
   date_written date,
@@ -15,7 +15,7 @@ CREATE TABLE questions (
 );
 
 CREATE TABLE answers (
-  id int,
+  id serial,
   question_id int,
   body text,
   date_written date,
@@ -30,7 +30,7 @@ CREATE TABLE answers (
 );
 
 CREATE TABLE photos (
-  id int,
+  id serial,
   answer_id int,
   url text,
   PRIMARY KEY(id),
