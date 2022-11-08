@@ -4,7 +4,7 @@ const axios = require('axios');
 function getQuestions(params, callback) {
   let options = {
     method: 'GET',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=${params.id}&count=${params.count}`,
+    url: `http://localhost:3001/qa/questions?product_id=${params.id}&count=${params.count}`,
     headers: {
       'Authorization': `${process.env.TOKENS}`
     }
@@ -15,7 +15,7 @@ function getQuestions(params, callback) {
 function getAnswers(q_id, callback) {
   let options = {
     method: 'GET',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/qa/questions/${q_id}/answers?count=100`,
+    url: `http://localhost:3001/qa/questions/${q_id}/answers?count=100`,
     headers: {
       'User-Agent': 'request',
       'Authorization': `${process.env.TOKENS}`
@@ -27,7 +27,7 @@ function getAnswers(q_id, callback) {
 function addQuestion(obj) {
   let options = {
     method: 'POST',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/qa/questions`,
+    url: `http://localhost:3001/qa/questions`,
     headers: {
       'User-Agent': 'request',
       'Authorization': `${process.env.TOKENS}`
@@ -45,7 +45,7 @@ function addQuestion(obj) {
 function addAnswer(q_id, obj) {
   let options = {
     method: 'POST',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/qa/questions/${q_id}/answers`,
+    url: `http://localhost:3001/qa/questions/${q_id}/answers`,
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `${process.env.TOKENS}`
@@ -63,7 +63,7 @@ function addAnswer(q_id, obj) {
 function markQHelpful(q_id) {
   let options = {
     method: 'PUT',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/qa/questions/${q_id}/helpful`,
+    url: `http://localhost:3001/qa/questions/${q_id}/helpful`,
     headers: {
       'User-Agent': 'request',
       'Authorization': `${process.env.TOKENS}`
@@ -75,7 +75,7 @@ function markQHelpful(q_id) {
 function reportQuestion(q_id) {
   let options = {
     method: 'PUT',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/qa/questions/${q_id}/report`,
+    url: `http://localhost:3001/qa/questions/${q_id}/report`,
     headers: {
       'User-Agent': 'request',
       'Authorization': `${process.env.TOKENS}`
@@ -87,7 +87,7 @@ function reportQuestion(q_id) {
 function markAHelpful(a_id) {
   let options = {
     method: 'PUT',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/qa/answers/${a_id}/helpful`,
+    url: `http://localhost:3001/qa/answers/${a_id}/helpful`,
     headers: {
       'User-Agent': 'request',
       'Authorization': `${process.env.TOKENS}`
@@ -99,7 +99,7 @@ function markAHelpful(a_id) {
 function reportAnswer(a_id) {
   let options = {
     method: 'PUT',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.campus}/qa/answers/${a_id}/report`,
+    url: `http://localhost:3001/qa/answers/${a_id}/report`,
     headers: {
       'User-Agent': 'request',
       'Authorization': `${process.env.TOKENS}`

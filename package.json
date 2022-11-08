@@ -4,7 +4,8 @@
   "description": "Frontend Capstone",
   "main": "index.js",
   "scripts": {
-    "server-dev": "npx nodemon --watch server server/index.js",
+    "server-dev": "npx nodemon --watch server api/index.js",
+    "server-frontend": "node server/index.js",
     "client-dev": "npx webpack --watch",
     "test": "jest",
     "coverage": "react-scripts test --coverage --watchAll",
