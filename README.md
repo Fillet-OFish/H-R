@@ -11,13 +11,19 @@
   <br>
 </h4>
 
-![-react](https://user-images.githubusercontent.com/103979716/199112745-aea0ac0c-11f8-40be-a7b5-08300e3945a5.svg)
-![-javascript](https://user-images.githubusercontent.com/103979716/199113123-04739e76-7bf1-4ce8-a19b-68228ebabc5f.svg)
-![-html](https://user-images.githubusercontent.com/103979716/199112762-f1a7148b-d9f0-4b29-9dbb-e9a350500eed.svg)
-![-css](https://user-images.githubusercontent.com/103979716/199112767-d74e12db-3d6a-47af-8f86-5de024e16bd0.svg)
-![-nodejs](https://user-images.githubusercontent.com/103979716/199112775-d22e679c-6f36-4d6c-bff8-0d9e7f6561ff.svg)
-![-express](https://user-images.githubusercontent.com/103979716/199112780-09753942-cce4-4551-9b0d-91d391a5d0fe.svg)
-![-aws (1)](https://user-images.githubusercontent.com/103979716/199112786-2dcb17cd-0650-478b-b1f7-aa7394574d8c.svg)
+<div align="center">
+  <img src='https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB' />
+  <img src='https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E' />
+  <img src='https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white' />
+  <img src='https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white' />
+  <img src="https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white" />
+  <img src="https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB" />
+  <img src="https://img.shields.io/badge/-AWS-232F3E?logo=amazonaws&logoColor=white&style=for-the-badge" />
+</div>
+
+
+## See It In Action
+Visit our group presentation <a rel="noopener noreferrer" target="_blank" href='https://docs.google.com/presentation/d/1fxJdcWFcnfD9vaJuwRyJTV67F9eIQu4Fan8WUgba-RY/edit?usp=sharing'> slides </a> to see everything in motion.
 
 ## Key Features
 * Dark/Light mode
